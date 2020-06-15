@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'oracle' => [
+    /* 'oracle' => [
         'driver'         => 'oracle',
         'tns'            => env('DB_TNS', 'BANDEV'),
         'host'           => env('DB_HOST', '10.100.4.41'),
@@ -14,5 +14,5 @@ return [
         'prefix_schema'  => env('DB_SCHEMA_PREFIX', ''),
         'edition'        => env('DB_EDITION', 'ora$base'),
         'server_version' => env('DB_SERVER_VERSION', '11g'),
-    ],
+    ], */
 ];
