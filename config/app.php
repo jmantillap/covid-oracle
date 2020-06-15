@@ -179,7 +179,10 @@ return [
          *Laravel Codigo QR 
          */
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
-
+        /**
+         * Laravel oracle
+         */
+        Yajra\Oci8\Oci8ServiceProvider::class,
     ],
 
     /*
@@ -232,7 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,        
 
     ],
 

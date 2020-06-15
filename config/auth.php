@@ -75,8 +75,12 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        'administrador' => [
+        /* 'administrador' => [
             'driver' => 'eloquent',
+            'model' => App\Entidades\Administrador::class,
+        ], */
+        'administrador' => [
+            'driver' => 'oracle',
             'model' => App\Entidades\Administrador::class,
         ],
 

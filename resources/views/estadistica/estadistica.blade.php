@@ -1,8 +1,15 @@
+@php
+    $ciudad='';
+    if(auth()->user()->ciudad!=null){
+      $ciudad=auth()->user()->ciudad->t_nombre;
+    }
+@endphp
+
 @extends('layout')
 @section('title','Formulario COVID-19' )
 @section('titulopag','ESTADISTICAS')
 @section('elcontrolador','Menu')
-@section('laaccion','Estadistica : '.auth()->user()->ciudad->t_nombre ?? '' )
+@section('laaccion','Estadistica : '.$ciudad )
 @section('content')
 {{-- /**
  * Javier Mantilla. javier.mantillap@upb.edu.co

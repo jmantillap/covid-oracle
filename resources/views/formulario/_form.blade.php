@@ -7,7 +7,6 @@
 
 <input type="hidden" id="n_idusuario" name="n_idusuario" value="{{$n_idusuario}}">
 <input type="hidden" id="t_activo" name="t_activo" value="SI">
-<input type="hidden" id="n_iddesactiva" name="n_iddesactiva" value="0">
 
 
 <div class="col-md-6">

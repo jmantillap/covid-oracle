@@ -38,16 +38,20 @@ class ReportesController extends Controller
       if(request('fecha_hasta')!=null){
           $fecha_hasta=request('fecha_hasta');
       }
-      $fecha_desde=$fecha_desde.' 00:00:00';
+      $fecha_desde=$fecha_desde;
       $fecha_hasta=$fecha_hasta.' 23:59:59';
 
       //dd($fecha_hasta);
-        $elselect= "SELECT * ";
-        $elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
+        //$elselect= "SELECT * ";
+        $elselect="select fo.*,se.*,us.* ";
+        //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";        
+        $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
         $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-        $elselect .= " FROM covidform.formulario fo, users us, sedes se";
-        $elselect .= " where fo.created_at >=:fecha_desde";
-        $elselect .= " and fo.created_at <= :fecha_hasta";
+        $elselect .= " FROM formulario fo, users us, sedes se";
+        //$elselect .= " where fo.created_at >=:fecha_desde";
+        $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD')) ";          
+        //$elselect .= " and fo.created_at <= :fecha_hasta";
+        $elselect .= " and fo.created_at <= (to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS')) ";
         $elselect .= " and fo.n_semaforo>1";
         $elselect .= " and us.n_idusuario=fo.n_idusuario";
         $elselect .= " and se.n_idsede= fo.n_idsede"; 
@@ -58,7 +62,7 @@ class ReportesController extends Controller
 
         //dd($elselect);
 
-        $query = DB::select($elselect,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta]);
+        $query = DB::select($elselect,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta]);        
 
         //dd($elselect);
       
@@ -112,16 +116,20 @@ public function getReporte2Formularios()
   if(request('fecha_hasta')!=null){
       $fecha_hasta=request('fecha_hasta');
   }
-  $fecha_desde=$fecha_desde.' 00:00:00';
+  $fecha_desde=$fecha_desde;
   $fecha_hasta=$fecha_hasta.' 23:59:59';
 
   //dd($fecha_hasta);
-    $elselect= "SELECT * ";
-    $elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
+    //$elselect= "SELECT * ";
+    $elselect="select fo.*,se.*,us.* ";
+    //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
+    $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
     $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-    $elselect .= " FROM covidform.formulario fo, users us, sedes se";
-    $elselect .= " where fo.created_at >=:fecha_desde";
-    $elselect .= " and fo.created_at <= :fecha_hasta";
+    $elselect .= " FROM formulario fo, users us, sedes se";
+    //$elselect .= " where fo.created_at >=:fecha_desde";
+    $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD')) ";          
+    //$elselect .= " and fo.created_at <= :fecha_hasta";
+    $elselect .= " and fo.created_at <= (to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS')) ";
     //$elselect .= " and fo.n_semaforo>1";
     $elselect .= " and us.n_idusuario=fo.n_idusuario";
     $elselect .= " and se.n_idsede= fo.n_idsede"; 
@@ -197,12 +205,16 @@ public function getReporte3Formularios()
   }
 
   //dd($fecha_hasta);
-    $elselect= "SELECT * ";
-    $elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
+    //$elselect= "SELECT * ";
+    $elselect="select fo.*,se.*,us.* ";
+    //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
+    $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
     $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-    $elselect .= " FROM covidform.formulario fo, users us, sedes se";
-    $elselect .= " where fo.created_at >=:fecha_desde";
-    $elselect .= " and fo.created_at <= :fecha_hasta";
+    $elselect .= " FROM formulario fo, users us, sedes se";
+    //$elselect .= " where fo.created_at >=:fecha_desde";
+    $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS')) ";          
+    //$elselect .= " and fo.created_at <= :fecha_hasta";
+    $elselect .= " and fo.created_at <= (to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS')) ";
     $elselect .= " and us.t_documento= :documento";
     $elselect .= " and us.n_idusuario=fo.n_idusuario";
     $elselect .= " and se.n_idsede= fo.n_idsede"; 
@@ -282,9 +294,11 @@ public function getReporte4Formularios()
   //dd($fecha_desde);
 
 
-  $elselect= "SELECT *";
+ //$elselect= "SELECT *";
+ $elselect= "SELECT us.*,se.*,vi.*,ci.*";
 $elselect .= " FROM users us, sedes se, vinculou vi, ciudades ci";
-$elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=:fecha_desde and fo.created_at<=:fecha_hasta and fo.t_activo='SI')";
+//$elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=:fecha_desde and fo.created_at<=:fecha_hasta and fo.t_activo='SI')";
+$elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS') and fo.created_at<=to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS') and fo.t_activo='SI')";
 $elselect .= " AND us.n_idsede=se.n_idsede";
 $elselect .= " AND us.n_idvinculou=vi.n_idvinculou";
 $elselect .= " AND se.n_idciudad=ci.n_id";

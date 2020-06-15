@@ -41,7 +41,7 @@ class SaveFormularioRequest extends FormRequest
             'd_ultimocontacto' => 'sometimes',
             't_realizoviaje'=>'required',
             't_activo' => 'required',
-            'n_iddesactiva' => 'required',
+            /* 'n_iddesactiva' => 'required', */
 
 
            
