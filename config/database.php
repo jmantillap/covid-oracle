@@ -91,6 +91,7 @@ return [
             'prefix_indexes' => true,
         ],
         /* Funciona */
+        /*
         'oracle' => [
             'driver'         => 'oracle',
             'tns'            => env('DB_TNS', 'BANDEV'),
@@ -104,9 +105,9 @@ return [
             'prefix_schema'  => env('DB_SCHEMA_PREFIX', ''),
             'edition'        => env('DB_EDITION', 'ora$base'),
             'server_version' => env('DB_SERVER_VERSION', '11g'),
-        ],
+        ],*/
         /* Funciona */
-        /* 'oracle' => [
+         'oracle' => [
             'driver' => 'oracle',
             'host' => env('DB_HOST', '10.100.4.41'),
             'port' => env('DB_PORT', '1521'),
@@ -116,7 +117,7 @@ return [
             'password'       => env('DB_PASSWORD', 'upb2020'),
             'charset'        => env('DB_CHARSET', 'AL32UTF8'),
             'prefix'         => env('DB_PREFIX', ''),
-        ], */
+        ], 
 
     ],
 

@@ -39,8 +39,9 @@ class LoginController extends Controller
 
     public function validarLogin()    {
 
+        
         $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);
-
+        
         $administrador=Administrador::where($this->username(),'=',request('usuario'))->first();
         if($administrador==null ||  $administrador->b_habilitado=='0' ){
             return back()->withErrors(['usuario'=>trans('auth.failed')])->withInput(request(['usuario']));
