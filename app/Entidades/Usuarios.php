@@ -1,5 +1,5 @@
 <?php
-
+/** Creado por Japefuloni */
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
