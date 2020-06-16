@@ -30,10 +30,10 @@ class WebServicesUpb {
         ];  
         try {
             $response = $client->request('GET', "/General/Autenticacion/?",$parametros);        
-            $data = json_decode($response->getBody());
+            $data = json_decode($response->getBody());            
         } catch (Exception $e) {
-             Log::error($e);                            
-            return array('ESTADO' => '*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema');
+             Log::error($e);             
+            return json_decode('{"ESTADO":"*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema"}');
         }  
         return $data;
     }

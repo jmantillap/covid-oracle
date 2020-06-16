@@ -42,6 +42,15 @@ class LoginController extends Controller
         
         $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);
         
+        $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
+        if($data->ESTADO=="AUTORIZADO"){
+            Auth::login($administrador);    
+            return $this->validarUsuario(); 
+        }else{
+            return back()->withErrors(array('usuario' =>$data->ESTADO ))->withInput(request(['usuario']));    
+        }
+
+
         $administrador=Administrador::where($this->username(),'=',request('usuario'))->first();
         if($administrador==null ||  $administrador->b_habilitado=='0' ){
             return back()->withErrors(['usuario'=>trans('auth.failed')])->withInput(request(['usuario']));
