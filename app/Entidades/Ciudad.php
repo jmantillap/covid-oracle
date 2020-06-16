@@ -20,7 +20,5 @@ class Ciudad extends Model
     {
         return $this->hasMany('App\Entidades\Sedes','n_id');
     }
-    
-    //Camilo
-    //javier
+        
 }
