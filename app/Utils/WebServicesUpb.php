@@ -33,7 +33,7 @@ class WebServicesUpb {
             $data = json_decode($response->getBody());
         } catch (Exception $e) {
              Log::error($e);                            
-            return array('error' => '*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema');
+            return array('ESTADO' => '*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema');
         }  
         return $data;
     }
