@@ -38,7 +38,7 @@ class LoginController extends Controller
     public function validarLogin()    {
 
         $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);
-        $ws=true;
+        $ws=false;
         if (!$ws){
             $credentials = [$this->username() => request('usuario'),'password' => request('password'),];
             if (Auth::attempt($credentials)) {
@@ -50,8 +50,7 @@ class LoginController extends Controller
                 }
             }
         }else{
-            $this->wsParamFuncionaExplicado();
-            
+            $this->wsParamFuncionaExplicado();            
             $this->wsInvocacion();   
             $this->wsParamFunciona();
                         
