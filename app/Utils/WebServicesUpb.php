@@ -32,7 +32,7 @@ class WebServicesUpb {
             $response = $client->request('GET', "/General/Autenticacion/?",$parametros);        
             $data = json_decode($response->getBody());
         } catch (Exception $e) {
-            Log::error($e);                            
+             Log::error($e);                            
             return array('error' => '*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema');
         }  
         return $data;

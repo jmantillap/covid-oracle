@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Entidades\AuditoriaIngreso;
+use App\Utils\WebServicesUpb;
 use Auth;
 use Config;
 use GuzzleHttp\Client;
@@ -50,10 +51,10 @@ class LoginController extends Controller
                 }
             }
         }else{
-            $this->wsParamFuncionaExplicado();            
-            $this->wsInvocacion();   
-            $this->wsParamFunciona();
-                        
+            //$this->wsParamFuncionaExplicado();            
+            //$this->wsInvocacion();   
+            //$this->wsParamFunciona();
+            $this->autenticarWsUtilitario();
             
             $parametros=[ 'headers' => ['Username' => Config::get('ws.username'),'Password' => Config::get('ws.password'), 'Accept'     => 'application/json',]];            
             $baseUrl="https://servibiblioteca.bucaramanga.upb.edu.co";
@@ -61,9 +62,9 @@ class LoginController extends Controller
             try {                
                 $response = $client->request('GET', "/rest/info.php?uid=java",$parametros);
                 $data = json_decode($response->getBody());                
-                dd($response->getHeaderLine('content-type'));
-                dd($response);
-                //dd($data);           
+                //dd($response->getHeaderLine('content-type'));
+                //dd($response);
+                dd($data);           
             } catch (Exception $e) {
                 Log::error($e);                            
                 return back()->withErrors(array('usuario' => '*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema'))->withInput(request(['usuario']));                
@@ -112,6 +113,12 @@ class LoginController extends Controller
         $response = $client->request('GET', "/General/Autenticacion/?",$parametros);        
         $data = json_decode($response->getBody());
         dd($data);  
+    }
+
+    private function autenticarWsUtilitario()
+    {
+        $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
+        dd($data);
     }
    
 
