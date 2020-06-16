@@ -27,6 +27,7 @@ class WebServicesUpb {
         $parametros=[
             'headers' => ['Username' => Config::get('ws.username'),'Password' => Config::get('ws.password'), 'Accept'     => 'application/json',],
             'query' => ['id' => $idBanner,'password' => $password],
+            'verify' => false,
         ];  
         try {
             $response = $client->request('GET', "/General/Autenticacion/?",$parametros);        
