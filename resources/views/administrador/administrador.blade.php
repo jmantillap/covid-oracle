@@ -19,6 +19,14 @@
             <input id="n_id" name="n_id" type="hidden" value="{{$administrador->n_id}}" />           
         </div>    
         <div class="card-body">
+            <div class="form-group">                
+                <label for="t_login" class="control-label">Login *</label>           
+                <div class="row">
+                   <div class="col-5">
+                        <input type="text" class="form-control @error('t_login') is-invalid @enderror" maxlength="20" id="t_login" name="t_login"  placeholder="Usuario o Id Sigaa" value="{{ $administrador->t_login }}" required>
+                   </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="t_nombrecompleto">Nombre Completo *</label>
                 <input type="text" class="form-control @error('t_nombrecompleto') is-invalid @enderror" id="t_nombrecompleto" name="t_nombrecompleto" placeholder="Digite el nombre completo"
@@ -52,15 +60,7 @@
             <div class="form-group ">
                 <label for="b_todas">Nacional</label>
                 <input name="b_todas" id="b_todas" type="checkbox" {{ $administrador->b_todas==1 ? 'checked' : '' }} value="1" class="flat-red" > Todas Ciudades
-            </div>
-            <div class="form-group">                
-                <label for="t_login" class="control-label">Login *</label>           
-                <div class="row">
-                   <div class="col-5">
-                        <input type="text" class="form-control @error('t_login') is-invalid @enderror" maxlength="20" id="t_login" name="t_login"  placeholder="Usuario" value="{{ $administrador->t_login }}" required>
-                   </div>
-                </div>
-            </div>
+            </div>            
             <div class="form-group">
                 <label for="password">Pasword</label>
                 <div class="input-group mb-3">
@@ -80,6 +80,10 @@
                     </div>
                 </div>                  
             </div>              
+            <div class="form-group ">
+                <label for="b_ldap">Ldap</label>
+                <input name="b_ldap" id="b_ldap" type="checkbox" {{ $administrador->b_ldap==1 ? 'checked' : '' }} value="1" class="flat-red" > Web Services
+            </div>
             <div class="form-group ">
                 <label for="b_habilitado">Estado</label>
                 <input name="b_habilitado" id="b_habilitado" type="checkbox" {{ $administrador->b_habilitado==1 ? 'checked' : '' }} value="1" class="flat-red" > Activo

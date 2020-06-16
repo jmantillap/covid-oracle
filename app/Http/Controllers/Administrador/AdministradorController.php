@@ -109,7 +109,7 @@ class AdministradorController extends Controller
                 't_nombrecompleto' => 'required|string|max:100',                
                 't_email' => 'required|string|email|max:100|unique:administradores',
                 'n_idciudad' => 'required|numeric|min:0',
-                't_login' => 'required|string|max:30',
+                't_login' => 'required|string|max:30|unique:administradores',
                 'password' => 'required|string|min:6|confirmed',
             ];
         }
@@ -131,14 +131,16 @@ class AdministradorController extends Controller
         $this->administrador->b_todas=request('b_todas')!=null ? '1' : '0';        
         //dd($this->administrador);
     }
+
     private function mensajesPersonalizados()
     {
         return $custom=['t_nombrecompleto.required'=>'El Nombre requerido',
                         'n_idciudad.required' => 'La Ciudad es requerida',
                         't_email.required' => 'El Email es requerido',
-                        't_email.unique' => 'El email ya existe',
+                        't_email.unique' => 'El email ya existe',                        
                         't_email.max' => 'El email debe ser de menor caracteres',
                         't_login.required' => 'El login es requerido',                        
+                        't_login.unique' => 'El login id de banner ya existe',
                         ];
     }
 

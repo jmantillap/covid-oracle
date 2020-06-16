@@ -21,6 +21,7 @@
             <tr>
                 <th class="text-center">Sel..</th>
                 <th>ID</th><th>Nombre</th><th>login</th>
+                <th>Ldap</th>
                 <th>Ciudad</th>
                 <th>Todas</th>
                 <th>Email</th>
@@ -43,6 +44,11 @@
                     <td>{{ $adm->n_id }}</td>
                     <td>{{ $adm->t_nombrecompleto }}</td>
                     <td>{{ $adm->t_login }}</td>                    
+                    <td class="text-center">
+                        @if ($adm->b_ldap == 1)
+                            <span class="badge badge-success">Si</span>
+                        @endif
+                    </td>
                     <td>{{ $adm->ciudad->t_nombre ?? '' }}</td>
                     <td class="text-center">
                         @if ($adm->b_todas == 1)
