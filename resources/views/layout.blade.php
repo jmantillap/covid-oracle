@@ -126,14 +126,14 @@ use App\Entidades\Menus;
 <div class="sidebar">
   <!-- Sidebar user (optional) -->
   @guest
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+  {{--   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img src="/img/usr/guest.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">                
         <a href="{{ route('login') }}" class="d-block">Administración</a>
       </div>
-    </div>
+    </div> --}}
  @endguest     
       <!-- Sidebar Menu -->
 @auth
@@ -277,11 +277,11 @@ use App\Entidades\Menus;
   <!-- /.content-wrapper -->
   @yield('script-custom')
   <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 1.0.0
+    <div class="float-right d-none d-sm-block">      
+      <b><a class="info user-panel d-flex" href="{{ route('login') }}" class="d-block">Admin UPB</a></b>
     </div>
     <strong>Copyright &copy; 2019 Universidad Pontificia Bolivariana - CTIC. Bucaramanga</strong> All rights
-    reserved.
+    reserved.<b> Version</b> 1.0.0
   </footer>
 
   <!-- Control Sidebar -->
