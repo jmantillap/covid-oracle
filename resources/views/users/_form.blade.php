@@ -32,26 +32,43 @@
                      @endif
                     
                     </div>
-    
                     <div class="card-body">
+                    <div class="form-group row">
+                        
+                        <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
+                            <div class="col-md-6">
+                                <select name="c_codtipo" class="form-control" id="c_codtipo" required autofocus>
+                                    <option value="" >--Seleccionar Tipo--</option>
+                                    <option value="TI" @if (old('c_codtipo',$users->c_codtipo) == "TI") {{ 'selected' }} @endif>Tarjeta de Identidad</option> 
+                                    <option value="CC" @if (old('c_codtipo',$users->c_codtipo) == "CC") {{ 'selected' }} @endif>Cédula de Ciudadanía</option>
+                                    <option value="CE" @if (old('c_codtipo',$users->c_codtipo) == "CE") {{ 'selected' }} @endif>Cédula de Extranjería</option>
+                                    <option value="PA" @if (old('c_codtipo',$users->c_codtipo) == "PA") {{ 'selected' }} @endif>Pasaporte</option>
+                                </select>
+                                @error('c_codtipo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                    </div>                  
+    
+                    <div class="form-group row">
+                        <label for="t_documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
+
+                        <div class="col-md-6">
+                            <input placeholder="Solo numeros, no use puntos ni guiones" id="t_documento" type="number" class="form-control @error('t_documento') is-invalid @enderror" name="t_documento" value="{{ old('t_documento',$users->t_documento) }}" required autocomplete="documento" >
+
+                            @error('t_nombres')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-    
-                            <div class="form-group row">
-                                <label for="t_apellidos" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
-    
-                                <div class="col-md-6">
-                                    <input id="t_apellidos" type="text" class="form-control @error('t_apellidos') is-invalid @enderror" name="t_apellidos" value="{{ old('t_apellidos',$users->t_apellidos) }}" required autocomplete="apellidos" autofocus>
-    
-                                    @error('t_apellidos')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <input type="hidden" id="t_activo" name="t_activo" value="SI">
-    
                             <div class="form-group row">
                                 <label for="t_nombres" class="col-md-4 col-form-label text-md-right">{{ __('Nombres') }}</label>
     
@@ -65,45 +82,26 @@
                                     @enderror
                                 </div>
                             </div>
-    
+
                             <div class="form-group row">
-                                <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Documento') }}</label>
+                                <label for="t_apellidos" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
     
                                 <div class="col-md-6">
-                                    <select name="c_codtipo" class="form-control" id="c_codtipo" required>
-                                        <option value="" >--Seleccionar Tipo--</option>
-                                        <option value="TI" @if (old('c_codtipo',$users->c_codtipo) == "TI") {{ 'selected' }} @endif>Tarjeta de Identidad</option> 
-                                        <option value="CC" @if (old('c_codtipo',$users->c_codtipo) == "CC") {{ 'selected' }} @endif>Cédula de Ciudadanía</option>
-                                        <option value="CE" @if (old('c_codtipo',$users->c_codtipo) == "CE") {{ 'selected' }} @endif>Cédula de Extranjería</option>
-                                        <option value="PA" @if (old('c_codtipo',$users->c_codtipo) == "PA") {{ 'selected' }} @endif>Pasaporte</option>
-                                    </select>
-                                    @error('c_codtipo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>                  
+                                    <input id="t_apellidos" type="text" class="form-control @error('t_apellidos') is-invalid @enderror" name="t_apellidos" value="{{ old('t_apellidos',$users->t_apellidos) }}" required autocomplete="apellidos" >
     
-    
-    
-    
-                            <div class="form-group row">
-                                <label for="t_documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
-    
-                                <div class="col-md-6">
-                                    <input placeholder="Solo numeros, no use puntos ni guiones" id="t_documento" type="number" class="form-control @error('t_documento') is-invalid @enderror" name="t_documento" value="{{ old('t_documento',$users->t_documento) }}" required autocomplete="documento" >
-    
-                                    @error('t_nombres')
+                                    @error('t_apellidos')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+                            <input type="hidden" id="t_activo" name="t_activo" value="SI">
+
+                            
     
                             <div class="form-group row">
-                                <label for="t_idsigaa" class="col-md-4 col-form-label text-md-right">{{ __('IDSIGAA') }}</label>
+                                <label for="t_idsigaa" class="col-md-4 col-form-label text-md-right">{{ __('ID SIGAA') }}</label>
     
                                 <div class="col-md-6">
                                     <input id="t_idsigaa" type="text" class="form-control @error('t_idsigaa') is-invalid @enderror" name="t_idsigaa" value="{{ old('t_idsigaa',$users->t_idsigaa) }}"  >
@@ -144,6 +142,19 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="t_telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono fijo o Celular') }}</label>
+    
+                                <div class="col-md-6">
+                                    <input required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ old('t_telefono',$users->t_telefono) }}"  >
+    
+                                    @error('t_telefono')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="n_idseden_idsede" class="col-md-4 col-form-label text-md-right">{{ __('Sede') }}</label>
@@ -169,54 +180,6 @@
                                 </div>
                             </div>
 
-                    
-                              
-
-                            <div class="form-group row">
-                                <label for="t_telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono fijo o Celular') }}</label>
-    
-                                <div class="col-md-6">
-                                    <input required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ old('t_telefono',$users->t_telefono) }}"  >
-    
-                                    @error('t_telefono')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="t_jefeinmediatocontacto" class="col-md-4 col-form-label text-md-right">{{ __('Jefe inmediato o Contacto en la UPB.') }}</label>
-    
-                                <div class="col-md-6">
-                                    <input required id="t_jefeinmediatocontacto" type="text" class="form-control @error('t_jefeinmediatocontacto') is-invalid @enderror" name="t_jefeinmediatocontacto" value="{{ old('t_jefeinmediatocontacto',$users->t_jefeinmediatocontacto) }}"  >
-    
-                                    @error('t_jefeinmediatocontacto')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="t_facultadareaempresa" class="col-md-4 col-form-label text-md-right">{{ __('Facultad, Área, Dependencia o Empresa.') }}</label>
-    
-                                <div class="col-md-6">
-                                    <input required id="t_facultadareaempresa" type="text" class="form-control @error('t_facultadareaempresa') is-invalid @enderror" name="t_facultadareaempresa" value="{{ old('t_facultadareaempresa',$users->t_facultadareaempresa) }}"  >
-    
-                                    @error('t_facultadareaempresa')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                              
-                            
-                            
                             <div class="form-group row">
                                 <label for="n_idseden_idsede" class="col-md-4 col-form-label text-md-right">{{ __('Vínculo con la Universidad') }}</label>
     
@@ -239,8 +202,38 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div><br>
+                            </div>
+
+                            <div class="form-group row" id="t_jefeinmediatocontacto_d">
+                                <label for="t_jefeinmediatocontacto" class="col-md-4 col-form-label text-md-right">{{ __('Jefe inmediato o Contacto en la UPB.') }}</label>
     
+                                <div class="col-md-6">
+                                    <input required id="t_jefeinmediatocontacto" type="text" class="form-control @error('t_jefeinmediatocontacto') is-invalid @enderror" name="t_jefeinmediatocontacto" value="{{ old('t_jefeinmediatocontacto',$users->t_jefeinmediatocontacto) }}"  >
+    
+                                    @error('t_jefeinmediatocontacto')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="t_facultadareaempresa_d">
+                                <label for="t_facultadareaempresa"  class="col-md-4 col-form-label text-md-right">{{ __('Facultad, Área, Dependencia o Empresa.') }}</label>
+    
+                                <div class="col-md-6">
+                                    <input required id="t_facultadareaempresa" type="text" class="form-control @error('t_facultadareaempresa') is-invalid @enderror" name="t_facultadareaempresa" value="{{ old('t_facultadareaempresa',$users->t_facultadareaempresa) }}"  >
+    
+                                    @error('t_facultadareaempresa')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <br>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
