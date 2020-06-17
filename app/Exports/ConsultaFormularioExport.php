@@ -36,7 +36,7 @@ class ConsultaFormularioExport implements FromCollection,WithHeadings, WithColum
             'PRESENTA_FIEBRE','DIAS_FIEBRE','DOLOR_GARGANTA',
             'MALESTAR_GENERAL','SECRECION_NASAL',
             'DIFICULTAD_RESPIRAR','TOS_SECA','CONTACTO_PERSONA_COVID',
-            'FECHA_ULTIMO_CONTACTO','REALIZO_VIAJE_ULT_DIAS'
+            'FECHA_ULTIMO_CONTACTO','REALIZO_VIAJE_ULT_DIAS','FEC_ULTIMO_VIAJE'
             ,'CREACION','ACTUALIZO'];
     }
     // Set Date Format
