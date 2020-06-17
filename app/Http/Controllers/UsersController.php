@@ -9,12 +9,14 @@ use App\Entidades\Menus;
 use Auth;
 use App\Entidades\Sedes;
 use App\Entidades\Vinculou;
+use App\Entidades\Ciudad;
+use DB;
 
 
 //Importanto las validaciones
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Requests\SaveUser2Request;
-
+ 
 
 class UsersController extends Controller
 {
@@ -43,6 +45,16 @@ class UsersController extends Controller
         ]);  
     }
 
+    public function listarSedesAjax($request)
+    {
+        $sql = "SELECT n_idsede, t_sede FROM sedes 
+                 WHERE n_idciudad = :n_idciudad
+              ORDER BY t_sede";
+        
+        $sedes = DB::select($sql, ['n_idciudad' => request('n_idciudad')]);
+        return response()->json($sedes);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -51,11 +63,11 @@ class UsersController extends Controller
     public function create()
     {
          //$project = Project::findOrFail($id);
-         $sedes= Sedes::all();
          $vinculou= Vinculou::all();
+         $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
          return view('users.create',[
            'users' => new User,
-           'sedes'=>$sedes,
+           'ciudades' => $ciudades,
            'vinculous'=>$vinculou
          ]);
     }

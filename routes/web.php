@@ -48,6 +48,7 @@ Route::get('formularioupbshow2/{id}', 'Loginupb\FormularioupbController@show2')-
 
 
 Route::get('formulario/create/{n_idciudad}', 'FormularioController@listarSedesAjax')->name('sedes.listar');
+Route::get('users/create/{n_idciudad}', 'UsersController@listarSedesAjax')->name('sedes.listar.users');
 
 Route::get('losusuarios', 'UsuariosController@getListaUsuarios')->name('losusuarios');
 Route::get('losformularios', 'FormularioController@getListaFormularios')->name('losformularios');

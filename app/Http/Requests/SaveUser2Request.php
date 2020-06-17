@@ -33,8 +33,8 @@ class SaveUser2Request extends FormRequest
             't_email' => 'email|required_with:t_emailc|same:t_emailc',
             'n_idsede' => 'required',
             't_telefono' => 'required',
-            't_jefeinmediatocontacto' => 'required',
-            't_facultadareaempresa' => 'required',
+            't_jefeinmediatocontacto' => 'sometimes',
+            't_facultadareaempresa' => 'sometimes',
             'n_idvinculou' => 'required',
             't_activo' => 'required'
         ];
@@ -56,8 +56,8 @@ class SaveUser2Request extends FormRequest
             't_email.same'=>"El email y su confirmación no son iguales",
             'n_idsede.required' => "No ha seleccionado la sede",
             't_telefono.required' => "Debe ingresar el Número telefónico o Celular",
-            't_jefeinmediatocontacto.required' => "Debe ingresar el Nombre del Jefe inmediato o el contacto",
-            't_facultadareaempresa.required' => "Debe ingresar el área la facultad y la empresa",
+            't_jefeinmediatocontacto.sometimes' => "Debe ingresar el Nombre del Jefe inmediato o el contacto",
+            't_facultadareaempresa.sometimes' => "Debe ingresar el área la facultad y la empresa",
             'n_idvinculou.required' => "Debe seleccionar un vínculo con la Universidad",
            
          ];

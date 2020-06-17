@@ -161,21 +161,36 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="n_idciudad" class="col-md-4 col-form-label text-md-right">
+                                    {{ __('Ciudad') }}
+                                </label>
+                                <div class="col-md-6">
+                                    <select name="n_idciudad" class="form-control" id="n_idciudad">
+                                        <option value="" >--Seleccionar Ciudad--</option>
+                                        @foreach($ciudades as $ciudad)
+                                            <option value="{{$ciudad->n_id }}"
+                                                @if ($ciudad->n_id == old('n_idciudad'))
+                                                    selected="selected"
+                                                @endif                
+                                                >{{ $ciudad->t_nombre }}</option> 
+                                        @endforeach
+                                    </select>
+                                    @error('n_idciudad')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
                                 <label for="n_idseden_idsede" class="col-md-4 col-form-label text-md-right">{{ __('Sede') }}</label>
     
                                 <div class="col-md-6">
                                     <select name="n_idsede" class="form-control" id="n_idsede">
                                         <option value="" >--Seleccionar Sede--</option>
-                                        @foreach($sedes as $sede)
-                                             <option value="{{$sede->n_idsede }}"
-                                                @if ($sede->n_idsede == old('n_idsede',$users->n_idsede))
-                                                selected="selected"
-                                            @endif
-                                                
-                                                >{{ $sede->t_sede }} ({{ $sede->ciudad->t_nombre }})</option> 
-                                        @endforeach
-                                        </select>
-    
+                                    </select>
                                     @error('n_idsede')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -212,12 +227,12 @@
                                 <label for="t_jefeinmediatocontacto" class="col-md-4 col-form-label text-md-right">{{ __('Jefe inmediato o Contacto en la UPB.') }}</label>
     
                                 <div class="col-md-6">
-                                    <input required id="t_jefeinmediatocontacto" type="text" class="form-control @error('t_jefeinmediatocontacto') is-invalid @enderror" name="t_jefeinmediatocontacto" value="{{ old('t_jefeinmediatocontacto',$users->t_jefeinmediatocontacto) }}"  >
+                                    <input  id="t_jefeinmediatocontacto" type="text" class="form-control @error('t_jefeinmediatocontacto') is-invalid @enderror" name="t_jefeinmediatocontacto" value="{{ old('t_jefeinmediatocontacto',$users->t_jefeinmediatocontacto) }}"  >
     
                                     @error('t_jefeinmediatocontacto')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
-                                        </span>
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -226,7 +241,7 @@
                                 <label for="t_facultadareaempresa"  class="col-md-4 col-form-label text-md-right">{{ __('Facultad, Área, Dependencia o Empresa.') }}</label>
     
                                 <div class="col-md-6">
-                                    <input required id="t_facultadareaempresa" type="text" class="form-control @error('t_facultadareaempresa') is-invalid @enderror" name="t_facultadareaempresa" value="{{ old('t_facultadareaempresa',$users->t_facultadareaempresa) }}"  >
+                                    <input id="t_facultadareaempresa" type="text" class="form-control @error('t_facultadareaempresa') is-invalid @enderror" name="t_facultadareaempresa" value="{{ old('t_facultadareaempresa',$users->t_facultadareaempresa) }}"  >
     
                                     @error('t_facultadareaempresa')
                                         <span class="invalid-feedback" role="alert">
