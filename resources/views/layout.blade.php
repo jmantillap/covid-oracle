@@ -180,32 +180,33 @@ use App\Entidades\Menus;
             </li>
           </ul>
         </li>
+        <li class="nav-item"><a  id="menuInactivar" href="{{ route('formulario.inactivar') }}" class="nav-link"> <i class="nav-icon fas fa-eraser"></i><p>Inactivar Formulario</p></a></li>   
         @if (auth()->user()->n_id==1)
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
             <li class="nav-item"><a  id="menuPerfil" href="{{ route('administrador.perfil') }}" class="nav-link"> <i class="nav-icon fas fa-user-tie"></i><p>Cambio Contraseña</p></a></li>
+            <li class="nav-item"><a  id="menuUsuario" href="{{ route('users.index') }}" class="nav-link"> <i class="nav-icon fas fa-user"></i><p>Usuarios</p></a></li>
+            {{-- <li class="nav-item"><a  id="menuSedes" href="{{ route('sedes.index') }}" class="nav-link"> <i class="nav-icon fas fa-university"></i><p>Sedes</p></a></li>  --}}        
+            <li id="menuTablas" class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Tablas Básicas<i class="right fas fa-angle-left"></i></p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a id="menuSedes" href="{{ route('sedes.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-university"></i><p>Sedes</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a id="menuCiudad" href="{{ route('ciudad.listar') }}" class="nav-link">
+                    <i class="nav-icon fas fa-city"></i><p>Ciudades</p>
+                  </a>
+                </li>            
+              </ul>
+            </li>
         @endif        
         @if (auth()->user()->n_id==1)
-        <li class="nav-item"><a  id="menuUsuario" href="{{ route('users.index') }}" class="nav-link"> <i class="nav-icon fas fa-user"></i><p>Usuarios</p></a></li>
-        {{-- <li class="nav-item"><a  id="menuSedes" href="{{ route('sedes.index') }}" class="nav-link"> <i class="nav-icon fas fa-university"></i><p>Sedes</p></a></li>  --}}
-        <li class="nav-item"><a  id="menuInactivar" href="{{ route('formulario.inactivar') }}" class="nav-link"> <i class="nav-icon fas fa-eraser"></i><p>Inactivar Formulario</p></a></li>   
-        <li id="menuTablas" class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
-            <p>Tablas Básicas<i class="right fas fa-angle-left"></i></p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a id="menuSedes" href="{{ route('sedes.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-university"></i><p>Sedes</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a id="menuCiudad" href="{{ route('ciudad.listar') }}" class="nav-link">
-                <i class="nav-icon fas fa-city"></i><p>Ciudades</p>
-              </a>
-            </li>            
-          </ul>
-        </li>
+        
         @endif
         
         <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link"> <i class="nav-icon fas fa-sign-out-alt"></i><p>Salir</p></a></li>    
