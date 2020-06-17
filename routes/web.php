@@ -43,6 +43,9 @@ Route::get('reportes/reporte4', 'ReportesController@reporte4')->name('reportes.r
 
 Route::get('/loginupb','Loginupb\LoginupbController@showLoginForm')->name('loginupb');
 Route::post('/autenticarupb','Loginupb\LoginupbController@validarLogin')->name('loginupb.validar');
+Route::resource('formularioupb', 'Loginupb\FormularioupbController')->names('formularioupb')->parameters(['formulario'  =>  'formulario']);//->middleware('role:1|2');
+Route::get('formularioupbshow2/{id}', 'Loginupb\FormularioupbController@show2')->name('formularioupb.show2');
+
 
 Route::get('formulario/create/{n_idciudad}', 'FormularioController@listarSedesAjax')->name('sedes.listar');
 

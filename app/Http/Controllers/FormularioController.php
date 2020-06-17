@@ -200,6 +200,7 @@ class FormularioController extends Controller
         if ($miscampos[0]['t_dolorgarganta'] == "SI") $semaforonegacion = "SI";
         if ($miscampos[0]['t_malestargeneral'] == "SI") $semaforonegacion = "SI";
         if ($miscampos[0]['t_secresioncongestionnasal'] == "SI") $semaforonegacion = "SI";
+        if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI";
         if ($miscampos[0]['t_dificultadrespirar'] == "SI") {
             $semaforonegacion = "SI";
             $semafororojo = "SI";
