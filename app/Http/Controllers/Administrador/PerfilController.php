@@ -39,8 +39,8 @@ class PerfilController extends Controller
           if ($validator->fails()){              
               return back()->withErrors($validator->messages())->withInput(request(['actual_password']));
           }else{
-              //$servicioUsuario= new UsuarioServices();
-              //$servicioUsuario->actualizarPassword(Auth::id(), bcrypt(request('password')));
+              $servicioUsuario= new UsuarioServices();
+              $servicioUsuario->actualizarPassword(Auth::id(), bcrypt(request('password')));
               Session::flash('flash', 'La contraseña se actualizo satisfactoriamente');
               return back();
           }

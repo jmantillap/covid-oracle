@@ -126,13 +126,6 @@ class LoginController extends Controller
 } */
 
 
-
-//$this->wsParamFuncionaExplicado();            
-            //$this->wsInvocacion();   
-            //$this->wsParamFunciona();
-
-
-
 //$client = new Client();
             //$response = $client->request('GET', $baseUrl."/General/Autenticacion/?id=000253912&password=Pruebas2019",$headers);
 
@@ -206,8 +199,3 @@ try {
     return back()->withErrors(array('usuario' => '*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema'))->withInput(request(['usuario']));                
 } */
 
-/* private function autenticarWsUtilitario()
-    {
-        $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
-        dd($data);
-    } */

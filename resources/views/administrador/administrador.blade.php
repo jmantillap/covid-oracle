@@ -146,7 +146,7 @@
             if(this.value==''){
                 $("#t_login" ).removeClass("is-invalid" );
                 $("#t_login" ).removeClass("has-warning");
-                $("#t_login" ).removeClass("has-warning");
+                $("#t_login" ).removeClass("is-valid");
             }            
         });  
                         
