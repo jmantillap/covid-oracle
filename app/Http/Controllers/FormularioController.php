@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\User;
 use App\Entidades\Formulario;
 use App\Entidades\Sedes;
+use App\Entidades\Ciudad;
 use Validator;
 use Illuminate\Http\Request;
 use Session;
@@ -22,91 +24,101 @@ class FormularioController extends Controller
 
     public function index()
     {
-      
-       if(!Session::has('idUsuario')){
 
-         return route()->redirec('home');
+        if (!Session::has('idUsuario')) {
 
-       } 
-       $key = Session::get('idUsuario');
-       $usuarioesta=User::where('t_documento','=',$key)->first();
-       //var_dump($key);
-      return view('formulario.index', 
-        [
-            'formulario'=> Formulario::orderBy('n_idusuario','ASC')->paginate(10)
-        ]);  
+            return route()->redirec('home');
+        }
+        $key = Session::get('idUsuario');
+        $usuarioesta = User::where('t_documento', '=', $key)->first();
+        //var_dump($key);
+        return view(
+            'formulario.index',
+            [
+                'formulario' => Formulario::orderBy('n_idusuario', 'ASC')->paginate(10)
+            ]
+        );
     }
 
 
     public function inactivar()
     {
-      /*
+        /*
       var_dump(auth()->user()->n_idciudad);
       var_dump(auth()->user()->ciudad->t_nombre);
       var_dump(auth()->user()->n_id);
       var_dump(Auth::id());
-*/ 
-      
-      return view('formulario.inactivar', 
-        [
-            'sedes'=> Sedes::orderBy('t_sede','ASC')->paginate(10)
-        ]);  
+*/
+
+        return view(
+            'formulario.inactivar',
+            [
+                'sedes' => Sedes::orderBy('t_sede', 'ASC')->paginate(10)
+            ]
+        );
     }
 
     public function getListaFormularios()
     {
-      $id_ciudad=auth()->user()->n_idciudad;
-      $fechahoy=date('Y-m-d 00:00:00');
+        $id_ciudad = auth()->user()->n_idciudad;
+        $fechahoy = date('Y-m-d 00:00:00');
 
-      //$elselect= "select *,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo from formulario fo,sedes se, users us where se.n_idsede=fo.n_idsede and se.n_idciudad=".$id_ciudad;
+        //$elselect= "select *,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo from formulario fo,sedes se, users us where se.n_idsede=fo.n_idsede and se.n_idciudad=".$id_ciudad;
 
-      $elselect="select fo.*,se.*,us.*
+        $elselect = "select fo.*,se.*,us.*
       ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec      
       , fo.t_activo as activo 
-      from formulario fo,sedes se, users us where se.n_idsede=fo.n_idsede and se.n_idciudad= ".$id_ciudad  ;
-      //$elselect .= " and fo.updated_at>='".$fechahoy."'";
-      $elselect .= " and fo.updated_at>= trunc(to_date('".$fechahoy."','YY/MM/DD HH24:MI:SS')) ";
-      
-      $elselect .= " and us.n_idusuario=fo.n_idusuario";
-      
+      from formulario fo,sedes se, users us where se.n_idsede=fo.n_idsede and se.n_idciudad= " . $id_ciudad;
+        //$elselect .= " and fo.updated_at>='".$fechahoy."'";
+        $elselect .= " and fo.updated_at>= trunc(to_date('" . $fechahoy . "','YY/MM/DD HH24:MI:SS')) ";
+
+        $elselect .= " and us.n_idusuario=fo.n_idusuario";
+
         $query = DB::select($elselect);
 
         //dd($query);
-      
-        return datatables()->of($query)
-        ->addColumn('action', function ($registro) {
-            if ($registro->activo=="SI")return '<a href="'.route('formulario.updateinac', $registro->n_idformulario).'"> Inactivar</a>';
-            if ($registro->activo=="NO")return 'DESACTIVADO';
 
-        
-    })
-    ->addColumn('semaforo', function ($registro) {
-        if ($registro->n_semaforo=="1")return '<strong class="text-success">Verde</strong>';
-        if ($registro->n_semaforo=="2")return '<strong class="text-warning">Amarillo</strong>';
-        if ($registro->n_semaforo=="3")return '<strong class="text-danger">Rojo</strong>';
-    })
-    ->addColumn('ingreso', function ($registro) {
-    if ($registro->n_semaforo=="1")return '<strong class="text-success">SI</strong>';
-    if ($registro->n_semaforo=="2")return '<strong class="text-danger">NO</strong>';
-    if ($registro->n_semaforo=="3")return '<strong class="text-danger">NO</strong>';
-    })
-    ->rawColumns(['action','semaforo','ingreso'])
-    ->toJson();
+        return datatables()->of($query)
+            ->addColumn('action', function ($registro) {
+                if ($registro->activo == "SI") return '<a href="' . route('formulario.updateinac', $registro->n_idformulario) . '"> Inactivar</a>';
+                if ($registro->activo == "NO") return 'DESACTIVADO';
+            })
+            ->addColumn('semaforo', function ($registro) {
+                if ($registro->n_semaforo == "1") return '<strong class="text-success">Verde</strong>';
+                if ($registro->n_semaforo == "2") return '<strong class="text-warning">Amarillo</strong>';
+                if ($registro->n_semaforo == "3") return '<strong class="text-danger">Rojo</strong>';
+            })
+            ->addColumn('ingreso', function ($registro) {
+                if ($registro->n_semaforo == "1") return '<strong class="text-success">SI</strong>';
+                if ($registro->n_semaforo == "2") return '<strong class="text-danger">NO</strong>';
+                if ($registro->n_semaforo == "3") return '<strong class="text-danger">NO</strong>';
+            })
+            ->rawColumns(['action', 'semaforo', 'ingreso'])
+            ->toJson();
+    }
+
+    public function listarSedesAjax($request)
+    {
+        $sql = "SELECT n_idsede, t_sede FROM sedes 
+                 WHERE n_idciudad = :n_idciudad
+              ORDER BY t_sede";
+
+        $sedes = DB::select($sql, ['n_idciudad' => request('n_idciudad')]);
+
+        return response()->json($sedes);
     }
 
     public function updateinac($request)
     {
-       
+
         //return $request;
-        
+
         $affected = DB::table('formulario')
-              ->where('n_idformulario', $request)
-              ->update(['t_activo' => "NO", 'n_iddesactiva' => Auth::id(),'updated_at'=>date('Y-m-d H:i:s')]);
-        return redirect()->route('formulario.inactivar')->with('status','El formulario fue actualizado con éxito');
-
-
+            ->where('n_idformulario', $request)
+            ->update(['t_activo' => "NO", 'n_iddesactiva' => Auth::id(), 'updated_at' => date('Y-m-d H:i:s')]);
+        return redirect()->route('formulario.inactivar')->with('status', 'El formulario fue actualizado con éxito');
     }
-   
+
 
     /**
      * Show the form for creating a new resource. 
@@ -115,27 +127,27 @@ class FormularioController extends Controller
      */
     public function create()
     {
-        if(!Session::has('idUsuario')){
+        if (!Session::has('idUsuario')) {
 
             return route()->redirec('home');
-   
-          } 
-          $key = Session::get('idUsuario');
+        }
+        $key = Session::get('idUsuario');
 
-          $usuarioesta=User::where('n_idusuario','=',$key)->first();
+        $usuarioesta = User::where('n_idusuario', '=', $key)->first();
 
-          
-          $viculoconu=$usuarioesta->vinculou->t_vinculo;
-          $sedes= Sedes::all();
+
+        $viculoconu = $usuarioesta->vinculou->t_vinculo;
+        //   $sedes= Sedes::all();
+        $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
         //$project = Project::findOrFail($id);
-         return view('formulario.create',[
+        return view('formulario.create', [
             'formulario' => new Formulario,
-            'n_idusuario'=>$key,
-            'usuarioesta'=>$usuarioesta,
-        'sedes'=>$sedes,
-        'viculoconu'=>$viculoconu
-
-          ]);
+            'n_idusuario' => $key,
+            'usuarioesta' => $usuarioesta,
+            // 'sedes'=>$sedes,
+            'ciudades' => $ciudades,
+            'viculoconu' => $viculoconu
+        ]);
     }
 
     /**
@@ -146,79 +158,75 @@ class FormularioController extends Controller
      */
     public function store2()
     {
-       
-       //dd(request()->all());
-        $validator=Validator::make(request()->all(),$this->rules(),$this->messages());
 
-       
-     
-        if($validator->fails()){
-          //dd("Fallo"); 
-           return   redirect()->back()->withErrors( $validator->errors());
+        //dd(request()->all());
+        $validator = Validator::make(request()->all(), $this->rules(), $this->messages());
+
+
+
+        if ($validator->fails()) {
+            //dd("Fallo"); 
+            return   redirect()->back()->withErrors($validator->errors());
         }
 
-        $formulario= new Formulario(request()->all());        
-        $formulario->t_texto=request('t_texto');
-        $formulario->id_usuario=Session::get('idUsiario');
+        $formulario = new Formulario(request()->all());
+        $formulario->t_texto = request('t_texto');
+        $formulario->id_usuario = Session::get('idUsiario');
         dd(formulario);
         $formularo->save();
 
         Session::forget('idUsuario');
-        Session::put('id_formulario',$formulario->n_idformulario);
+        Session::put('id_formulario', $formulario->n_idformulario);
         //Formulario::create($validator); //solo envia los que esten validados por CreateProjectRequest
-        return redirect()->route('home')->with('status','La sede fue creado con éxito');
+        return redirect()->route('home')->with('status', 'La sede fue creado con éxito');
     }
 
 
 
-    
+
 
 
     public function store(SaveFormularioRequest $request)
     {
-        $semaforonegacion="NO";
-        $semafororojo="NO";
-        $semaforo=1;
+        $semaforonegacion = "NO";
+        $semafororojo = "NO";
+        $semaforo = 1;
         //dd($request->validated());
-        $campos= ($request->validated());
-        $miscampos=array($campos);
-        
-         if  ($miscampos[0]['t_consentimiento']=="NO")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_presentadofiebre']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_dolorgarganta']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_malestargeneral']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_secresioncongestionnasal']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_dificultadrespirar']=="SI"){
-                $semaforonegacion="SI";
-                $semafororojo="SI"; 
-            }
-         if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_contactopersonasinfectadas']=="SI")$semaforonegacion="SI"; 
+        $campos = ($request->validated());
+        $miscampos = array($campos);
 
-            if ($semafororojo=="SI"){
-                $semaforo="3";
+        if ($miscampos[0]['t_consentimiento'] == "NO") $semaforonegacion = "SI";
+        if ($miscampos[0]['t_presentadofiebre'] == "SI") $semaforonegacion = "SI";
+        if ($miscampos[0]['t_dolorgarganta'] == "SI") $semaforonegacion = "SI";
+        if ($miscampos[0]['t_malestargeneral'] == "SI") $semaforonegacion = "SI";
+        if ($miscampos[0]['t_secresioncongestionnasal'] == "SI") $semaforonegacion = "SI";
+        if ($miscampos[0]['t_dificultadrespirar'] == "SI") {
+            $semaforonegacion = "SI";
+            $semafororojo = "SI";
+        }
+        if ($miscampos[0]['t_tosseca'] == "SI") $semaforonegacion = "SI";
+        if ($miscampos[0]['t_contactopersonasinfectadas'] == "SI") $semaforonegacion = "SI";
+
+        if ($semafororojo == "SI") {
+            $semaforo = "3";
+        } else {
+            if ($semaforonegacion == "SI") {
+                $semaforo = "2";
+            } else {
+                $semaforo = "1";
             }
-            else    
-            {
-                if ($semaforonegacion=="SI"){
-                    $semaforo="2";
-                }
-                else
-                {
-                    $semaforo="1";    
-                }
-            }
-     
+        }
 
 
-        $campos['n_semaforo']=$semaforo;
+
+        $campos['n_semaforo'] = $semaforo;
         //dd($campos);
-        
-        $resultado=Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
 
-      //return redirect()->route('home')->with('status','La sede fue creado con éxito');
+        $resultado = Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
 
-      return redirect()->route('formulario.show', ['id' => $resultado])->with('status','El formulario se guardó con éxito');
+        //return redirect()->route('home')->with('status','La sede fue creado con éxito');
+
+        return redirect()->route('formulario.show', ['id' => $resultado])->with('status', 'El formulario se guardó con éxito');
     }
 
     /**
@@ -229,8 +237,8 @@ class FormularioController extends Controller
      */
     public function show(Formulario $formulario)
     {
-      
-      return view('formulario.show', [
+
+        return view('formulario.show', [
             'formulario' => $formulario
         ]);
     }
@@ -285,20 +293,21 @@ class FormularioController extends Controller
             't_secresioncongestionnasal' => 'required',
             't_dificultadrespirar' => 'required',
             't_tosseca' => 'required',
-            't_contactopersonasinfectadas' => 'required',            
+            't_contactopersonasinfectadas' => 'required',
             'd_ultimocontacto' => 'sometimes',
-            't_realizoviaje' => 'required', 
+            't_realizoviaje' => 'required',
             'd_ultimoviaje' => 'sometimes'
 
 
-           
+
 
         ];
     }
 
 
 
-    private function messages(){
+    private function messages()
+    {
 
         return [
             'n_idusuario.required' => "No ha selecionado la persona",
@@ -315,7 +324,6 @@ class FormularioController extends Controller
             't_tosseca.required' => "No has Respondido acerca de la tos seca",
             't_contactopersonasinfectadas.required' => "No has Respondido acerca de la cercanía con personas infectadas",
             't_realizoviaje.required' => "No has Respondido acerca de su ultimo viaje"
-         ];
+        ];
     }
-    
 }

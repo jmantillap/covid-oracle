@@ -30,21 +30,27 @@
     <!-- /.card -->
   </div>
 
- 
+<br>
+<label>
+    1. Indique la ciudad a la que pertenece la sede a la cual solicita el ingreso
+    <select name="n_idciudad" class="form-control" id="n_idciudad">
+        <option value="" >--Seleccionar Ciudad--</option>
+        @foreach($ciudades as $ciudad)
+            <option value="{{$ciudad->n_id }}"
+                @if ($ciudad->n_id == old('n_idciudad'))
+                    selected="selected"
+                @endif                
+                >{{ $ciudad->t_nombre }}</option> 
+        @endforeach
+    </select>
+</label>
+<br><br>
 
 <label>
     2. Indique para cuál sede o seccional solicita el ingreso
     <select name="n_idsede" class="form-control" id="n_idsede">
         <option value="" >--Seleccionar Sede--</option>
-        @foreach($sedes as $sede)
-             <option value="{{$sede->n_idsede }}"
-                @if ($sede->n_idsede == old('n_idsede'))
-                selected="selected"
-            @endif
-                
-                >{{ $sede->t_sede }} ({{ $sede->ciudad->t_nombre }})</option> 
-        @endforeach
-        </select>
+    </select>
 </label><br> 
 <br>
 <label>

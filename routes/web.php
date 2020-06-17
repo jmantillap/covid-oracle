@@ -25,8 +25,6 @@ Route::view('inicio','inicio', ['nombre'=>'Jairo Peña Fuentes'])->name('inicio'
 //Route::resource('sedes', 'SedesController')->names('sedes')->parameters(['sedes'  =>  'sedes'])->middleware('role:1|2');
 Route::resource('formulario', 'FormularioController')->names('formulario')->parameters(['formulario'  =>  'formulario']);//->middleware('role:1|2');
 
-Route::get('formulario/create/{n_idciudad}', 'FormularioController@listarSedesAjax')->name('sedes.listar');
-
 Route::resource('users', 'UsersController')->names('users')->parameters(['users'  =>  'users']);//->middleware('role:1|2');
 Route::resource('usersupb', 'Loginupb\UsersupbController')->names('usersupb')->parameters(['users'  =>  'users']);//->
 Route::resource('usuarios', 'UsuariosController')->names('usuarios')->parameters(['usuarios'  =>  'usuarios']);//->middleware('role:1|2');
@@ -46,6 +44,7 @@ Route::get('reportes/reporte4', 'ReportesController@reporte4')->name('reportes.r
 Route::get('/loginupb','Loginupb\LoginupbController@showLoginForm')->name('loginupb');
 Route::post('/autenticarupb','Loginupb\LoginupbController@validarLogin')->name('loginupb.validar');
 
+Route::get('formulario/create/{n_idciudad}', 'FormularioController@listarSedesAjax')->name('sedes.listar');
 
 Route::get('losusuarios', 'UsuariosController@getListaUsuarios')->name('losusuarios');
 Route::get('losformularios', 'FormularioController@getListaFormularios')->name('losformularios');

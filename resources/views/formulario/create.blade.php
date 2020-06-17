@@ -18,6 +18,18 @@
         @include('formulario._form',['btnText'=>'Guardar'])
 </form>
 <script>
+        $(document).ready(function() {
+            $('#n_idciudad').change(function() {
+                $('#n_idsede').empty().append('<option value="" selected>--Seleccionar sede--</option>');            
+                if(this.value==""){return;}
+                $.get('create/' + this.value, function(data) {
+		    $.each(data,function(key, value) {
+			$("#n_idsede").append('<option value='+value.n_idsede+'>'+value.t_sede+'</option>');
+                    });
+	        });
+            });
+        });
+
 $('input[type=radio][name=t_irahoy]').change(function() {
         if (this.value == 'SI') {
                 $("#t_sitios").show();
