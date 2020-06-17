@@ -1,9 +1,4 @@
-
-
 @csrf
-
-
-
 
 <input type="hidden" id="n_idusuario" name="n_idusuario" value="{{$n_idusuario}}">
 <input type="hidden" id="t_activo" name="t_activo" value="SI">
@@ -22,23 +17,20 @@
       <!-- /.card-header -->
       <div class="card-body">
       Que conforme a la Ley 1581 de 2012, de manera voluntaria, autorizo a la Universidad Pontificia Bolivariana a tratar mis datos personales. Declaro que conozco mis derechos y deberes y las políticas de Tratamiento de protección de datos de la Universidad, en mi calidad de <strong>{{$viculoconu}}</strong> conforme a la finalidad de promoción, prevención y gestión de riesgo de salud, establecida por la Resolución 666 del 24 de abril de 2020 denominada “Por el cual se adopta el protocolo general de bioseguridad para mitigar, controlar y realizar el adecuado manejo de la pandemia del Coronavirus COVID-19”, numeral 4.1 inciso 4, y conforme a los parámetros establecidos por la Organización Mundial de la Salud - OMS sobre el autocuidado que cada persona debe tener para generar los medios de protección que le permita salvaguardad su salud; por lo anterior, asumo el compromiso del Reporte diario de estado de salud, bajo el principio de la buena fe, que lo reportado en la presente encuesta corresponde a datos verídicos asumiendo la responsabilidad por cualquier dato inexacto que pueda poner en riesgo mi salud y la de los demás.
+      <br><br>
+      <label>
+        Acepto
+      </label><br>
+      <input   type="radio" name="t_consentimiento" value="SI"  {{(old('t_consentimiento') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+      <input   type="radio" name="t_consentimiento" value="NO" {{(old('t_consentimiento') == 'NO') ? 'checked' : ''}}> NO<br>
+
       </div>
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
   </div>
 
-
-<label>
-    1. Acepta consentimiento
-</label><br>
-<input   type="radio" name="t_consentimiento" value="SI"  {{(old('t_consentimiento') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
-<input   type="radio" name="t_consentimiento" value="NO" {{(old('t_consentimiento') == 'NO') ? 'checked' : ''}}> NO<br>
-
-    
-
-
-<br>
+ 
 
 <label>
     2. Indique para cuál sede o seccional solicita el ingreso
@@ -145,6 +137,11 @@
 <input   type="radio" name="t_realizoviaje" value="SI" {{(old('t_realizoviaje') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
 <input   type="radio" name="t_realizoviaje" value="NO" {{(old('t_realizoviaje') == 'NO') ? 'checked' : ''}}> NO<br>
 
+<br>
+<label id="ld_ultimoviaje">
+    16. En caso de que en la anterior pregunta haya marcado "Sí", ¿en qué fecha realizó su ultimo viaje? 
+</label><br>
+<input class="form-control col-md-2" type="date" id="d_ultimoviaje" name="d_ultimoviaje" value="{{ old('d_ultimoviaje') }}"><br>
 
 
 

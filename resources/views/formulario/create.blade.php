@@ -67,4 +67,20 @@ $('input[type=radio][name=t_presentadofiebre]').change(function() {
             });  
 </script>
     
+<script>
+        $('input[type=radio][name=t_realizoviaje]').change(function() {
+                if (this.value == 'SI') {
+                        $("#d_ultimoviaje").show();
+                        $("#ld_ultimoviaje").show();
+                       
+        
+                }
+                else if (this.value == 'NO') {
+                        $("#d_ultimoviaje").hide();
+                        $("#ld_ultimoviaje").hide();
+                        
+                }
+            });  
+</script>
+
 @endsection

@@ -40,6 +40,7 @@ class SaveFormularioRequest extends FormRequest
             't_contactopersonasinfectadas' => 'required',            
             'd_ultimocontacto' => 'sometimes',
             't_realizoviaje'=>'required',
+            'd_ultimoviaje' => 'sometimes',
             't_activo' => 'required',
             /* 'n_iddesactiva' => 'required', */
 

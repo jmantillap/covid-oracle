@@ -286,7 +286,9 @@ class FormularioController extends Controller
             't_dificultadrespirar' => 'required',
             't_tosseca' => 'required',
             't_contactopersonasinfectadas' => 'required',            
-            'd_ultimocontacto' => 'sometimes'
+            'd_ultimocontacto' => 'sometimes',
+            't_realizoviaje' => 'required', 
+            'd_ultimoviaje' => 'sometimes'
 
 
            
@@ -311,7 +313,8 @@ class FormularioController extends Controller
             't_secresioncongestionnasal.required' => "No has respondido acerca de la Cosgentión Nasal",
             't_dificultadrespirar.required' => "No has Respondido acerca de la dificultad al respirar",
             't_tosseca.required' => "No has Respondido acerca de la tos seca",
-            't_contactopersonasinfectadas.required' => "No has Respondido acerca de la cercanía con personas infectadas"
+            't_contactopersonasinfectadas.required' => "No has Respondido acerca de la cercanía con personas infectadas",
+            't_realizoviaje.required' => "No has Respondido acerca de su ultimo viaje"
          ];
     }
     

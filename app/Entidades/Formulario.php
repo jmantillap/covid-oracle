@@ -27,6 +27,7 @@ class Formulario extends Model
                             't_contactopersonasinfectadas',
                             'd_ultimocontacto',
                             't_realizoviaje',
+                            'd_ultimoviaje',
                             'n_semaforo',
                             't_activo',
                             'n_iddesactiva'
