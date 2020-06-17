@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-body">
                     <div class="form-group row">
-                        
+                         
                         <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
                             <div class="col-md-6">
                                 <select name="c_codtipo" class="form-control" id="c_codtipo" required autofocus>

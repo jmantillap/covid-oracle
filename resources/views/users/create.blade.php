@@ -31,7 +31,7 @@
             $("#t_facultadareaempresa_d").hide(); 
             $("#t_jefeinmediatocontacto").hide();
             $("#t_facultadareaempresa").hide();  
-
+ 
             $('#n_idvinculou').change(function() {
                 var vselected = $('#n_idvinculou option:selected').text();
                 if (vselected == 'Visitante' || vselected == 'Egresado' || vselected == 'Proveedor' || vselected == 'Estudiante'|| this.value=='') 
