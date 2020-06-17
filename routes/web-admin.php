@@ -10,7 +10,6 @@ Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('/autenticar','Auth\LoginController@validarLogin')->name('login.validar');
 Route::get('/autenticar','Auth\LoginController@irLogin');
-//Route::get('logout','Auth\LoginController@logout')->name('logout');
 
 #administradores
 Route::get('/administrador/listar','Administrador\ListarAdministradorController@index')->name('administrador.listar')->middleware('auth');
