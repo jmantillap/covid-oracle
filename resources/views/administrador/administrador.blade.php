@@ -23,7 +23,12 @@
                 <label for="t_login" class="control-label">Login *</label>           
                 <div class="row">
                    <div class="col-5">
-                        <input type="text" class="form-control @error('t_login') is-invalid @enderror" maxlength="20" id="t_login" name="t_login"  placeholder="Usuario o Id Sigaa" value="{{ $administrador->t_login }}" required>
+                        @if ($administrador->n_id!=null)
+                        <input type="text" class="form-control @error('t_login') is-invalid @enderror" maxlength="20" id="t_login_d" name="t_login_d" value="{{ $administrador->t_login }}" disabled>
+                        <input type="hidden" id="t_login" name="t_login"  value="{{ $administrador->t_login }}">    
+                        @else
+                        <input type="text" class="form-control @error('t_login') is-invalid @enderror" maxlength="20" id="t_login" name="t_login"  placeholder="Usuario o Id Sigaa" value="{{ $administrador->t_login }}" required>    
+                        @endif
                    </div>
                 </div>
             </div>
@@ -106,7 +111,45 @@
 <script>
     $(function () {      
       $("#menuAdministrador" ).addClass("active" );                  
-      //$("#n_idciudad" ).addClass("is-invalid" );                  
+      //$("#n_idciudad" ).addClass("is-invalid" );
+      $("#t_login").blur(function(){
+            if(this.value==''){return; }
+            $.ajax({
+                url:'{!! route('administrador.login.ajax'); !!}', type: 'GET', data: { 'pidm': this.value },
+            }).done(function(response) {
+                if(response.status=="1"){ 
+                    /*El usuario ya existe en la tabla administradores*/                    
+                    toastr.error(response.msg);
+                    $("#t_login" ).addClass("is-invalid" );                    
+                    $("#t_login").focus();
+                }else if(response.status=="2"){
+                    /*El usuario no existe en banner*/
+                    toastr.warning(response.msg);
+                    $("#t_login" ).addClass("has-warning" );
+                }else if(response.status=="3"){
+                    /*Elusuario existe en banner y relleno todos los campos*/
+                    $("#t_nombrecompleto").val(response.banner.nombre_completo);
+                    $("#t_email").val(response.banner.email); 
+                    $('#b_ldap').iCheck('check'); 
+                    $("#t_login" ).removeClass("is-invalid" );                       
+                    $("#t_login" ).removeClass("has-warning");                    
+                    $("#t_login" ).addClass("is-valid" );                    
+                    toastr.success(response.msg);
+
+                }else{
+                    $("#t_login" ).removeClass("is-invalid" );
+                    $("#t_login" ).removeClass("has-warning");
+                    $("#t_login" ).removeClass("is-valid");
+                }
+            });
+	    }).focusout(function() {            
+            if(this.value==''){
+                $("#t_login" ).removeClass("is-invalid" );
+                $("#t_login" ).removeClass("has-warning");
+                $("#t_login" ).removeClass("has-warning");
+            }            
+        });  
+                        
       
     });
   </script>

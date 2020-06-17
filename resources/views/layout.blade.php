@@ -291,7 +291,7 @@ use App\Entidades\Menus;
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+@include('partials.notification')
 
 </body>
 </html>

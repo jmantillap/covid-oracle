@@ -297,7 +297,11 @@
                             cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                error : function(xhr, status) { 
+                    console.log(JSON.stringify(xhr))
+                    console.log("AJAX error: " + status);
+                    //errorAlert('Error','Disculpe, existió un problema'); 
+                  },
                 complete : function(xhr, status) {
                    if(barChartFiebre!=null){ resetCanvas('barChartFiebre','#graph-container-fiebre'); }  
                    graficaBarChart("#barChartFiebre",ciudad,cantidadSi,cantidadNo);
@@ -320,7 +324,11 @@
                             cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                error : function(xhr, status) { 
+                    //errorAlert('Error','Disculpe, existió un problema'); 
+                    console.log(JSON.stringify(xhr))
+                    console.log("AJAX error: " + status);
+                 },
                 complete : function(xhr, status) {
                    if(barChartSecrecion!=null){ resetCanvas('barChartSecrecion','#graph-container-secrecion'); }  
                    graficaBarChart("#barChartSecrecion",ciudad,cantidadSi,cantidadNo);
@@ -343,7 +351,11 @@
                             cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                error : function(xhr, status) { 
+                    //errorAlert('Error','Disculpe, existió un problema'); 
+                    console.log(JSON.stringify(xhr))
+                    console.log("AJAX error: " + status);
+                 },
                 complete : function(xhr, status) {
                    if(barChartViaje!=null){ resetCanvas('barChartViaje','#graph-container-viaje'); }  
                    graficaBarChart("#barChartViaje",ciudad,cantidadSi,cantidadNo);
@@ -364,7 +376,11 @@
                             ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                error : function(xhr, status) { 
+                    //errorAlert('Error','Disculpe, existió un problema'); 
+                    console.log(JSON.stringify(xhr))
+                    console.log("AJAX error: " + status);
+                },
                 complete : function(xhr, status) {
                    if(barChartGarganta!=null){ resetCanvas('barChartGarganta','#graph-container-garganta'); }  
                    graficaBarChart("#barChartGarganta",ciudad,cantidadSi,cantidadNo);
@@ -385,7 +401,11 @@
                             ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                error : function(xhr, status) { 
+                    //errorAlert('Error','Disculpe, existió un problema'); 
+                    console.log(JSON.stringify(xhr))
+                    console.log("AJAX error: " + status);
+                },
                 complete : function(xhr, status) {
                    if(barChartMalestar!=null){ resetCanvas('barChartMalestar','#graph-container-malestar'); }  
                    graficaBarChart("#barChartMalestar",ciudad,cantidadSi,cantidadNo);
@@ -406,7 +426,11 @@
                             ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                error : function(xhr, status) { 
+                    //errorAlert('Error','Disculpe, existió un problema'); 
+                    console.log(JSON.stringify(xhr))
+                    console.log("AJAX error: " + status);
+                },
                 complete : function(xhr, status) {
                    if(barChartRespirar!=null){ resetCanvas('barChartRespirar','#graph-container-respirar'); }  
                    graficaBarChart("#barChartRespirar",ciudad,cantidadSi,cantidadNo);
@@ -427,7 +451,11 @@
                             ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                error : function(xhr, status) { 
+                    //errorAlert('Error','Disculpe, existió un problema'); 
+                    console.log(JSON.stringify(xhr))
+                    console.log("AJAX error: " + status);
+                },
                 complete : function(xhr, status) {
                    if(barChartTos!=null){ resetCanvas('barChartTos','#graph-container-tos'); }  
                    graficaBarChart("#barChartTos",ciudad,cantidadSi,cantidadNo);
@@ -448,7 +476,11 @@
                             ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                error : function(xhr, status) { 
+                    //errorAlert('Error','Disculpe, existió un problema'); 
+                    console.log(JSON.stringify(xhr))
+                    console.log("AJAX error: " + status);
+                },
                 complete : function(xhr, status) {
                    if(barChartContacto!=null){ resetCanvas('barChartContacto','#graph-container-contacto'); }  
                    graficaBarChart("#barChartContacto",ciudad,cantidadSi,cantidadNo);

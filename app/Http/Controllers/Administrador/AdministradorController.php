@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entidades\Administrador;
 use App\Entidades\Ciudad;
+use App\Services\BannerServices;
 use Auth;
 use Session;
 use Validator;
@@ -60,9 +61,15 @@ class AdministradorController extends Controller
     {
         $this->cargarRequest();                
         $validator=$this->validarCampos();
-        if ($validator->fails()){     
-            //dd($validator->messages());       
-            return $this->mostrarView($validator->messages());
+        if ($validator->fails()){                 
+            return $this->mostrarView($validator->messages());        
+        }
+        //if($this->administrador->b_ldap==1 && !Session::has('idAdministradorModificar')){
+        if($this->administrador->b_ldap==1){
+            $usuarioBanner=BannerServices::getUsuarioBanner($this->administrador->t_login);
+            if($usuarioBanner==null){
+                return $this->mostrarView(array('message' => '* El login del usuario debe existir en banner'));
+            }
         }
         try {
             DB::beginTransaction();           
@@ -75,11 +82,8 @@ class AdministradorController extends Controller
         }
         Session::put('idAdministradorModificar',$this->administrador->n_id);
         $accion='Registro';
-        if(request('n_id')!=null ){
-             $accion='Actualizo';
-        }
-        Session::flash('flash', 'Administrador se '.$accion.' satisfactoriamente  Id:'.$this->administrador->n_id );        
-        //Session::flash('flash', 'El Administrador se guardo satisfactoriamente');        
+        if(request('n_id')!=null ){ $accion='Actualizo'; }
+        Session::flash('flash', 'Administrador se '.$accion.' satisfactoriamente  Id:'.$this->administrador->n_id );                
         return redirect()->route('administrador.mostrar'); 
 
 
@@ -129,6 +133,7 @@ class AdministradorController extends Controller
         }
         $this->administrador->b_habilitado=request('b_habilitado')!=null ? '1' : '0';
         $this->administrador->b_todas=request('b_todas')!=null ? '1' : '0';        
+        $this->administrador->b_ldap=request('b_ldap')!=null ? '1' : '0';        
         //dd($this->administrador);
     }
 
@@ -142,6 +147,22 @@ class AdministradorController extends Controller
                         't_login.required' => 'El login es requerido',                        
                         't_login.unique' => 'El login id de banner ya existe',
                         ];
+    }
+
+    public function getAdministradorAjax()
+    {
+        if(request('pidm')==null){ return response()->json(array('status' => '0','msg' =>''));  }
+        $administrador=Administrador::where('t_login','=',request('pidm'))->first();
+        if($administrador!=null){
+            return response()->json(array('status' => '1','msg' =>'El Administrador con el login ya se encuentra registrado.')); 
+        }
+        $usuarioBanner=BannerServices::getUsuarioBanner(request('pidm'));
+        if($usuarioBanner==null){
+            return response()->json(array('status' => '2','msg' =>'El Administrador con el login no existe en BANNER.')); 
+        }
+        return response()->json(array('status' => '3','msg' =>'El usuario Existe en BANNER','banner' =>$usuarioBanner)); 
+
+
     }
 
 

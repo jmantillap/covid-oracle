@@ -18,6 +18,9 @@ Route::post('/administrador/listar','Administrador\ListarAdministradorController
 Route::get('/administrador/listar/nuevo','Administrador\ListarAdministradorController@envioNuevo')->name('administrador.listar.nuevo')->middleware('auth');
 Route::get('/administrador/administrador','Administrador\AdministradorController@index')->name('administrador.mostrar')->middleware('auth');
 Route::post('/administrador/administrador','Administrador\AdministradorController@envioGuardar')->name('administrador.guardar')->middleware('auth');
+Route::get('/administrador/login/ajax','Administrador\AdministradorController@getAdministradorAjax')->name('administrador.login.ajax')->middleware('auth');
+
+
 Route::get('/perfil','Administrador\PerfilController@showPerfil')->name('administrador.perfil')->middleware('auth');
 Route::post('/perfil/actualizar','Administrador\PerfilController@envioGuardarPerfil')->name('perfil.guardar')->middleware('auth'); 
 
