@@ -102,9 +102,11 @@ class LoginupbController extends Controller
             $docentesall= Formulario::all();
             $usuarioesta=User::where('t_documento','=',$documentous)->first();
 
-            if (is_null ( $usuarioesta ))
-                {
+            //dd($usuarioesta);
 
+            if ($usuarioesta!=null)
+                {
+                                Return "Hola mundo";
                 }
             else
                 {

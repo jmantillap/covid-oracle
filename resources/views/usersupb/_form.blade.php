@@ -32,6 +32,8 @@
                      @endif
                     
                     </div>
+
+                    <input id="t_sigaa" name="t_sigaa" type="hidden" value="SI">
     
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
@@ -41,7 +43,7 @@
                                 <label for="t_apellidos" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
     
                                 <div class="col-md-6">
-                                    <input disabled id="t_apellidos" type="text" class="form-control @error('t_apellidos') is-invalid @enderror" name="t_apellidos" value="{{ $usuario->apellidos }}" required autocomplete="apellidos" autofocus>
+                                    <input readonly id="t_apellidos" type="text" class="form-control @error('t_apellidos') is-invalid @enderror" name="t_apellidos" value="{{ $usuario->apellidos }}" required autocomplete="apellidos" autofocus>
     
                                     @error('t_apellidos')
                                         <span class="invalid-feedback" role="alert">
@@ -56,7 +58,7 @@
                                 <label for="t_nombres" class="col-md-4 col-form-label text-md-right">{{ __('Nombres') }}</label>
     
                                 <div class="col-md-6">
-                                    <input disabled id="t_nombres" type="text" class="form-control @error('t_nombres') is-invalid @enderror" name="t_nombres" value="{{ $usuario->primer_nombre }} {{ $usuario->segundo_nombre }}" required autocomplete="nombres" >
+                                    <input readonly id="t_nombres" type="text" class="form-control @error('t_nombres') is-invalid @enderror" name="t_nombres" value="{{ $usuario->primer_nombre }} {{ $usuario->segundo_nombre }}" required autocomplete="nombres" >
     
                                     @error('t_nombres')
                                         <span class="invalid-feedback" role="alert">
@@ -70,7 +72,7 @@
                                 <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Documento') }}</label>
     
                                 <div class="col-md-6">
-                                    <select disabled name="c_codtipo" class="form-control" id="c_codtipo" required>
+                                    <select readonly name="c_codtipo" class="form-control" id="c_codtipo" required>
                                         <option value="" >--Seleccionar Tipo--</option>
                                         <option value="TI" @if (old('c_codtipo',$usuario->tipo_documento) == "TI") {{ 'selected' }} @endif>Tarjeta de Identidad</option> 
                                         <option value="CC" @if (old('c_codtipo',$usuario->tipo_documento) == "CC") {{ 'selected' }} @endif>Cédula de Ciudadanía</option>
@@ -96,7 +98,7 @@
                                 <label for="t_documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
     
                                 <div class="col-md-6">
-                                    <input disabled placeholder="Solo numeros, no use puntos ni guiones" id="t_documento" type="number" class="form-control @error('t_documento') is-invalid @enderror" name="t_documento" value="{{ $usuario->documento }}" required autocomplete="documento" >
+                                    <input readonly placeholder="Solo numeros, no use puntos ni guiones" id="t_documento" type="number" class="form-control @error('t_documento') is-invalid @enderror" name="t_documento" value="{{ $usuario->documento }}" required autocomplete="documento" >
     
                                     @error('t_nombres')
                                         <span class="invalid-feedback" role="alert">
@@ -110,7 +112,7 @@
                                 <label for="t_idsigaa" class="col-md-4 col-form-label text-md-right">{{ __('IDSIGAA') }}</label>
     
                                 <div class="col-md-6">
-                                    <input disabled id="t_idsigaa" type="text" class="form-control @error('t_idsigaa') is-invalid @enderror" name="t_idsigaa" value="{{ $usuario->id }}"  >
+                                    <input readonly id="t_idsigaa" type="text" class="form-control @error('t_idsigaa') is-invalid @enderror" name="t_idsigaa" value="{{ $usuario->id }}"  >
     
                                     @error('t_idsigaa')
                                         <span class="invalid-feedback" role="alert">
@@ -124,7 +126,7 @@
                                 <label for="t_email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
     
                                 <div class="col-md-6">
-                                    <input disabled id="t_email" type="email" class="form-control @error('t_email') is-invalid @enderror" name="t_email" value="{{ old('t_email',$users->t_email) }}" required >
+                                    <input readonly id="t_email" type="email" class="form-control @error('t_email') is-invalid @enderror" name="t_email" value="{{ $usuario->correo }}" required >
     
                                     @error('t_email')
                                         <span class="invalid-feedback" role="alert">
@@ -138,7 +140,7 @@
                                 <label for="t_emailc" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Confirmación') }}</label>
     
                                 <div class="col-md-6">
-                                    <input disabled id="t_emailc" type="email" class="form-control @error('t_emailc') is-invalid @enderror" name="t_emailc" value="{{ old('t_emailc',$users->t_email) }}" required >
+                                    <input readonly id="t_emailc" type="email" class="form-control @error('t_emailc') is-invalid @enderror" name="t_emailc" value="{{ $usuario->correo }}" required >
     
                                     @error('t_emailc')
                                         <span class="invalid-feedback" role="alert">
@@ -152,7 +154,7 @@
                                 <label for="t_telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono fijo o Celular') }}</label>
     
                                 <div class="col-md-6">
-                                    <input required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ old('t_telefono',$users->t_telefono) }}"  >
+                                    <input readonly required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ $usuario->telefono_completo }}"  >
     
                                     @error('t_telefono')
                                         <span class="invalid-feedback" role="alert">

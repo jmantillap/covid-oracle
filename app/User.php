@@ -31,7 +31,8 @@ class User extends Authenticatable
         't_facultadareaempresa', 
         'n_idvinculou', 
         'password', 
-        't_activo'
+        't_activo',
+        't_sigaa'
    ];
 
    protected $guarded= ['n_idusuario'];

@@ -15,6 +15,7 @@ use App\Entidades\Vinculou;
 //Importanto las validaciones
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Requests\SaveUser2Request;
+use App\Http\Requests\SaveUserupbRequest;
 
 use Session;
 
@@ -75,10 +76,13 @@ class UsersupbController extends Controller
      *
      
      */
-    public function store(SaveUserRequest $request)
+    public function store(SaveUserupbRequest $request)
     {
-      User::create($request->validated()); //solo envia los que esten validados por CreateUserRequest
-      return redirect()->route('home')->with('status','¡ Usuario registrado exitósamente !');
+      $resultado=User::create($request->validated())->n_idusuario; //solo envia los que esten validados por CreateUserRequest
+      Session::put('idUsuario',$resultado);
+      //$resultado=Formulario::create($campos)->n_idformulario;
+      return redirect()->route('formularioupb.create')->with('status','¡ Usuario registrado exitósamente !');
+
     }
 
     /**
