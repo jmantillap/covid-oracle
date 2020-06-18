@@ -93,6 +93,7 @@ class LoginupbController extends Controller
         $elquery .=" ORDER BY 1 ASC";
        
        $usuario_sel = collect(DB::select($elquery ,['idBanner' => $idbanner]))->first();
+       
        if($usuario_sel!=null){
             Session::put('vs_ussel',$usuario_sel);
             $documentous=$usuario_sel->documento;
@@ -137,7 +138,6 @@ class LoginupbController extends Controller
                 } 
 
 
-            dd($usuarioesta);
             
             Session::forget('vs_ussel');
             
