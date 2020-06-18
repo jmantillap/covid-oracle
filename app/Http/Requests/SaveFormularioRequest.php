@@ -61,6 +61,8 @@ class SaveFormularioRequest extends FormRequest
             't_consentimiento.required' => "No has dado el consentimiento (Preg. 1)",
             'n_idsede.required' => "No has seleccionado a la sede a la cual se dirige (Preg. 2)",
             't_irahoy.required' => "Debe responder si ira hoy a la Universidad (Preg. 3)",
+            't_sitios.sometimes' => 'Debe responder a que sitios se dirige (Preg. 4)',
+            't_actividades.sometimes' => 'Debe responder que actividades va a realizar (Preg. 5)',
             't_presentadofiebre.required' => "No has respondido si presento fiebre (Preg. 6)",
             't_dolorgarganta.required' => "No respondió a la pregunta sobre el dolor de garganta (Preg. 8)",
             't_malestargeneral.required' => "No has respondido sobre el malestar general (Preg. 9)",

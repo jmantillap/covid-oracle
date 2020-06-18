@@ -27,11 +27,12 @@
   </script>
   <script>
         $(document).ready(function() {
+          
             $("#t_jefeinmediatocontacto_d").hide();
             $("#t_jefeinmediatocontacto").prop('required', false).hide();
             $("#t_facultadareaempresa_d").hide(); 
             $("#t_facultadareaempresa").prop('required', false).hide();  
- 
+            
             $('#n_idvinculou').change(function() {
                 var vselected = $('#n_idvinculou option:selected').text();
                 if (vselected == 'Visitante' || vselected == 'Egresado' || vselected == 'Proveedor' || vselected == 'Estudiante'|| this.value=='') 

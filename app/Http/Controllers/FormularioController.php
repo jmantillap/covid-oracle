@@ -317,6 +317,8 @@ class FormularioController extends Controller
             't_consentimiento.required' => "No has dado el consentimiento",
             'n_idsede.required' => "No has seleccionado la sede",
             't_irahoy.required' => "Debe responder si ira hoy a la Universidad",
+            't_sitios.sometimes' => 'Debe responder a que sitios se dirige',
+            't_actividades.sometimes' => 'Debe responder que actividades va a realizar',
             't_presentadofiebre.required' => "No has respondido si presento fiebre",
             't_dolorgarganta.required' => "No respondió a la pregunta sobre el dolor de garganta",
             't_malestargeneral.required' => "No has respondido sobre el malestar general",
