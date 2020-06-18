@@ -60,7 +60,7 @@ class UsersupbController extends Controller
           
       } 
       
-      var_dump($usuario);
+     // var_dump($usuario);
          $sedes= Sedes::all();
          $vinculou= Vinculou::all();
          return view('usersupb.create',[

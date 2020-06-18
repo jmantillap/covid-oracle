@@ -61,7 +61,7 @@ class LoginupbController extends Controller
     {
        $idbanner=request('usuario');
 
-       
+       $contestohoy="NO";
 
         $elquery=" SELECT DISTINCT";
         $elquery .=" SPRIDEN_PIDM pidm,";
@@ -106,7 +106,31 @@ class LoginupbController extends Controller
 
             if ($usuarioesta!=null)
                 {
-                                Return "Hola mundo";
+                    $fechahoy= date('Y-m-d 00:00:00');
+                    
+                    $formhoy=Formulario::where([
+                        ['n_idusuario', '=', $usuarioesta->n_idusuario],
+                        ['created_at', '>', $fechahoy],
+                        ['t_activo', '=', "SI"],
+                    ])->first();
+
+                    if (!is_null($formhoy)) $contestohoy="SI";
+
+                    if ($contestohoy=="SI"){
+                        $hoyformulario=$formhoy->n_idformulario;
+                        return redirect()->route('formularioupb.show2', ['id' => $hoyformulario])->with('status','Resultado Previamente Guardado');
+          
+                    }
+                    else
+                    {
+                      Session::put('idUsuario',$usuarioesta->n_idusuario);
+          
+                    return redirect()->route('formularioupb.create');
+          
+                    }
+          
+
+
                 }
             else
                 {

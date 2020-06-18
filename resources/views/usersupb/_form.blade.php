@@ -126,7 +126,7 @@
                                 <label for="t_email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
     
                                 <div class="col-md-6">
-                                    <input readonly id="t_email" type="email" class="form-control @error('t_email') is-invalid @enderror" name="t_email" value="{{ $usuario->correo }}" required >
+                                    <input  id="t_email" type="email" class="form-control @error('t_email') is-invalid @enderror" name="t_email" value="{{ $usuario->correo }}" required >
     
                                     @error('t_email')
                                         <span class="invalid-feedback" role="alert">
@@ -140,7 +140,7 @@
                                 <label for="t_emailc" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Confirmación') }}</label>
     
                                 <div class="col-md-6">
-                                    <input readonly id="t_emailc" type="email" class="form-control @error('t_emailc') is-invalid @enderror" name="t_emailc" value="{{ $usuario->correo }}" required >
+                                    <input  id="t_emailc" type="email" class="form-control @error('t_emailc') is-invalid @enderror" name="t_emailc" value="{{ $usuario->correo }}" required >
     
                                     @error('t_emailc')
                                         <span class="invalid-feedback" role="alert">
@@ -154,7 +154,7 @@
                                 <label for="t_telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono fijo o Celular') }}</label>
     
                                 <div class="col-md-6">
-                                    <input readonly required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ $usuario->telefono_completo }}"  >
+                                    <input  required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ $usuario->telefono_completo }}"  >
     
                                     @error('t_telefono')
                                         <span class="invalid-feedback" role="alert">
