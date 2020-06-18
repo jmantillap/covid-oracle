@@ -36,10 +36,9 @@
                             <div class="form-group row">
                                 <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
                                 <div class="col-md-6">
-                                    
-                                    <input readonly id="c_codtipo" type="text" 
-                                    class="form-control @error('c_codtipo') is-invalid @enderror" name="c_codtipo" value="{{ $usuario->tipo_documento}}" 
-                                    required autocomplete="documento" >
+                                    <input readonly id="c_codtipodesc" type="text" name="c_codtipodesc"
+                                    class="form-control @error('c_codtipo') is-invalid @enderror" value="{{ $usuario_tipo_documento->descripcion_tipo_documento}}" >
+                                    <input type="hidden" id="c_codtipo" name="c_codtipo" value="{{ $usuario->tipo_documento}}"> 
                                 </div>
                             </div>
                             <div class="form-group row">

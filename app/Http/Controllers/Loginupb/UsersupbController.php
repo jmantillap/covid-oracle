@@ -70,6 +70,15 @@ class UsersupbController extends Controller
       //$project = Project::findOrFail($id);
       if(Session::has('vs_ussel')){
         $usuario= Session::get('vs_ussel');
+
+        $elquery=" SELECT DISTINCT";
+        $elquery .=" gtvadid_Desc  descripcion_tipo_documento";
+        $elquery .=" FROM gtvadid";
+        $elquery .=" WHERE gtvadid_code = :idTipo";
+
+        $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>  $usuario->tipo_documento]))->first();
+
+        //dd($usuario_tipo_documento);
       } 
       
       // var_dump($usuario);
@@ -79,6 +88,7 @@ class UsersupbController extends Controller
         'users' => new User,
         'ciudades' => $ciudades,
         'vinculous'=>$vinculou,
+        'usuario_tipo_documento'=>$usuario_tipo_documento,
         'usuario'=>$usuario
       ]);
     }
