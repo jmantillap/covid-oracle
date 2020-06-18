@@ -30,7 +30,9 @@ class BannerServices {
         $sql="SELECT DISTINCT SPRIDEN_PIDM pidm, SPRIDEN_ID id,    SZRIDEN_ADID_CODE tipo_documento, SZRIDEN_DOC_ID documento,
             (SPRIDEN_FIRST_NAME || ' ' || SPRIDEN_MI || ' ' || SPRIDEN_LAST_NAME) nombre_completo,  
             SPRIDEN_FIRST_NAME primer_nombre,    SPRIDEN_MI segundo_nombre,    SPRIDEN_LAST_NAME apellidos,
-            GOREMAL_EMAIL_ADDRESS email,    SPRTELE_PHONE_AREA || SPRTELE_PHONE_NUMBER celular
+            GOREMAL_EMAIL_ADDRESS email,    SPRTELE_PHONE_AREA || SPRTELE_PHONE_NUMBER celular,
+            DECODE (sprtele_phone_ext, NULL, NULL, 'ext: ' || sprtele_phone_Ext) telefono_completo,
+            GOREMAL_EMAIL_ADDRESS correo
             /*,sprtele.**/
             FROM SPRIDEN JOIN SZRIDEN ON (SPRIDEN_PIDM = SZRIDEN_PIDM AND SZRIDEN_PRINCIPAL_IND = 'Y') left join
                 goremal ON (SZRIDEN_PIDM = goremal_PIDM AND GOREMAL_STATUS_IND='A' AND GOREMAL_EMAL_CODE='UPB' ) LEFT JOIN

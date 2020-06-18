@@ -17,6 +17,7 @@ use DB;
 use Session;
 
 use App\Entidades\Formulario;
+use App\Services\BannerServices;
 use App\Entidades\Sedes;
 use App\User;
 
@@ -63,36 +64,15 @@ class LoginupbController extends Controller
 
        $contestohoy="NO";
 
-        $elquery=" SELECT DISTINCT";
-        $elquery .=" SPRIDEN_PIDM pidm,";
-        $elquery .=" SPRIDEN_ID id,";
-        $elquery .=" SZRIDEN_ADID_CODE tipo_documento,";
-        $elquery .=" SZRIDEN_DOC_ID documento,";
-        $elquery .=" SPRIDEN_FIRST_NAME primer_nombre,";
-        $elquery .=" SPRIDEN_MI segundo_nombre,";
-        $elquery .=" SPRIDEN_LAST_NAME apellidos,";
-        $elquery .=" goremal_email_address  correo,";
-        $elquery .=" sprtele_phone_area codigo_area,";
-        $elquery .=" sprtele_phone_number telefono,";
-        $elquery .=" sprtele_phone_Ext extension,";
-        $elquery .=" '(' || sprtele_phone_area || ')' || ' ' || sprtele_phone_number || ' ' ||";
-        $elquery .=" DECODE (sprtele_phone_ext, NULL, NULL, 'ext: ' || sprtele_phone_Ext) telefono_completo";
-        $elquery .=" FROM SZRIDEN";
-        $elquery .=" JOIN SPRIDEN ON SZRIDEN_PIDM = SPRIDEN_PIDM AND SZRIDEN_PRINCIPAL_IND = 'Y'";
-        $elquery .=" JOIN GOREMAL on SZRIDEN_PIDM = goremal_PIDM";
-        $elquery .=" JOIN SPRTELE on SZRIDEN_PIDM = sprtele_PIDM";
-        $elquery .=" AND SZRIDEN_PRINCIPAL_IND = 'Y'";
-        $elquery .=" WHERE SPRIDEN_CHANGE_IND IS NULL";
-        $elquery .=" AND spriden_entity_ind = 'P'";
-        $elquery .=" AND ((SPRIDEN_ID) = NVL(:idBanner,'-9999') )";
-        $elquery .=" AND goremal_preferred_ind='Y'";
-        $elquery .=" and goremal_status_ind = 'A'";
-        $elquery .=" and sprtele_tele_code='MA'";
-        $elquery .=" and sprtele_status_ind is null";
-       // $elquery .=" rownum= 1";
-        $elquery .=" ORDER BY 1 ASC";
+        
        
-       $usuario_sel = collect(DB::select($elquery ,['idBanner' => $idbanner]))->first();
+       //$usuario_sel = collect(DB::select($elquery ,['idBanner' => $idbanner]))->first();
+
+       $usuario_sel=BannerServices::getUsuarioBanner($idbanner);
+
+       //dd($usuario_sel);
+
+       //dd(array($usuario_sel,$idbanner));
        
        if($usuario_sel!=null){
             Session::put('vs_ussel',$usuario_sel);
