@@ -91,7 +91,6 @@ class LoginupbController extends Controller
         $elquery .=" and sprtele_status_ind is null";
        // $elquery .=" rownum= 1";
         $elquery .=" ORDER BY 1 ASC";
-
        
        $usuario_sel = collect(DB::select($elquery ,['idBanner' => $idbanner]))->first();
        if($usuario_sel!=null){

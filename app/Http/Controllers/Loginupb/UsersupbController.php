@@ -9,7 +9,9 @@ use App\User;
 use App\Entidades\Menus;
 use Auth;
 use App\Entidades\Sedes;
+use App\Entidades\Ciudad;
 use App\Entidades\Vinculou;
+use DB;
 
 
 //Importanto las validaciones
@@ -47,6 +49,17 @@ class UsersupbController extends Controller
         ]);  
     }
 
+    public function listarSedesAjax($request)
+    {
+        $sql = "SELECT n_idsede, t_sede FROM sedes 
+                 WHERE n_idciudad = :n_idciudad
+              ORDER BY t_sede";
+        
+        $sedes = DB::select($sql, ['n_idciudad' => request('n_idciudad')]);
+        return response()->json($sedes);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -54,21 +67,20 @@ class UsersupbController extends Controller
      */
     public function create()
     {
-         //$project = Project::findOrFail($id);
-         if(Session::has('vs_ussel')){
-          $usuario= Session::get('vs_ussel');
-          
+      //$project = Project::findOrFail($id);
+      if(Session::has('vs_ussel')){
+        $usuario= Session::get('vs_ussel');
       } 
       
-     // var_dump($usuario);
-         $sedes= Sedes::all();
-         $vinculou= Vinculou::all();
-         return view('usersupb.create',[
-           'users' => new User,
-           'sedes'=>$sedes,
-           'vinculous'=>$vinculou,
-           'usuario'=>$usuario
-         ]);
+      // var_dump($usuario);
+      $vinculou= Vinculou::all();
+      $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
+      return view('usersupb.create',[
+        'users' => new User,
+        'ciudades' => $ciudades,
+        'vinculous'=>$vinculou,
+        'usuario'=>$usuario
+      ]);
     }
 
     /**

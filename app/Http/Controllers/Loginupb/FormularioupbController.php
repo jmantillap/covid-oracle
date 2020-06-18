@@ -1,9 +1,10 @@
 <?php
-
+ 
 namespace App\Http\Controllers\Loginupb;
 use App\User;
 use App\Entidades\Formulario;
 use App\Entidades\Sedes;
+use App\Entidades\Ciudad;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -108,7 +109,16 @@ class FormularioupbController extends Controller
 
 
     }
-   
+    public function listarSedesAjax($request)
+    {
+        $sql = "SELECT n_idsede, t_sede FROM sedes 
+                 WHERE n_idciudad = :n_idciudad
+              ORDER BY t_sede";
+
+        $sedes = DB::select($sql, ['n_idciudad' => request('n_idciudad')]);
+
+        return response()->json($sedes);
+    }
 
     /**
      * Show the form for creating a new resource. 
@@ -128,14 +138,15 @@ class FormularioupbController extends Controller
 
           
           $viculoconu=$usuarioesta->vinculou->t_vinculo;
-          $sedes= Sedes::all();
+          $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
         //$project = Project::findOrFail($id);
          return view('formularioupb.create',[
             'formulario' => new Formulario,
             'n_idusuario'=>$key,
             'usuarioesta'=>$usuarioesta,
-        'sedes'=>$sedes,
-        'viculoconu'=>$viculoconu
+            //'sedes'=>$sedes,
+            'ciudades' => $ciudades,
+            'viculoconu'=>$viculoconu
 
           ]);
     }

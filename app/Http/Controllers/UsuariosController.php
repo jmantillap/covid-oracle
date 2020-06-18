@@ -66,7 +66,7 @@ class UsuariosController extends Controller
     public function store(SaveUserRequest $request)
     {
       User::create($request->validated()); //solo envia los que esten validados por CreateUserRequest
-      return redirect()->route('users.index')->with('status','La sede fue creado con éxito');
+      return redirect()->route('users.index')->with('status','La sede fue creada con éxito');
     }
 
     /**

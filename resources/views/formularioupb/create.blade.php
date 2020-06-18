@@ -7,80 +7,84 @@
     
 
 
-
+ 
 @section('content')
 @include('partials.session-status')
 @include('partials.validation-errors')
 
 
 
-<form action="{{ route('formularioupb.store')}}" method="POST">
+<form action="{{ route('formularioupb.store')}}" method="POST" id="formularioupb" >
         @include('formularioupb._form',['btnText'=>'Guardar'])
 </form>
 <script>
-$('input[type=radio][name=t_irahoy]').change(function() {
-        if (this.value == 'SI') {
-                $("#t_sitios").show();
-                $("#lt_sitios").show();
-                $("#t_actividades").show();
-                $("#lt_actividades").show();
+        $(document).ready(function() {
+                $("#formularioupb")[0].reset();
+                $("#n_idciudad").val('');
+                $('input[type=radio][name=t_irahoy]').prop("checked",false);
 
-        }
-        else if (this.value == 'NO') {
-                $("#t_sitios").hide();
-                $("#lt_sitios").hide();
-                $("#t_actividades").hide();
-                $("#lt_actividades").hide();
+                //Ciudades
+                $('#n_idciudad').change(function() {
+                        $('#n_idsede').empty().append('<option value="" selected>--Seleccionar sede--</option>');            
+                        if(this.value==""){return;}
+                        $.get('create/' + this.value, function(data) {
+                                $.each(data,function(key, value) {
+                                        $("#n_idsede").append('<option value='+value.n_idsede+'>'+value.t_sede+'</option>');
+                                });
+                        });
+                });
 
-        }
-    });
+                //ir_hoy
+                $('input[type=radio][name=t_irahoy]').change(function() {
+                        if (this.value == 'SI') {
+                                $("#t_sitios").prop('required', true).show();
+                                $("#lt_sitios").show();
+                                $("#t_actividades").prop('required', true).show();
+                                $("#lt_actividades").show();
+                        }
+                        else{
+                                $("#t_sitios").prop('required', false).hide().val(''); 
+                                $("#lt_sitios").hide();
+                                $("#t_actividades").prop('required', false).hide().val('');
+                                $("#lt_actividades").hide();
+                        }
+                });
+
+                //fiebre
+                $('input[type=radio][name=t_presentadofiebre]').change(function() {
+                        if (this.value == 'SI') {
+                                $("#t_diasfiebre").prop('required', true).show();
+                                $("#lt_diasfiebre").show();
+                        }
+                        else{
+                                $("#t_diasfiebre").prop('required', false).hide().val('');
+                                $("#lt_diasfiebre").hide();
+                        }
+                });  
+
+                //contactoinfectado
+                $('input[type=radio][name=t_contactopersonasinfectadas]').change(function() {
+                        if (this.value == 'SI') {
+                                $("#d_ultimocontacto").prop('required', true).show();
+                                $("#ld_ultimocontacto").show();
+                        }
+                        else{
+                                $("#d_ultimocontacto").prop('required', false).hide().val('');
+                                $("#ld_ultimocontacto").hide();
+                        }
+                });  
+
+                //realizoviaje
+                $('input[type=radio][name=t_realizoviaje]').change(function() {
+                        if (this.value == 'SI') {
+                                $("#d_ultimoviaje").prop('required', true).show();
+                                $("#ld_ultimoviaje").show();
+                        }
+                        else{
+                                $("#d_ultimoviaje").prop('required', false).hide().val('');
+                                $("#ld_ultimoviaje").hide();
+                        }
+                });  
+        });
 </script>
-<script>
-$('input[type=radio][name=t_presentadofiebre]').change(function() {
-        if (this.value == 'SI') {
-                $("#t_diasfiebre").show();
-                $("#lt_diasfiebre").show();
-               
-
-        }
-        else if (this.value == 'NO') {
-                $("#t_diasfiebre").hide();
-                $("#lt_diasfiebre").hide();
-                
-        }
-    });  
-</script>
-
-<script>
-        $('input[type=radio][name=t_contactopersonasinfectadas]').change(function() {
-                if (this.value == 'SI') {
-                        $("#d_ultimocontacto").show();
-                        $("#ld_ultimocontacto").show();
-                       
-        
-                }
-                else if (this.value == 'NO') {
-                        $("#d_ultimocontacto").hide();
-                        $("#ld_ultimocontacto").hide();
-                        
-                }
-            });  
-</script>
-    
-<script>
-        $('input[type=radio][name=t_realizoviaje]').change(function() {
-                if (this.value == 'SI') {
-                        $("#d_ultimoviaje").show();
-                        $("#ld_ultimoviaje").show();
-                       
-        
-                }
-                else if (this.value == 'NO') {
-                        $("#d_ultimoviaje").hide();
-                        $("#ld_ultimoviaje").hide();
-                        
-                }
-            });  
-</script>
-
 @endsection

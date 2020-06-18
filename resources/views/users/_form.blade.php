@@ -3,38 +3,32 @@
 <script>
     $(document).ready(function(){
         $("#t_emailc").on('paste', function(e){
-          e.preventDefault();
-          alert('Esta acción está prohibida');
+            e.preventDefault();
+            alert('Esta acción está prohibida');
         })
-        
         $("#t_emailc").on('copy', function(e){
-          e.preventDefault();
-          alert('Esta acción está prohibida');
+            e.preventDefault();
+            alert('Esta acción está prohibida');
         })
-      })
-    
-    </script>
+    })
+</script>
     
     
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h3>Datos Obligatorios </h3>
+                    <div class="card-header"><h3>Datos de Contacto</h3>
                         @if ($errors->any())
-                        <ul>
-                         @foreach ($errors->all() as $item)
-                     
-                         <li>{{ $item }}</li>
-                             
-                         @endforeach
-                     </ul> 
-                     @endif
-                    
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                <li>{{ $item }}</li>  
+                                @endforeach
+                            </ul> 
+                        @endif
                     </div>
                     <div class="card-body">
-                    <div class="form-group row">
-                         
+                    <div class="form-group row">    
                         <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
                             <div class="col-md-6">
                                 <select name="c_codtipo" class="form-control" id="c_codtipo" required autofocus>

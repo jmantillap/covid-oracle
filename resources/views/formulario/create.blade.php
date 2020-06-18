@@ -63,7 +63,7 @@
                                 $("#d_ultimocontacto").prop('required', true).show();
                                 $("#ld_ultimocontacto").show();
                         }
-                        else if (this.value == 'NO') {
+                        else{
                                 $("#d_ultimocontacto").prop('required', false).hide().val('');
                                 $("#ld_ultimocontacto").hide();
                         }
@@ -75,7 +75,7 @@
                                 $("#d_ultimoviaje").prop('required', true).show();
                                 $("#ld_ultimoviaje").show();
                         }
-                        else if (this.value == 'NO') {
+                        else{
                                 $("#d_ultimoviaje").prop('required', false).hide().val('');
                                 $("#ld_ultimoviaje").hide();
                         }

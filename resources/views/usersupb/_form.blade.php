@@ -1,99 +1,47 @@
 @csrf
 
-<script>
+<script> 
     $(document).ready(function(){
         $("#t_emailc").on('paste', function(e){
-          e.preventDefault();
-          alert('Esta acción está prohibida');
+            e.preventDefault();
+            alert('Esta acción está prohibida');
         })
-        
         $("#t_emailc").on('copy', function(e){
-          e.preventDefault();
-          alert('Esta acción está prohibida');
+            e.preventDefault();
+            alert('Esta acción está prohibida');
         })
-      })
-    
-    </script>
+    })
+</script>
     
     
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h3>Todos los Datos son Obligatorios </h3>
+                    <div class="card-header"><h3>Datos de Contacto</h3>
                         @if ($errors->any())
-                        <ul>
-                         @foreach ($errors->all() as $item)
-                     
-                         <li>{{ $item }}</li>
-                             
-                         @endforeach
-                     </ul> 
-                     @endif
-                    
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                <li>{{ $item }}</li>     
+                                @endforeach
+                            </ul> 
+                        @endif  
                     </div>
-
                     <input id="t_sigaa" name="t_sigaa" type="hidden" value="SI">
-    
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-    
+                            <input type="hidden" id="t_activo" name="t_activo" value="SI">    
+                            
                             <div class="form-group row">
-                                <label for="t_apellidos" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
-    
+                                <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
                                 <div class="col-md-6">
-                                    <input readonly id="t_apellidos" type="text" class="form-control @error('t_apellidos') is-invalid @enderror" name="t_apellidos" value="{{ $usuario->apellidos }}" required autocomplete="apellidos" autofocus>
-    
-                                    @error('t_apellidos')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    
+                                    <input readonly id="c_codtipo" type="text" 
+                                    class="form-control @error('c_codtipo') is-invalid @enderror" name="c_codtipo" value="{{ $usuario->tipo_documento}}" 
+                                    required autocomplete="documento" >
                                 </div>
                             </div>
-                            <input type="hidden" id="t_activo" name="t_activo" value="SI">
-    
-                            <div class="form-group row">
-                                <label for="t_nombres" class="col-md-4 col-form-label text-md-right">{{ __('Nombres') }}</label>
-    
-                                <div class="col-md-6">
-                                    <input readonly id="t_nombres" type="text" class="form-control @error('t_nombres') is-invalid @enderror" name="t_nombres" value="{{ $usuario->primer_nombre }} {{ $usuario->segundo_nombre }}" required autocomplete="nombres" >
-    
-                                    @error('t_nombres')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-    
-                            <div class="form-group row">
-                                <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Documento') }}</label>
-    
-                                <div class="col-md-6">
-                                    <select readonly name="c_codtipo" class="form-control" id="c_codtipo" required>
-                                        <option value="" >--Seleccionar Tipo--</option>
-                                        <option value="TI" @if (old('c_codtipo',$usuario->tipo_documento) == "TI") {{ 'selected' }} @endif>Tarjeta de Identidad</option> 
-                                        <option value="CC" @if (old('c_codtipo',$usuario->tipo_documento) == "CC") {{ 'selected' }} @endif>Cédula de Ciudadanía</option>
-                                        <option value="CE" @if (old('c_codtipo',$usuario->tipo_documento) == "CE") {{ 'selected' }} @endif>Cédula de Extranjería</option>
-                                        <option value="PA" @if (old('c_codtipo',$usuario->tipo_documento) == "PA") {{ 'selected' }} @endif>Pasaporte</option>
-                                        <option value="RC" @if (old('c_codtipo',$usuario->tipo_documento) == "TI") {{ 'selected' }} @endif>Registro Civil</option> 
-                                        <option value="VI" @if (old('c_codtipo',$usuario->tipo_documento) == "VI") {{ 'selected' }} @endif>Visa</option> 
-                                        <option value="NI" @if (old('c_codtipo',$usuario->tipo_documento) == "NI") {{ 'selected' }} @endif>Nro. Identificación Tributaria</option> 
-                                        <option value="DE" @if (old('c_codtipo',$usuario->tipo_documento) == "DE") {{ 'selected' }} @endif>Dto. Identificación Extranjero</option> 
-                                    </select>
-                                    @error('c_codtipo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>                  
-    
-    
-    
-    
                             <div class="form-group row">
                                 <label for="t_documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
     
@@ -107,13 +55,32 @@
                                     @enderror
                                 </div>
                             </div>
-    
                             <div class="form-group row">
-                                <label for="t_idsigaa" class="col-md-4 col-form-label text-md-right">{{ __('IDSIGAA') }}</label>
-    
+                                <label for="t_nombres" class="col-md-4 col-form-label text-md-right">{{ __('Nombres') }}</label>
+                                <div class="col-md-6">
+                                    <input readonly id="t_nombres" type="text" class="form-control @error('t_nombres') is-invalid @enderror" name="t_nombres" value="{{ $usuario->primer_nombre }} {{ $usuario->segundo_nombre }}" required autocomplete="nombres" >
+                                    @error('t_nombres')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="t_apellidos" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
+                                <div class="col-md-6">
+                                    <input readonly id="t_apellidos" type="text" class="form-control @error('t_apellidos') is-invalid @enderror" name="t_apellidos" value="{{ $usuario->apellidos }}" required autocomplete="apellidos" autofocus>
+                                    @error('t_apellidos')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="t_idsigaa" class="col-md-4 col-form-label text-md-right">{{ __('ID SIGAA') }}</label>
                                 <div class="col-md-6">
                                     <input readonly id="t_idsigaa" type="text" class="form-control @error('t_idsigaa') is-invalid @enderror" name="t_idsigaa" value="{{ $usuario->id }}"  >
-    
                                     @error('t_idsigaa')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -121,7 +88,6 @@
                                     @enderror
                                 </div>
                             </div>
-    
                             <div class="form-group row">
                                 <label for="t_email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
     
@@ -135,13 +101,10 @@
                                     @enderror
                                 </div>
                             </div>
-    
                             <div class="form-group row">
                                 <label for="t_emailc" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Confirmación') }}</label>
-    
                                 <div class="col-md-6">
                                     <input  id="t_emailc" type="email" class="form-control @error('t_emailc') is-invalid @enderror" name="t_emailc" value="{{ $usuario->correo }}" required >
-    
                                     @error('t_emailc')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -149,13 +112,10 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label for="t_telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono fijo o Celular') }}</label>
-    
                                 <div class="col-md-6">
                                     <input  required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ $usuario->telefono_completo }}"  >
-    
                                     @error('t_telefono')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -163,24 +123,35 @@
                                     @enderror
                                 </div>
                             </div>
-
-
+                            <div class="form-group row">
+                                <label for="n_idciudad" class="col-md-4 col-form-label text-md-right">
+                                    {{ __('Ciudad') }}
+                                </label>
+                                <div class="col-md-6">
+                                    <select name="n_idciudad" class="form-control" id="n_idciudad">
+                                        <option value="" >--Seleccionar Ciudad--</option>
+                                        @foreach($ciudades as $ciudad)
+                                            <option value="{{$ciudad->n_id }}"
+                                                @if ($ciudad->n_id == old('n_idciudad'))
+                                                    selected="selected"
+                                                @endif                
+                                                >{{ $ciudad->t_nombre }}</option> 
+                                        @endforeach
+                                    </select>
+                                    @error('n_idciudad')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="n_idseden_idsede" class="col-md-4 col-form-label text-md-right">{{ __('Sede') }}</label>
     
                                 <div class="col-md-6">
                                     <select name="n_idsede" class="form-control" id="n_idsede">
                                         <option value="" >--Seleccionar Sede--</option>
-                                        @foreach($sedes as $sede)
-                                             <option value="{{$sede->n_idsede }}"
-                                                @if ($sede->n_idsede == old('n_idsede',$users->n_idsede))
-                                                selected="selected"
-                                            @endif
-                                                
-                                                >{{ $sede->t_sede }} ({{ $sede->ciudad->t_nombre }})</option> 
-                                        @endforeach
-                                        </select>
-    
+                                    </select>
                                     @error('n_idsede')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -188,43 +159,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                    
-                              
-
-                            
-
-                            <div class="form-group row">
-                                <label for="t_jefeinmediatocontacto" class="col-md-4 col-form-label text-md-right">{{ __('Jefe inmediato o Contacto en la UPB.') }}</label>
-    
-                                <div class="col-md-6">
-                                    <input required id="t_jefeinmediatocontacto" type="text" class="form-control @error('t_jefeinmediatocontacto') is-invalid @enderror" name="t_jefeinmediatocontacto" value="{{ old('t_jefeinmediatocontacto',$users->t_jefeinmediatocontacto) }}"  >
-    
-                                    @error('t_jefeinmediatocontacto')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="t_facultadareaempresa" class="col-md-4 col-form-label text-md-right">{{ __('Facultad, Área, Dependencia o Empresa.') }}</label>
-    
-                                <div class="col-md-6">
-                                    <input required id="t_facultadareaempresa" type="text" class="form-control @error('t_facultadareaempresa') is-invalid @enderror" name="t_facultadareaempresa" value="{{ old('t_facultadareaempresa',$users->t_facultadareaempresa) }}"  >
-    
-                                    @error('t_facultadareaempresa')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                              
-                            
-                            
                             <div class="form-group row">
                                 <label for="n_idseden_idsede" class="col-md-4 col-form-label text-md-right">{{ __('Vínculo con la Universidad') }}</label>
     
@@ -247,8 +181,38 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div><br>
+                            </div>
+
+                            <div class="form-group row" id="t_jefeinmediatocontacto_d">
+                                <label for="t_jefeinmediatocontacto" class="col-md-4 col-form-label text-md-right">{{ __('Jefe inmediato o Contacto en la UPB.') }}</label>
     
+                                <div class="col-md-6">
+                                    <input  id="t_jefeinmediatocontacto" type="text" class="form-control @error('t_jefeinmediatocontacto') is-invalid @enderror" name="t_jefeinmediatocontacto" value="{{ old('t_jefeinmediatocontacto',$users->t_jefeinmediatocontacto) }}"  >
+    
+                                    @error('t_jefeinmediatocontacto')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span> 
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="t_facultadareaempresa_d">
+                                <label for="t_facultadareaempresa"  class="col-md-4 col-form-label text-md-right">{{ __('Facultad, Área, Dependencia o Empresa.') }}</label>
+    
+                                <div class="col-md-6">
+                                    <input id="t_facultadareaempresa" type="text" class="form-control @error('t_facultadareaempresa') is-invalid @enderror" name="t_facultadareaempresa" value="{{ old('t_facultadareaempresa',$users->t_facultadareaempresa) }}"  >
+    
+                                    @error('t_facultadareaempresa')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <br>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
