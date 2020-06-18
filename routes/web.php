@@ -45,6 +45,8 @@ Route::get('/loginupb','Loginupb\LoginupbController@showLoginForm')->name('login
 Route::post('/autenticarupb','Loginupb\LoginupbController@validarLogin')->name('loginupb.validar');
 Route::resource('formularioupb', 'Loginupb\FormularioupbController')->names('formularioupb')->parameters(['formulario'  =>  'formulario']);//->middleware('role:1|2');
 Route::get('formularioupbshow2/{id}', 'Loginupb\FormularioupbController@show2')->name('formularioupb.show2');
+Route::get('home/consulta', 'Consulta\ConsultaController@homeconsulta')->name('consulta');
+Route::post('consultar', 'Consulta\ConsultaController@consultar')->name('consultar');
 
 
 Route::get('formulario/create/{n_idciudad}', 'FormularioController@listarSedesAjax')->name('sedes.listar');

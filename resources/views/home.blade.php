@@ -23,7 +23,7 @@ else {
 <div class="row">
   <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box">
-      <span class="info-box-icon bg-info elevation-1"><a href="{{ route('loginupb') }}"><i class="fas fa-university"></a></i></span>
+      <span class="info-box-icon bg-danger elevation-1"><a href="{{ route('loginupb') }}"><i class="fas fa-university"></a></i></span>
 
       <div class="info-box-content">
         <a href="{{ route('loginupb') }}"><span class="info-box-text">Usuarios UPB</span></a>
@@ -53,6 +53,27 @@ else {
     <!-- /.info-box -->
   </div>
   <!-- /.col -->
+</div>
+
+<div class="row"><div class="border-top my-3"></div></div>
+
+<div class="row">
+  
+  <div class="col-12 col-sm-6 col-md-3">
+    <div class="info-box">
+      <span class="info-box-icon bg-success elevation-1"><a href="{{ route('consulta') }}"><i class="fas fa-search"></a></i></span>
+
+      <div class="info-box-content">
+        <a href="{{ route('consulta') }}"><span class="info-box-text">Resultado de Formulario vs Usuario</span></a>
+        
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+  <!-- /.col -->
+
+
 </div>
 
 
