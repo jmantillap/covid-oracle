@@ -70,7 +70,7 @@ class UsersupbController extends Controller
       //$project = Project::findOrFail($id);
       if(Session::has('vs_ussel')){
         $usuario= Session::get('vs_ussel');
-
+//dd($usuario);
         $elquery=" SELECT DISTINCT";
         $elquery .=" gtvadid_Desc  descripcion_tipo_documento";
         $elquery .=" FROM gtvadid";

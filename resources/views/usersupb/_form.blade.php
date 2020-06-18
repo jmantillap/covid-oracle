@@ -114,7 +114,7 @@
                             <div class="form-group row">
                                 <label for="t_telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono fijo o Celular') }}</label>
                                 <div class="col-md-6">
-                                    <input  required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ $usuario->telefono_completo }}"  >
+                                    <input  required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ $usuario->celular }}"  >
                                     @error('t_telefono')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
