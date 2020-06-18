@@ -15,9 +15,86 @@
 
 
 <?php 
+
+$elmes="";
+  $eldia="";
+  $fechaformulario=strtotime($formulario->created_at);
+  $mes=date("n", $fechaformulario);
+  $diasemana=date("w", $fechaformulario);
+  $dia=date("j", $fechaformulario);
+  $year=date("Y", $fechaformulario);
+
+  switch ($mes) {
+    case "1":
+        $elmes="Enero";
+        break;
+    case "2":
+        $elmes="Febrero";
+        break;
+    case "3":
+        $elmes="Marzo";
+        break;
+    case "4":
+        $elmes="Abril";
+        break;
+    case "5":
+        $elmes="Mayo";
+        break;
+    case "6":
+        $elmes="Junio";
+        break;
+    case "7":
+        $elmes="Julio";
+        break;
+    case "8":
+        $elmes="Agosto";
+        break;
+    case "9":
+        $elmes="Septiembre";
+        break;
+    case "10":
+        $elmes="Octubre";
+        break;
+    case "11":
+        $elmes="Noviembre";
+        break;
+    case "12":
+        $elmes="Diciembre";
+        break;
+        
+}
+
+switch ($diasemana) {
+    case "0":
+        $eldia="Domingo";
+        break;
+    case "1":
+        $eldia="Lunes";
+        break;
+    case "2":
+        $eldia="Martes";
+        break;
+    case "3":
+        $eldia="Miércoles";
+        break;
+    case "4":
+        $eldia="Jueves";
+        break;
+    case "5":
+        $eldia="Viernes";
+        break;
+        case "6":
+    $eldia="Sábado";
+        break;
+    
+        
+}
+
+$fechafinal= $eldia.", ".$dia." de ".$elmes." de ".$year;
+
 $color="success";
 $icono="checkmark";
-$textautoriza="Está autorizado para ingresar a la universidad en la fecha <br><br>". date('Y-m-d') ;
+$textautoriza="Está autorizado para ingresar a la universidad en la fecha <br><br>". $fechafinal ;
 $recomendaciones="<ul>
 	<li>Para ingresar a la Universidad debes utilizar mascarilla (desechable o en tela). Si es desechables deben cambiarla diariamente, si es de tela el lavado debe ser diario.</li>
 	<li> Llevar el cabello recogido</li>
@@ -40,14 +117,14 @@ if($formulario->n_semaforo=="2")
   {
     $color="warning";
     $icono="android-hand";
-    $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato o al contacto en la Universidad hacia donde se dirigía<br><br>". date('Y-m-d');
+    $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato o al contacto en la Universidad hacia donde se dirigía<br><br>". $fechafinal;
     $recomendaciones="Si presenta sintomatología, no debe consultar al servicio de urgencias, sino que debe quedarse en casa, tener aislamiento, usar tapabocas, hacer lavado frecuente de manos y marcar los números telefónicos establecidos para esto, ciñéndonos a las directrices del Gobierno Nacional y la Organización Mundial de la Salud.";
   } 
 if($formulario->n_semaforo=="3")
   {
     $color="danger";
     $icono="heart-broken";
-    $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato o al contacto de la Universidad hacia donde se dirigía<br><br>". date('Y-m-d');
+    $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato o al contacto de la Universidad hacia donde se dirigía<br><br>". $fechafinal;
     $recomendaciones="El dolor en el pecho y la dificultad para respirar son signos de alerta para la infección de COVID-19 y deben ser atendidos por un médico.<br>Acuda al servicio de urgencias de su EPS";
   }
 
