@@ -95,7 +95,7 @@
 </div>
 <div id="lt_diasfiebre" class="form-group row">
     <label class="col-md-10 col-form-label">
-        7. En caso de haber presentado fiebre mayor a 38°C, ¿por cuántos días la ha presentado? (formato de número en la respuesta)
+        7. ¿por cuántos días la ha presentado? (formato de número en la respuesta)
     </label>
     <div class="col-md-10">
         <input size="10" class="form-control col-md-1" type="number" id="t_diasfiebre" name="t_diasfiebre" placeholder="0" value="{{ old('t_diasfiebre') }}">
@@ -157,9 +157,9 @@
 </div>
 <div id="ld_ultimocontacto" class="form-group row">
     <label class="col-md-10 col-form-label">
-        14. En caso de que en la anterior pregunta haya marcado "Sí", ¿en qué fecha se presentó el último contacto con la persona infectada? 
+        14. ¿en qué fecha se presentó el último contacto con la persona infectada? 
     </label>
-    <div class="col-md-5">
+    <div class="col-md-10">
         <input class="form-control col-md-2" type="date" id="d_ultimocontacto" name="d_ultimocontacto" value="{{ old('d_ultimocontacto') }}">
     </div>
 </div>
@@ -174,9 +174,9 @@
 </div>
 <div id="ld_ultimoviaje" class="form-group row">
     <label class="col-md-10 col-form-label">
-        16. En caso de que en la anterior pregunta haya marcado "Sí", ¿en qué fecha realizó su ultimo viaje? 
+        16. ¿en qué fecha realizó su ultimo viaje? 
     </label>
-    <div class="col-md-5">
+    <div class="col-md-10">
         <input class="form-control col-md-2" type="date" id="d_ultimoviaje" name="d_ultimoviaje" value="{{ old('d_ultimoviaje') }}"><br>
     </div>
 </div>
