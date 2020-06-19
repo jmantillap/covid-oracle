@@ -39,6 +39,23 @@ class WebServicesUpb {
         return $data;
     }
 
+    public static function isExisteLdap($pidmCeros)
+    {
+        $client = new Client(['base_uri' => Config::get('ws.endpoint')]);
+        $parametros=[
+            'headers' => ['Username' => Config::get('ws.username'),'Password' => Config::get('ws.password'), 'Accept'     => 'application/json',],
+            'query' => ['id' => $pidmCeros],
+            'verify' => false,
+        ];  
+        try {    
+            $response = $client->request('GET', "/General/UsuariosLdap/?",$parametros);        
+            $data = json_decode($response->getBody());            
+        } catch (Exception $e) {
+             Log::error($e);             
+            return json_decode('{"ESTADO":"*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema"}');
+        }  
+        return $data;
+    }
 
 
 

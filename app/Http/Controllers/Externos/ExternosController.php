@@ -86,7 +86,7 @@ class ExternosController extends Controller
     }
 
     public function homeext()
-    {
+    {        
         return view('externos.homeext');
     }
 }

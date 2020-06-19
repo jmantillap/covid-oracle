@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Formulario;
 use App\Entidades\Sedes;
+use App\Services\BannerServices;
+use App\Utils\WebServicesUpb;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Input;
@@ -77,9 +79,15 @@ class RevisarController extends Controller
 
             //dd($usuarioesta);
         } else {
+            $usuarioBanner=BannerServices::getUsuarioBannerNroDocumento($key);
+            if($usuarioBanner!=null){                
+                $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
+                if($data->CN==$usuarioBanner->id){
+                    return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+                }            
+            }
             $errorenform = "Usuario No Existe";
         }
-
         //var_dump($docentesall);
 
         return view('revisar.verificar', [
