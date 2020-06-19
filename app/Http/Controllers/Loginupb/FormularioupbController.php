@@ -136,7 +136,12 @@ class FormularioupbController extends Controller
 
           $usuarioesta=User::where('n_idusuario','=',$key)->first();
 
-          
+          //validar si ya hizo hoy el fomulario
+          $fechahoy = date('Y-m-d 00:00:00');
+          $formhoy = Formulario::where([['n_idusuario', '=',$key],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
+          if($formhoy!=null){                
+                return redirect()->route('formulario.show', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
+          }          
           $viculoconu=$usuarioesta->vinculou->t_vinculo;
           $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
         //$project = Project::findOrFail($id);
@@ -230,6 +235,7 @@ class FormularioupbController extends Controller
         
         $resultado=Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
         //Session::put('idformulario',$resultado);
+        Session::forget('idUsuario');
 
       //return redirect()->route('home')->with('status','La sede fue creado con éxito');
 
