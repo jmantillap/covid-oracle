@@ -127,10 +127,8 @@ class FormularioupbController extends Controller
      */
     public function create()
     {
-         if(!Session::has('idUsuario')){
-
-            return route()->redirec('home');
-   
+         if(!Session::has('idUsuario')){            
+            return redirect()->route("home");   
           } 
           $key = Session::get('idUsuario');
 
