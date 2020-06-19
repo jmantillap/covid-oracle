@@ -127,7 +127,7 @@ class FormularioupbController extends Controller
      */
     public function create()
     {
-        if(!Session::has('idUsuario')){
+         if(!Session::has('idUsuario')){
 
             return route()->redirec('home');
    
@@ -140,7 +140,7 @@ class FormularioupbController extends Controller
           $fechahoy = date('Y-m-d 00:00:00');
           $formhoy = Formulario::where([['n_idusuario', '=',$key],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
           if($formhoy!=null){                
-                return redirect()->route('formulario.show', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
+                return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
           }          
           $viculoconu=$usuarioesta->vinculou->t_vinculo;
           $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
