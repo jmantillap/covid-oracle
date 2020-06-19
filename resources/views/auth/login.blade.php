@@ -34,7 +34,7 @@
                             <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }} Sigaa</label>
                             <div class="col-md-6">
                                 <input id="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required 
-                                autocomplete="usuario" autofocus  placeholder="Ej. 000253678" >
+                                autocomplete="usuario" autofocus  placeholder="Ej. 000253678" autocomplete="off"  >
                                 @error('usuario')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -45,7 +45,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required >
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="off"  required >
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
