@@ -488,13 +488,13 @@
             });
     }
 
-    function graficaBarChart(nombreGrafica,ciudad,arraySi,arrayNo) {        
+    function graficaBarChart(nombreGrafica,ciudad,arraySi,arrayNo) {              
         var areaChartData = {
               labels  :ciudad,
               datasets: [
                 {
-                  label: 'Si',backgroundColor: 'rgba(60,141,188,0.9)',borderColor: 'rgba(60,141,188,0.8)',pointRadius: false,pointColor: '#3b8bba',
-                  pointStrokeColor: 'rgba(60,141,188,1)',pointHighlightFill: '#fff',pointHighlightStroke: 'rgba(60,141,188,1)',data: arraySi,
+                  label: 'Si',backgroundColor: 'rgba(207,0,15,0.9)',borderColor: 'rgba(207,0,15,0.8)',pointRadius: false,pointColor: '#CF000F',
+                  pointStrokeColor: 'rgba(207,0,15,1)',pointHighlightFill: '#fff',pointHighlightStroke: 'rgba(207,0,15,1)',data: arraySi,
                 },
                 {
                   label: 'No',backgroundColor: 'rgba(210, 214, 222, 1)',borderColor: 'rgba(210, 214, 222, 1)',pointRadius: false,pointColor: 'rgba(210, 214, 222, 1)',
@@ -547,7 +547,9 @@ function graficaFiebre(ciudad,arraySi,arrayNo) {
       //barChart.clear();
       resetCanvas();
   }        
-  var areaChartData = {
+  //label: 'Si',backgroundColor: 'rgba(60,141,188,0.9)',borderColor: 'rgba(60,141,188,0.8)',pointRadius: false,pointColor: '#3b8bba',
+      //pointStrokeColor: 'rgba(60,141,188,1)',pointHighlightFill: '#fff',pointHighlightStroke: 'rgba(60,141,188,1)',data: arraySi,
+  var areaChartData = {    
     labels  :ciudad,
     datasets: [
       {
