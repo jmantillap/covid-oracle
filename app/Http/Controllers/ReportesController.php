@@ -47,7 +47,8 @@ class ReportesController extends Controller
         //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";        
         $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
         $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-        $elselect .= " FROM formulario fo, users us, sedes se";
+        $elselect .= " ,ci.t_nombre as ciudad";
+        $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci";
         //$elselect .= " where fo.created_at >=:fecha_desde";
         $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD')) ";          
         //$elselect .= " and fo.created_at <= :fecha_hasta";
@@ -55,6 +56,7 @@ class ReportesController extends Controller
         $elselect .= " and fo.n_semaforo>1";
         $elselect .= " and us.n_idusuario=fo.n_idusuario";
         $elselect .= " and se.n_idsede= fo.n_idsede"; 
+        $elselect .= " and se.n_idciudad= ci.n_id"; 
         if ($todas=="1")$elselect .= " and se.n_idciudad>0";
         else $elselect .= " and se.n_idciudad=".$id_ciudad;
 
@@ -125,14 +127,16 @@ public function getReporte2Formularios()
     //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
     $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
     $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-    $elselect .= " FROM formulario fo, users us, sedes se";
+    $elselect .= " ,ci.t_nombre as ciudad";
+    $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci";
     //$elselect .= " where fo.created_at >=:fecha_desde";
     $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD')) ";          
     //$elselect .= " and fo.created_at <= :fecha_hasta";
     $elselect .= " and fo.created_at <= (to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS')) ";
     //$elselect .= " and fo.n_semaforo>1";
     $elselect .= " and us.n_idusuario=fo.n_idusuario";
-    $elselect .= " and se.n_idsede= fo.n_idsede"; 
+    $elselect .= " and se.n_idsede= fo.n_idsede";
+    $elselect .= " and se.n_idciudad= ci.n_id"; 
     if ($todas=="1")$elselect .= " and se.n_idciudad>0";
     else $elselect .= " and se.n_idciudad=".$id_ciudad;
 
@@ -210,14 +214,16 @@ public function getReporte3Formularios()
     //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
     $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
     $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-    $elselect .= " FROM formulario fo, users us, sedes se";
+    $elselect .= " ,ci.t_nombre as ciudad";
+    $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci";
     //$elselect .= " where fo.created_at >=:fecha_desde";
     $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS')) ";          
     //$elselect .= " and fo.created_at <= :fecha_hasta";
     $elselect .= " and fo.created_at <= (to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS')) ";
     $elselect .= " and us.t_documento= :documento";
     $elselect .= " and us.n_idusuario=fo.n_idusuario";
-    $elselect .= " and se.n_idsede= fo.n_idsede"; 
+    $elselect .= " and se.n_idsede= fo.n_idsede";
+    $elselect .= " and se.n_idciudad= ci.n_id"; 
     if ($todas=="1"){
         $elselect .= " and se.n_idciudad>0";
     }else { 
