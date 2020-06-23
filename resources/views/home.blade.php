@@ -21,7 +21,7 @@ else {
 
 
 <div class="row">
-  <div class="col-12 col-sm-6 col-md-3">
+  <div class="col-12 col-sm-7 col-md-3">
     <div class="info-box">
       <span class="info-box-icon bg-danger elevation-1"><a href="{{ route('loginupb') }}"><i class="fas fa-university"></a></i></span>
 
@@ -40,8 +40,8 @@ else {
   <div class="clearfix hidden-md-up"></div>
 
 
-  <div class="col-12 col-sm-6 col-md-3">
-    <div class="info-box mb-3">
+  <div class="col-12 col-sm-7 col-md-3">
+    <div class="info-box mb-2">
       <span class="info-box-icon bg-warning elevation-1"><a href="{{ route('homeext') }}"><i class="fas fa-users"></i></a></span>
 
       <div class="info-box-content">
@@ -53,18 +53,13 @@ else {
     <!-- /.info-box -->
   </div>
   <!-- /.col -->
-</div>
 
-<div class="row"><div class="border-top my-3"></div></div>
-
-<div class="row">
-  
-  <div class="col-12 col-sm-6 col-md-3">
-    <div class="info-box">
+<div class="col-12 col-sm-7 col-md-4">
+    <div class="info-box mb-2">
       <span class="info-box-icon bg-success elevation-1"><a href="{{ route('consulta') }}"><i class="fas fa-search"></a></i></span>
 
       <div class="info-box-content">
-        <a href="{{ route('consulta') }}"><span class="info-box-text">Resultado de Formulario vs Usuario</span></a>
+        <a href="{{ route('consulta') }}"><span class="info-box-text">Resultado de Formulario</span></a>
         
       </div>
       <!-- /.info-box-content -->
@@ -72,12 +67,9 @@ else {
     <!-- /.info-box -->
   </div>
   <!-- /.col -->
-
-
 </div>
 
-
-
+<div class="row"><div class="border-top my-3"></div></div>
 
 {{-- @endguest --}}
 @endsection

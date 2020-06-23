@@ -281,9 +281,7 @@ use App\Entidades\Menus;
     <div class="float-right d-none d-sm-block">      
       <b><a class="info user-panel d-flex" href="{{ route('login') }}" class="d-block">Admin UPB</a></b>
     </div>
-    <strong>Copyright &copy; 2019 Universidad Pontificia Bolivariana - CTIC. Bucaramanga</strong> All rights
-    reserved.<b> Version</b> 1.0.0
-  </footer>
+    <strong><center>Universidad Pontificia Bolivariana.<center></footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
