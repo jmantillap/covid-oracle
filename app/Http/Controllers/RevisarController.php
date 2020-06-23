@@ -34,7 +34,7 @@ class RevisarController extends Controller
         //$usuarioesta=null;
 
         $errorenform = "";
-
+        
         $contestohoy = "NO";
         $puedeingresar = "SI";
         $idsigaa="NO";
@@ -44,52 +44,48 @@ class RevisarController extends Controller
 
         if (!is_null($usuarioesta)) {
             $nombrecompleto = $usuarioesta->t_nombres . " " . $usuarioesta->t_apellidos;
-            $viculoconu = $usuarioesta->vinculou->t_vinculo;
-            
+            $viculoconu = $usuarioesta->vinculou->t_vinculo;            
             $idsigaa=$usuarioesta->t_sigaa;
-
             $idusuario = $usuarioesta->n_idusuario;
             $formhoy = Formulario::where([
                 ['n_idusuario', '=', $idusuario],
                 ['created_at', '>', $fechahoy],
                 ['t_activo', '=', "SI"],
             ])->first();
-
             if (!is_null($formhoy)) {
                 $contestohoy = "SI";
             }
-
             if ($contestohoy == "SI") {
                 $hoyformulario = $formhoy->n_idformulario;
                 return redirect()->route('formulario.show', ['id' => $hoyformulario])->with('status', 'Resultado Previamente Guardado');
-
             } else {
                 Session::put('idUsuario', $idusuario);
-
                 if ($idsigaa=="SI"){
                   return redirect()->route('loginupb')->with('status', 'Debe hacer login de usuario para llenar el formulario');
                 }
                 else{
                   return redirect()->route('formulario.create');
                 }
-
-                
-
-            }
-
-            //dd($usuarioesta);
+            }            //dd($usuarioesta);
         } else {
-            $usuarioBanner=BannerServices::getUsuarioBannerNroDocumento($key);
+            $usuarioBanner=BannerServices::getUsuarioBannerNroDocumento($key);            
             if($usuarioBanner!=null){                
                 $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
                 if($data->CN==$usuarioBanner->id){
                     return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
                 }            
+            }else{
+                 $usuarioBanner=BannerServices::getUsuarioBanner($key);
+                 if($usuarioBanner!=null){
+                    $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
+                    if($data->CN==$usuarioBanner->id){
+                        return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+                    }
+                 }                 
             }
             $errorenform = "Usuario No Existe";
         }
         //var_dump($docentesall);
-
         return view('revisar.verificar', [
             'nombrecompleto' => $nombrecompleto,
             'idusuario' => $idusuario,
