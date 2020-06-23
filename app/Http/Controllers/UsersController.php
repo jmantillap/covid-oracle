@@ -118,11 +118,13 @@ class UsersController extends Controller
       {
         $sedes= Sedes::all();
         $vinculou= Vinculou::all(); 
+        $ciudades= Ciudad::all();
         
         return view('users.edit',
         [
           'users'=>$users,
           'sedes'=>$sedes,
+          'ciudades'=>$ciudades,
            'vinculous'=>$vinculou
         ]);
       }
