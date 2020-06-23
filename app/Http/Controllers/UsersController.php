@@ -10,6 +10,8 @@ use Auth;
 use App\Entidades\Sedes;
 use App\Entidades\Vinculou;
 use App\Entidades\Ciudad;
+use App\Services\BannerServices;
+use App\Utils\WebServicesUpb;
 use DB;
 
 
@@ -65,6 +67,7 @@ class UsersController extends Controller
          //$project = Project::findOrFail($id);
          $vinculou= Vinculou::all();
          $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
+         //dd($ciudades);
          return view('users.create',[
            'users' => new User,
            'ciudades' => $ciudades,
@@ -79,6 +82,15 @@ class UsersController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
+
+      //dd(request()->all());
+      $usuarioBanner=BannerServices::getUsuarioBannerNroDocumento(request('t_documento'));
+      if($usuarioBanner!=null){                
+          $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
+          if($data->CN==$usuarioBanner->id){
+              return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+          }            
+      }
       User::create($request->validated()); //solo envia los que esten validados por CreateUserRequest
       return redirect()->route('home')->with('status','¡ Usuario registrado exitósamente !');
     }
