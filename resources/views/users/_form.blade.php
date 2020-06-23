@@ -33,14 +33,14 @@
                             <div class="col-md-6">
                                 <select name="c_codtipo" class="form-control" id="c_codtipo" required autofocus>
                                     <option value="" >--Seleccionar Tipo--</option>
-                                    <option value="TI" @if (old('c_codtipo',$users->tipo_documento) == "TI") {{ 'selected' }} @endif>Tarjeta de Identidad</option> 
-                                        <option value="CC" @if (old('c_codtipo',$users->tipo_documento) == "CC") {{ 'selected' }} @endif>Cédula de Ciudadanía</option>
-                                        <option value="CE" @if (old('c_codtipo',$users->tipo_documento) == "CE") {{ 'selected' }} @endif>Cédula de Extranjería</option>
-                                        <option value="PA" @if (old('c_codtipo',$users->tipo_documento) == "PA") {{ 'selected' }} @endif>Pasaporte</option>
-                                        <option value="RC" @if (old('c_codtipo',$users->tipo_documento) == "TI") {{ 'selected' }} @endif>Registro Civil</option> 
-                                        <option value="VI" @if (old('c_codtipo',$users->tipo_documento) == "VI") {{ 'selected' }} @endif>Visa</option> 
-                                        <option value="NI" @if (old('c_codtipo',$users->tipo_documento) == "NI") {{ 'selected' }} @endif>Nro. Identificación Tributaria</option> 
-                                        <option value="DE" @if (old('c_codtipo',$users->tipo_documento) == "DE") {{ 'selected' }} @endif>Dto. Identificación Extranjero</option>
+                                    <option value="TI" @if (old('c_codtipo',$users->c_codtipo) == "TI") {{ 'selected' }} @endif>Tarjeta de Identidad</option> 
+                                        <option value="CC" @if (old('c_codtipo',$users->c_codtipo) == "CC") {{ 'selected' }} @endif>Cédula de Ciudadanía</option>
+                                        <option value="CE" @if (old('c_codtipo',$users->c_codtipo) == "CE") {{ 'selected' }} @endif>Cédula de Extranjería</option>
+                                        <option value="PA" @if (old('c_codtipo',$users->c_codtipo) == "PA") {{ 'selected' }} @endif>Pasaporte</option>
+                                        <option value="RC" @if (old('c_codtipo',$users->c_codtipo) == "TI") {{ 'selected' }} @endif>Registro Civil</option> 
+                                        <option value="VI" @if (old('c_codtipo',$users->c_codtipo) == "VI") {{ 'selected' }} @endif>Visa</option> 
+                                        <option value="NI" @if (old('c_codtipo',$users->c_codtipo) == "NI") {{ 'selected' }} @endif>Nro. Identificación Tributaria</option> 
+                                        <option value="DE" @if (old('c_codtipo',$users->c_codtipo) == "DE") {{ 'selected' }} @endif>Dto. Identificación Extranjero</option>
                                 </select>
                                 @error('c_codtipo')
                                     <span class="invalid-feedback" role="alert">
