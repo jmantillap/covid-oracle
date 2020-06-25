@@ -2,6 +2,7 @@
     $ciudad='';
     if(auth()->user()->ciudad!=null){
       $ciudad=auth()->user()->ciudad->t_nombre;
+      if(auth()->user()->b_estudiantes==1){ $ciudad.=" (SOLO ESTUDIANTES)"; }      
     }
 @endphp
 

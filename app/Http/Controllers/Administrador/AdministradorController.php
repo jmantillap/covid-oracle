@@ -133,8 +133,8 @@ class AdministradorController extends Controller
         }
         $this->administrador->b_habilitado=request('b_habilitado')!=null ? '1' : '0';
         $this->administrador->b_todas=request('b_todas')!=null ? '1' : '0';        
-        $this->administrador->b_ldap=request('b_ldap')!=null ? '1' : '0';        
-        //dd($this->administrador);
+        $this->administrador->b_ldap=request('b_ldap')!=null ? '1' : '0';
+        $this->administrador->b_estudiantes=request('b_estudiantes')!=null ? '1' : '0';        
     }
 
     private function mensajesPersonalizados()

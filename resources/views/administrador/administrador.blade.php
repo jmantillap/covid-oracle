@@ -65,6 +65,10 @@
             <div class="form-group ">
                 <label for="b_todas">Nacional</label>
                 <input name="b_todas" id="b_todas" type="checkbox" {{ $administrador->b_todas==1 ? 'checked' : '' }} value="1" class="flat-red" > Todas Ciudades
+            </div>
+            <div class="form-group ">
+                <label for="b_estudiantes">Estudiantes</label>
+                <input name="b_estudiantes" id="b_estudiantes" type="checkbox" {{ $administrador->b_estudiantes==1 ? 'checked' : '' }} value="1" class="flat-red" > Bienestar Universitario
             </div>            
             <div class="form-group">
                 <label for="password">Pasword</label>

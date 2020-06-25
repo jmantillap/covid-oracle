@@ -24,13 +24,10 @@ class EstadisticaController extends Controller
     public function index()
     {   
 
-        $listaVinculo=Vinculou::orderBy('t_vinculo','asc')->get();
-        //dd(auth()->user()->b_estudiantes);
+        $listaVinculo=Vinculou::orderBy('t_vinculo','asc')->get();        
         if(auth()->user()->b_estudiantes==1){
-            $listaVinculo=Vinculou::where('n_idvinculou','=',Config::get('pregunta.n_idestudiante'))->orderBy('t_vinculo','asc')->get();
-            //$id_vinculo_estudiante=Config::get('pregunta.n_idestudiante');
+            $listaVinculo=Vinculou::where('n_idvinculou','=',Config::get('pregunta.n_idestudiante'))->orderBy('t_vinculo','asc')->get();            
         }
-
         $objetos=['listaVinculo'=>$listaVinculo];         
         return view('estadistica.estadistica',$objetos);
     }
@@ -59,6 +56,7 @@ class EstadisticaController extends Controller
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }
         if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+        if(auth()->user()->b_estudiantes==1){ $sqlInterno.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }
 
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_presentadofiebre ";
 
@@ -93,6 +91,7 @@ class EstadisticaController extends Controller
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }    
         if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+        if(auth()->user()->b_estudiantes==1){ $sqlInterno.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }
 
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_secresioncongestionnasal ";
 
@@ -122,6 +121,7 @@ class EstadisticaController extends Controller
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }  
         if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }  
+        if(auth()->user()->b_estudiantes==1){ $sqlInterno.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_realizoviaje ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -150,6 +150,7 @@ class EstadisticaController extends Controller
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }    
         if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+        if(auth()->user()->b_estudiantes==1){ $sqlInterno.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }
 
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_dolorgarganta ";
 
@@ -179,6 +180,7 @@ class EstadisticaController extends Controller
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }    
         if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+        if(auth()->user()->b_estudiantes==1){ $sqlInterno.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_malestargeneral ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -207,7 +209,7 @@ class EstadisticaController extends Controller
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }    
         if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
-
+        if(auth()->user()->b_estudiantes==1){ $sqlInterno.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_dificultadrespirar ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -236,6 +238,7 @@ class EstadisticaController extends Controller
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }
         if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+        if(auth()->user()->b_estudiantes==1){ $sqlInterno.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_tosseca ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -264,6 +267,7 @@ class EstadisticaController extends Controller
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }
         if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+        if(auth()->user()->b_estudiantes==1){ $sqlInterno.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_contactopersonasinfectadas ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -298,7 +302,7 @@ class EstadisticaController extends Controller
             $sql.=" AND s.n_idciudad=".$idCiudad; 
         }
         if(request('n_idvinculou')!=null){ $sql.=" AND u.n_idvinculou=".request('n_idvinculou');  }
-        //dd(request('id_tipo'));
+        if(auth()->user()->b_estudiantes==1){ $sql.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }        
         $registros = DB::select($sql,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta]);
         //dd($registros);
         return Excel::download(new ConsultaFormularioExport($registros), 'CONSULTAS_FORMULARIOS.xlsx');

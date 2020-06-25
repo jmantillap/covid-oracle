@@ -24,6 +24,7 @@
                 <th>Ldap</th>
                 <th>Ciudad</th>
                 <th>Todas</th>
+                <th>Bienestar</th>
                 <th>Email</th>
                 <th>Actualización</th>
                 <th class="text-center">Estado</th>
@@ -53,8 +54,12 @@
                     <td class="text-center">
                         @if ($adm->b_todas == 1)
                             <span class="badge badge-success">Si</span>
-                        @else
-                            {{-- <span class="badge badge-danger">No</span> --}}
+                        @else{{-- <span class="badge badge-danger">No</span> --}}
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        @if ($adm->b_estudiantes == 1)
+                            <span class="badge badge-success">Si</span>                        
                         @endif
                     </td>
                     <td>{{ $adm->t_email }}</td>
@@ -84,16 +89,10 @@
       //$("#menuHome" ).removeClass("active" );
       
       $('#example1').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": false,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-        "language": { "url": "/plugins/datatables/locale/Spanish.json",},
-        "pageLength": 10,
-        "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+        "paging": true,"lengthChange": false,"searching": true,
+        "ordering": false,"info": true,"autoWidth": false,
+        "responsive": true,"language": { "url": "/plugins/datatables/locale/Spanish.json",},
+        "pageLength": 10,"lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
       });
     });
   </script>
