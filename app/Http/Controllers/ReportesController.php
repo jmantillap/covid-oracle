@@ -26,6 +26,7 @@ class ReportesController extends Controller
     public function getReporte1Formularios()
     {
       $id_ciudad=auth()->user()->n_idciudad;
+      $estudsi=auth()->user()->b_estudiantes;
       $todas=auth()->user()->b_todas;
       $fechahoy=date('Y-m-d 00:00:00');
 
@@ -47,8 +48,8 @@ class ReportesController extends Controller
         //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";        
         $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
         $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-        $elselect .= " ,ci.t_nombre as ciudad";
-        $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci";
+        $elselect .= " ,ci.t_nombre as ciudad, vu.t_vinculo as vinculo ";
+        $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci, vinculou vu";
         //$elselect .= " where fo.created_at >=:fecha_desde";
         $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD')) ";          
         //$elselect .= " and fo.created_at <= :fecha_hasta";
@@ -57,8 +58,13 @@ class ReportesController extends Controller
         $elselect .= " and us.n_idusuario=fo.n_idusuario";
         $elselect .= " and se.n_idsede= fo.n_idsede"; 
         $elselect .= " and se.n_idciudad= ci.n_id"; 
+        $elselect .= " and us.n_idvinculou= vu.n_idvinculou"; 
         if ($todas=="1")$elselect .= " and se.n_idciudad>0";
         else $elselect .= " and se.n_idciudad=".$id_ciudad;
+
+        
+        if ($estudsi=="0")$elselect .= " and us.n_idvinculou>0";
+        else $elselect .= " and us.n_idvinculou=1";
 
         $elselect .= " order by fo.created_at";
 
@@ -106,6 +112,7 @@ public function reporte2(){
 public function getReporte2Formularios()
 {
   $id_ciudad=auth()->user()->n_idciudad;
+  $estudsi=auth()->user()->b_estudiantes;
   $todas=auth()->user()->b_todas;
   $fechahoy=date('Y-m-d 00:00:00');
 
@@ -127,8 +134,8 @@ public function getReporte2Formularios()
     //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
     $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
     $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-    $elselect .= " ,ci.t_nombre as ciudad";
-    $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci";
+    $elselect .= " ,ci.t_nombre as ciudad , vu.t_vinculo as vinculo ";
+    $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci, vinculou vu ";
     //$elselect .= " where fo.created_at >=:fecha_desde";
     $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD')) ";          
     //$elselect .= " and fo.created_at <= :fecha_hasta";
@@ -137,8 +144,12 @@ public function getReporte2Formularios()
     $elselect .= " and us.n_idusuario=fo.n_idusuario";
     $elselect .= " and se.n_idsede= fo.n_idsede";
     $elselect .= " and se.n_idciudad= ci.n_id"; 
+    $elselect .= " and us.n_idvinculou= vu.n_idvinculou"; 
     if ($todas=="1")$elselect .= " and se.n_idciudad>0";
     else $elselect .= " and se.n_idciudad=".$id_ciudad;
+
+    if ($estudsi=="0")$elselect .= " and us.n_idvinculou>0";
+        else $elselect .= " and us.n_idvinculou=1";
 
     $elselect .= " order by fo.created_at";
 
@@ -186,6 +197,7 @@ public function reporte3(){
 public function getReporte3Formularios()
 {
   $id_ciudad=auth()->user()->n_idciudad;
+  $estudsi=auth()->user()->b_estudiantes;
   $todas=auth()->user()->b_todas;
   $fechahoy=date('Y-m-d 00:00:00');
 
@@ -214,8 +226,8 @@ public function getReporte3Formularios()
     //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
     $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
     $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
-    $elselect .= " ,ci.t_nombre as ciudad";
-    $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci";
+    $elselect .= " ,ci.t_nombre as ciudad , vu.t_vinculo as vinculo ";
+    $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci, vinculou vu ";
     //$elselect .= " where fo.created_at >=:fecha_desde";
     $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS')) ";          
     //$elselect .= " and fo.created_at <= :fecha_hasta";
@@ -224,11 +236,15 @@ public function getReporte3Formularios()
     $elselect .= " and us.n_idusuario=fo.n_idusuario";
     $elselect .= " and se.n_idsede= fo.n_idsede";
     $elselect .= " and se.n_idciudad= ci.n_id"; 
+    $elselect .= " and us.n_idvinculou= vu.n_idvinculou"; 
     if ($todas=="1"){
         $elselect .= " and se.n_idciudad>0";
     }else { 
         $elselect .= " and se.n_idciudad=".$id_ciudad;
     }
+
+    if ($estudsi=="0")$elselect .= " and us.n_idvinculou>0";
+        else $elselect .= " and us.n_idvinculou=1";
 
     $elselect .= " order by fo.created_at";
 
@@ -276,6 +292,7 @@ public function reporte4(){
 public function getReporte4Formularios()
 {
   $id_ciudad=auth()->user()->n_idciudad;
+  $estudsi=auth()->user()->b_estudiantes;
   $todas=auth()->user()->b_todas;
   $fechahoy=date('Y-m-d');
 
@@ -302,12 +319,13 @@ public function getReporte4Formularios()
 
  //$elselect= "SELECT *";
  $elselect= "SELECT us.*,se.*,vi.*,ci.*";
-$elselect .= " FROM users us, sedes se, vinculou vi, ciudades ci";
+$elselect .= " FROM users us, sedes se, vinculou vi, ciudades ci , vinculou vu";
 //$elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=:fecha_desde and fo.created_at<=:fecha_hasta and fo.t_activo='SI')";
 $elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS') and fo.created_at<=to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS') and fo.t_activo='SI')";
 $elselect .= " AND us.n_idsede=se.n_idsede";
 $elselect .= " AND us.n_idvinculou=vi.n_idvinculou";
 $elselect .= " AND se.n_idciudad=ci.n_id";
+
 
 //dd($elselect);
    
@@ -316,6 +334,9 @@ $elselect .= " AND se.n_idciudad=ci.n_id";
     }else { 
         $elselect .= " and se.n_idciudad=".$id_ciudad;
     }
+
+    if ($estudsi=="0")$elselect .= " and us.n_idvinculou>0";
+        else $elselect .= " and us.n_idvinculou=1";
 
     $elselect .= " order by us.t_apellidos, us.t_nombres";
 
