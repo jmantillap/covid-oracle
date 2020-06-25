@@ -50,6 +50,17 @@
                 <input type="text" value="" size="10"  maxlength="10" class="form-control pull-right" id="fecha_hasta" name="fecha_hasta" placeholder="yyyy-mm-dd" required>
             </div>
         </div>
+        <div class="form-group">
+            <label for="tipo" >Tipo </label>
+            <div class="row col-7">
+              <select class="form-control" name="n_idvinculou" id="n_idvinculou" >
+                  <option value="">Seleccione ...</option>
+                  @foreach($listaVinculo as $vinculo)
+                      <option value="{{$vinculo->n_idvinculou}}">{{$vinculo->t_vinculo}}</option>
+                  @endforeach
+              </select>
+            </div>
+        </div>  
         @if (auth()->user()->b_todas==1)
           <div class="form-group" >
             <input name="todas" id="todas"  type="checkbox" value="1" class="flat-red pull-right" > Todas las Ciudades
@@ -287,19 +298,16 @@
             $.ajax({
                 url : '{{ route('estadistica.fiebre.grafico.ajax') }}',
                 data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
-                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),'id_tipo': $('#n_idvinculou').val(), 
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
                     response.forEach(function(obj) {
-                            ciudad.push(obj.ciudad);
-                            cantidadSi.push(obj.si);
-                            cantidadNo.push(obj.no);
+                            ciudad.push(obj.ciudad); cantidadSi.push(obj.si); cantidadNo.push(obj.no);
                     });
                 },
                 error : function(xhr, status) { 
-                    console.log(JSON.stringify(xhr))
-                    console.log("AJAX error: " + status);
+                    console.log(JSON.stringify(xhr)); console.log("AJAX error: " + status);
                     //errorAlert('Error','Disculpe, existió un problema'); 
                   },
                 complete : function(xhr, status) {
@@ -314,20 +322,17 @@
             $.ajax({
                 url : '{{ route('estadistica.secrecion.grafico.ajax') }}',
                 data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
-                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),'id_tipo': $('#n_idvinculou').val(),
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
                     response.forEach(function(obj) {
-                            ciudad.push(obj.ciudad);
-                            cantidadSi.push(obj.si);
-                            cantidadNo.push(obj.no);
+                            ciudad.push(obj.ciudad); cantidadSi.push(obj.si); cantidadNo.push(obj.no);
                     });
                 },
                 error : function(xhr, status) { 
                     //errorAlert('Error','Disculpe, existió un problema'); 
-                    console.log(JSON.stringify(xhr))
-                    console.log("AJAX error: " + status);
+                    console.log(JSON.stringify(xhr)); console.log("AJAX error: " + status);
                  },
                 complete : function(xhr, status) {
                    if(barChartSecrecion!=null){ resetCanvas('barChartSecrecion','#graph-container-secrecion'); }  
@@ -341,20 +346,17 @@
             $.ajax({
                 url : '{{ route('estadistica.viaje.grafico.ajax') }}',
                 data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
-                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),'id_tipo': $('#n_idvinculou').val(),
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
                     response.forEach(function(obj) {
-                            ciudad.push(obj.ciudad);
-                            cantidadSi.push(obj.si);
-                            cantidadNo.push(obj.no);
+                            ciudad.push(obj.ciudad); cantidadSi.push(obj.si); cantidadNo.push(obj.no);
                     });
                 },
                 error : function(xhr, status) { 
                     //errorAlert('Error','Disculpe, existió un problema'); 
-                    console.log(JSON.stringify(xhr))
-                    console.log("AJAX error: " + status);
+                    console.log(JSON.stringify(xhr)); console.log("AJAX error: " + status);
                  },
                 complete : function(xhr, status) {
                    if(barChartViaje!=null){ resetCanvas('barChartViaje','#graph-container-viaje'); }  
@@ -368,7 +370,7 @@
             $.ajax({
                 url : '{{ route('estadistica.garganta.grafico.ajax') }}',
                 data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
-                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),'id_tipo': $('#n_idvinculou').val(),
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
@@ -378,8 +380,7 @@
                 },
                 error : function(xhr, status) { 
                     //errorAlert('Error','Disculpe, existió un problema'); 
-                    console.log(JSON.stringify(xhr))
-                    console.log("AJAX error: " + status);
+                    console.log(JSON.stringify(xhr)); console.log("AJAX error: " + status);
                 },
                 complete : function(xhr, status) {
                    if(barChartGarganta!=null){ resetCanvas('barChartGarganta','#graph-container-garganta'); }  
@@ -393,7 +394,7 @@
             $.ajax({
                 url : '{{ route('estadistica.malestar.grafico.ajax') }}',
                 data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
-                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),'id_tipo': $('#n_idvinculou').val(),
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
@@ -403,8 +404,7 @@
                 },
                 error : function(xhr, status) { 
                     //errorAlert('Error','Disculpe, existió un problema'); 
-                    console.log(JSON.stringify(xhr))
-                    console.log("AJAX error: " + status);
+                    console.log(JSON.stringify(xhr)); console.log("AJAX error: " + status);
                 },
                 complete : function(xhr, status) {
                    if(barChartMalestar!=null){ resetCanvas('barChartMalestar','#graph-container-malestar'); }  
@@ -418,7 +418,7 @@
             $.ajax({
                 url : '{{ route('estadistica.respirar.grafico.ajax') }}',
                 data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
-                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),'id_tipo': $('#n_idvinculou').val(),
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
@@ -428,8 +428,7 @@
                 },
                 error : function(xhr, status) { 
                     //errorAlert('Error','Disculpe, existió un problema'); 
-                    console.log(JSON.stringify(xhr))
-                    console.log("AJAX error: " + status);
+                    console.log(JSON.stringify(xhr)); console.log("AJAX error: " + status);
                 },
                 complete : function(xhr, status) {
                    if(barChartRespirar!=null){ resetCanvas('barChartRespirar','#graph-container-respirar'); }  
@@ -443,7 +442,7 @@
             $.ajax({
                 url : '{{ route('estadistica.tos.grafico.ajax') }}',
                 data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
-                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),'id_tipo': $('#n_idvinculou').val(),
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
@@ -453,8 +452,7 @@
                 },
                 error : function(xhr, status) { 
                     //errorAlert('Error','Disculpe, existió un problema'); 
-                    console.log(JSON.stringify(xhr))
-                    console.log("AJAX error: " + status);
+                    console.log(JSON.stringify(xhr)); console.log("AJAX error: " + status);
                 },
                 complete : function(xhr, status) {
                    if(barChartTos!=null){ resetCanvas('barChartTos','#graph-container-tos'); }  
@@ -468,7 +466,7 @@
             $.ajax({
                 url : '{{ route('estadistica.contacto.grafico.ajax') }}',
                 data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
-                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),'id_tipo': $('#n_idvinculou').val(),
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
@@ -478,8 +476,7 @@
                 },
                 error : function(xhr, status) { 
                     //errorAlert('Error','Disculpe, existió un problema'); 
-                    console.log(JSON.stringify(xhr))
-                    console.log("AJAX error: " + status);
+                    console.log(JSON.stringify(xhr)); console.log("AJAX error: " + status);
                 },
                 complete : function(xhr, status) {
                    if(barChartContacto!=null){ resetCanvas('barChartContacto','#graph-container-contacto'); }  

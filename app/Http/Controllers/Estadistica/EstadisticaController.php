@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ConsultaFormularioExport;
+use App\Entidades\Vinculou;
 use Validator;
+use Config;
 /**
  * Javier Mantilla. javier.mantillap@upb.edu.co
  * 2020-06
@@ -19,8 +21,17 @@ class EstadisticaController extends Controller
         $this->middleware('auth');            
     }
 
-    public function index(){   
-        $objetos=['lista'=>null];         
+    public function index()
+    {   
+
+        $listaVinculo=Vinculou::orderBy('t_vinculo','asc')->get();
+        //dd(auth()->user()->b_estudiantes);
+        if(auth()->user()->b_estudiantes==1){
+            $listaVinculo=Vinculou::where('n_idvinculou','=',Config::get('pregunta.n_idestudiante'))->orderBy('t_vinculo','asc')->get();
+            //$id_vinculo_estudiante=Config::get('pregunta.n_idestudiante');
+        }
+
+        $objetos=['listaVinculo'=>$listaVinculo];         
         return view('estadistica.estadistica',$objetos);
     }
 
@@ -38,6 +49,7 @@ class EstadisticaController extends Controller
         $sqlInterno="SELECT c.t_nombre ciudad, NVL(SUM(CASE WHEN f.t_presentadofiebre='SI' THEN 1 ELSE 0 END ),0)  AS si
             ,NVL(SUM(CASE WHEN f.t_presentadofiebre='NO' THEN 1 ELSE 0 END ),0)  AS no
             FROM formulario f inner join sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+            inner join users u on (f.n_idusuario=u.n_idusuario) /*left join vinculou v on (v.n_idvinculou=u.n_idvinculou)*/
             WHERE f.t_activo='SI'
             AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
             AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD')) ";
@@ -45,9 +57,10 @@ class EstadisticaController extends Controller
         if(request('todas')==null){
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
-        }    
-        $sqlInterno.=" GROUP BY c.t_nombre,f.t_presentadofiebre ";
+        }
+        if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
 
+        $sqlInterno.=" GROUP BY c.t_nombre,f.t_presentadofiebre ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no
               FROM (".$sqlInterno.") t
@@ -71,6 +84,7 @@ class EstadisticaController extends Controller
         $sqlInterno="SELECT c.t_nombre ciudad, NVL(SUM(CASE WHEN f.t_secresioncongestionnasal='SI' THEN 1 ELSE 0 END ),0)  AS si
             ,NVL(SUM(CASE WHEN f.t_secresioncongestionnasal='NO' THEN 1 ELSE 0 END ),0)  AS no
             FROM formulario f inner join sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+            inner join users u on (f.n_idusuario=u.n_idusuario) /*left join vinculou v on (v.n_idvinculou=u.n_idvinculou)*/
             WHERE f.t_activo='SI' AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
             AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD'))  ";
 
@@ -78,6 +92,8 @@ class EstadisticaController extends Controller
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }    
+        if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_secresioncongestionnasal ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -97,13 +113,15 @@ class EstadisticaController extends Controller
         $sqlInterno="SELECT c.t_nombre ciudad, NVL(SUM(CASE WHEN f.t_realizoviaje='SI' THEN 1 ELSE 0 END ),0)  AS si
             ,NVL(SUM(CASE WHEN f.t_realizoviaje='NO' THEN 1 ELSE 0 END ),0)  AS no
             FROM formulario f inner join sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+            inner join users u on (f.n_idusuario=u.n_idusuario) /*left join vinculou v on (v.n_idvinculou=u.n_idvinculou)*/
             WHERE f.t_activo='SI' AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
             AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD')) ";
 
         if(request('todas')==null){
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
-        }    
+        }  
+        if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }  
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_realizoviaje ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -123,6 +141,7 @@ class EstadisticaController extends Controller
         $sqlInterno="SELECT c.t_nombre ciudad, NVL(SUM(CASE WHEN f.t_dolorgarganta='SI' THEN 1 ELSE 0 END ),0)  AS si
             ,NVL(SUM(CASE WHEN f.t_dolorgarganta='NO' THEN 1 ELSE 0 END ),0)  AS no
             FROM formulario f inner join sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+            inner join users u on (f.n_idusuario=u.n_idusuario) /*left join vinculou v on (v.n_idvinculou=u.n_idvinculou)*/
             WHERE f.t_activo='SI' AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
             AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD')) ";
 
@@ -130,6 +149,8 @@ class EstadisticaController extends Controller
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }    
+        if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_dolorgarganta ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -149,6 +170,7 @@ class EstadisticaController extends Controller
         $sqlInterno="SELECT c.t_nombre ciudad, NVL(SUM(CASE WHEN f.t_malestargeneral='SI' THEN 1 ELSE 0 END ),0)  AS si
             ,NVL(SUM(CASE WHEN f.t_malestargeneral='NO' THEN 1 ELSE 0 END ),0)  AS no
             FROM formulario f inner join sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+            inner join users u on (f.n_idusuario=u.n_idusuario) /*left join vinculou v on (v.n_idvinculou=u.n_idvinculou)*/
             WHERE f.t_activo='SI' AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
             AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD')) ";
 
@@ -156,6 +178,7 @@ class EstadisticaController extends Controller
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }    
+        if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_malestargeneral ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -175,6 +198,7 @@ class EstadisticaController extends Controller
         $sqlInterno="SELECT c.t_nombre ciudad, NVL(SUM(CASE WHEN f.t_dificultadrespirar='SI' THEN 1 ELSE 0 END ),0)  AS si
             ,NVL(SUM(CASE WHEN f.t_dificultadrespirar='NO' THEN 1 ELSE 0 END ),0)  AS no
             FROM formulario f inner join sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+            inner join users u on (f.n_idusuario=u.n_idusuario) /*left join vinculou v on (v.n_idvinculou=u.n_idvinculou)*/
             WHERE f.t_activo='SI' AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
             AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD')) ";
 
@@ -182,6 +206,8 @@ class EstadisticaController extends Controller
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
         }    
+        if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
+
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_dificultadrespirar ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -201,13 +227,15 @@ class EstadisticaController extends Controller
         $sqlInterno="SELECT c.t_nombre ciudad, NVL(SUM(CASE WHEN f.t_tosseca='SI' THEN 1 ELSE 0 END ),0)  AS si
             ,NVL(SUM(CASE WHEN f.t_tosseca='NO' THEN 1 ELSE 0 END ),0)  AS no
             FROM formulario f inner join sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+            inner join users u on (f.n_idusuario=u.n_idusuario) /*left join vinculou v on (v.n_idvinculou=u.n_idvinculou)*/
             WHERE f.t_activo='SI' AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
             AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD')) ";
 
         if(request('todas')==null){
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
-        }    
+        }
+        if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_tosseca ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -227,13 +255,15 @@ class EstadisticaController extends Controller
         $sqlInterno="SELECT c.t_nombre ciudad, NVL(SUM(CASE WHEN f.t_contactopersonasinfectadas='SI' THEN 1 ELSE 0 END ),0)  AS si
             ,NVL(SUM(CASE WHEN f.t_contactopersonasinfectadas='NO' THEN 1 ELSE 0 END ),0)  AS no
             FROM formulario f inner join sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+            inner join users u on (f.n_idusuario=u.n_idusuario) /*left join vinculou v on (v.n_idvinculou=u.n_idvinculou)*/
             WHERE f.t_activo='SI' AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
             AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD')) ";
 
         if(request('todas')==null){
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sqlInterno.=" AND s.n_idciudad=".$idCiudad; 
-        }    
+        }
+        if(request('id_tipo')!=null){ $sqlInterno.=" AND u.n_idvinculou=".request('id_tipo');  }
         $sqlInterno.=" GROUP BY c.t_nombre,f.t_contactopersonasinfectadas ";
 
         $sql="SELECT t.ciudad,sum(t.si) as si,sum(t.no) as no FROM (".$sqlInterno.") t GROUP BY t.ciudad ";                
@@ -267,6 +297,8 @@ class EstadisticaController extends Controller
             $idCiudad=(auth()->user()->n_idciudad!=null)? auth()->user()->n_idciudad : 0 ;            
             $sql.=" AND s.n_idciudad=".$idCiudad; 
         }
+        if(request('n_idvinculou')!=null){ $sql.=" AND u.n_idvinculou=".request('n_idvinculou');  }
+        //dd(request('id_tipo'));
         $registros = DB::select($sql,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta]);
         //dd($registros);
         return Excel::download(new ConsultaFormularioExport($registros), 'CONSULTAS_FORMULARIOS.xlsx');

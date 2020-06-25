@@ -21,7 +21,7 @@ class Administrador extends Authenticatable
     const CREATED_AT = 'dt_created_at';
     const UPDATED_AT = 'dt_updated_at';
 
-    protected $fillable = ['t_nombrecompleto', 't_login','n_idciudad','t_email','b_habilitado','b_todas','b_ldap'];
+    protected $fillable = ['t_nombrecompleto', 't_login','n_idciudad','t_email','b_habilitado','b_todas','b_ldap','b_estudiantes'];
     
     protected $guarded =['t_password'];
 
