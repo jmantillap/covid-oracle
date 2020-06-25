@@ -61,6 +61,8 @@ class FormularioController extends Controller
     public function getListaFormularios()
     {
         $id_ciudad = auth()->user()->n_idciudad;
+        $estudsi=auth()->user()->b_estudiantes;
+        $todas=auth()->user()->b_todas;
         $fechahoy = date('Y-m-d 00:00:00');
 
         //$elselect= "select *,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo from formulario fo,sedes se, users us where se.n_idsede=fo.n_idsede and se.n_idciudad=".$id_ciudad;
@@ -73,6 +75,17 @@ class FormularioController extends Controller
         $elselect .= " and fo.updated_at>= trunc(to_date('" . $fechahoy . "','YY/MM/DD HH24:MI:SS')) ";
 
         $elselect .= " and us.n_idusuario=fo.n_idusuario";
+
+        if ($todas=="1"){
+            $elselect .= " and se.n_idciudad>0";
+        }else { 
+            $elselect .= " and se.n_idciudad=".$id_ciudad;
+        }
+    
+        if ($estudsi=="0")$elselect .= " and us.n_idvinculou>0";
+            else $elselect .= " and us.n_idvinculou=1";
+
+
 
         $query = DB::select($elselect);
 
