@@ -255,11 +255,12 @@ class EstadisticaController extends Controller
         $fecha_hasta='1900-12-31';
         if(request('fecha_hasta')!=null){ $fecha_hasta=request('fecha_hasta');}    
 
-        $sql="SELECT f.n_idformulario,trunc(f.created_at) fecha  ,u.t_nombres ,u.t_apellidos,c.t_nombre,s.t_sede,f.t_consentimiento
+        $sql="SELECT f.n_idformulario,trunc(f.created_at) fecha  ,u.t_nombres ,u.t_apellidos,v.t_vinculo vinculo,c.t_nombre ciudad,s.t_sede,f.t_consentimiento
         ,f.t_irahoy ,f.t_sitios,f.t_actividades,f.t_presentadofiebre,f.t_diasfiebre ,f.t_dolorgarganta
         ,f.t_malestargeneral,f.t_secresioncongestionnasal,f.t_dificultadrespirar,f.t_tosseca,f.t_contactopersonasinfectadas
         ,f.d_ultimocontacto,f.t_realizoviaje,f.d_ultimoviaje,f.created_at,f.updated_at
         from formulario f inner join users u on (f.n_idusuario=u.n_idusuario) INNER JOIN sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
+        left join vinculou v on (v.n_idvinculou=u.n_idvinculou)
         where f.t_activo='SI'  AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
         AND TRUNC(f.created_at)<=trunc(to_date(:fecha_hasta, 'YY/MM/DD'))";
         if(request('todas')==null){

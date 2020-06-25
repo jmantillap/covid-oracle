@@ -31,7 +31,7 @@ class ConsultaFormularioExport implements FromCollection,WithHeadings, WithColum
     public function headings(): array
     {
         return [
-            'ID','FECHA','NOMBRE','APELLIDOS','CIUDAD','SEDE',
+            'ID','FECHA','NOMBRE','APELLIDOS','TIPO','CIUDAD','SEDE',
             'CONSENTIMIENTO','IR_HOY_UPB','SITIOS','ACTIVIDADES',
             'PRESENTA_FIEBRE','DIAS_FIEBRE','DOLOR_GARGANTA',
             'MALESTAR_GENERAL','SECRECION_NASAL',
