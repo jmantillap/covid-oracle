@@ -34,7 +34,7 @@
 <br>
 <div id="dn_idciudad" class="form-group row">
     <label class="col-md-10 col-form-label">
-        1. Indique la ciudad a la que pertenece la sede a la cual solicita el ingreso
+        1. Indique la ciudad a la que pertenece la sede a la cual solicita el ingreso *
     </label>
     <div class="col-md-5">
         <select name="n_idciudad" class="form-control" id="n_idciudad">
@@ -51,7 +51,7 @@
 </div>
 <div id="dn_idsede" class="form-group row">
     <label class="col-md-10 col-form-label">
-        2. Indique para cuál sede o seccional solicita el ingreso
+        2. Indique para cuál sede o seccional solicita el ingreso *
     </label>
     <div class="col-md-5">
         <select name="n_idsede" class="form-control" id="n_idsede">
@@ -61,7 +61,7 @@
 </div>
 <div id="dt_irahoy" class="form-group row">
     <label class="col-md-10 col-form-label">
-        3. ¿Usted irá hoy a la Universidad o a una de sus sedes?
+        3. ¿Usted irá hoy a la Universidad o a una de sus sedes? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_irahoy" id="SI" value="SI" {{(old('t_irahoy') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -70,7 +70,7 @@
 </div>
 <div id="lt_sitios" class="form-group row">
     <label class="col-md-10 col-form-label">
-        4. Indique el o los sitios donde realizará sus actividades
+        4. Indique el o los sitios donde realizará sus actividades *
     </label>
     <div class="col-md-5">
         <input class="form-control" type="text" id="t_sitios" name="t_sitios" placeholder="Indique el sitio" value="{{ old('t_sitios') }}">
@@ -78,7 +78,7 @@
 </div>
 <div id="lt_actividades" class="form-group row">
     <label class="col-md-10 col-form-label">
-        5. Actividades que realizará en la Universidad, objeto de solicitud de permiso
+        5. Actividades que realizará en la Universidad, objeto de solicitud de permiso *
     </label>
     <div class="col-md-5">
     <input class="form-control" type="text" name="t_actividades" id="t_actividades" placeholder="Llene con resumen actividades" value="{{ old('t_actividades') }}">
@@ -86,7 +86,7 @@
 </div>
 <div id="lt_presentadofiebre" class="form-group row">
     <label class="col-md-10 col-form-label">
-        6. ¿Presenta fiebre (temperatura superior a 38º C, cuantificada con termómetro)?
+        6. ¿Presenta fiebre (temperatura superior a 38º C, cuantificada con termómetro)? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_presentadofiebre" value="SI" {{(old('t_presentadofiebre') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -95,7 +95,7 @@
 </div>
 <div id="lt_diasfiebre" class="form-group row">
     <label class="col-md-10 col-form-label">
-        7. ¿por cuántos días la ha presentado? (formato de número en la respuesta)
+        7. ¿por cuántos días la ha presentado? (formato de número en la respuesta) *
     </label>
     <div class="col-md-10">
         <input size="10" class="form-control col-md-1" type="number" id="t_diasfiebre" name="t_diasfiebre" placeholder="0" value="{{ old('t_diasfiebre') }}">
@@ -103,7 +103,7 @@
 </div>
 <div id="lt_dolorgarganta" class="form-group row">
     <label class="col-md-10 col-form-label">
-        8. ¿Usted tiene dolor de garganta?
+        8. ¿Usted tiene dolor de garganta? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_dolorgarganta" value="SI" {{(old('t_dolorgarganta') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -112,7 +112,7 @@
 </div>
 <div id="lt_malestargeneral" class="form-group row">
     <label class="col-md-10 col-form-label">
-        9. ¿Usted tiene malestar general?
+        9. ¿Usted tiene malestar general? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_malestargeneral" value="SI" {{(old('t_malestargeneral') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -121,7 +121,7 @@
 </div>
 <div id="lt_secresioncongestionnasal" class="form-group row">
     <label class="col-md-10 col-form-label">
-        10. ¿Tiene secreciones nasales o congestión nasal? (no relacionadas con procesos alérgicos)
+        10. ¿Tiene secreciones nasales o congestión nasal? (no relacionadas con procesos alérgicos) *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_secresioncongestionnasal" value="SI" {{(old('t_secresioncongestionnasal') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -130,7 +130,7 @@
 </div>
 <div id="lt_dificultadrespirar" class="form-group row">
     <label class="col-md-10 col-form-label">
-        11. ¿Usted tiene dificultad para respirar?
+        11. ¿Usted tiene dificultad para respirar? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_dificultadrespirar" value="SI" {{(old('t_dificultadrespirar') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -139,7 +139,7 @@
 </div>
 <div id="lt_tosseca" class="form-group row">
     <label class="col-md-10 col-form-label">
-        12. ¿Tiene tos seca y persistente?
+        12. ¿Tiene tos seca y persistente? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_tosseca" value="SI" {{(old('t_tosseca') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -148,7 +148,7 @@
 </div>
 <div id="lt_contactopersonasinfectadas" class="form-group row">
     <label class="col-md-10 col-form-label">
-        13. ¿Ha estado en contacto con personas que han tenido los síntomas anteriormente mencionados o ha estado relacionado con casos de personas infectadas de Coronavirus en los últimos 7- 14 días?
+        13. ¿Ha estado en contacto con personas que han tenido los síntomas anteriormente mencionados o ha estado relacionado con casos de personas infectadas de Coronavirus en los últimos 7- 14 días? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_contactopersonasinfectadas" value="SI" {{(old('t_contactopersonasinfectadas') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -157,7 +157,7 @@
 </div>
 <div id="ld_ultimocontacto" class="form-group row">
     <label class="col-md-10 col-form-label">
-        14. ¿en qué fecha se presentó el último contacto con la persona infectada? 
+        14. ¿en qué fecha se presentó el último contacto con la persona infectada? *
     </label>
     <div class="col-md-10">
         <input class="form-control col-md-2" type="date" id="d_ultimocontacto" name="d_ultimocontacto" value="{{ old('d_ultimocontacto') }}">
@@ -165,7 +165,7 @@
 </div>
 <div id="lt_realizoviaje" class="form-group row">
     <label class="col-md-10 col-form-label">
-        15. ¿Realizó un viaje nacional o internacional en los últimos 30 días?
+        15. ¿Realizó un viaje nacional o internacional en los últimos 30 días? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_realizoviaje" value="SI" {{(old('t_realizoviaje') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -174,7 +174,7 @@
 </div>
 <div id="ld_ultimoviaje" class="form-group row">
     <label class="col-md-10 col-form-label">
-        16. ¿en qué fecha realizó su ultimo viaje? 
+        16. ¿en qué fecha realizó su ultimo viaje? *
     </label>
     <div class="col-md-10">
         <input class="form-control col-md-2" type="date" id="d_ultimoviaje" name="d_ultimoviaje" value="{{ old('d_ultimoviaje') }}"><br>

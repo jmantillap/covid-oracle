@@ -88,13 +88,13 @@ switch ($diasemana) {
         break;
     
         
-}
-
+} 
+ 
 $fechafinal= $eldia.", ".$dia." de ".$elmes." de ".$year;
 
 $color="success";
 $icono="checkmark";
-$textautoriza="Está autorizado para ingresar a la universidad en la fecha <br><br>". $fechafinal ;
+$textautoriza="Si usted solicitó el ingreso y cumplió los requerimientos, esta autorizado, de lo contrario continúe en casa.<br><br>". $fechafinal ;
 $recomendaciones="<ul>
 	<li>Para ingresar a la Universidad debes utilizar mascarilla (desechable o en tela). Si es desechables deben cambiarla diariamente, si es de tela el lavado debe ser diario.</li>
 	<li> Llevar el cabello recogido</li>
@@ -105,7 +105,7 @@ $recomendaciones="<ul>
 	<li> Debes estar higienizándote las manos frecuentemente (gel antibacterial).</li>
 	<li> No puedes compartir objetos y utensilios de trabajo.</li>
 	<li> Si tu estancia es de todo el día debes llevar tu alimento y no lavar los recipientes en la Universidad.</li>
-	<li> No puedes prender el aire acondicionado ni el ventilador. Excepto áreas que requieren una temperatura específica por los procesos que allí se ejecutan.</li>
+	<li> Procura que las areas esten ventiladas de forma natural.</li>
 	<li> No promover conversaciones entre compañeros que puedan disminuir el distanciamiento físico.</li>
 	<li> Debes tener las ventanas abiertas para permitir una adecuada circulación del aire.</li>
 	<li> Lavarse las manos antes de comer y después de ir al baño.</li>
@@ -125,7 +125,7 @@ if($formulario->n_semaforo=="3")
     $color="danger";
     $icono="heart-broken";
     $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato o al contacto de la Universidad hacia donde se dirigía<br><br>". $fechafinal;
-    $recomendaciones="El dolor en el pecho y la dificultad para respirar son signos de alerta para la infección de COVID-19 y deben ser atendidos por un médico.<br>Acuda al servicio de urgencias de su EPS";
+    $recomendaciones="Si presenta sintomatología, no debe consultar al servicio de urgencias, sino que debe quedarse en casa, tener aislamiento, usar tapabocas, hacer lavado frecuente de manos y marcar los números telefónicos establecidos para esto, ciñéndonos a las directrices del Gobierno Nacional y la Organización Mundial de la Salud.";
   }
 
 

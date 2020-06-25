@@ -34,7 +34,7 @@ if ($errorenform=="NO HA CONTESTADO EL FORMULARIO")
 
 <div class="row">
   
-  <div class="col-12 col-sm-2 col-md-2">
+  <div class="col-12 col-sm-2 col-md-4">
     <div class="info-box">
       <span class="info-box-icon bg-success elevation-1"><a href="{{ route('consulta') }}"><i class="fas fa-arrow-left"></a></i></span>
 

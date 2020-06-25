@@ -34,7 +34,7 @@
                             <input type="hidden" id="t_activo" name="t_activo" value="SI">    
                             
                             <div class="form-group row">
-                                <label for="c_codtipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Documento') }}</label>
+                                <label for="c_codtipo" class="col-md-5 col-form-label text-md-right">{{ __('Tipo Documento *') }}</label>
                                 <div class="col-md-6">
                                     <input readonly id="c_codtipodesc" type="text" name="c_codtipodesc"
                                     class="form-control @error('c_codtipo') is-invalid @enderror" value="{{ $usuario_tipo_documento->descripcion_tipo_documento}}" >
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="t_documento" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
+                                <label for="t_documento" class="col-md-5 col-form-label text-md-right">{{ __('Documento *') }}</label>
     
                                 <div class="col-md-6">
                                     <input readonly placeholder="Solo numeros, no use puntos ni guiones" id="t_documento" type="number" class="form-control @error('t_documento') is-invalid @enderror" name="t_documento" value="{{ $usuario->documento }}" required autocomplete="documento" >
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="t_nombres" class="col-md-4 col-form-label text-md-right">{{ __('Nombres') }}</label>
+                                <label for="t_nombres" class="col-md-5 col-form-label text-md-right">{{ __('Nombres *') }}</label>
                                 <div class="col-md-6">
                                     <input readonly id="t_nombres" type="text" class="form-control @error('t_nombres') is-invalid @enderror" name="t_nombres" value="{{ $usuario->primer_nombre }} {{ $usuario->segundo_nombre }}" required autocomplete="nombres" >
                                     @error('t_nombres')
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="t_apellidos" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
+                                <label for="t_apellidos" class="col-md-5 col-form-label text-md-right">{{ __('Apellidos *') }}</label>
                                 <div class="col-md-6">
                                     <input readonly id="t_apellidos" type="text" class="form-control @error('t_apellidos') is-invalid @enderror" name="t_apellidos" value="{{ $usuario->apellidos }}" required autocomplete="apellidos" autofocus>
                                     @error('t_apellidos')
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="t_idsigaa" class="col-md-4 col-form-label text-md-right">{{ __('ID SIGAA') }}</label>
+                                <label for="t_idsigaa" class="col-md-5 col-form-label text-md-right">{{ __('ID SIGAA *') }}</label>
                                 <div class="col-md-6">
                                     <input readonly id="t_idsigaa" type="text" class="form-control @error('t_idsigaa') is-invalid @enderror" name="t_idsigaa" value="{{ $usuario->id }}"  >
                                     @error('t_idsigaa')
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="t_email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
+                                <label for="t_email" class="col-md-5 col-form-label text-md-right">{{ __('E-Mail *') }}</label>
     
                                 <div class="col-md-6">
                                     <input  id="t_email" type="email" class="form-control @error('t_email') is-invalid @enderror" name="t_email" value="{{ $usuario->correo }}" required >
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="t_emailc" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Confirmación') }}</label>
+                                <label for="t_emailc" class="col-md-5 col-form-label text-md-right">{{ __('E-Mail Confirmación *') }}</label>
                                 <div class="col-md-6">
                                     <input  id="t_emailc" type="email" class="form-control @error('t_emailc') is-invalid @enderror" name="t_emailc" value="{{ $usuario->correo }}" required >
                                     @error('t_emailc')
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="t_telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono fijo o Celular') }}</label>
+                                <label for="t_telefono" class="col-md-5 col-form-label text-md-right">{{ __('Teléfono fijo o Celular *') }}</label>
                                 <div class="col-md-6">
                                     <input  required id="t_telefono" type="text" class="form-control @error('t_telefono') is-invalid @enderror" name="t_telefono" value="{{ $usuario->celular }}"  >
                                     @error('t_telefono')
@@ -123,8 +123,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="n_idciudad" class="col-md-4 col-form-label text-md-right">
-                                    {{ __('Ciudad') }}
+                                <label for="n_idciudad" class="col-md-5 col-form-label text-md-right">
+                                    {{ __('Ciudad *') }}
                                 </label>
                                 <div class="col-md-6">
                                     <select name="n_idciudad" class="form-control" id="n_idciudad">
@@ -145,7 +145,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="n_idseden_idsede" class="col-md-4 col-form-label text-md-right">{{ __('Sede') }}</label>
+                                <label for="n_idseden_idsede" class="col-md-5 col-form-label text-md-right">{{ __('Sede *') }}</label>
     
                                 <div class="col-md-6">
                                     <select name="n_idsede" class="form-control" id="n_idsede">
@@ -159,7 +159,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="n_idseden_idsede" class="col-md-4 col-form-label text-md-right">{{ __('Vínculo con la Universidad') }}</label>
+                                <label for="n_idseden_idsede" class="col-md-5 col-form-label text-md-right">{{ __('Vínculo con la Universidad *') }}</label>
     
                                 <div class="col-md-6">
                                     <select name="n_idvinculou" class="form-control" id="n_idvinculou">
@@ -183,7 +183,7 @@
                             </div>
 
                             <div class="form-group row" id="t_jefeinmediatocontacto_d">
-                                <label for="t_jefeinmediatocontacto" class="col-md-4 col-form-label text-md-right">{{ __('Jefe inmediato o Contacto en la UPB.') }}</label>
+                                <label for="t_jefeinmediatocontacto" class="col-md-5 col-form-label text-md-right">{{ __('Jefe inmediato o Contacto en la UPB. *') }}</label>
     
                                 <div class="col-md-6">
                                     <input  id="t_jefeinmediatocontacto" type="text" class="form-control @error('t_jefeinmediatocontacto') is-invalid @enderror" name="t_jefeinmediatocontacto" value="{{ old('t_jefeinmediatocontacto',$users->t_jefeinmediatocontacto) }}"  >
@@ -197,7 +197,7 @@
                             </div>
 
                             <div class="form-group row" id="t_facultadareaempresa_d">
-                                <label for="t_facultadareaempresa"  class="col-md-4 col-form-label text-md-right">{{ __('Facultad, Área, Dependencia o Empresa.') }}</label>
+                                <label for="t_facultadareaempresa"  class="col-md-5 col-form-label text-md-right">{{ __('Facultad, Área, Dependencia o Empresa. *') }}</label>
     
                                 <div class="col-md-6">
                                     <input id="t_facultadareaempresa" type="text" class="form-control @error('t_facultadareaempresa') is-invalid @enderror" name="t_facultadareaempresa" value="{{ old('t_facultadareaempresa',$users->t_facultadareaempresa) }}"  >

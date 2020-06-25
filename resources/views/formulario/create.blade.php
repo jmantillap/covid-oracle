@@ -3,7 +3,7 @@
 @section('title','Formulario de COVID-19')
 @section('titulopag','Formulario COVID')
 @section('elcontrolador','Formulario')
-@section('laaccion','Llenar todos los campos')
+@section('laaccion','Todos los campos son obligatorios.')
 
 @section('content')
 @include('partials.session-status')
