@@ -94,7 +94,8 @@ return [
         /*
         'oracle' => [
             'driver'         => 'oracle',
-            'tns'            => env('DB_TNS', 'BANDEV'),
+            //'tns'            => env('DB_TNS', 'BANDEV'),
+            'tns'            => env('DB_TNS', 'bandev.upb.edu.co'),
             'host'           => env('DB_HOST', '10.100.4.41'),
             'port'           => env('DB_PORT', '1521'),
             'database'       => env('DB_DATABASE', 'UPB_COVID'),
