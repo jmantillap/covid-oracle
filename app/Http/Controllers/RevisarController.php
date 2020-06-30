@@ -68,7 +68,7 @@ class RevisarController extends Controller
                 }
             }            //dd($usuarioesta);
         } else {
-            $usuarioBanner=BannerServices::getUsuarioBannerNroDocumento($key);            
+            $usuarioBanner=BannerServices::getUsuarioBannerNroDocumento($key);           
             if($usuarioBanner!=null){                
                 $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
                 if($data->CN==$usuarioBanner->id){
@@ -78,6 +78,7 @@ class RevisarController extends Controller
                 }            
             }else{
                  $usuarioBanner=BannerServices::getUsuarioBanner($key);
+                 
                  if($usuarioBanner!=null){
                     $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
                     if($data->CN==$usuarioBanner->id){
@@ -85,8 +86,9 @@ class RevisarController extends Controller
                             return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
                         }
                     }
-                 }                 
+                 }
             }
+            
             $errorenform = "Usuario No Existe";
         }
         //var_dump($docentesall);

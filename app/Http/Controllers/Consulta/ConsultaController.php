@@ -38,7 +38,7 @@ class ConsultaController extends Controller
 
         $fechahoy = date('Y-m-d 00:00:00');
         //dd($fechahoy);
-
+        //dd($usuarioesta);
         if (!is_null($usuarioesta)) {
             $nombrecompleto = $usuarioesta->t_nombres . " " . $usuarioesta->t_apellidos;
             $viculoconu = $usuarioesta->vinculou->t_vinculo;

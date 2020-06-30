@@ -88,7 +88,9 @@ class UsersController extends Controller
       if($usuarioBanner!=null){                
           $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
           if($data->CN==$usuarioBanner->id){
-              return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+              if($data->lastlogon<>0){
+                return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+              }
           }            
       }
       User::create($request->validated()); //solo envia los que esten validados por CreateUserRequest

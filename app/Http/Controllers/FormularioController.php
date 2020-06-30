@@ -185,7 +185,7 @@ class FormularioController extends Controller
         $formulario = new Formulario(request()->all());
         $formulario->t_texto = request('t_texto');
         $formulario->id_usuario = Session::get('idUsiario');
-        dd(formulario);
+        //dd(formulario);
         $formularo->save();
 
         Session::forget('idUsuario');
