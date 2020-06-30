@@ -72,14 +72,18 @@ class RevisarController extends Controller
             if($usuarioBanner!=null){                
                 $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
                 if($data->CN==$usuarioBanner->id){
-                    return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+                    if($data->lastlogon<>0){
+                        return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+                    }
                 }            
             }else{
                  $usuarioBanner=BannerServices::getUsuarioBanner($key);
                  if($usuarioBanner!=null){
                     $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
                     if($data->CN==$usuarioBanner->id){
-                        return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+                        if($data->lastlogon<>0){
+                            return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
+                        }
                     }
                  }                 
             }

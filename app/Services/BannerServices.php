@@ -31,7 +31,7 @@ class BannerServices {
             (SPRIDEN_FIRST_NAME || ' ' || SPRIDEN_MI || ' ' || SPRIDEN_LAST_NAME) nombre_completo,  
             SPRIDEN_FIRST_NAME primer_nombre,    SPRIDEN_MI segundo_nombre,    SPRIDEN_LAST_NAME apellidos,
             GOREMAL_EMAIL_ADDRESS email,    SPRTELE_PHONE_AREA || SPRTELE_PHONE_NUMBER celular,
-            DECODE (sprtele_phone_ext, NULL, NULL, 'ext: ' || sprtele_phone_Ext) telefono_completo,
+            NVL(DECODE (sprtele_phone_ext, NULL, NULL, 'ext: ' || sprtele_phone_Ext),'') telefono_completo,
             GOREMAL_EMAIL_ADDRESS correo
             /*,sprtele.**/
             FROM SPRIDEN JOIN SZRIDEN ON (SPRIDEN_PIDM = SZRIDEN_PIDM AND SZRIDEN_PRINCIPAL_IND = 'Y') left join
