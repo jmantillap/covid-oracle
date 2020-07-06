@@ -318,7 +318,7 @@ public function getReporte4Formularios()
 
 
  //$elselect= "SELECT *";
- $elselect= "SELECT us.*,se.*,vi.*,ci.*";
+ $elselect= "SELECT DISTINCT us.*,se.*,vi.*,ci.*";
 $elselect .= " FROM users us, sedes se, vinculou vi, ciudades ci , vinculou vu";
 //$elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=:fecha_desde and fo.created_at<=:fecha_hasta and fo.t_activo='SI')";
 $elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS') and fo.created_at<=to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS') and fo.t_activo='SI')";
