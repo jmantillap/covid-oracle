@@ -1,6 +1,9 @@
 <?php
 namespace App\Services;
 use DB;
+use Log;
+use Exception;
+
 /**
  * Javier Mantilla. javier.mantillap@upb.edu.co
  * 2020-06-16
@@ -14,7 +17,12 @@ class BannerServices {
     public static function getUsuarioBanner($pidmCeros)
     {
         $sql=Self::getSqlBase(). " AND SPRIDEN_ID=NVL(:PIDM_COVID,'-99999') ";        
-        $registros = collect(DB::select($sql,['PIDM_COVID' => $pidmCeros]))->first();
+        try {
+            $registros = collect(DB::select($sql,['PIDM_COVID' => $pidmCeros]))->first();        
+        } catch (Exception $e) {
+		$registros = collect([]);
+             Log::error($e);             
+        }  	
         return $registros;
     }
 

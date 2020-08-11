@@ -44,7 +44,7 @@ class ReportesController extends Controller
 
       //dd($fecha_hasta);
         //$elselect= "SELECT * ";
-        $elselect="select fo.*,se.*,us.* ";
+        $elselect="select distinct fo.*,se.*,us.* ";
         //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";        
         $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
         $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
@@ -318,13 +318,15 @@ public function getReporte4Formularios()
 
 
  //$elselect= "SELECT *";
- $elselect= "SELECT DISTINCT us.*,se.*,vi.*,ci.*";
+ //$elselect= "SELECT distinct us.*,se.*,vi.*,ci.*";
+$elselect= "SELECT DISTINCT us.c_codtipo, us.t_documento, us.t_nombres, us.t_apellidos, us.t_telefono, us.t_email, se.t_sede, ci.t_nombre, vi.t_vinculo, us.t_idsigaa, us.t_jefeinmediatocontacto, us.t_facultadareaempresa ";
 $elselect .= " FROM users us, sedes se, vinculou vi, ciudades ci , vinculou vu";
 //$elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=:fecha_desde and fo.created_at<=:fecha_hasta and fo.t_activo='SI')";
 $elselect .= " WHERE us.n_idusuario NOT IN (SELECT fo.n_idusuario FROM formulario fo where fo.created_at>=to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS') and fo.created_at<=to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS') and fo.t_activo='SI')";
 $elselect .= " AND us.n_idsede=se.n_idsede";
 $elselect .= " AND us.n_idvinculou=vi.n_idvinculou";
 $elselect .= " AND se.n_idciudad=ci.n_id";
+
 
 
 //dd($elselect);
@@ -344,8 +346,9 @@ $elselect .= " AND se.n_idciudad=ci.n_id";
 
     $query = DB::select($elselect,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta ]);
 
-   
-  
+   	
+    //dd(array($query));
+
     //return datatables()->of($query)
     return Datatables::of($query)
     /*

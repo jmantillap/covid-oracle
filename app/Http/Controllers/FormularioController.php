@@ -148,12 +148,12 @@ class FormularioController extends Controller
 
         $usuarioesta = User::where('n_idusuario', '=', $key)->first();
 
-        $fechahoy = date('d/m/Y');
+	$fechahoy = date('d/m/Y');
         $sql = "select * from formulario where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$key,'created_at'=>$fechahoy]))->first();
         if($formhoy!=null){                
             return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
-        }      
+        }	
 
         $viculoconu = $usuarioesta->vinculou->t_vinculo;
         //   $sedes= Sedes::all();
@@ -214,7 +214,7 @@ class FormularioController extends Controller
         $campos = ($request->validated());
         $miscampos = array($campos);
 
-        $fechahoy = date('d/m/Y');
+	$fechahoy = date('d/m/Y');
         $sql = "select * from formulario where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$request->n_idusuario,'created_at'=>$fechahoy]))->first();
         if($formhoy!=null){                

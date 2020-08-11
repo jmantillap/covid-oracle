@@ -17,7 +17,8 @@ else {
 @section('content')
 @include('partials.session-status')
 
-<h4>Bienvenido a la página inicial del Aplicativo de Control de Ingreso UPB</h4><br>
+<h4>¡Bienvenido! Este es el registro para el control de ingreso a la UPB.</h4><br>
+<h5 align="justify">Para la continuidad de nuestro retorno responsable e inteligente a la UPB es fundamental que cada uno realice de forma consciente y responsable la siguiente encuesta, reportando su estado de salud y síntomas diariamente, ya sea porque vayas a ir a la Universidad o estés desde tu casa. ¡De esto depende nuestra salud y bienestar!<h5><br><br>
 
 
 <div class="row">

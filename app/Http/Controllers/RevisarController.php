@@ -78,7 +78,6 @@ class RevisarController extends Controller
                 }            
             }else{
                  $usuarioBanner=BannerServices::getUsuarioBanner($key);
-                 
                  if($usuarioBanner!=null){
                     $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
                     if($data->CN==$usuarioBanner->id){
@@ -88,7 +87,6 @@ class RevisarController extends Controller
                     }
                  }
             }
-            
             $errorenform = "Usuario No Existe";
         }
         //var_dump($docentesall);

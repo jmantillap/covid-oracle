@@ -94,7 +94,7 @@ $fechafinal= $eldia.", ".$dia." de ".$elmes." de ".$year;
 
 $color="success";
 $icono="checkmark";
-$textautoriza="Si usted solicitó el ingreso y cumplió los requerimientos, esta autorizado, de lo contrario continúe en casa.<br><br>". $fechafinal ;
+$textautoriza="Si usted solicitó el ingreso y cumplió los requerimientos, está autorizado, de lo contrario continúe en casa.<br><br>". $fechafinal ;
 $recomendaciones="<ul>
 	<li>Para ingresar a la Universidad debes utilizar mascarilla (desechable o en tela). Si es desechables deben cambiarla diariamente, si es de tela el lavado debe ser diario.</li>
 	<li> Llevar el cabello recogido</li>

@@ -48,7 +48,6 @@ class LoginupbController extends Controller
 
         $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);
 
-       
             $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
             if($data->ESTADO=="AUTORIZADO"){
                 return $this->validarUsuario(); 
