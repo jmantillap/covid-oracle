@@ -135,11 +135,15 @@ class FormularioupbController extends Controller
           $usuarioesta=User::where('n_idusuario','=',$key)->first();
 
           //validar si ya hizo hoy el fomulario
-          $fechahoy = date('Y-m-d 00:00:00');
-          $formhoy = Formulario::where([['n_idusuario', '=',$key],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
+          //$fechahoy = date('Y-m-d 00:00:00');
+          //$formhoy = Formulario::where([['n_idusuario', '=',$key],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
+          
+          $fechahoy = date('d/m/Y');
+          $sql = "select * from formulario where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
+          $formhoy = collect(DB::select($sql, ['n_idusuario'=>$key,'created_at'=>$fechahoy]))->first();
           if($formhoy!=null){                
                 return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
-          }          
+            }          
           $viculoconu=$usuarioesta->vinculou->t_vinculo;
           $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
         //$project = Project::findOrFail($id);
@@ -199,6 +203,14 @@ class FormularioupbController extends Controller
         $campos= ($request->validated());
         $miscampos=array($campos);
         
+        $fechahoy = date('d/m/Y');
+        $sql = "select * from formulario where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
+        $formhoy = collect(DB::select($sql, ['n_idusuario'=>$request->n_idusuario,'created_at'=>$fechahoy]))->first();
+        if($formhoy!=null){                
+              return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
+          }    
+
+
          if  ($miscampos[0]['t_consentimiento']=="NO")$semaforonegacion="SI"; 
          if  ($miscampos[0]['t_presentadofiebre']=="SI")$semaforonegacion="SI"; 
          if  ($miscampos[0]['t_dolorgarganta']=="SI")$semaforonegacion="SI"; 
