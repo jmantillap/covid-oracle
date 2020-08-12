@@ -291,7 +291,7 @@ class EstadisticaController extends Controller
 
         $sql="SELECT f.n_idformulario,trunc(f.created_at) fecha  ,u.t_nombres ,u.t_apellidos,v.t_vinculo vinculo,c.t_nombre ciudad,s.t_sede,f.t_consentimiento
         ,f.t_irahoy ,f.t_sitios,f.t_actividades,f.t_presentadofiebre,f.t_diasfiebre ,f.t_dolorgarganta
-        ,f.t_malestargeneral,f.t_secresioncongestionnasal,f.t_dificultadrespirar,f.t_tosseca,f.t_contactopersonasinfectadas
+        ,f.t_malestargeneral,f.t_secresioncongestionnasal,f.t_dificultadrespirar,f.t_tosseca,f.t_personalsalud,f.t_contactopersonasinfectadas
         ,f.d_ultimocontacto,f.t_realizoviaje,f.d_ultimoviaje,f.created_at,f.updated_at
         from formulario f inner join users u on (f.n_idusuario=u.n_idusuario) INNER JOIN sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
         left join vinculou v on (v.n_idvinculou=u.n_idvinculou)
