@@ -112,9 +112,9 @@ class FormularioController extends Controller
 
     public function listarSedesAjax($request)
     {
-        $sql = "SELECT n_idsede, t_sede FROM sedes 
-                 WHERE n_idciudad = :n_idciudad
-              ORDER BY t_sede";
+        $sql = "SELECT n_idsede, t_sede
+        FROM(SELECT DISTINCT n_idsede, t_sede,n_idciudad FROM upb_covid.sedes WHERE t_sede ='TRABAJO EN CASA' UNION SELECT n_idsede, t_sede,n_idciudad FROM(SELECT n_idsede, t_sede,n_idciudad FROM sedes WHERE t_sede != 'TRABAJO EN CASA' ORDER BY t_sede))
+        WHERE n_idciudad = :n_idciudad";
 
         $sedes = DB::select($sql, ['n_idciudad' => request('n_idciudad')]);
 

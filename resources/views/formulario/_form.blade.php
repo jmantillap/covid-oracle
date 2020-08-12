@@ -34,7 +34,7 @@
 <br>
 <div id="dn_idciudad" class="form-group row">
     <label class="col-md-10 col-form-label">
-        1. Indique la ciudad a la que pertenece la sede a la cual solicita el ingreso *
+        1. Indique la ciudad en la cual se encuentra *
     </label>
     <div class="col-md-5">
         <select name="n_idciudad" class="form-control" id="n_idciudad">

@@ -62,6 +62,18 @@
                         }
                 });  
 
+                //personalsalud
+                $('input[type=radio][name=t_personalsalud]').change(function() {
+                        if (this.value == 'NO') {
+                                $("#t_contactopersonasinfectadas").prop('required', true).show();
+                                $("#lt_contactopersonasinfectadas").show();
+                        }
+                        else{
+                                $("#t_contactopersonasinfectadas").prop('required', false).hide().val('');
+                                $("#lt_contactopersonasinfectadas").hide();
+                        }
+                });
+
                 //contactoinfectado
                 $('input[type=radio][name=t_contactopersonasinfectadas]').change(function() {
                         if (this.value == 'SI') {

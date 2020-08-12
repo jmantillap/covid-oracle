@@ -28,6 +28,7 @@ class Formulario extends Model
                             'd_ultimocontacto',
                             't_realizoviaje',
                             'd_ultimoviaje',
+                            't_personalsalud',
                             'n_semaforo',
                             't_activo',
                             'n_iddesactiva'

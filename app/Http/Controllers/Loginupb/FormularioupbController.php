@@ -110,10 +110,13 @@ class FormularioupbController extends Controller
 
     }
     public function listarSedesAjax($request)
-    {
-        $sql = "SELECT n_idsede, t_sede FROM sedes 
+    {   
+        $sql = "SELECT n_idsede, t_sede
+        FROM(SELECT DISTINCT n_idsede, t_sede,n_idciudad FROM upb_covid.sedes WHERE t_sede ='TRABAJO EN CASA' UNION SELECT n_idsede, t_sede,n_idciudad FROM(SELECT n_idsede, t_sede,n_idciudad FROM sedes WHERE t_sede != 'TRABAJO EN CASA' ORDER BY t_sede))
+        WHERE n_idciudad = :n_idciudad";
+       /* $sql = "SELECT n_idsede, t_sede FROM sedes 
                  WHERE n_idciudad = :n_idciudad
-              ORDER BY t_sede";
+              ORDER BY t_sede";*/
 
         $sedes = DB::select($sql, ['n_idciudad' => request('n_idciudad')]);
 
@@ -219,7 +222,7 @@ class FormularioupbController extends Controller
                 $semafororojo="SI"; 
             }
          if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_contactopersonasinfectadas']=="SI")$semaforonegacion="SI"; 
+         if  ($miscampos[0]['t_contactopersonasinfectadas']=="SI" && $miscampos[0]['t_personalsalud']=="NO")$semaforonegacion="SI"; 
 
             if ($semafororojo=="SI"){
                 $semaforo="3";
@@ -331,7 +334,8 @@ class FormularioupbController extends Controller
             't_secresioncongestionnasal' => 'required',
             't_dificultadrespirar' => 'required',
             't_tosseca' => 'required',
-            't_contactopersonasinfectadas' => 'required',            
+            't_personalsalud' => 'required',  
+            't_contactopersonasinfectadas' => 'sometimes',            
             'd_ultimocontacto' => 'sometimes',
             't_realizoviaje' => 'required', 
             'd_ultimoviaje' => 'sometimes'
@@ -359,7 +363,8 @@ class FormularioupbController extends Controller
             't_secresioncongestionnasal.required' => "No has respondido acerca de la Cosgentión Nasal",
             't_dificultadrespirar.required' => "No has Respondido acerca de la dificultad al respirar",
             't_tosseca.required' => "No has Respondido acerca de la tos seca",
-            't_contactopersonasinfectadas.required' => "No has Respondido acerca de la cercanía con personas infectadas",
+            't_personalsalud.required' => "No has Respondido acerca de la cercanía con personas infectadas",
+            't_contactopersonasinfectadas.sometimes' => "No has Respondido acerca de la cercanía con personas infectadas",
             't_realizoviaje.required' => "No has Respondido acerca de su ultimo viaje"
          ];
     }
