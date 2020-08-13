@@ -209,7 +209,11 @@ class FormularioupbController extends Controller
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$request->n_idusuario,'created_at'=>$fechahoy]))->first();
         if($formhoy!=null){                
               return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
-          }  
+        }
+        if(!Session::has('idUsuario') || Session::get('idUsuario')!=$request->n_idusuario ){
+            Session::forget('idUsuario');
+            return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');;
+        }  
 
          if  ($miscampos[0]['t_consentimiento']=="NO")$semaforonegacion="SI"; 
          if  ($miscampos[0]['t_presentadofiebre']=="SI")$semaforonegacion="SI"; 
