@@ -153,7 +153,8 @@ class FormularioController extends Controller
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$key,'created_at'=>$fechahoy]))->first();
         if($formhoy!=null){                
             return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
-        }	
+        }
+       
 
         $viculoconu = $usuarioesta->vinculou->t_vinculo;
         //   $sedes= Sedes::all();
@@ -220,6 +221,11 @@ class FormularioController extends Controller
         if($formhoy!=null){                
               return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
           }
+
+        if(!Session::has('idUsuario') || Session::get('idUsuario')!=$request->n_idusuario ){
+            Session::forget('idUsuario');
+            return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');;
+        }	  
 
         if ($miscampos[0]['t_consentimiento'] == "NO") $semaforonegacion = "SI";
         if ($miscampos[0]['t_presentadofiebre'] == "SI") $semaforonegacion = "SI";
