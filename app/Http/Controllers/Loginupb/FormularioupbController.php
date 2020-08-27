@@ -14,6 +14,10 @@ use Session;
 use App\Http\Requests\SaveFormularioRequest;
 use DB;
 use Auth;
+use Log;
+use Exception;
+
+
 
 class FormularioupbController extends Controller
 {
@@ -130,32 +134,27 @@ class FormularioupbController extends Controller
      */
     public function create()
     {
-         if(!Session::has('idUsuario')){            
+        if(!Session::has('idUsuario')){            
             return redirect()->route("home");   
-          } 
-          $key = Session::get('idUsuario');
-
-          $usuarioesta=User::where('n_idusuario','=',$key)->first();
-
-         
-	  $fechahoy = date('d/m/Y');
-          $sql = "select * from formulario where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
-          $formhoy = collect(DB::select($sql, ['n_idusuario'=>$key,'created_at'=>$fechahoy]))->first();
-          if($formhoy!=null){                
-                return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
-            }     
-          
-          $viculoconu=$usuarioesta->vinculou->t_vinculo;
-          $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
+        } 
+        $key = Session::get('idUsuario');
+        $usuarioesta=User::where('n_idusuario','=',$key)->first();
+	    $fechahoy = date('d/m/Y');
+        $sql = "select * from formulario where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
+        $formhoy = collect(DB::select($sql, ['n_idusuario'=>$key,'created_at'=>$fechahoy]))->first();
+        if($formhoy!=null){                
+             return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
+        }               
+        $viculoconu=$usuarioesta->vinculou->t_vinculo;
+        $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
         //$project = Project::findOrFail($id);
-         return view('formularioupb.create',[
+        return view('formularioupb.create',[
             'formulario' => new Formulario,
             'n_idusuario'=>$key,
             'usuarioesta'=>$usuarioesta,
             //'sedes'=>$sedes,
             'ciudades' => $ciudades,
             'viculoconu'=>$viculoconu
-
           ]);
     }
 
@@ -170,29 +169,20 @@ class FormularioupbController extends Controller
        
        //dd(request()->all());
         $validator=Validator::make(request()->all(),$this->rules(),$this->messages());
-
-       
-     
         if($validator->fails()){
           //dd("Fallo"); 
            return   redirect()->back()->withErrors( $validator->errors());
         }
-
         $formulario= new Formulario(request()->all());        
         $formulario->t_texto=request('t_texto');
         $formulario->id_usuario=Session::get('idUsiario');
         dd(formulario);
         $formularo->save();
-
         Session::forget('idUsuario');
         Session::put('id_formulario',$formulario->n_idformulario);
         //Formulario::create($validator); //solo envia los que esten validados por CreateProjectRequest
         return redirect()->route('home')->with('status','La sede fue creado con éxito');
     }
-
-
-
-    
 
 
     public function store(SaveFormularioRequest $request)
@@ -201,59 +191,53 @@ class FormularioupbController extends Controller
         $semafororojo="NO";
         $semaforo=1;
         //dd($request->validated());
-        $campos= ($request->validated());
-        $miscampos=array($campos);
-        
-	$fechahoy = date('d/m/Y');
-        $sql = "select * from formulario where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
+        $campos= ($request->validated());        
+        $miscampos=array($campos);        
+        //dd($campos);
+        //dd(request()->all());
+	    $fechahoy = date('d/m/Y');
+        $sql = "select * from formulario 
+                where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') 
+                and t_activo ='SI'";
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$request->n_idusuario,'created_at'=>$fechahoy]))->first();
         if($formhoy!=null){                
-              return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
+              return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])
+              ->with('status', 'Resultado Previamente Guardado');
         }
         if(!Session::has('idUsuario') || Session::get('idUsuario')!=$request->n_idusuario ){
             Session::forget('idUsuario');
-            return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');;
-        }  
-
-         if  ($miscampos[0]['t_consentimiento']=="NO")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_presentadofiebre']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_dolorgarganta']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_malestargeneral']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_secresioncongestionnasal']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI";
-         if  ($miscampos[0]['t_dificultadrespirar']=="SI"){
+            return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');
+        }
+        if  ($miscampos[0]['t_consentimiento']=="NO")$semaforonegacion="SI"; 
+        if  ($miscampos[0]['t_presentadofiebre']=="SI")$semaforonegacion="SI"; 
+        if  ($miscampos[0]['t_dolorgarganta']=="SI")$semaforonegacion="SI"; 
+        if  ($miscampos[0]['t_malestargeneral']=="SI")$semaforonegacion="SI"; 
+        if  ($miscampos[0]['t_secresioncongestionnasal']=="SI")$semaforonegacion="SI"; 
+        if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI";
+        if  ($miscampos[0]['t_dificultadrespirar']=="SI"){
                 $semaforonegacion="SI";
                 $semafororojo="SI"; 
+        }
+        if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI"; 
+        if  ($miscampos[0]['t_personalsalud']=="NO" && $miscampos[0]['t_contactopersonasinfectadas']=="SI" )$semaforonegacion="SI"; 
+        if ($semafororojo=="SI"){
+            $semaforo="3";
+        }else{
+            if ($semaforonegacion=="SI"){
+                $semaforo="2";
+            }else{
+                $semaforo="1";    
             }
-         if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI"; 
-         if  ($miscampos[0]['t_contactopersonasinfectadas']=="SI" && $miscampos[0]['t_personalsalud']=="NO")$semaforonegacion="SI"; 
-
-            if ($semafororojo=="SI"){
-                $semaforo="3";
-            }
-            else    
-            {
-                if ($semaforonegacion=="SI"){
-                    $semaforo="2";
-                }
-                else
-                {
-                    $semaforo="1";    
-                }
-            }
-     
-
+        }
+        if($miscampos[0]['t_personalsalud']=="SI" && request('t_contactopersonasinfectadas')==null ){
+            $campos['t_contactopersonasinfectadas']="SI";    
+        }
 
         $campos['n_semaforo']=$semaforo;
-        //dd($campos);
-        
+        //dd($campos);                        
         $resultado=Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
-        //Session::put('idformulario',$resultado);
         Session::forget('idUsuario');
-
-      //return redirect()->route('home')->with('status','La sede fue creado con éxito');
-
-      return redirect()->route('formularioupb.show2',[$resultado])->with('status','El formulario se guardó con éxito');
+        return redirect()->route('formularioupb.show2',[$resultado])->with('status','El formulario se guardó con éxito');
     }
 
     /**
@@ -268,8 +252,7 @@ class FormularioupbController extends Controller
         $formulario = Formulario::all();
         //->orderBy('name', 'desc')
        // ->take(10)
-        //->get();
-      
+        //->get();      
         dd($formulario->n_idformulario);
       return view('formularioupb.show', [
             'formulario' => $formulario
@@ -343,17 +326,12 @@ class FormularioupbController extends Controller
             'd_ultimocontacto' => 'sometimes',
             't_realizoviaje' => 'required', 
             'd_ultimoviaje' => 'sometimes'
-
-
-           
-
         ];
     }
 
 
 
     private function messages(){
-
         return [
             'n_idusuario.required' => "No ha selecionado la persona",
             //'t_nombres.min' => "El Nombre del Docente debe tener el menos 3 caracteres",
@@ -374,3 +352,14 @@ class FormularioupbController extends Controller
     }
     
 }
+// $formularioGuardar= new Formulario($campos);
+        // try {
+        //     DB::beginTransaction();           
+        //     $formularioGuardar->saveOrFail();            
+        //     DB::commit();
+        //     $resultado=$formularioGuardar->n_idformulario;
+        // } catch (Exception $e) {
+        //     DB::rollBack();
+        //     Log::error($e);   
+        //     return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');
+        // }

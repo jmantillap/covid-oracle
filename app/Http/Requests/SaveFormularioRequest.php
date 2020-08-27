@@ -37,17 +37,13 @@ class SaveFormularioRequest extends FormRequest
             't_secresioncongestionnasal' => 'required',
             't_dificultadrespirar' => 'required',
             't_tosseca' => 'required',
-            //'t_personalsalud' => 'required', 
-            't_contactopersonasinfectadas' => 'sometimes',            
+            't_personalsalud' => 'required', 
+            't_contactopersonasinfectadas' => 'required_if:t_personalsalud,==,NO',            
             'd_ultimocontacto' => 'sometimes',
             't_realizoviaje'=>'required',
             'd_ultimoviaje' => 'sometimes',
             't_activo' => 'required',
             /* 'n_iddesactiva' => 'required', */
-
-
-           
-
         ];
     }
 
@@ -70,9 +66,9 @@ class SaveFormularioRequest extends FormRequest
             't_secresioncongestionnasal.required' => "No has respondido acerca de la Cosgentión Nasal (Preg. 10)",
             't_dificultadrespirar.required' => "No has Respondido acerca de la dificultad al respirar (Preg. 11)",
             't_tosseca.required' => "No has Respondido acerca de la tos seca (Preg. 12)",
-            //'t_personalsalud.required' => "No has Respondido acerca de si es personal de salud (Preg. 13)",
-            't_contactopersonasinfectadas.sometimes' => "No has Respondido acerca de la cercanía con personas infectadas (Preg. 14)",
-            't_realizoviaje.required'=>'Realizó Viaje no ha sido respondido (Preg. 16)'
+            't_personalsalud.required' => "No has Respondido acerca de si es personal de salud (Preg. 13)",
+            't_contactopersonasinfectadas.required_if' => "No has Respondido acerca de la cercanía con personas infectadas (Preg. 14)",            
+            't_realizoviaje.required'=>'Realizó Viaje no ha sido respondido (Preg. 16)'            
 
          ];
     }
