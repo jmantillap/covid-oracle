@@ -71,6 +71,8 @@
                         else{
                                 $("#t_contactopersonasinfectadas").prop('required', false).hide().val('');
                                 $("#lt_contactopersonasinfectadas").hide();
+                                $("#d_ultimocontacto").prop('required', false).hide().val('');
+                                $("#ld_ultimocontacto").hide();
                         }
                 });
 

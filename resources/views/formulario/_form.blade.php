@@ -146,9 +146,18 @@
         <input   type="radio" name="t_tosseca" value="NO" {{(old('t_tosseca') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
+<div id="lt_personalsalud" class="form-group row">
+    <label class="col-md-10 col-form-label">
+        13. ¿Usted es personal activo en servicios de salud? *
+    </label>
+    <div class="col-md-5">
+        <input   type="radio" name="t_personalsalud" value="SI" {{(old('t_personalsalud') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_personalsalud" value="NO" {{(old('t_personalsalud') == 'NO') ? 'checked' : ''}}> NO<br>
+    </div>
+</div>
 <div id="lt_contactopersonasinfectadas" class="form-group row">
     <label class="col-md-10 col-form-label">
-        13. ¿Ha estado en contacto con personas que han tenido los síntomas anteriormente mencionados o ha estado relacionado con casos de personas infectadas de Coronavirus en los últimos 7- 14 días? *
+        14. ¿Ha estado en contacto con personas que han tenido los síntomas anteriormente mencionados o ha estado relacionado con casos de personas infectadas de Coronavirus en los últimos 7- 14 días? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_contactopersonasinfectadas" value="SI" {{(old('t_contactopersonasinfectadas') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -157,7 +166,7 @@
 </div>
 <div id="ld_ultimocontacto" class="form-group row">
     <label class="col-md-10 col-form-label">
-        14. ¿en qué fecha se presentó el último contacto con la persona infectada? *
+        15. ¿en qué fecha se presentó el último contacto con la persona infectada? *
     </label>
     <div class="col-md-10">
         <input class="form-control col-md-2" type="date" id="d_ultimocontacto" name="d_ultimocontacto" value="{{ old('d_ultimocontacto') }}">
@@ -165,7 +174,7 @@
 </div>
 <div id="lt_realizoviaje" class="form-group row">
     <label class="col-md-10 col-form-label">
-        15. ¿Realizó un viaje nacional o internacional en los últimos 30 días? *
+        16. ¿Realizó un viaje nacional o internacional en los últimos 30 días? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_realizoviaje" value="SI" {{(old('t_realizoviaje') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
@@ -174,7 +183,7 @@
 </div>
 <div id="ld_ultimoviaje" class="form-group row">
     <label class="col-md-10 col-form-label">
-        16. ¿en qué fecha realizó su ultimo viaje? *
+        17. ¿en qué fecha realizó su ultimo viaje? *
     </label>
     <div class="col-md-10">
         <input class="form-control col-md-2" type="date" id="d_ultimoviaje" name="d_ultimoviaje" value="{{ old('d_ultimoviaje') }}"><br>

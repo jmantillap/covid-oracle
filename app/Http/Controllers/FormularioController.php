@@ -238,7 +238,7 @@ class FormularioController extends Controller
             $semafororojo = "SI";
         }
         if ($miscampos[0]['t_tosseca'] == "SI") $semaforonegacion = "SI";
-        if ($miscampos[0]['t_contactopersonasinfectadas'] == "SI") $semaforonegacion = "SI";
+        if  ($miscampos[0]['t_personalsalud']=="NO" && $miscampos[0]['t_contactopersonasinfectadas']=="SI" )$semaforonegacion="SI";
 
         if ($semafororojo == "SI") {
             $semaforo = "3";
@@ -249,7 +249,9 @@ class FormularioController extends Controller
                 $semaforo = "1";
             }
         }
-
+        if($miscampos[0]['t_personalsalud']=="SI" && request('t_contactopersonasinfectadas')==null ){
+            $campos['t_contactopersonasinfectadas']="SI";    
+        }
 
 
         $campos['n_semaforo'] = $semaforo;
@@ -326,7 +328,8 @@ class FormularioController extends Controller
             't_secresioncongestionnasal' => 'required',
             't_dificultadrespirar' => 'required',
             't_tosseca' => 'required',
-            't_contactopersonasinfectadas' => 'required',
+            't_personalsalud' => 'required',  
+            't_contactopersonasinfectadas' => 'sometimes', 
             'd_ultimocontacto' => 'sometimes',
             't_realizoviaje' => 'required',
             'd_ultimoviaje' => 'sometimes'
@@ -357,7 +360,8 @@ class FormularioController extends Controller
             't_secresioncongestionnasal.required' => "No has respondido acerca de la Cosgentión Nasal",
             't_dificultadrespirar.required' => "No has Respondido acerca de la dificultad al respirar",
             't_tosseca.required' => "No has Respondido acerca de la tos seca",
-            't_contactopersonasinfectadas.required' => "No has Respondido acerca de la cercanía con personas infectadas",
+            't_personalsalud.required' => "No has Respondido acerca de la cercanía con personas infectadas",
+            't_contactopersonasinfectadas.sometimes' => "No has Respondido acerca de la cercanía con personas infectadas",
             't_realizoviaje.required' => "No has Respondido acerca de su ultimo viaje"
         ];
     }
