@@ -43,6 +43,7 @@ Route::get('reportes/reporte4', 'ReportesController@reporte4')->name('reportes.r
 
 Route::get('/loginupb','Loginupb\LoginupbController@showLoginForm')->name('loginupb');
 Route::post('/autenticarupb','Loginupb\LoginupbController@validarLogin')->name('loginupb.validar');
+Route::get('/autenticarupb','Loginupb\LoginupbController@showLoginForm')->name('loginupb.mostrar');
 Route::resource('formularioupb', 'Loginupb\FormularioupbController')->names('formularioupb')->parameters(['formulario'  =>  'formulario']);//->middleware('role:1|2');
 Route::get('formularioupbshow2/{id}', 'Loginupb\FormularioupbController@show2')->name('formularioupb.show2');
 Route::get('home/consulta', 'Consulta\ConsultaController@homeconsulta')->name('consulta');

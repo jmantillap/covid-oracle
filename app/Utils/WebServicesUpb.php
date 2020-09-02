@@ -36,36 +36,35 @@ class WebServicesUpb {
             'verify' => false,
             'connect_timeout' => 10,
             'timeout' => 10,
-        ];  
-        //'connect_timeout' => Config::get('ws.connect_timeout'),
-        //'timeout' => Config::get('ws.timeout'),
+        ];  //'connect_timeout' => Config::get('ws.connect_timeout'), //'timeout' => Config::get('ws.timeout'),
         try {
+            //Log::channel('ws')->info('Inicio Prueba');            
             $response = $client->request('GET', "/General/Autenticacion/?",$parametros);        
-            $data = json_decode($response->getBody());            
+            $data = json_decode($response->getBody());                      
         } catch(ClientException $e) {
-            Log::error($e);             
-            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.001"}');
+            return self::mensajeError($e,"001");
         } catch (ServerException $e){
-            Log::error($e);             
-            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.002"}');
+            return self::mensajeError($e,"002");
         } catch (BadResponseException $e){    
-            Log::error($e);             
-            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.003"}');
+            return self::mensajeError($e,"003");
         } catch (ConnectException $e){    
-            Log::error($e);             
-            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.004"}');
-        } catch (RequestException $e){        
-            Log::error($e);             
-            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.005"}');
+            return self::mensajeError($e,"004");
+        } catch (RequestException $e){                    
+            return self::mensajeError($e,"005");
         } catch (GuzzleException $e){            
-            Log::error($e);             
-            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.006"}');
-        } catch (Exception $e) {
-             //Log::error("En el Archivo: ".$e->getFile()); //Log::error("En la linea: ".$e->getLine()); //Log::error("En la linea: ".$e->getMessage());             
-             Log::error($e);  
+            return self::mensajeError($e,"006");
+        } catch (Exception $e) { //Log::error("En el Archivo: ".$e->getFile()); //Log::error("En la linea: ".$e->getLine()); //Log::error("En la linea: ".$e->getMessage());             
+            Log::error($e);  
             return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** Contacte Con el Administrador del sistema o Intente nuevamente Por favor"}');
         }  
         return $data;
+    }
+
+    private static function mensajeError($error,$codigo="000" ){
+        //Log::error($e); return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.006"}');
+        Log::error($error);
+        $mensaje="*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.".$codigo;  
+        return json_decode('{"ESTADO":"'.$mensaje.'"}');
     }
 
     public static function isExisteLdap($pidmCeros)
