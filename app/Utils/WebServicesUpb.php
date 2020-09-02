@@ -2,6 +2,12 @@
 namespace App\Utils;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\GuzzleException;
 use Log;
 use Exception;
 use Config;
@@ -28,13 +34,36 @@ class WebServicesUpb {
             'headers' => ['Username' => Config::get('ws.username'),'Password' => Config::get('ws.password'), 'Accept'     => 'application/json',],
             'query' => ['id' => $idBanner,'password' => $password],
             'verify' => false,
+            'connect_timeout' => 10,
+            'timeout' => 10,
         ];  
+        //'connect_timeout' => Config::get('ws.connect_timeout'),
+        //'timeout' => Config::get('ws.timeout'),
         try {
             $response = $client->request('GET', "/General/Autenticacion/?",$parametros);        
             $data = json_decode($response->getBody());            
+        } catch(ClientException $e) {
+            Log::error($e);             
+            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.001"}');
+        } catch (ServerException $e){
+            Log::error($e);             
+            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.002"}');
+        } catch (BadResponseException $e){    
+            Log::error($e);             
+            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.003"}');
+        } catch (ConnectException $e){    
+            Log::error($e);             
+            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.004"}');
+        } catch (RequestException $e){        
+            Log::error($e);             
+            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.005"}');
+        } catch (GuzzleException $e){            
+            Log::error($e);             
+            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** INTENTE NUEVAMENTE LA AUTENTICACION POR FAVOR COD.ERROR.006"}');
         } catch (Exception $e) {
-             Log::error($e);             
-            return json_decode('{"ESTADO":"*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema"}');
+             //Log::error("En el Archivo: ".$e->getFile()); //Log::error("En la linea: ".$e->getLine()); //Log::error("En la linea: ".$e->getMessage());             
+             Log::error($e);  
+            return json_decode('{"ESTADO":"*** ERROR AL AUTENTICAR **** Contacte Con el Administrador del sistema o Intente nuevamente Por favor"}');
         }  
         return $data;
     }
