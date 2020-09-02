@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 Route::get('formulario/inactivar', 'FormularioController@inactivar')->name('formulario.inactivar')->middleware('auth');
 Route::get('formulario/{id}/updateinac', 'FormularioController@updateinac')->name('formulario.updateinac')->middleware('auth');
-Route::view('/','home', ['nombre'=>'Jairo Peña Fuentes'])->name('home');
+Route::view('/','home')->name('home');
 Route::get('home/externos', 'Externos\ExternosController@homeext')->name('homeext');
 
 Route::view('inicio','inicio', ['nombre'=>'Jairo Peña Fuentes'])->name('inicio');
