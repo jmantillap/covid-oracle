@@ -174,7 +174,7 @@
 </div>
 <div id="lt_realizoviaje" class="form-group row">
     <label class="col-md-10 col-form-label">
-        16. ¿Realizó un viaje nacional o internacional en los últimos 30 días? *
+        16. ¿Realizó un viaje nacional o internacional en los últimos 15 días? *
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_realizoviaje" value="SI" {{(old('t_realizoviaje') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
