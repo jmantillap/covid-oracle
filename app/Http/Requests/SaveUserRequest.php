@@ -28,7 +28,7 @@ class SaveUserRequest extends FormRequest
             't_apellidos' => 'required',
             't_nombres' => 'required',
             'c_codtipo' => 'required',           
-            't_documento' => 'required|numeric|unique:users',
+            't_documento' => 'required|unique:users',//|numeric
             't_idsigaa' => 'sometimes',
             't_email' => 'email|required_with:t_emailc|same:t_emailc',
             'n_idsede' => 'required',
