@@ -59,8 +59,7 @@ class CiudadController extends Controller
     {
         $this->cargarRequest();                
         $validator=$this->validarCampos();
-        if ($validator->fails()){     
-            //dd($validator->messages());       
+        if ($validator->fails()){                 
             return $this->mostrarView($validator->messages());
         }
         try {
@@ -90,9 +89,8 @@ class CiudadController extends Controller
                 $rules =['t_nombre' => 'required|string|max:100',
                          't_nombre' => Rule::unique('ciudades')->ignore($this->ciudad->n_id, 'n_id'),                    
                         ];
-        }else{
-            //nuevo
-                $rules =['t_nombre' => 'required|string|max:100|unique:ciudades',];
+        }else{//nuevo
+            $rules =['t_nombre' => 'required|string|max:100|unique:ciudades',];
         }
         $validator = Validator::make(request()->all(),$rules,$this->mensajesPersonalizados());
         return $validator;
@@ -104,9 +102,9 @@ class CiudadController extends Controller
         }else{
             $this->ciudad= new Ciudad(request()->all());            
         }
-        $this->ciudad->b_habilitado=request('b_habilitado')!=null ? '1' : '0';        
-        //dd($this->administrador);
+        $this->ciudad->b_habilitado=request('b_habilitado')!=null ? '1' : '0';                
     }
+    
     private function mensajesPersonalizados()
     {
         return $custom=['t_nombre.required'=>'El Nombre requerido',                                                

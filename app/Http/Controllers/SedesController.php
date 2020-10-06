@@ -22,9 +22,7 @@ class SedesController extends Controller
   
   public function __construct(){
     $this->middleware('auth');
-   // $this->middleware('role:1|2');
-    
-}
+  }
 
   
   
@@ -34,13 +32,7 @@ class SedesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-      /*
-      var_dump(auth()->user()->n_idciudad);
-      var_dump(auth()->user()->ciudad->t_nombre);
-      var_dump(auth()->user()->n_id);
-      var_dump(Auth::id());
-*/ 
+    {     
       
       return view('sedes.index', 
         [
@@ -55,8 +47,7 @@ class SedesController extends Controller
      */
     public function create()
     {
-      $ciudades= Ciudad::all();
-      //$project = Project::findOrFail($id);
+      $ciudades= Ciudad::all();      
         return view('sedes.create',[
           'sedes' => new Sedes,
           'ciudades'=>$ciudades
@@ -71,6 +62,7 @@ class SedesController extends Controller
     public function store(SaveSedeRequest $request)
     {
       Sedes::create($request->validated()); //solo envia los que esten validados por SaveSedeRequest
+      unset($request);
       return redirect()->route('sedes.index')->with('status','La Sede fue creada con éxito');
     }
 
@@ -108,15 +100,12 @@ class SedesController extends Controller
      *
      
      */
-    public function update(Sedes $sedes, SaveSedeRequest $request)
-      {
-
+    public function update(Sedes $sedes, SaveSedeRequest $request){
        
-    $sedes->update($request->validated()); //solo envia los que esten validados por SaveEscuelaRequest
-        return redirect()->route('sedes.show',$sedes)->with('status','La Sede fue actualizada con éxito');
-
-
-      }
+      $sedes->update($request->validated()); //solo envia los que esten validados por SaveEscuelaRequest
+      unset($request);
+      return redirect()->route('sedes.show',$sedes)->with('status','La Sede fue actualizada con éxito');
+    }
 
     /**
      * Remove the specified resource from storage.

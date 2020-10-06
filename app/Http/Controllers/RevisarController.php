@@ -21,27 +21,19 @@ class RevisarController extends Controller
      */
     public function verificar()
     {
-
         $sedes = Sedes::all();
-
         $key = Input::post('t_documento');
-        $docentesall = Formulario::all();
+        //$docentesall = Formulario::all();
         $usuarioesta = User::where('t_documento', '=', $key)->first();
         $usuariohoy = "";
         $nombrecompleto = "";
         $idusuario = "";
         $viculoconu = "";
-        //$usuarioesta=null;
-
-        $errorenform = "";
-        
+        $errorenform = "";        
         $contestohoy = "NO";
         $puedeingresar = "SI";
         $idsigaa="NO";
-
         $fechahoy = date('Y-m-d 00:00:00');
-        //dd($fechahoy);
-
         if (!is_null($usuarioesta)) {
             $nombrecompleto = $usuarioesta->t_nombres . " " . $usuarioesta->t_apellidos;
             $viculoconu = $usuarioesta->vinculou->t_vinculo;            
@@ -93,12 +85,12 @@ class RevisarController extends Controller
         return view('revisar.verificar', [
             'nombrecompleto' => $nombrecompleto,
             'idusuario' => $idusuario,
-            'docentesall' => $docentesall,
+            /*'docentesall' => $docentesall,*/
             'errorenform' => $errorenform,
             'contestohoy' => $contestohoy,
             'viculoconu' => $viculoconu,
             'usuarioesta' => $usuarioesta,
-            'sedes' => $sedes,
+            /*'sedes' => $sedes,*/
             't_documento' => $key,
         ])->with('status', 'El Docente Nuevo fue creado con éxito');
     }

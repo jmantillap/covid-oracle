@@ -63,8 +63,7 @@ class AdministradorController extends Controller
         $validator=$this->validarCampos();
         if ($validator->fails()){                 
             return $this->mostrarView($validator->messages());        
-        }
-        //if($this->administrador->b_ldap==1 && !Session::has('idAdministradorModificar')){
+        }        
         if($this->administrador->b_ldap==1){
             $usuarioBanner=BannerServices::getUsuarioBanner($this->administrador->t_login);
             if($usuarioBanner==null){

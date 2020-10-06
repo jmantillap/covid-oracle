@@ -18,11 +18,7 @@ class UsuariosController extends Controller
 {
     
   
-  public function __construct(){
-   // $this->middleware('auth');
-   // $this->middleware('role:1|2');
-    
-}
+  public function __construct(){      }
 
   
   
@@ -32,13 +28,9 @@ class UsuariosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-      
-      
+    { 
       return view('users.index', 
-        [
-            'users'=> User::orderBy('t_apellidos','ASC')->paginate(10)
-        ]);  
+        ['users'=> User::orderBy('t_apellidos','ASC')->paginate(10)]);  
     }
 
     /**
@@ -47,8 +39,7 @@ class UsuariosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-         //$project = Project::findOrFail($id);
+    {         
          $sedes= Sedes::all();
          $vinculou= Vinculou::all();
          return view('users.create',[
@@ -66,6 +57,7 @@ class UsuariosController extends Controller
     public function store(SaveUserRequest $request)
     {
       User::create($request->validated()); //solo envia los que esten validados por CreateUserRequest
+      unset($request);
       return redirect()->route('users.index')->with('status','La sede fue creada con éxito');
     }
 
@@ -114,9 +106,9 @@ class UsuariosController extends Controller
       {
 
        
-    $users->update($request->validated()); //solo envia los que esten validados por SaveSedeRequest
+        $users->update($request->validated()); //solo envia los que esten validados por SaveSedeRequest
+        unset($request);
         return redirect()->route('users.show',$users)->with('status','La sede fue actualizada con éxito');
-
 
       }
 

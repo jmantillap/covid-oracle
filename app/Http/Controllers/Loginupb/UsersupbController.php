@@ -26,11 +26,7 @@ class UsersupbController extends Controller
 {
     
   
-  public function __construct(){
-   // $this->middleware('auth');
-   // $this->middleware('role:1|2');
-    
-}
+  public function __construct(){   }
 
   
   
@@ -67,21 +63,16 @@ class UsersupbController extends Controller
      */
     public function create()
     {
-      //$project = Project::findOrFail($id);
+      
       if(Session::has('vs_ussel')){
         $usuario= Session::get('vs_ussel');
-//dd($usuario);
-        $elquery=" SELECT DISTINCT";
+        $elquery=" SELECT DISTINCT ";
         $elquery .=" gtvadid_Desc  descripcion_tipo_documento";
         $elquery .=" FROM gtvadid";
         $elquery .=" WHERE gtvadid_code = :idTipo";
-
         $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>  $usuario->tipo_documento]))->first();
-
-        //dd($usuario_tipo_documento);
+        
       } 
-      
-      // var_dump($usuario);
       $vinculou= Vinculou::all();
       $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
       return view('usersupb.create',[
@@ -101,10 +92,8 @@ class UsersupbController extends Controller
     public function store(SaveUserupbRequest $request)
     {
       $resultado=User::create($request->validated())->n_idusuario; //solo envia los que esten validados por CreateUserRequest
-      Session::put('idUsuario',$resultado);
-      //$resultado=Formulario::create($campos)->n_idformulario;
+      Session::put('idUsuario',$resultado);      
       return redirect()->route('formularioupb.create')->with('status','¡ Usuario registrado exitósamente !');
-
     }
 
     /**
@@ -146,12 +135,8 @@ class UsersupbController extends Controller
      */
     public function update(User $users, SaveUser2Request $request)
       {
-
-       
-    $users->update($request->validated()); //solo envia los que esten validados por SaveSedeRequest
+        $users->update($request->validated()); //solo envia los que esten validados por SaveSedeRequest
         return redirect()->route('users.show',$users)->with('status','El Usuario fue actualizado con éxito');
-
-
       }
 
     /**

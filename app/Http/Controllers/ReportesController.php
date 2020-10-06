@@ -41,9 +41,7 @@ class ReportesController extends Controller
       }
       $fecha_desde=$fecha_desde;
       $fecha_hasta=$fecha_hasta.' 23:59:59';
-
-      //dd($fecha_hasta);
-        //$elselect= "SELECT * ";
+      
         $elselect="select distinct fo.*,se.*,us.* ";
         //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";        
         $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
@@ -157,30 +155,19 @@ public function getReporte2Formularios()
 
     $query = DB::select($elselect,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta]);
 
-    //dd($elselect);
-  
-    //return datatables()->of($query)
     return Datatables::of($query)
-    /*
-    ->addColumn('action', function ($registro) {
-        if ($registro->activo=="SI")return '<a href="'.route('formulario.updateinac', $registro->n_idformulario).'"> Inactivar</a>';
-        if ($registro->activo=="NO")return 'DESACTIVADO';
-
-    
-})
-*/
-->addColumn('semaforo', function ($registro) {
-    if ($registro->n_semaforo=="1")return '<strong class="text-success">Verde</strong>';
-    if ($registro->n_semaforo=="2")return '<strong class="text-warning">Amarillo</strong>';
-    if ($registro->n_semaforo=="3")return '<strong class="text-danger">Rojo</strong>';
-})
-->addColumn('ingreso', function ($registro) {
-if ($registro->n_semaforo=="1")return '<strong class="text-success">SI</strong>';
-if ($registro->n_semaforo=="2")return '<strong class="text-danger">NO</strong>';
-if ($registro->n_semaforo=="3")return '<strong class="text-danger">NO</strong>';
-})
-->rawColumns(['action','semaforo','ingreso'])
-->toJson();
+        ->addColumn('semaforo', function ($registro) {
+            if ($registro->n_semaforo=="1")return '<strong class="text-success">Verde</strong>';
+            if ($registro->n_semaforo=="2")return '<strong class="text-warning">Amarillo</strong>';
+            if ($registro->n_semaforo=="3")return '<strong class="text-danger">Rojo</strong>';
+        })
+        ->addColumn('ingreso', function ($registro) {
+        if ($registro->n_semaforo=="1")return '<strong class="text-success">SI</strong>';
+        if ($registro->n_semaforo=="2")return '<strong class="text-danger">NO</strong>';
+        if ($registro->n_semaforo=="3")return '<strong class="text-danger">NO</strong>';
+        })
+        ->rawColumns(['action','semaforo','ingreso'])
+        ->toJson();
 }
 
 /*-------------------------------------
@@ -213,24 +200,17 @@ public function getReporte3Formularios()
   $fecha_desde=$fecha_desde.' 00:00:00';
   $fecha_hasta=$fecha_hasta.' 23:59:59';
 
-  //dd(request('documento'));
-
   $documento='000000000';
   if(request('documento')!=null){
       $documento=request('documento');
   }
-
-  //dd($fecha_hasta);
-    //$elselect= "SELECT * ";
     $elselect="select fo.*,se.*,us.* ";
     //$elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
     $elselect .= " ,'(' ||us.c_codtipo|| ' ' || us.t_documento ||')' || us.t_nombres || ' ' ||us.t_apellidos as nombrec , fo.t_activo as activo ";        
     $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
     $elselect .= " ,ci.t_nombre as ciudad , vu.t_vinculo as vinculo ";
-    $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci, vinculou vu ";
-    //$elselect .= " where fo.created_at >=:fecha_desde";
-    $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS')) ";          
-    //$elselect .= " and fo.created_at <= :fecha_hasta";
+    $elselect .= " FROM formulario fo, users us, sedes se , ciudades ci, vinculou vu ";   
+    $elselect .= " where fo.created_at >= trunc(to_date(:fecha_desde, 'YY/MM/DD HH24:MI:SS')) ";              
     $elselect .= " and fo.created_at <= (to_date(:fecha_hasta, 'YY/MM/DD HH24:MI:SS')) ";
     $elselect .= " and us.t_documento= :documento";
     $elselect .= " and us.n_idusuario=fo.n_idusuario";
@@ -248,13 +228,11 @@ public function getReporte3Formularios()
 
     $elselect .= " order by fo.created_at";
 
-    //dd($elselect);
+    
 
     $query = DB::select($elselect,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta , 'documento'=>$documento]);
 
-    //dd($elselect);
-  
-    //return datatables()->of($query)
+    
     return Datatables::of($query)
     /*
     ->addColumn('action', function ($registro) {

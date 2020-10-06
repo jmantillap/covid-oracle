@@ -189,12 +189,9 @@ class FormularioupbController extends Controller
     {
         $semaforonegacion="NO";
         $semafororojo="NO";
-        $semaforo=1;
-        //dd($request->validated());
+        $semaforo=1;        
         $campos= ($request->validated());        
-        $miscampos=array($campos);        
-        //dd($campos);
-        //dd(request()->all());
+        $miscampos=array($campos);                
 	    $fechahoy = date('d/m/Y');
         $sql = "select * from formulario 
                 where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') 
@@ -249,7 +246,7 @@ class FormularioupbController extends Controller
     public function show(Formulario $formulario)
     {
       
-        $formulario = Formulario::all();
+        //$formulario = Formulario::all();
         //->orderBy('name', 'desc')
        // ->take(10)
         //->get();      
@@ -352,14 +349,3 @@ class FormularioupbController extends Controller
     }
     
 }
-// $formularioGuardar= new Formulario($campos);
-        // try {
-        //     DB::beginTransaction();           
-        //     $formularioGuardar->saveOrFail();            
-        //     DB::commit();
-        //     $resultado=$formularioGuardar->n_idformulario;
-        // } catch (Exception $e) {
-        //     DB::rollBack();
-        //     Log::error($e);   
-        //     return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');
-        // }

@@ -37,13 +37,13 @@ class LoginController extends Controller
         return redirect()->route('login');
     }
 
-    public function validarLogin()    {
-
+    public function validarLogin(){
         
         $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);
         
         $administrador=Administrador::where($this->username(),'=',request('usuario'))->first();
-        if($administrador==null ||  $administrador->b_habilitado=='0' ){
+        if($administrador==null ||  $administrador->b_habilitado=='0' ){            
+            unset($administrador);
             return back()->withErrors(['usuario'=>trans('auth.failed')])->withInput(request(['usuario']));
         }        
         if($administrador->b_ldap=='0'){
@@ -80,6 +80,7 @@ class LoginController extends Controller
         $auditoria->t_ip=$_SERVER['REMOTE_ADDR'];
         $auditoria->t_navegador=$_SERVER['HTTP_USER_AGENT'];         
         $auditoria->save();
+        unset($auditoria);
      }
 
      public function username()

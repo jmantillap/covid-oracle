@@ -20,8 +20,8 @@ class BannerServices {
         try {
             $registros = collect(DB::select($sql,['PIDM_COVID' => $pidmCeros]))->first();        
         } catch (Exception $e) {
-		$registros = collect([]);
-             Log::error($e);             
+		    $registros = collect([]);
+            Log::error($e);             
         }  	
         return $registros;
     }

@@ -18,69 +18,47 @@ class ConsultaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function consultar()
-    {
-
-        $sedes = Sedes::all();
-
-        $key = Input::post('t_documento');
-        $docentesall = Formulario::all();
+    {       
+        $key = Input::post('t_documento');        
         $usuarioesta = User::where('t_documento', '=', $key)->first();
         $usuariohoy = "";
         $nombrecompleto = "";
         $idusuario = "";
-        $viculoconu = "";
-        //$usuarioesta=null;
-
+        $viculoconu = "";        
         $errorenform = "";
-
         $contestohoy = "NO";
         $puedeingresar = "SI";
-
-        $fechahoy = date('Y-m-d 00:00:00');
-        //dd($fechahoy);
-        //dd($usuarioesta);
+        $fechahoy = date('Y-m-d 00:00:00');        
         if (!is_null($usuarioesta)) {
             $nombrecompleto = $usuarioesta->t_nombres . " " . $usuarioesta->t_apellidos;
             $viculoconu = $usuarioesta->vinculou->t_vinculo;
-
             $idusuario = $usuarioesta->n_idusuario;
             $formhoy = Formulario::where([
                 ['n_idusuario', '=', $idusuario],
                 ['created_at', '>', $fechahoy],
                 ['t_activo', '=', "SI"],
             ])->first();
-
             if (!is_null($formhoy)) {
                 $contestohoy = "SI";
             }
-
             if ($contestohoy == "SI") {
                 $hoyformulario = $formhoy->n_idformulario;
+                unset($formhoy);
                 return redirect()->route('formulario.show', ['id' => $hoyformulario])->with('status', 'Resultado Previamente Guardado');
-
             } else {
-                
-
                 $errorenform =  "NO HA CONTESTADO EL FORMULARIO";
-
-            }
-
-            //dd($usuarioesta);
+            }            
         } else {
             $errorenform = "Documento de Usuario No Registrado";
         }
 
-        //var_dump($docentesall);
-
         return view('consulta.consultar', [
             'nombrecompleto' => $nombrecompleto,
-            'idusuario' => $idusuario,
-            'docentesall' => $docentesall,
+            'idusuario' => $idusuario,         
             'errorenform' => $errorenform,
             'contestohoy' => $contestohoy,
             'viculoconu' => $viculoconu,
-            'usuarioesta' => $usuarioesta,
-            'sedes' => $sedes,
+            'usuarioesta' => $usuarioesta,            
             't_documento' => $key,
             'fechahoy'=>$fechahoy
         ])->with('status', 'El Docente Nuevo fue creado con éxito');

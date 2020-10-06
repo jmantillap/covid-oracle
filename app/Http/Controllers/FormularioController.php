@@ -215,7 +215,7 @@ class FormularioController extends Controller
         $campos = ($request->validated());
         $miscampos = array($campos);
 
-	$fechahoy = date('d/m/Y');
+	    $fechahoy = date('d/m/Y');
         $sql = "select * from formulario where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$request->n_idusuario,'created_at'=>$fechahoy]))->first();
         if($formhoy!=null){                
@@ -254,13 +254,11 @@ class FormularioController extends Controller
         }
 
 
-        $campos['n_semaforo'] = $semaforo;
-        //dd($campos);
+        $campos['n_semaforo'] = $semaforo;        
 
         $resultado = Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
-
         //return redirect()->route('home')->with('status','La sede fue creado con éxito');
-
+        unset($request);
         return redirect()->route('formulario.show', ['id' => $resultado])->with('status', 'El formulario se guardó con éxito');
     }
 

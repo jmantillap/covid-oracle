@@ -40,7 +40,8 @@ class WebServicesUpb {
         try {
             //Log::channel('ws')->info('Inicio Prueba');            
             $response = $client->request('GET', "/General/Autenticacion/?",$parametros);        
-            $data = json_decode($response->getBody());                      
+            $data = json_decode($response->getBody());
+            unset($response, $client);    
         } catch(ClientException $e) {
             return self::mensajeError($e,"001");
         } catch (ServerException $e){
@@ -75,9 +76,11 @@ class WebServicesUpb {
             'query' => ['id' => $pidmCeros],
             'verify' => false,
         ];  
+        $data=null;
         try {    
             $response = $client->request('GET', "/General/UsuariosLdap/?",$parametros);        
-            $data = json_decode($response->getBody());            
+            $data = json_decode($response->getBody());
+            unset($response,$client);
         } catch (Exception $e) {
              Log::error($e);             
             return json_decode('{"ESTADO":"*** ERROR GRAVE AL AUTENTICAR **** Contacte Con el Administrador del sistema"}');

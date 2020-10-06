@@ -24,11 +24,7 @@ class UsersController extends Controller
 {
     
   
-  public function __construct(){
-   // $this->middleware('auth');
-   // $this->middleware('role:1|2');
-    
-}
+  public function __construct(){}
 
   
   
@@ -64,7 +60,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-         //$project = Project::findOrFail($id);
+         
          $vinculou= Vinculou::all();
          $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
          //dd($ciudades);
@@ -81,9 +77,7 @@ class UsersController extends Controller
      
      */
     public function store(SaveUserRequest $request)
-    {
-
-      //dd(request()->all());
+    { 
       $usuarioBanner=BannerServices::getUsuarioBannerNroDocumento(request('t_documento'));
       if($usuarioBanner!=null){                
           $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
@@ -94,6 +88,7 @@ class UsersController extends Controller
           }            
       }
       User::create($request->validated()); //solo envia los que esten validados por CreateUserRequest
+      unset($request);
       return redirect()->route('home')->with('status','¡ Usuario registrado exitósamente !');
     }
 
@@ -140,7 +135,8 @@ class UsersController extends Controller
       {
 
        
-    $users->update($request->validated()); //solo envia los que esten validados por SaveSedeRequest
+        $users->update($request->validated()); //solo envia los que esten validados por SaveSedeRequest
+        unset($request);
         return redirect()->route('users.show',$users)->with('status','El Usuario fue actualizado con éxito');
 
 

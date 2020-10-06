@@ -106,6 +106,9 @@ return [
             'prefix_schema'  => env('DB_SCHEMA_PREFIX', ''),
             'edition'        => env('DB_EDITION', 'ora$base'),
             'server_version' => env('DB_SERVER_VERSION', '11g'),
+            'options'   => [
+                            PDO::ATTR_PERSISTENT => true,
+                           ],
         ],*/
         /* Funciona */
          'oracle' => [
@@ -118,7 +121,25 @@ return [
             'password'       => env('DB_PASSWORD', 'upb2020'),
             'charset'        => env('DB_CHARSET', 'AL32UTF8'),
             'prefix'         => env('DB_PREFIX', ''),
+            'options'   => [
+                PDO::ATTR_PERSISTENT => true,
+            ],
         ], 
+        // produccion
+       /* 'oracle' => [
+            'driver' => 'oracle',
+            'host' => env('DB_HOST', '10.100.4.82'),
+            'port' => env('DB_PORT', '1521'),
+            'database' => env('DB_DATABASE', 'UPB_COVID'),
+            'service_name' =>env('SID_ALIAS', 'banpdn.upb.edu.co'),
+            'username'       => env('DB_USERNAME', 'UPB_COVID'),
+            'password'       => env('DB_PASSWORD', ''),
+            'charset'        => env('DB_CHARSET', 'AL32UTF8'),
+            'prefix'         => env('DB_PREFIX', ''),
+            'options'   => [
+                PDO::ATTR_PERSISTENT => true,
+            ],
+        ],*/
 
     ],
 
