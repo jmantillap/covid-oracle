@@ -62,6 +62,7 @@ class LoginupbController extends Controller
        $idbanner=request('usuario');
        $contestohoy="NO";
        $usuario_sel=BannerServices::getUsuarioBanner($idbanner);
+       //dd($usuario_sel);
        if($usuario_sel!=null){
             Session::put('vs_ussel',$usuario_sel);
             $documentous=$usuario_sel->documento;                        
@@ -84,11 +85,13 @@ class LoginupbController extends Controller
                         return redirect()->route('formularioupb.create');          
                     }
             }else{
+                //dd(Session::get('vs_ussel'));
                 return redirect()->route('usersupb.create')->with('status','Debe Registrar los datos faltantes');;
             }             
             Session::forget('vs_ussel');            
        } 
-       return "Hola mundo";
+       return back()->withErrors(array('usuario' =>'Usuario No exite en Banner. Contacte con el administrador del Sistema'))->withInput(request(['usuario']));    
+       //return "Hola mundo";
     }
 
     public function auditoriaIngreso($request)

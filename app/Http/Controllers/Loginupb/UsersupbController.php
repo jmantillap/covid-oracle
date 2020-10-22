@@ -72,7 +72,9 @@ class UsersupbController extends Controller
         $elquery .=" WHERE gtvadid_code = :idTipo";
         $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>  $usuario->tipo_documento]))->first();
         
-      } 
+      }
+      //$usuario->documento='PA702700464';
+      //dd($usuario);
       $vinculou= Vinculou::all();
       $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
       return view('usersupb.create',[

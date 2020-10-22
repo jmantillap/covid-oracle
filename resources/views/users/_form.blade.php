@@ -54,7 +54,9 @@
                         <label for="t_documento" class="col-md-5 col-form-label text-md-right">{{ __('Documento *') }}</label>
 
                         <div class="col-md-6">
-                            <input placeholder="No use puntos ni guiones" id="t_documento" type="text" class="form-control @error('t_documento') is-invalid @enderror" name="t_documento" value="{{ old('t_documento',$users->t_documento) }}" required autocomplete="documento" >
+                            <input placeholder="No use puntos ni guiones" 
+                            id="t_documento" type="text" class="form-control @error('t_documento') is-invalid @enderror" 
+                            name="t_documento" value="{{ old('t_documento',$users->t_documento) }}" required autocomplete="documento"  >
 
                             @error('t_nombres')
                                 <span class="invalid-feedback" role="alert">
