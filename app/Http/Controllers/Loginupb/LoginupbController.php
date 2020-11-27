@@ -46,36 +46,34 @@ class LoginupbController extends Controller
 
     public function validarLogin()    {
 
-        $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);
-        $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
-        if($data->ESTADO=="AUTORIZADO"){
-        //if(true){ //desarrollo javier.mantillap
+        $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);        
+        if(Config::get('ws.developer')==null || Config::get('ws.developer')==false ){
+            $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
+        }else{
+            $data=json_decode('{"ESTADO":"AUTORIZADO"}');
+            Session::flash('flash-error', '********WARNING: PILAS ESTA EN MODO DESARROLLO PARA EL WS, POR FAVOR COMUNICARSE CON CTIC**********' );
+        }         
+        if($data->ESTADO=="AUTORIZADO"){//if(true){ //desarrollo javier.mantillap
             return $this->validarUsuario(); 
         }else{
             return back()->withErrors(array('usuario' =>$data->ESTADO ))->withInput(request(['usuario']));    
         }            
-       
+
     }
 
     public function validarUsuario()
     {
        $idbanner=request('usuario');
        $contestohoy="NO";
-       $usuario_sel=BannerServices::getUsuarioBanner($idbanner);
-       //dd($usuario_sel);
+       $usuario_sel=BannerServices::getUsuarioBanner($idbanner);       
        if($usuario_sel!=null){
             Session::put('vs_ussel',$usuario_sel);
             $documentous=$usuario_sel->documento;                        
             $usuarioesta=User::where('t_documento','=',$documentous)->first();
             if ($usuarioesta!=null){
                     $fechahoy= date('Y-m-d 00:00:00');                    
-                    $formhoy=Formulario::where([
-                        ['n_idusuario', '=', $usuarioesta->n_idusuario],
-                        ['created_at', '>', $fechahoy],
-                        ['t_activo', '=', "SI"],
-                    ])->first();
+                    $formhoy=Formulario::where([['n_idusuario', '=', $usuarioesta->n_idusuario],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
                     if (!is_null($formhoy)) $contestohoy="SI";
-
                     if ($contestohoy=="SI"){
                         $hoyformulario=$formhoy->n_idformulario;
                         unset($formhoy);
@@ -84,14 +82,12 @@ class LoginupbController extends Controller
                         Session::put('idUsuario',$usuarioesta->n_idusuario);          
                         return redirect()->route('formularioupb.create');          
                     }
-            }else{
-                //dd(Session::get('vs_ussel'));
+            }else{//dd(Session::get('vs_ussel'));
                 return redirect()->route('usersupb.create')->with('status','Debe Registrar los datos faltantes');;
             }             
             Session::forget('vs_ussel');            
        } 
-       return back()->withErrors(array('usuario' =>'Usuario No exite en Banner. Contacte con el administrador del Sistema'))->withInput(request(['usuario']));    
-       //return "Hola mundo";
+       return back()->withErrors(array('usuario' =>'Usuario No exite en Banner. Contacte con el administrador del Sistema'))->withInput(request(['usuario']));           
     }
 
     public function auditoriaIngreso($request)

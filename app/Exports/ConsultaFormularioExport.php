@@ -37,7 +37,7 @@ class ConsultaFormularioExport implements FromCollection,WithHeadings, WithColum
             'MALESTAR_GENERAL','SECRECION_NASAL',
             'DIFICULTAD_RESPIRAR','TOS_SECA','PERSONAL_SALUD','CONTACTO_PERSONA_COVID',
             'FECHA_ULTIMO_CONTACTO','REALIZO_VIAJE_ULT_DIAS','FEC_ULTIMO_VIAJE'
-            ,'CREACION','ACTUALIZO'];
+            ,'CREACION','ACTUALIZO','PERDIDA_OLFATO','MOLESTIA_DIGESTIVA','CONTINUA_AISLADO'];
     }
     // Set Date Format
     public function columnFormats(): array

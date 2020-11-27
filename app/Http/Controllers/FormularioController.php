@@ -170,12 +170,7 @@ class FormularioController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store2()
     {
 
@@ -221,7 +216,6 @@ class FormularioController extends Controller
         if($formhoy!=null){                
               return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
           }
-
         if(!Session::has('idUsuario') || Session::get('idUsuario')!=$request->n_idusuario ){
             Session::forget('idUsuario');
             return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');;
@@ -238,6 +232,11 @@ class FormularioController extends Controller
             $semafororojo = "SI";
         }
         if ($miscampos[0]['t_tosseca'] == "SI") $semaforonegacion = "SI";
+
+        if ($miscampos[0]['t_perdolfa'] == "SI") $semaforonegacion = "SI";        
+        if ($miscampos[0]['t_molestia_diges'] == "SI") $semaforonegacion = "SI";        
+        if ($miscampos[0]['t_sigue_aislado'] == "SI") $semafororojo = "SI";
+        
         if  ($miscampos[0]['t_personalsalud']=="NO" && $miscampos[0]['t_contactopersonasinfectadas']=="SI" )$semaforonegacion="SI";
 
         if ($semafororojo == "SI") {
@@ -256,8 +255,7 @@ class FormularioController extends Controller
 
         $campos['n_semaforo'] = $semaforo;        
 
-        $resultado = Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
-        //return redirect()->route('home')->with('status','La sede fue creado con éxito');
+        $resultado = Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest        
         unset($request);
         return redirect()->route('formulario.show', ['id' => $resultado])->with('status', 'El formulario se guardó con éxito');
     }

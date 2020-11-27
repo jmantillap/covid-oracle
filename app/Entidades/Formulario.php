@@ -31,11 +31,12 @@ class Formulario extends Model
                             't_personalsalud',
                             'n_semaforo',
                             't_activo',
-                            'n_iddesactiva'
-                            
+                            'n_iddesactiva',
+                            't_perdolfa',
+                            't_molestia_diges',
+                            't_sigue_aislado',                            
+
                         ];
-
-
 
                           
 

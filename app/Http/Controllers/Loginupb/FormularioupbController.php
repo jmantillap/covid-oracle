@@ -159,18 +159,14 @@ class FormularioupbController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Metodo no funcionando. Javier.mantillap
      */
     public function store2()
     {
        
        //dd(request()->all());
         $validator=Validator::make(request()->all(),$this->rules(),$this->messages());
-        if($validator->fails()){
-          //dd("Fallo"); 
+        if($validator->fails()){          
            return   redirect()->back()->withErrors( $validator->errors());
         }
         $formulario= new Formulario(request()->all());        
@@ -197,9 +193,8 @@ class FormularioupbController extends Controller
                 where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') 
                 and t_activo ='SI'";
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$request->n_idusuario,'created_at'=>$fechahoy]))->first();
-        if($formhoy!=null){                
-              return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])
-              ->with('status', 'Resultado Previamente Guardado');
+        if($formhoy!=null){
+              return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
         }
         if(!Session::has('idUsuario') || Session::get('idUsuario')!=$request->n_idusuario ){
             Session::forget('idUsuario');
@@ -216,6 +211,11 @@ class FormularioupbController extends Controller
                 $semafororojo="SI"; 
         }
         if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI"; 
+        
+        if ($miscampos[0]['t_perdolfa'] == "SI") $semaforonegacion = "SI";        
+        if ($miscampos[0]['t_molestia_diges'] == "SI") $semaforonegacion = "SI";        
+        if ($miscampos[0]['t_sigue_aislado'] == "SI") $semafororojo = "SI";
+
         if  ($miscampos[0]['t_personalsalud']=="NO" && $miscampos[0]['t_contactopersonasinfectadas']=="SI" )$semaforonegacion="SI"; 
         if ($semafororojo=="SI"){
             $semaforo="3";
@@ -229,9 +229,8 @@ class FormularioupbController extends Controller
         if($miscampos[0]['t_personalsalud']=="SI" && request('t_contactopersonasinfectadas')==null ){
             $campos['t_contactopersonasinfectadas']="SI";    
         }
-
         $campos['n_semaforo']=$semaforo;
-        //dd($campos);                        
+        //dd($campos);
         $resultado=Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
         Session::forget('idUsuario');
         return redirect()->route('formularioupb.show2',[$resultado])->with('status','El formulario se guardó con éxito');

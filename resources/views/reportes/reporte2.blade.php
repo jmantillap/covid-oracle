@@ -51,12 +51,14 @@
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Dolor Garganta</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Malestar General</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Secresión Nasal</th>
-                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Dificultad Respirar</th>
-                       
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Dificultad Respirar</th>                       
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Tos Seca</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Contacto Personas Infectadas</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Fecha Último Contacto</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Realizó Viaje</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Perdida Gusto/Olfato</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Molestia Digestiva</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Continua Aislamiento</th>
                     </tr>
                     </thead>
                     <tbody></tbody>
@@ -106,7 +108,9 @@
             {data: 't_contactopersonasinfectadas' },
             {data: 'd_ultimocontacto' },
             {data: 't_realizoviaje' },
-
+            {data: 't_perdolfa' },
+            {data: 't_molestia_diges' },
+            {data: 't_sigue_aislado' },
 
             ],
           "language": { "url": "/plugins/datatables/locale/Spanish.json",},
@@ -116,27 +120,27 @@
             {
                  extend: 'copy',
                  exportOptions: {
-                 columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ] //Your Colume value those you want
+                 columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23 ] //Your Colume value those you want
                      }
                    },
                   {
                  extend: 'print',
                  orientation: 'landscape',
                  exportOptions: {
-                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ] //Your Colume value those you want
+                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23 ] //Your Colume value those you want
                      }
                    },
                    {
                     extend: 'excel',
                     exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18 ] //Your Colume value those you want
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18,19,20,21,22,23 ] //Your Colume value those you want
                    }
                  },
                  {
                     extend: 'pdf',
                     orientation: 'landscape',
                     exportOptions: {
-                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18 ] //Your Colume value those you want
+                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18,19,20,21,22,23 ] //Your Colume value those you want
                    }
                  },
                ],
