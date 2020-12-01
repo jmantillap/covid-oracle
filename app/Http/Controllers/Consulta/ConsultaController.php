@@ -33,11 +33,7 @@ class ConsultaController extends Controller
             $nombrecompleto = $usuarioesta->t_nombres . " " . $usuarioesta->t_apellidos;
             $viculoconu = $usuarioesta->vinculou->t_vinculo;
             $idusuario = $usuarioesta->n_idusuario;
-            $formhoy = Formulario::where([
-                ['n_idusuario', '=', $idusuario],
-                ['created_at', '>', $fechahoy],
-                ['t_activo', '=', "SI"],
-            ])->first();
+            $formhoy = Formulario::where([['n_idusuario', '=', $idusuario],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
             if (!is_null($formhoy)) {
                 $contestohoy = "SI";
             }
@@ -51,17 +47,9 @@ class ConsultaController extends Controller
         } else {
             $errorenform = "Documento de Usuario No Registrado";
         }
-
-        return view('consulta.consultar', [
-            'nombrecompleto' => $nombrecompleto,
-            'idusuario' => $idusuario,         
-            'errorenform' => $errorenform,
-            'contestohoy' => $contestohoy,
-            'viculoconu' => $viculoconu,
-            'usuarioesta' => $usuarioesta,            
-            't_documento' => $key,
-            'fechahoy'=>$fechahoy
-        ])->with('status', 'El Docente Nuevo fue creado con éxito');
+        return view('consulta.consultar', ['nombrecompleto' => $nombrecompleto,'idusuario' => $idusuario,'errorenform' => $errorenform,
+            'contestohoy' => $contestohoy,'viculoconu' => $viculoconu,'usuarioesta' => $usuarioesta,'t_documento' => $key,
+            'fechahoy'=>$fechahoy])->with('status', 'El Docente Nuevo fue creado con éxito');
     }
 
     public function homeconsulta()

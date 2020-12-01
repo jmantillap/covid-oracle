@@ -94,7 +94,9 @@ class UsersupbController extends Controller
     public function store(SaveUserupbRequest $request)
     {
       $resultado=User::create($request->validated())->n_idusuario; //solo envia los que esten validados por CreateUserRequest
-      Session::put('idUsuario',$resultado);      
+      Session::put('idUsuario',$resultado);     
+      $usuarioesta=User::find($resultado);
+      Session::put('userUPB',$usuarioesta);
       return redirect()->route('formularioupb.create')->with('status','¡ Usuario registrado exitósamente !');
     }
 

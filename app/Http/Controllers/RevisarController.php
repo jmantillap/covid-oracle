@@ -21,9 +21,8 @@ class RevisarController extends Controller
      */
     public function verificar()
     {
-        $sedes = Sedes::all();
-        $key = Input::post('t_documento');
-        //$docentesall = Formulario::all();
+        //$sedes = Sedes::all();
+        $key = Input::post('t_documento');//$docentesall = Formulario::all();
         $usuarioesta = User::where('t_documento', '=', $key)->first();
         $usuariohoy = "";
         $nombrecompleto = "";
@@ -39,11 +38,7 @@ class RevisarController extends Controller
             $viculoconu = $usuarioesta->vinculou->t_vinculo;            
             $idsigaa=$usuarioesta->t_sigaa;
             $idusuario = $usuarioesta->n_idusuario;
-            $formhoy = Formulario::where([
-                ['n_idusuario', '=', $idusuario],
-                ['created_at', '>', $fechahoy],
-                ['t_activo', '=', "SI"],
-            ])->first();
+            $formhoy = Formulario::where([['n_idusuario', '=', $idusuario],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
             if (!is_null($formhoy)) {
                 $contestohoy = "SI";
             }
@@ -52,10 +47,10 @@ class RevisarController extends Controller
                 return redirect()->route('formulario.show', ['id' => $hoyformulario])->with('status', 'Resultado Previamente Guardado');
             } else {
                 Session::put('idUsuario', $idusuario);
-                if ($idsigaa=="SI"){
-                  return redirect()->route('loginupb')->with('status', 'Debe hacer login de usuario para llenar el formulario');
-                }
-                else{
+                Session::forget('userUPB');
+                if ($idsigaa=="SI"){                    
+                  return redirect()->route('loginupb')->with('status', 'Ud. es Usuario UPB, Por favor autentíquese');
+                }else{
                   return redirect()->route('formulario.create');
                 }
             }            //dd($usuarioesta);
@@ -65,6 +60,7 @@ class RevisarController extends Controller
                 $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
                 if($data->CN==$usuarioBanner->id){
                     if($data->lastlogon<>0){
+                        Session::forget('userUPB');
                         return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
                     }
                 }            
@@ -74,6 +70,7 @@ class RevisarController extends Controller
                     $data=WebServicesUpb::isExisteLdap($usuarioBanner->id);
                     if($data->CN==$usuarioBanner->id){
                         if($data->lastlogon<>0){
+                            Session::forget('userUPB');
                             return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
                         }
                     }
@@ -82,16 +79,17 @@ class RevisarController extends Controller
             $errorenform = "Usuario No Existe";
         }
         //var_dump($docentesall);
-        return view('revisar.verificar', [
-            'nombrecompleto' => $nombrecompleto,
-            'idusuario' => $idusuario,
-            /*'docentesall' => $docentesall,*/
-            'errorenform' => $errorenform,
-            'contestohoy' => $contestohoy,
-            'viculoconu' => $viculoconu,
-            'usuarioesta' => $usuarioesta,
-            /*'sedes' => $sedes,*/
-            't_documento' => $key,
-        ])->with('status', 'El Docente Nuevo fue creado con éxito');
+        Session::put('documentoCreate', $key);
+        return view('revisar.verificar', ['nombrecompleto' => $nombrecompleto,'idusuario' => $idusuario,            /*'docentesall' => $docentesall,*/
+            'errorenform' => $errorenform,'contestohoy' => $contestohoy, 'viculoconu' => $viculoconu,
+            'usuarioesta' => $usuarioesta,            /*'sedes' => $sedes,*/
+            't_documento' => $key,])->with('status', 'El Docente Nuevo fue creado con éxito');
+    }
+
+    public function getRevisar()
+    {
+        Session::forget('userUPB');
+        Session::forget('idUsuario');
+        return redirect()->route('home');
     }
 }

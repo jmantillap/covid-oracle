@@ -30,10 +30,8 @@ class FormularioupbController extends Controller
     public function index()
     {
       
-       if(!Session::has('idUsuario')){
-
-         return route()->redirec('home');
-
+       if(!Session::has('idUsuario') ||  !Session::has('userUPB') ){
+            return route()->redirec('home');
        } 
        $key = Session::get('idUsuario');
        $usuarioesta=User::where('t_documento','=',$key)->first();
@@ -134,7 +132,7 @@ class FormularioupbController extends Controller
      */
     public function create()
     {
-        if(!Session::has('idUsuario')){            
+        if(!Session::has('userUPB') || !Session::has('idUsuario') ){            
             return redirect()->route("home");   
         } 
         $key = Session::get('idUsuario');
@@ -161,24 +159,24 @@ class FormularioupbController extends Controller
     /**
      * Metodo no funcionando. Javier.mantillap
      */
-    public function store2()
-    {
+    // public function store2()
+    // {
        
-       //dd(request()->all());
-        $validator=Validator::make(request()->all(),$this->rules(),$this->messages());
-        if($validator->fails()){          
-           return   redirect()->back()->withErrors( $validator->errors());
-        }
-        $formulario= new Formulario(request()->all());        
-        $formulario->t_texto=request('t_texto');
-        $formulario->id_usuario=Session::get('idUsiario');
-        dd(formulario);
-        $formularo->save();
-        Session::forget('idUsuario');
-        Session::put('id_formulario',$formulario->n_idformulario);
-        //Formulario::create($validator); //solo envia los que esten validados por CreateProjectRequest
-        return redirect()->route('home')->with('status','La sede fue creado con éxito');
-    }
+    //    //dd(request()->all());
+    //     $validator=Validator::make(request()->all(),$this->rules(),$this->messages());
+    //     if($validator->fails()){          
+    //        return   redirect()->back()->withErrors( $validator->errors());
+    //     }
+    //     $formulario= new Formulario(request()->all());        
+    //     $formulario->t_texto=request('t_texto');
+    //     $formulario->id_usuario=Session::get('idUsiario');
+    //     dd(formulario);
+    //     $formularo->save();
+    //     Session::forget('idUsuario');
+    //     Session::put('id_formulario',$formulario->n_idformulario);
+    //     //Formulario::create($validator); //solo envia los que esten validados por CreateProjectRequest
+    //     return redirect()->route('home')->with('status','La sede fue creado con éxito');
+    // }
 
 
     public function store(SaveFormularioRequest $request)
@@ -232,7 +230,7 @@ class FormularioupbController extends Controller
         $campos['n_semaforo']=$semaforo;
         //dd($campos);
         $resultado=Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
-        Session::forget('idUsuario');
+        //Session::forget('idUsuario');
         return redirect()->route('formularioupb.show2',[$resultado])->with('status','El formulario se guardó con éxito');
     }
 

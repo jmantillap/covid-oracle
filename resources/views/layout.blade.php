@@ -1,7 +1,8 @@
 <?php
 use App\Entidades\Menus;
 ?>
-
+@php
+@endphp
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,6 +135,12 @@ use App\Entidades\Menus;
         <a href="{{ route('login') }}" class="d-block">Administración</a>
       </div>
     </div> --}}
+    @if (Session::has('userUPB') && Session::get('userUPB')->n_idusuario!=null)
+      {{-- @csrf --}}      
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <a href="{{ route('salir.usuario.upb') }}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt"></i><p>Salir Usuario UPB</p></a>
+      </div>    
+    @endif
  @endguest     
       <!-- Sidebar Menu -->
 @auth

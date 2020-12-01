@@ -4,6 +4,8 @@
 @section('elcontrolador','loginupb')
 @section('laaccion','Login de Usuario Comunidad UPB')
 @section('content')
+@include('partials.validation-errors')
+@include('partials.session-status')
 {{-- /**
  * Javier Mantilla. javier.mantillap@upb.edu.co
  * 2020-06
@@ -21,6 +23,7 @@
     }
 
 </style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

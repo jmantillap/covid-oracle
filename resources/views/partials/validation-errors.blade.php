@@ -25,6 +25,9 @@
             </ul>
     </div>   
 @endif
+@php
+    Session::forget('flash-error');     
+@endphp
 <style>
     .form-control.has-warning {
         border-color: #d39e00; !important;

@@ -1,5 +1,15 @@
-@extends('layout')
+@if ($formulario==null)
+    <script type = "text/javascript">
+        function Redirect() { window.location = "/";}            
+        document.write("You will be redirected to main page in 10 sec.");
+        setTimeout(Redirect(), 10000);
+    </script>  
+    @php
+      return redirect()->route('home');
+    @endphp
+@endif
 
+@extends('layout')
 @section('title','Resultado Formulario | ' . $formulario->n_idformulario)
 @section('titulopag','VERIFICACIÓN')
 @section('elcontrolador','FORMULARIO')

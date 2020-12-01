@@ -18,22 +18,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'n_idsede', 
-        't_apellidos', 
-        't_nombres', 
-        'c_codtipo', 
-        't_documento', 
-        't_idsigaa', 
-        't_email', 
-        't_telefono', 
-        't_jefeinmediatocontacto', 
-        't_facultadareaempresa', 
-        'n_idvinculou', 
-        'password', 
-        't_activo',
-        't_sigaa'
-   ];
+   protected $fillable = ['n_idsede','t_apellidos','t_nombres','c_codtipo','t_documento','t_idsigaa','t_email','t_telefono','t_jefeinmediatocontacto',
+             't_facultadareaempresa','n_idvinculou','password','t_activo','t_sigaa'];
 
    protected $guarded= ['n_idusuario'];
    //
@@ -54,4 +40,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Entidades\Formulario','n_idusuario');
     }
+
+    /**
+     * Variable que indica si esta en cero, ya lleno el acta de ingreso, si es 1, esta pendiente llenar.
+     */
+    public $actaPendiente=0;    
+
 }

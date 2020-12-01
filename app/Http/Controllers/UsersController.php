@@ -13,6 +13,7 @@ use App\Entidades\Ciudad;
 use App\Services\BannerServices;
 use App\Utils\WebServicesUpb;
 use DB;
+use Session;
 
 
 //Importanto las validaciones
@@ -64,8 +65,9 @@ class UsersController extends Controller
          $vinculou= Vinculou::all();
          $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
          //dd($ciudades);
+         $user= new User(['t_documento'=>Session::get('documentoCreate')]);
          return view('users.create',[
-           'users' => new User,
+           'users' => $user,
            'ciudades' => $ciudades,
            'vinculous'=>$vinculou
          ]);
@@ -89,7 +91,8 @@ class UsersController extends Controller
       }
       User::create($request->validated()); //solo envia los que esten validados por CreateUserRequest
       unset($request);
-      return redirect()->route('home')->with('status','¡ Usuario registrado exitósamente !');
+      Session::forget('documentoCreate');
+      return redirect()->route('home')->with('status','¡ Usuario registrado exitósamente ! Por favor consulte nuevamente para Crear el formulario');
     }
 
     /**

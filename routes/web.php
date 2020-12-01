@@ -8,24 +8,22 @@ include ('web-admin.php');
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+| contains the "web" middleware group. Now create something great!|
 */
+//Route::get('/', function () {    return view('welcome'); });
+//Route::view('/','home')->name('home');
+
+Route::get('/','HomeController@index')->name('home');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('formulario/inactivar', 'FormularioController@inactivar')->name('formulario.inactivar')->middleware('auth');
 Route::get('formulario/{id}/updateinac', 'FormularioController@updateinac')->name('formulario.updateinac')->middleware('auth');
-Route::view('/','home')->name('home');
 Route::get('home/externos', 'Externos\ExternosController@homeext')->name('homeext');
 
 Route::view('inicio','inicio', ['nombre'=>'Jairo Peña Fuentes'])->name('inicio');
-//Route::resource('sedes', 'SedesController')->names('sedes')->parameters(['sedes'  =>  'sedes'])->middleware('role:1|2');
 Route::resource('formulario', 'FormularioController')->names('formulario')->parameters(['formulario'  =>  'formulario']);//->middleware('role:1|2');
-
 Route::resource('users', 'UsersController')->names('users')->parameters(['users'  =>  'users']);//->middleware('role:1|2');
+
 Route::resource('usersupb', 'Loginupb\UsersupbController')->names('usersupb')->parameters(['users'  =>  'users']);//->
 Route::resource('usuarios', 'UsuariosController')->names('usuarios')->parameters(['usuarios'  =>  'usuarios']);//->middleware('role:1|2');
 Route::get('usuarios/editar/{usuarios}', 'UsuariosController@editar')->name('usuarios.editar');
@@ -33,6 +31,7 @@ Route::resource('sedes', 'SedesController')->names('sedes')->parameters(['sedes'
 
 
 Route::post('revisar', 'RevisarController@verificar')->name('revisar');
+Route::get('revisar', 'RevisarController@getRevisar')->name('revisar');
 
 Route::get('reportes/reporte1', 'ReportesController@index')->name('reportes.reporte1')->middleware('auth');
 Route::get('reportes/reporte2', 'ReportesController@reporte2')->name('reportes.reporte2')->middleware('auth');
@@ -48,6 +47,7 @@ Route::resource('formularioupb', 'Loginupb\FormularioupbController')->names('for
 Route::get('formularioupbshow2/{id}', 'Loginupb\FormularioupbController@show2')->name('formularioupb.show2');
 Route::get('home/consulta', 'Consulta\ConsultaController@homeconsulta')->name('consulta');
 Route::post('consultar', 'Consulta\ConsultaController@consultar')->name('consultar');
+Route::get('consultar', 'Consulta\ConsultaController@consultar')->name('consultar');
 
 
 Route::get('formulario/create/{n_idciudad}', 'FormularioController@listarSedesAjax')->name('sedes.listar');
@@ -62,5 +62,6 @@ Route::get('reporteador2', 'ReportesController@getReporte2Formularios')->name('r
 Route::get('reporteador3', 'ReportesController@getReporte3Formularios')->name('reporteador3');
 Route::get('reporteador4', 'ReportesController@getReporte4Formularios')->name('reporteador4');
 
+Route::get('/salir/usuario/upb','Loginupb\LoginupbController@cerrarSessionUserUPB')->name('salir.usuario.upb');
 
 Auth::routes();

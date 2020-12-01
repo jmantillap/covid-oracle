@@ -7,6 +7,7 @@ use App\Entidades\Sedes;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Input;
+use App\Services\FormularioServices;
 use Session;
 
 class ExternosController extends Controller
@@ -32,18 +33,12 @@ class ExternosController extends Controller
         $puedeingresar = "SI";
 
         $fechahoy = date('Y-m-d 00:00:00');
-        
-        
+                
         if (!is_null($usuarioesta)) {
             $nombrecompleto = $usuarioesta->t_nombres . " " . $usuarioesta->t_apellidos;
             $viculoconu = $usuarioesta->vinculou->t_vinculo;
             $idusuario = $usuarioesta->n_idusuario;
-            $formhoy = Formulario::where([
-                ['n_idusuario', '=', $idusuario],
-                ['created_at', '>', $fechahoy],
-                ['t_activo', '=', "SI"],
-            ])->first();
-
+            $formhoy = Formulario::where([['n_idusuario', '=', $idusuario],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
             if (!is_null($formhoy)) {
                 $contestohoy = "SI";
             }
@@ -72,6 +67,22 @@ class ExternosController extends Controller
 
     public function homeext()
     {        
+        if(Session::has('userUPB') && Session::get('userUPB')->n_idusuario!=null ){
+            $formularioHoy=FormularioServices::formularioHoy();
+            if($formularioHoy!=null){
+                return redirect()->route('formularioupb.show2', ['id' => $formularioHoy->n_idformulario])->with('status','Resultado Previamente Guardado');
+            }else{
+                Session::put('idUsuario',Session::get('userUPB')->n_idusuario);
+                return redirect()->route('formularioupb.create');
+            }
+        }
         return view('externos.homeext');
     }
+
+    // public function formularioHoy()
+    // {
+    //     $fechahoy= date('Y-m-d 00:00:00');                    
+    //     $formhoy=Formulario::where([['n_idusuario', '=', Session::get('userUPB')->n_idusuario],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
+    //     return $formhoy;
+    // }
 }
