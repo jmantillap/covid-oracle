@@ -87,10 +87,10 @@ class LoginupbController extends Controller
                     Session::put('userUPB',$usuarioesta);//if (!is_null($this->formularioHoy())) $contestohoy="SI";
                     $formhoy=FormularioServices::formularioHoy();
                     if (!is_null($formhoy)) $contestohoy="SI";                    
-                    if ($contestohoy=="SI"){                        
+                    Session::put('idUsuario',$usuarioesta->n_idusuario);
+                    if ($contestohoy=="SI"){                                                
                         return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status','Resultado Previamente Guardado');
-                    }else{
-                        Session::put('idUsuario',$usuarioesta->n_idusuario);          
+                    }else{                        
                         return redirect()->route('formularioupb.create');          
                     }
             }else{//dd(Session::get('vs_ussel'));
@@ -98,11 +98,25 @@ class LoginupbController extends Controller
             }             
             Session::forget('vs_ussel'); 
             Session::forget('userUPB');            
+            Session::forget('idUsuario');            
        } 
        return back()->withErrors(array('usuario' =>'Usuario No exite en Banner. Contacte con el administrador del Sistema'))->withInput(request(['usuario']));           
     }
 
-    // public function formularioHoy()
+    public function cerrarSessionUserUPB()
+     {
+             Auth::logout();
+             Session::forget('vs_ussel'); 
+             Session::forget('userUPB');
+             Session::forget('idUsuario');
+             Session::forget('documentoCreate');                
+             return redirect()->route('home');
+    }
+
+
+}
+
+// public function formularioHoy()
     // {
     //     $fechahoy= date('Y-m-d 00:00:00');                    
     //     $formhoy=Formulario::where([['n_idusuario', '=', Session::get('userUPB')->n_idusuario],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
@@ -123,17 +137,3 @@ class LoginupbController extends Controller
     //  {
     //      return 't_login';
     //  }
-
-     public function cerrarSessionUserUPB()
-     {
-             Auth::logout();
-             Session::forget('vs_ussel'); 
-             Session::forget('userUPB');
-             Session::forget('idUsuario');
-             Session::forget('documentoCreate');                
-             return redirect()->route('home');
-     }
-
-
-}
-

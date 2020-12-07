@@ -24,14 +24,8 @@ class RevisarController extends Controller
         //$sedes = Sedes::all();
         $key = Input::post('t_documento');//$docentesall = Formulario::all();
         $usuarioesta = User::where('t_documento', '=', $key)->first();
-        $usuariohoy = "";
-        $nombrecompleto = "";
-        $idusuario = "";
-        $viculoconu = "";
-        $errorenform = "";        
-        $contestohoy = "NO";
-        $puedeingresar = "SI";
-        $idsigaa="NO";
+        $usuariohoy = "";         $nombrecompleto = "";        $idusuario = "";        $viculoconu = "";        $errorenform = "";        
+        $contestohoy = "NO";        $puedeingresar = "SI";        $idsigaa="NO";
         $fechahoy = date('Y-m-d 00:00:00');
         if (!is_null($usuarioesta)) {
             $nombrecompleto = $usuarioesta->t_nombres . " " . $usuarioesta->t_apellidos;
@@ -42,11 +36,11 @@ class RevisarController extends Controller
             if (!is_null($formhoy)) {
                 $contestohoy = "SI";
             }
-            if ($contestohoy == "SI") {
+            Session::put('idUsuario', $idusuario);
+            if ($contestohoy == "SI") {                
                 $hoyformulario = $formhoy->n_idformulario;
                 return redirect()->route('formulario.show', ['id' => $hoyformulario])->with('status', 'Resultado Previamente Guardado');
-            } else {
-                Session::put('idUsuario', $idusuario);
+            } else {                
                 Session::forget('userUPB');
                 if ($idsigaa=="SI"){                    
                   return redirect()->route('loginupb')->with('status', 'Ud. es Usuario UPB, Por favor autentíquese');

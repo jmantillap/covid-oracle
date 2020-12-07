@@ -13,21 +13,11 @@
 @section('title','Resultado Formulario | ' . $formulario->n_idformulario)
 @section('titulopag','VERIFICACIÓN')
 @section('elcontrolador','FORMULARIO')
-@section('laaccion','Resultado')
-    
-
-
-
+@section('laaccion','Resultado Encuesta Diaria')
 @section('content')
-
-
 @include('partials.session-status')
-
-
 <?php 
-
-if ($formulario->t_activo=="SI"){
-  
+if ($formulario->t_activo=="SI"){  
   $elmes="";
   $eldia="";
   $fechaformulario=strtotime($formulario->created_at);
@@ -98,14 +88,8 @@ switch ($diasemana) {
         case "6":
     $eldia="Sábado";
         break;
-    
-        
 }
-
 $fechafinal= $eldia.", ".$dia." de ".$elmes." de ".$year;
-
-
-
 
 $color="success";
 $icono="checkmark";
@@ -193,15 +177,36 @@ else {
 echo "<h1> El formulario fue desactivado por el Administrador del Aplicativo</h1>";
 }
 ?>
-    
-
-    
-  
-
-
-  
-
-
 @endsection
-
+@section('acta')
+    @if ($acta!=null && $acta->n_idformulario_acta>=0)
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Resultado Acta COVID-19</h3>
+        <div class="card-tools">          
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="position-relative p-3 {{ $acta->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} bordes" >
+          <div class="ribbon-wrapper"><div class="ribbon {{ $acta->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} ">{{ $acta->n_idformulario_acta }}</div></div>
+          <h5>Acta COVID-19. Diligenciada el {{ substr ($acta->created_at,0,10) }}</h5>
+        </div>
+      </div>      
+    </div>  
+    @else
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Resultado Acta COVID-19</h3>
+        <div class="card-tools">          
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="position-relative p-3 bg-danger bordes" >
+          <div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div>
+          <h5>Falta LLenar Acta COVID-19</h5>
+        </div>                
+      </div>      
+    </div>  
+    @endif
+@endsection
 

@@ -64,4 +64,10 @@ Route::get('reporteador4', 'ReportesController@getReporte4Formularios')->name('r
 
 Route::get('/salir/usuario/upb','Loginupb\LoginupbController@cerrarSessionUserUPB')->name('salir.usuario.upb');
 
+/*Funcionalidad de acta*/
+Route::get('/acta/usuario/','formularioacta\FormularioActaController@index')->name('acta.usuario.upb');
+Route::post('/acta/usuario/','formularioacta\FormularioActaController@envioGuardar')->name('acta.usuario.guardar');
+
+
+
 Auth::routes();

@@ -16,7 +16,7 @@ use DB;
 use Auth;
 use Log;
 use Exception;
-
+use App\Services\FormularioServices;
 
 
 class FormularioupbController extends Controller
@@ -144,40 +144,11 @@ class FormularioupbController extends Controller
              return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
         }               
         $viculoconu=$usuarioesta->vinculou->t_vinculo;
-        $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
-        //$project = Project::findOrFail($id);
-        return view('formularioupb.create',[
-            'formulario' => new Formulario,
-            'n_idusuario'=>$key,
-            'usuarioesta'=>$usuarioesta,
-            //'sedes'=>$sedes,
-            'ciudades' => $ciudades,
+        $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();        
+        return view('formularioupb.create',['formulario' => new Formulario,'n_idusuario'=>$key,'usuarioesta'=>$usuarioesta,'ciudades' => $ciudades,
             'viculoconu'=>$viculoconu
           ]);
     }
-
-    /**
-     * Metodo no funcionando. Javier.mantillap
-     */
-    // public function store2()
-    // {
-       
-    //    //dd(request()->all());
-    //     $validator=Validator::make(request()->all(),$this->rules(),$this->messages());
-    //     if($validator->fails()){          
-    //        return   redirect()->back()->withErrors( $validator->errors());
-    //     }
-    //     $formulario= new Formulario(request()->all());        
-    //     $formulario->t_texto=request('t_texto');
-    //     $formulario->id_usuario=Session::get('idUsiario');
-    //     dd(formulario);
-    //     $formularo->save();
-    //     Session::forget('idUsuario');
-    //     Session::put('id_formulario',$formulario->n_idformulario);
-    //     //Formulario::create($validator); //solo envia los que esten validados por CreateProjectRequest
-    //     return redirect()->route('home')->with('status','La sede fue creado con éxito');
-    // }
-
 
     public function store(SaveFormularioRequest $request)
     {
@@ -187,15 +158,14 @@ class FormularioupbController extends Controller
         $campos= ($request->validated());        
         $miscampos=array($campos);                
 	    $fechahoy = date('d/m/Y');
-        $sql = "select * from formulario 
-                where n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') 
-                and t_activo ='SI'";
+        $sql = "SELECT * from formulario WHERE n_idusuario = :n_idusuario and trunc(created_at) = to_date(:created_at,'dd/mm/yyyy') and t_activo ='SI'";
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$request->n_idusuario,'created_at'=>$fechahoy]))->first();
         if($formhoy!=null){
               return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
         }
         if(!Session::has('idUsuario') || Session::get('idUsuario')!=$request->n_idusuario ){
             Session::forget('idUsuario');
+            Session::forget('userUPB');
             return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');
         }
         if  ($miscampos[0]['t_consentimiento']=="NO")$semaforonegacion="SI"; 
@@ -210,7 +180,7 @@ class FormularioupbController extends Controller
         }
         if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI"; 
         
-        if ($miscampos[0]['t_perdolfa'] == "SI") $semaforonegacion = "SI";        
+        if ($miscampos[0]['t_perdolfa'] == "SI") $semafororojo = "SI";
         if ($miscampos[0]['t_molestia_diges'] == "SI") $semaforonegacion = "SI";        
         if ($miscampos[0]['t_sigue_aislado'] == "SI") $semafororojo = "SI";
 
@@ -226,11 +196,11 @@ class FormularioupbController extends Controller
         }
         if($miscampos[0]['t_personalsalud']=="SI" && request('t_contactopersonasinfectadas')==null ){
             $campos['t_contactopersonasinfectadas']="SI";    
-        }
-        $campos['n_semaforo']=$semaforo;
-        //dd($campos);
+        }        
+        $campos['n_semaforo']=$semaforo;        
+        $campos['t_realizoviaje']='NO'; /* Se realiza cambio en vista para que no muestre la pregunta de viaje segun reunion 07/12/2020 */
         $resultado=Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
-        //Session::forget('idUsuario');
+        
         return redirect()->route('formularioupb.show2',[$resultado])->with('status','El formulario se guardó con éxito');
     }
 
@@ -241,59 +211,29 @@ class FormularioupbController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Formulario $formulario)
-    {
-      
-        //$formulario = Formulario::all();
-        //->orderBy('name', 'desc')
-       // ->take(10)
-        //->get();      
-        dd($formulario->n_idformulario);
-      return view('formularioupb.show', [
-            'formulario' => $formulario
-        ]);
+    {      
+      dd($formulario->n_idformulario);
+      $acta=FormularioServices::getActaCovidUsuario($formulario->n_idusuario); 
+      return view('formularioupb.show', ['formulario' => $formulario,'acta' => $acta ]);
     }
-
 
     public function show2($id)
     {
-      //$id=request('id');
         $formulario=Formulario::find($id);
-      
-      return view('formularioupb.show', [
-            'formulario' => $formulario
-        ]);
+        $acta=FormularioServices::getActaCovidUsuario($formulario->n_idusuario); 
+        return view('formularioupb.show', ['formulario' => $formulario,'acta' => $acta]);
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

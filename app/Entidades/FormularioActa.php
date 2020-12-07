@@ -8,7 +8,7 @@ class FormularioActa extends Model
 {
     protected $primaryKey = 'n_idformulario_acta'; 
     protected $fillable= ['n_idusuario','t_consentimiento','t_activo','n_iddesactiva','n_semaforo'];
-    protected $guarded= ['n_idformulario', 'created_at', 'updated_at'];    //
+    protected $guarded= ['n_idformulario_acta', 'created_at', 'updated_at'];    //
     protected $table = 'formulario_acta';
 
     public $incrementing = 'true';

@@ -40,8 +40,8 @@ class SaveFormularioRequest extends FormRequest
             't_personalsalud' => 'required', 
             't_contactopersonasinfectadas' => 'required_if:t_personalsalud,==,NO',
             'd_ultimocontacto' => 'sometimes',
-            't_realizoviaje'=>'required',
-            'd_ultimoviaje' => 'sometimes',
+            /*'t_realizoviaje'=>'required',
+            'd_ultimoviaje' => 'sometimes',*/
             't_activo' => 'required',
             't_perdolfa' => 'required',       
             't_molestia_diges'=> 'required',
@@ -69,10 +69,10 @@ class SaveFormularioRequest extends FormRequest
             't_tosseca.required' => "No has Respondido acerca de la tos seca (Preg. 13)",
             't_personalsalud.required' => "No has Respondido acerca de si es personal de salud (Preg. 15)",
             't_contactopersonasinfectadas.required_if' => "No has Respondido acerca de la cercanía con personas infectadas (Preg. 16)",            
-            't_realizoviaje.required'=>'Realizó Viaje no ha sido respondido (Preg. 18)',
+            /*'t_realizoviaje.required'=>'Realizó Viaje no ha sido respondido (Preg. 18)',*/
             't_perdolfa.required'=>'No has respondido pérdida del sentido del gusto o olfato (Preg. 9)',
             't_molestia_diges.required'=>'No has respondido sobre diarrea u otra molestia disgestiva (Preg. 14)',
-            't_sigue_aislado.required'=>'No has respondido sobre aislamiento por COVID-19 (Preg. 20)',
+            't_sigue_aislado.required'=>'No has respondido sobre aislamiento por COVID-19 (Preg. 18)',
          ];
     }
 }

@@ -204,9 +204,9 @@
         <input class="form-control col-md-2" type="date" id="d_ultimocontacto" name="d_ultimocontacto" value="{{ old('d_ultimocontacto') }}">
     </div>
 </div>
-<div id="lt_realizoviaje" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 16. ¿Realizó un viaje nacional o internacional en los últimos 15 días? * --}}
+{{-- Se comentarea por indicaciones reunion del dia 07/12/2020 nacional donde indican que no es necesario --}}
+{{-- <div id="lt_realizoviaje" class="form-group row">
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.viaje') }} *
     </label>
     <div class="col-md-5">
@@ -215,14 +215,13 @@
     </div>
 </div>
 <div id="ld_ultimoviaje" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 17. ¿en qué fecha realizó su ultimo viaje? * --}}
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.fecha_viaje') }} *
     </label>
     <div class="col-md-10">
         <input class="form-control col-md-2" type="date" id="d_ultimoviaje" name="d_ultimoviaje" value="{{ old('d_ultimoviaje') }}"><br>
     </div>
-</div>
+</div> --}}
 <div id="lt_sigue_aislado" class="form-group row">
     <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.aislamiento_covid') }} *

@@ -17,9 +17,9 @@ return [
     'personal_salud'=>'15. ¿Usted es personal activo en servicios de salud? ',    
     'contacto'=>'16. ¿Ha estado en contacto con personas que han tenido los síntomas anteriormente mencionados o ha estado relacionado con casos de personas infectadas de Coronavirus en los últimos 7- 14 días? ',
     'fecha_contacto'=>'17. ¿En qué fecha se presentó el último contacto con la persona infectada?',     
-    'viaje'=>'18. ¿Realizó un viaje nacional o internacional en los últimos 15 días? ',  
-    'fecha_viaje'=>'19. ¿en qué fecha realizó su ultimo viaje? ',          
-    'aislamiento_covid'=>'20. En caso de haber presentado infección COVID-19 ¿sigue usted en aislamiento? ',
+    'viaje'=>'18. ¿Realizó un viaje nacional o internacional en los últimos 15 días? ',  /* Se quitan de la vista reunion 07 dic 2020 */
+    'fecha_viaje'=>'19. ¿en qué fecha realizó su ultimo viaje? ',          /* Se quitan de la vista reunion 07 dic 2020 */
+    'aislamiento_covid'=>'18. En caso de haber presentado infección COVID-19 ¿sigue usted en aislamiento? ',
     'n_idestudiante'=>'1',
     'encabezado'=>'Que conforme a la Ley 1581 de 2012, de manera voluntaria, autorizo a la Universidad Pontificia Bolivariana a tratar mis datos personales. 
                    Declaro que conozco mis derechos y deberes y las políticas de tratamiento de protección de datos de la Universidad, en mi calidad de  
@@ -29,5 +29,5 @@ return [
                    para el trabajo y el desarrollo humano, en numeral 3.6.5 inciso 3.6.1.5.. Y conforme a los parámetros  establecidos por la Organización Mundial de la Salud – OMS, 
                    sobre el autocuidado que cada persona debe tener para generar los medios de protección que le permita salvaguardar su salud; 
                    por lo anterior, asumo el compromiso del reporte diario de mi estado de salud, bajo el principio de la buena fe, que lo reportado en la 
-                   presente encuesta corresponde a datos verídicos, asumiendo la responsabilidad por cualquier dato inexacto que pueda poner en riesgo  mi salud y la de los demás. '
+                   presente encuesta corresponde a datos verídicos, asumiendo la responsabilidad por cualquier dato inexacto que pueda poner en riesgo  mi salud y la de los demás. '                   
 ];

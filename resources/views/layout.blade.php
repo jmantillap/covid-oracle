@@ -1,8 +1,3 @@
-<?php
-use App\Entidades\Menus;
-?>
-@php
-@endphp
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +18,7 @@ use App\Entidades\Menus;
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <link rel="stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> 
-  
+  <link rel="stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">   
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -40,21 +34,16 @@ use App\Entidades\Menus;
 <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.print.js"></script>
 <script src="/plugins/iCheck/icheck.min.js"></script>
-
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" type="text/javascript"></script>
-
 <!-- ickeck -->
 <link rel="stylesheet" href="/plugins/iCheck/all.css">
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <!-- validator -->
-
 <!-- ---- -->
 <!-- jquery-validation -->
 <script src="/plugins/jquery-validation/jquery.validate.min.js"></script>
@@ -64,36 +53,21 @@ use App\Entidades\Menus;
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
 <script>  
-  $(function () {    
-    /* $('.formulario').bootstrapValidator(); */
+  $(function () {        
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
         checkboxClass: 'icheckbox_flat-green',
         radioClass   : 'iradio_flat-green'
     });
   });
 </script>
-
 </head>
 <style>
-  .card-primary:not(.card-outline) > .card-header {
-    background-color: #6a0d0d !important;
-  }
-  .btn-primary:hover {
-        color: #fff;
-        background-color: #6a0d0d !important ;
-        border-color: #6a0d0d !important;
-    }
-    .btn-primary {
-        color: #fff;
-        background-color: #6a0d0d !important ;
-        border-color: #6a0d0d !important;
-    }
-    .pull-left {
-      float: left !important;
-    }
-    .pull-right {
-      float: right !important;
-    }
+  .card-primary:not(.card-outline) > .card-header {    background-color: #6a0d0d !important;  }
+  .btn-primary:hover {        color: #fff;        background-color: #6a0d0d !important ;        border-color: #6a0d0d !important;    }
+  .btn-primary {        color: #fff;        background-color: #6a0d0d !important ;        border-color: #6a0d0d !important;    }
+  .pull-left {      float: left !important;    }
+  .pull-right {      float: right !important;    }
+  .bordes{      border-radius: 10px !important;    }
 </style>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -110,39 +84,84 @@ use App\Entidades\Menus;
     </ul>
   </nav>
   <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="{{ route('home') }}" class="brand-link">
-      <img src="/dist/img/AdminLTELogo.png"
-           alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">Formulario COVID-19</span>
-    </a>
-
-    <!-- Sidebar -->
-      
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<!-- Brand Logo -->
+<a href="{{ route('home') }}" class="brand-link">
+  <img src="/dist/img/AdminLTELogo.png"
+        alt="AdminLTE Logo"
+        class="brand-image img-circle elevation-3"
+        style="opacity: .8">
+  <span class="brand-text font-weight-light">Formulario COVID-19</span>
+</a>
+<!-- Sidebar -->      
 <div class="sidebar">
-  <!-- Sidebar user (optional) -->
-  @guest
-  {{--   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="/img/usr/guest.jpg" class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">                
-        <a href="{{ route('login') }}" class="d-block">Administración</a>
-      </div>
-    </div> --}}
+@guest  
     @if (Session::has('userUPB') && Session::get('userUPB')->n_idusuario!=null)
-      {{-- @csrf --}}      
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <a href="{{ route('salir.usuario.upb') }}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt"></i><p>Salir Usuario UPB</p></a>
-      </div>    
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          @if (App\Services\FormularioServices::getFormularioEncuestaHoy()==null)
+            <li class="nav-item"><a href="{{ route('formularioupb.create') }}" class="nav-link"> <i class="nav-icon fas fa-file-signature"></i><p>Llenar Encuesta Diaria</p></a></li>    
+            <li class="nav-header">
+              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper "><div class="ribbon bg-danger ">Llenar</div></div><h5>Encuesta Diaria</h5></div>
+            </li>              
+          @endif                    
+          @if (App\Services\FormularioServices::getActaCovid()==null)
+            <li class="nav-item"><a href="{{ route('acta.usuario.upb') }}" class="nav-link"> <i class="nav-icon fas fa-file-signature"></i><p>Llenar Acta COVID-19</p></a></li>    
+            <li class="nav-header">
+              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
+            </li> 
+          @endif         
+          
+          <li class="nav-header"></li> 
+          <li class="nav-item"><a href="{{ route('salir.usuario.upb') }}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt"></i><p>Salir Usuario UPB</p></a></li>          
+        </ul>  
+      </nav>        
+    @elseif(!Session::has('userUPB') && Session::has('idUsuario') && Session::get('idUsuario')!=null )  
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          @if (App\Services\FormularioServices::getFormularioEncuestaHoy()==null)
+            <li class="nav-item"><a href="{{ route('formulario.create') }}" class="nav-link"> <i class="nav-icon fas fa-file-signature"></i><p>Llenar Encuesta Diaria</p></a></li>    
+            <li class="nav-header">
+              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper "><div class="ribbon bg-danger ">Llenar</div></div><h5>Encuesta Diaria</h5></div>
+            </li>     
+          @endif
+          @if (App\Services\FormularioServices::getActaCovid()==null)
+              <li class="nav-item"><a href="{{ route('acta.usuario.upb') }}" class="nav-link"> <i class="nav-icon fas fa-file-signature"></i><p>Llenar Acta COVID-19</p></a></li>    
+              <li class="nav-header">
+                <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
+              </li> 
+          @endif 
+          <li class="nav-header"></li> 
+          <li class="nav-item"><a href="{{ route('salir.usuario.upb') }}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt"></i><p>Salir Usuario Visitante</p></a></li>          
+          @if (($form=App\Services\FormularioServices::getActaCovid())!=null)              
+              <li class="nav-header">
+              <div class="position-relative p-3 {{ $form->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} bordes" >
+                <div class="ribbon-wrapper"><div class="ribbon {{ $form->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} ">{{ $form->n_idformulario_acta }}</div></div>
+                <h5>Acta COVID-19</h5>
+              </div>
+              </li>
+          @else
+              <li class="nav-header">ALERTAS</li> 
+              <li class="nav-header">
+                <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
+              </li> 
+          @endif            
+        </ul>  
+      </nav>            
+    @else    
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                    
+        @if (Session::has('idUsuario') && App\Services\FormularioServices::getActaCovid()==null )
+              <li class="nav-header">ALERTAS 1</li> 
+              <li class="nav-header">
+                <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
+              </li> 
+        @endif  
+        </ul>  
+      </nav>          
     @endif
- @endguest     
-      <!-- Sidebar Menu -->
+@endguest           
 @auth
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
@@ -221,21 +240,13 @@ use App\Entidades\Menus;
       </ul>
     </nav>
 @endauth
-
-
-      <!-- Quitado por japefuloni, consulte la barra de navegacion original de adminlte    -->
-
-
-      @yield('menu')
-      
-      <!-- /.sidebar-menu -->
-      
-    </div>
-    
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<!-- Quitado por japefuloni, consulte la barra de navegacion original de adminlte    -->
+@yield('menu')      
+<!-- /.sidebar-menu -->      
+</div>    
+</aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -255,41 +266,31 @@ use App\Entidades\Menus;
 
     <!-- Main content -->
     <section class="content">
-
       <!-- Default box -->
       <div class="card card-primary">
-
         <div class="card-header">
           <h3 class="card-title">@yield('laaccion','laaccion')</h3>
-
-          <div class="card-tools">
-            {{-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button> --}}
-            {{-- <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove"> --}}
-              {{-- <i class="fas fa-times"></i></button> --}}
+          <div class="card-tools">          
           </div>
         </div>
         <div class="card-body">
-         
-
-@yield('content')
+          @yield('content')
         </div>
-        <!-- /.card-body -->
-        
+        <!-- /.card-body -->        
       </div>
-      <!-- /.card -->
-{{-- @yield('content_1') --}}
+      <!-- /.card -->  
+      @yield('acta')
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  @yield('script-custom')
-  <footer class="main-footer">
+</div>
+ <!-- /.content-wrapper -->
+@yield('script-custom')
+<footer class="main-footer">
     <div class="float-right d-none d-sm-block">      
       <b><a class="info user-panel d-flex" href="{{ route('login') }}" class="d-block">Admin UPB</a></b>
     </div>
-    <strong><center>Universidad Pontificia Bolivariana.<center></footer>
-
+    <strong><center>Universidad Pontificia Bolivariana.</center>    
+</footer>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -301,3 +302,13 @@ use App\Entidades\Menus;
 
 </body>
 </html>
+{{-- @if (App\Services\FormularioServices::getActaCovid()==null)
+            <li class="nav-header">
+              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
+            </li> 
+          @endif --}}
+          {{-- @if (App\Services\FormularioServices::getFormularioEncuestaHoy()==null)
+            <li class="nav-header">
+              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper "><div class="ribbon bg-danger ">Llenar</div></div><h5>Encuesta Diaria</h5></div>
+            </li>     
+          @endif --}}
