@@ -27,7 +27,7 @@
                 Acepto
             </label>
             <br>
-            <input   type="radio" name="t_consentimiento" value="SI"  {{(old('t_consentimiento') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+            <input   type="radio" name="t_consentimiento" value="SI"  {{(old('t_consentimiento') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
             <input   type="radio" name="t_consentimiento" value="NO" {{(old('t_consentimiento') == 'NO') ? 'checked' : ''}}> NO<br>
         </div>
     </div>
@@ -35,12 +35,11 @@
 
 <br>
 <div id="dn_idciudad" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 1. Indique la ciudad en la cual se encuentra * --}}
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.ciudad') }} *
     </label>
     <div class="col-md-5">
-        <select name="n_idciudad" class="form-control" id="n_idciudad">
+        <select name="n_idciudad" class="form-control" id="n_idciudad" required>
             <option value="" >--Seleccionar Ciudad--</option>
             @foreach($ciudades as $ciudad)
                 <option value="{{$ciudad->n_id }}"
@@ -53,29 +52,26 @@
     </div>
 </div>
 <div id="dn_idsede" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 2. Indique para cuál sede o seccional solicita el ingreso * --}}
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.sede') }} *
     </label>
     <div class="col-md-5">
-        <select name="n_idsede" class="form-control" id="n_idsede">
+        <select name="n_idsede" class="form-control" id="n_idsede" required>
             <option value="" >--Seleccionar Sede--</option>
         </select>
     </div>
 </div>
 <div id="dt_irahoy" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 3. ¿Usted irá hoy a la Universidad o a una de sus sedes? * --}}
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.ir_hoy') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_irahoy" id="SI" value="SI" {{(old('t_irahoy') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_irahoy" id="SI" value="SI" {{(old('t_irahoy') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_irahoy" id="NO" value="NO" {{(old('t_irahoy') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
 <div id="lt_sitios" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 4. Indique el o los sitios donde realizará sus actividades * --}}
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.sitio_actividades') }} *       
     </label>
     <div class="col-md-5">
@@ -83,8 +79,7 @@
     </div>
 </div>
 <div id="lt_actividades" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 5. Actividades que realizará en la Universidad, objeto de solicitud de permiso * --}}
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.actividades_realizar') }} *        
     </label>
     <div class="col-md-5">
@@ -96,13 +91,12 @@
         {{ Config::get('pregunta.fiebre') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_presentadofiebre" value="SI" {{(old('t_presentadofiebre') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_presentadofiebre" value="SI" {{(old('t_presentadofiebre') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_presentadofiebre" value="NO" {{(old('t_presentadofiebre') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
 <div id="lt_diasfiebre" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 7. ¿por cuántos días la ha presentado? (formato de número en la respuesta) * --}}
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.dias_fiebre') }} *        
     </label>
     <div class="col-md-10">
@@ -114,7 +108,7 @@
         {{ Config::get('pregunta.garganta') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_dolorgarganta" value="SI" {{(old('t_dolorgarganta') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_dolorgarganta" value="SI" {{(old('t_dolorgarganta') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_dolorgarganta" value="NO" {{(old('t_dolorgarganta') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
@@ -123,7 +117,7 @@
         {{ Config::get('pregunta.gusto_olfato') }} *        
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_perdolfa" value="SI" {{(old('t_perdolfa') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_perdolfa" value="SI" {{(old('t_perdolfa') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_perdolfa" value="NO" {{(old('t_perdolfa') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
@@ -132,17 +126,16 @@
         {{ Config::get('pregunta.malestar') }} *        
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_malestargeneral" value="SI" {{(old('t_malestargeneral') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_malestargeneral" value="SI" {{(old('t_malestargeneral') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_malestargeneral" value="NO" {{(old('t_malestargeneral') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
 <div id="lt_secresioncongestionnasal" class="form-group row">
-    <label class="col-md-10 col-form-label">
-        {{-- 10. ¿Tiene secreciones nasales o congestión nasal? (no relacionadas con procesos alérgicos) * --}}
+    <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.secrecion') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_secresioncongestionnasal" value="SI" {{(old('t_secresioncongestionnasal') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_secresioncongestionnasal" value="SI" {{(old('t_secresioncongestionnasal') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_secresioncongestionnasal" value="NO" {{(old('t_secresioncongestionnasal') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
@@ -152,7 +145,7 @@
         {{ Config::get('pregunta.respirar') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_dificultadrespirar" value="SI" {{(old('t_dificultadrespirar') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_dificultadrespirar" value="SI" {{(old('t_dificultadrespirar') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_dificultadrespirar" value="NO" {{(old('t_dificultadrespirar') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
@@ -162,7 +155,7 @@
         {{ Config::get('pregunta.tos') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_tosseca" value="SI" {{(old('t_tosseca') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_tosseca" value="SI" {{(old('t_tosseca') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_tosseca" value="NO" {{(old('t_tosseca') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
@@ -171,7 +164,7 @@
         {{ Config::get('pregunta.diarrea') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_molestia_diges" value="SI" {{(old('t_molestia_diges') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_molestia_diges" value="SI" {{(old('t_molestia_diges') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_molestia_diges" value="NO" {{(old('t_molestia_diges') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
@@ -181,7 +174,7 @@
         {{ Config::get('pregunta.personal_salud') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_personalsalud" value="SI" {{(old('t_personalsalud') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_personalsalud" value="SI" {{(old('t_personalsalud') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_personalsalud" value="NO" {{(old('t_personalsalud') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
@@ -227,7 +220,7 @@
         {{ Config::get('pregunta.aislamiento_covid') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_sigue_aislado" value="SI" {{(old('t_sigue_aislado') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_sigue_aislado" value="SI" {{(old('t_sigue_aislado') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_sigue_aislado" value="NO" {{(old('t_sigue_aislado') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
