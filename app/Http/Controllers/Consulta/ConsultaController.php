@@ -20,6 +20,7 @@ class ConsultaController extends Controller
     public function consultar()
     {       
         $key = Input::post('t_documento');        
+        if(is_null($key)) $key='-999';
         $usuarioesta = User::where('t_documento', '=', $key)->first();
         $usuariohoy = "";
         $nombrecompleto = "";

@@ -65,9 +65,16 @@ Route::get('reporteador4', 'ReportesController@getReporte4Formularios')->name('r
 Route::get('/salir/usuario/upb','Loginupb\LoginupbController@cerrarSessionUserUPB')->name('salir.usuario.upb');
 
 /*Funcionalidad de acta*/
-Route::get('/acta/usuario/','formularioacta\FormularioActaController@index')->name('acta.usuario.upb');
-Route::post('/acta/usuario/','formularioacta\FormularioActaController@envioGuardar')->name('acta.usuario.guardar');
+Route::get('/acta/usuario/','Formularioacta\FormularioActaController@index')->name('acta.usuario.upb');
+Route::post('/acta/usuario/','Formularioacta\FormularioActaController@envioGuardar')->name('acta.usuario.guardar');
 
+/*Funcionalidad de inactivar formularios de encuesta covid */
+Route::get('acta/covid19/inactivar', 'FormularioActa\ActaCovidInactivarController@index')->name('acta.covid19.inactivar')->middleware('auth');
+Route::get('acta/covid19/consultar', 'FormularioActa\ActaCovidInactivarController@consultar')->name('acta.covid19.consultar.ajax')->middleware('auth');
+Route::post('acta/covid19/inactivar/ajax','Formularioacta\ActaCovidInactivarController@envioInactivar')->name('acta.covid19.inactivar.ajax')->middleware('auth');
 
+/** Funcionalidad de encuesta cormobilidad */
+Route::get('/encuesta/comorbilidad/','Formulariocomorbilidad\FormularioCormobilidadController@index')->name('encuesta.comorbilidad.upb');
+Route::post('/encuesta/comorbilidad/','Formulariocomorbilidad\FormularioCormobilidadController@envioGuardar')->name('encuesta.comorbilidad.upb.guardar');
 
 Auth::routes();

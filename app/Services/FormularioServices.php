@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Entidades\Formulario;
 use App\Entidades\FormularioActa;
+use App\Entidades\FormularioComorbilidad;
 use DB;
 use Log;
 use Exception;
@@ -39,21 +40,22 @@ class FormularioServices {
         return $formhoy;
     }
 
-
     public static function getActaCovid()
     {     
-        $formhoy=FormularioActa::where([['n_idusuario', '=', Session::get('idUsuario')],['t_activo', '=', "SI"],])->first();
-        //$formhoy=new Formulario();
-        //$formhoy=null;
-        return $formhoy;
+        $formulario=FormularioActa::where([['n_idusuario', '=', Session::get('idUsuario')],['t_activo', '=', "SI"],])->first();        
+        return $formulario;
     }
 
     public static function getActaCovidUsuario($idUsuario)
+    {   
+        $formulario=FormularioActa::where('n_idusuario', '=',$idUsuario)->where('t_activo', '=', 'SI')->first();        
+        return $formulario;
+    }
+
+    public static function getEncuestaComorbilidad()
     {     
-        $formhoy=FormularioActa::where([['n_idusuario', '=',$idUsuario],['t_activo', '=', "SI"],])->first();
-        //$formhoy=new Formulario();
-        //$formhoy=null;
-        return $formhoy;
+        $formulario=FormularioComorbilidad::where('n_idusuario', '=',Session::get('idUsuario'))->where('t_activo', '=', 'SI')->first();        
+        return $formulario;
     }
 
     

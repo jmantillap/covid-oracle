@@ -58,6 +58,13 @@
         checkboxClass: 'icheckbox_flat-green',
         radioClass   : 'iradio_flat-green'
     });
+    $(".numero").keypress(function (e) {
+        if (e.event){ key = e.keyCode;}else{key = e.which;}
+        if (key == 0) {            return true;                    }
+        if (key == 8) {            return true;                    }
+        if (key == 46) {            return false;                    }
+        if (key < 46 || key > 57) {            return false;        }
+    });
   });
 </script>
 </head>
@@ -105,14 +112,20 @@
             <li class="nav-header">
               <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper "><div class="ribbon bg-danger ">Llenar</div></div><h5>Encuesta Diaria</h5></div>
             </li>              
-          @endif                    
+          @endif
           @if (App\Services\FormularioServices::getActaCovid()==null)
             <li class="nav-item"><a href="{{ route('acta.usuario.upb') }}" class="nav-link"> <i class="nav-icon fas fa-file-signature"></i><p>Llenar Acta COVID-19</p></a></li>    
             <li class="nav-header">
               <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
             </li> 
-          @endif         
-          
+          @endif
+          @if (App\Services\FormularioServices::getEncuestaComorbilidad()==null)
+            <li class="nav-item">
+              <a id="menuEncuestaComorbilidad" href="{{ route('encuesta.comorbilidad.upb') }}" class="nav-link"> <i class="nav-icon fas fa-file-signature"></i><p>Llenar Comorbilidad</p></a></li>    
+            <li class="nav-header">
+              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Comorbilidad</h5></div>
+            </li> 
+          @endif
           <li class="nav-header"></li> 
           <li class="nav-item"><a href="{{ route('salir.usuario.upb') }}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt"></i><p>Salir Usuario UPB</p></a></li>          
         </ul>  
@@ -206,12 +219,17 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item"><a  id="menuInactivar" href="{{ route('formulario.inactivar') }}" class="nav-link"> <i class="nav-icon fas fa-eraser"></i><p>Inactivar Formulario</p></a></li>   
+        <li class="nav-item"><a  id="menuInactivar" href="{{ route('formulario.inactivar') }}" class="nav-link"> 
+              <i class="nav-icon fas fa-eraser"></i><p>Inactivar Encuesta Ingreso</p></a></li>   
+        <li class="nav-item">
+            <a  id="menuInactivarEncuestaCovid" href="{{ route('acta.covid19.inactivar') }}" class="nav-link"> 
+            <i class="nav-icon fas fa-backspace"></i><p>Inactivar Acta Covid</p></a>
+        </li>   
+        
         @if (auth()->user()->n_id==1)
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
             <li class="nav-item"><a  id="menuPerfil" href="{{ route('administrador.perfil') }}" class="nav-link"> <i class="nav-icon fas fa-user-tie"></i><p>Cambio Contraseña</p></a></li>
-            <li class="nav-item"><a  id="menuUsuario" href="{{ route('users.index') }}" class="nav-link"> <i class="nav-icon fas fa-user"></i><p>Usuarios</p></a></li>
-            {{-- <li class="nav-item"><a  id="menuSedes" href="{{ route('sedes.index') }}" class="nav-link"> <i class="nav-icon fas fa-university"></i><p>Sedes</p></a></li>  --}}        
+            <li class="nav-item"><a  id="menuUsuario" href="{{ route('users.index') }}" class="nav-link"> <i class="nav-icon fas fa-user"></i><p>Usuarios</p></a></li>            
             <li id="menuTablas" class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -233,8 +251,7 @@
         @endif        
         @if (auth()->user()->n_id==1)
         
-        @endif
-        
+        @endif        
         <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link"> <i class="nav-icon fas fa-sign-out-alt"></i><p>Salir</p></a></li>    
 
       </ul>
@@ -299,16 +316,5 @@
 </div>
 <!-- ./wrapper -->
 @include('partials.notification')
-
 </body>
 </html>
-{{-- @if (App\Services\FormularioServices::getActaCovid()==null)
-            <li class="nav-header">
-              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
-            </li> 
-          @endif --}}
-          {{-- @if (App\Services\FormularioServices::getFormularioEncuestaHoy()==null)
-            <li class="nav-header">
-              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper "><div class="ribbon bg-danger ">Llenar</div></div><h5>Encuesta Diaria</h5></div>
-            </li>     
-          @endif --}}

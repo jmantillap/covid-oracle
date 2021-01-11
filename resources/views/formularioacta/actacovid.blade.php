@@ -36,7 +36,7 @@
 </form>
 @endsection
 @include('partials.session-status')
-@section('script-page')
+@section('script-custom')
 <script>         
     $(function () {
         
