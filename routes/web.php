@@ -77,4 +77,9 @@ Route::post('acta/covid19/inactivar/ajax','Formularioacta\ActaCovidInactivarCont
 Route::get('/encuesta/comorbilidad/','Formulariocomorbilidad\FormularioCormobilidadController@index')->name('encuesta.comorbilidad.upb');
 Route::post('/encuesta/comorbilidad/','Formulariocomorbilidad\FormularioCormobilidadController@envioGuardar')->name('encuesta.comorbilidad.upb.guardar');
 
+/*Funcionalidad de inactivar Encuesta comorbilidad */
+Route::get('encuesta/comorbilidad/inactivar', 'Formulariocomorbilidad\ComorbilidadInactivarController@index')->name('encuesta.comorbilidad.inactivar')->middleware('auth');
+Route::get('encuesta/comorbilidad/consultar', 'Formulariocomorbilidad\ComorbilidadInactivarController@consultar')->name('encuesta.comorbilidad.consultar.ajax')->middleware('auth');
+Route::post('encuesta/comorbilidad/inactivar/ajax','Formulariocomorbilidad\ComorbilidadInactivarController@envioInactivar')->name('encuesta.comorbilidad.inactivar.ajax')->middleware('auth');
+
 Auth::routes();

@@ -89,8 +89,8 @@ class FormularioCormobilidadController extends Controller
         if(request('t_consentimiento')=='NO'){
             $validator = Validator::make(request()->all(),$reglas,array());
         }elseif(request('t_consentimiento')=='SI'){
-            $reglas=['n_peso' => 'required|numeric|min:30|max:150',
-                    'n_talla' => 'required|numeric|min:50|max:230',
+            $reglas=['n_peso' => 'required|integer|min:30|max:150',
+                    'n_talla' => 'required|integer|min:50|max:230',
                     't_fuma' => 'required|string|in:SI,NO',
                     't_hipertension' => 'required|string|in:SI,NO',
                     't_diabetes' => 'required|string|in:SI,NO',
@@ -99,7 +99,7 @@ class FormularioCormobilidadController extends Controller
                     't_medicamento_defensas_bajas' => 'required|string|in:SI,NO',
                     't_inmunodeficiencia' => 'required|string|in:SI,NO',
                     't_cancer' => 'required|string|in:SI,NO',
-                    'n_cigarrillos_dia' => 'nullable|required_if:t_fuma,==,SI|numeric|min:1|max:30|',
+                    'n_cigarrillos_dia' => 'nullable|required_if:t_fuma,==,SI|integer|min:1|max:30|',
                     't_medicamento_hipertension' => 'required_if:t_hipertension,==,SI',
                     't_medicamento_diabetes' => 'required_if:t_diabetes,==,SI',
                     't_enfermedad_corazon' => 'required_if:t_corazon,==,SI',
@@ -120,7 +120,7 @@ class FormularioCormobilidadController extends Controller
                         'n_peso.max'=>'El Peso en Kilogramos máximo es 150 kg',                        
                         'n_talla.required' => 'la talla en centímetros es requerida',
                         'n_talla.min' => 'la talla minima es de 50 cm',
-                        'n_talla.min' => 'la talla máxima es de 230 cm',
+                        'n_talla.max' => 'la talla máxima es de 230 cm',
                         't_fuma.required' => 'Debe seleccionar si fuma o no',
                         't_hipertension.required' => 'Debe seleccionar hipertensión',
                         't_diabetes.required' => 'Debe seleccionar Diabetes',
