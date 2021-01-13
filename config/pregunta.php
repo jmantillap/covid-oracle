@@ -19,7 +19,7 @@ return [
     'fecha_contacto'=>'17. ¿En qué fecha se presentó el último contacto con la persona infectada?',     
     'viaje'=>'18. ¿Realizó un viaje nacional o internacional en los últimos 15 días? ',  /* Se quitan de la vista reunion 07 dic 2020 */
     'fecha_viaje'=>'19. ¿en qué fecha realizó su ultimo viaje? ',          /* Se quitan de la vista reunion 07 dic 2020 */
-    'aislamiento_covid'=>'18. En caso de haber presentado infección COVID-19 ¿sigue usted en aislamiento? ',
+    'aislamiento_covid'=>'20. En caso de haber presentado infección COVID-19 ¿sigue usted en aislamiento? ',
     'n_idestudiante'=>'1',
     'encabezado'=>'Que conforme a la Ley 1581 de 2012, de manera voluntaria, autorizo a la Universidad Pontificia Bolivariana a tratar mis datos personales. 
                    Declaro que conozco mis derechos y deberes y las políticas de tratamiento de protección de datos de la Universidad, en mi calidad de  

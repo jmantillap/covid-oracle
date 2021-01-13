@@ -117,7 +117,7 @@ class FormularioController extends Controller
         if($formhoy!=null){                
             return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
         }       
-        $viculoconu = $usuarioesta->vinculou->t_vinculo; //$sedes= Sedes::all();
+        $viculoconu = $usuarioesta->vinculou->t_vinculo; 
         $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();        
         return view('formulario.create', ['formulario' => new Formulario,'n_idusuario' => $key,
                     'usuarioesta' => $usuarioesta,
@@ -148,6 +148,7 @@ class FormularioController extends Controller
         if ($miscampos[0]['t_malestargeneral'] == "SI") $semaforonegacion = "SI";
         if ($miscampos[0]['t_secresioncongestionnasal'] == "SI") $semaforonegacion = "SI";
         //if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI"; //Se realiza cambio segun correo de badder. 23 sep 2020
+        if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI";  //Se activa por correo badder 13 ene 2021
         if ($miscampos[0]['t_dificultadrespirar'] == "SI") {
             $semaforonegacion = "SI";
             $semafororojo = "SI";
@@ -172,7 +173,8 @@ class FormularioController extends Controller
             $campos['t_contactopersonasinfectadas']="SI";    
         }
         $campos['n_semaforo'] = $semaforo;        
-        $campos['t_realizoviaje']='NO'; /* Se realiza cambio en vista para que no muestre la pregunta de viaje segun reunion 07/12/2020 */
+        //se Comentarea por cambio de correo 13/01/2021
+        //$campos['t_realizoviaje']='NO'; /* Se realiza cambio en vista para que no muestre la pregunta de viaje segun reunion 07/12/2020 */        
         $resultado = Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest        
         unset($request);
         Session::forget('userUPB');        //Session::forget('idUsuario');
@@ -197,29 +199,29 @@ class FormularioController extends Controller
 
     public function destroy($id){ }
 
-    private function rules()
-    {
-        return ['n_idusuario' => 'required','n_idsede' => 'required','t_consentimiento' => 'required','t_irahoy' => 'required','t_sitios' => 'sometimes',
-            't_actividades' => 'sometimes','t_presentadofiebre' => 'required','t_diasfiebre' => 'sometimes|integer|min:0|max:200',
-            't_dolorgarganta' => 'required','t_malestargeneral' => 'required','t_secresioncongestionnasal' => 'required','t_dificultadrespirar' => 'required',
-            't_tosseca' => 'required','t_personalsalud' => 'required','t_contactopersonasinfectadas' => 'sometimes', 'd_ultimocontacto' => 'sometimes',
-            't_realizoviaje' => 'required','d_ultimoviaje' => 'sometimes'
-        ];
-    }
+    // private function rules()
+    // {
+    //     return ['n_idusuario' => 'required','n_idsede' => 'required','t_consentimiento' => 'required','t_irahoy' => 'required','t_sitios' => 'sometimes',
+    //         't_actividades' => 'sometimes','t_presentadofiebre' => 'required','t_diasfiebre' => 'sometimes|integer|min:0|max:200',
+    //         't_dolorgarganta' => 'required','t_malestargeneral' => 'required','t_secresioncongestionnasal' => 'required','t_dificultadrespirar' => 'required',
+    //         't_tosseca' => 'required','t_personalsalud' => 'required','t_contactopersonasinfectadas' => 'sometimes', 'd_ultimocontacto' => 'sometimes',
+    //         't_realizoviaje' => 'required','d_ultimoviaje' => 'sometimes'
+    //     ];
+    // }
 
-    private function messages()
-    {
+    // private function messages()
+    // {
 
-        return ['n_idusuario.required' => "No ha selecionado la persona",//'t_nombres.min' => "El Nombre del Docente debe tener el menos 3 caracteres",
-            //'t_nombres.max' => "El Nombre del  Docente debe tener máximo 100 caracteres",
-            't_consentimiento.required' => "No has dado el consentimiento",'n_idsede.required' => "No has seleccionado la sede",
-            't_irahoy.required' => "Debe responder si ira hoy a la Universidad",'t_sitios.sometimes' => 'Debe responder a que sitios se dirige',
-            't_actividades.sometimes' => 'Debe responder que actividades va a realizar','t_presentadofiebre.required' => "No has respondido si presento fiebre",
-            't_dolorgarganta.required' => "No respondió a la pregunta sobre el dolor de garganta",'t_malestargeneral.required' => "No has respondido sobre el malestar general",
-            't_secresioncongestionnasal.required' => "No has respondido acerca de la Cosgentión Nasal",'t_dificultadrespirar.required' => "No has Respondido acerca de la dificultad al respirar",
-            't_tosseca.required' => "No has Respondido acerca de la tos seca",'t_personalsalud.required' => "No has Respondido acerca de la cercanía con personas infectadas",
-            't_contactopersonasinfectadas.sometimes' => "No has Respondido acerca de la cercanía con personas infectadas",
-            't_realizoviaje.required' => "No has Respondido acerca de su ultimo viaje"
-        ];
-    }
+    //     return ['n_idusuario.required' => "No ha selecionado la persona",//'t_nombres.min' => "El Nombre del Docente debe tener el menos 3 caracteres",
+    //         //'t_nombres.max' => "El Nombre del  Docente debe tener máximo 100 caracteres",
+    //         't_consentimiento.required' => "No has dado el consentimiento",'n_idsede.required' => "No has seleccionado la sede",
+    //         't_irahoy.required' => "Debe responder si ira hoy a la Universidad",'t_sitios.sometimes' => 'Debe responder a que sitios se dirige',
+    //         't_actividades.sometimes' => 'Debe responder que actividades va a realizar','t_presentadofiebre.required' => "No has respondido si presento fiebre",
+    //         't_dolorgarganta.required' => "No respondió a la pregunta sobre el dolor de garganta",'t_malestargeneral.required' => "No has respondido sobre el malestar general",
+    //         't_secresioncongestionnasal.required' => "No has respondido acerca de la Cosgentión Nasal",'t_dificultadrespirar.required' => "No has Respondido acerca de la dificultad al respirar",
+    //         't_tosseca.required' => "No has Respondido acerca de la tos seca",'t_personalsalud.required' => "No has Respondido acerca de la cercanía con personas infectadas",
+    //         't_contactopersonasinfectadas.sometimes' => "No has Respondido acerca de la cercanía con personas infectadas",
+    //         't_realizoviaje.required' => "No has Respondido acerca de su ultimo viaje"
+    //     ];
+    // }
 }

@@ -206,12 +206,13 @@
     </div>
 </div>
 {{-- Se comentarea por indicaciones reunion del dia 07/12/2020 nacional donde indican que no es necesario --}}
-{{-- <div id="lt_realizoviaje" class="form-group row">
+{{-- Se descomentarea por indicaciones correo del dia 13/01/2021 nacional donde indican que no es necesario --}}
+<div id="lt_realizoviaje" class="form-group row">
     <label class="col-md-10 col-form-label">
         {{ Config::get('pregunta.viaje') }} *
     </label>
     <div class="col-md-5">
-        <input   type="radio" name="t_realizoviaje" value="SI" {{(old('t_realizoviaje') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+        <input   type="radio" name="t_realizoviaje" value="SI" {{(old('t_realizoviaje') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
         <input   type="radio" name="t_realizoviaje" value="NO" {{(old('t_realizoviaje') == 'NO') ? 'checked' : ''}}> NO<br>
     </div>
 </div>
@@ -220,9 +221,9 @@
         {{ Config::get('pregunta.fecha_viaje') }} *
     </label>
     <div class="col-md-10">
-        <input class="form-control col-md-2" type="date" id="d_ultimoviaje" name="d_ultimoviaje" value="{{ old('d_ultimoviaje') }}"><br>
+        <input class="form-control col-md-2" type="date" id="d_ultimoviaje" name="d_ultimoviaje" value="{{ old('d_ultimoviaje') }}">
     </div>
-</div> --}} 
+</div>
 <div id="lt_sigue_aislado" class="form-group row">
     <label class="col-md-10 col-form-label">        
         {{ Config::get('pregunta.aislamiento_covid') }} *
