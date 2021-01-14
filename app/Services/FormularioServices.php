@@ -57,7 +57,11 @@ class FormularioServices {
         $formulario=FormularioComorbilidad::where('n_idusuario', '=',Session::get('idUsuario'))->where('t_activo', '=', 'SI')->first();        
         return $formulario;
     }
-
+    public static function getEncuestaComorbilidadUsuario($idUsuario)
+    {     
+        $formulario=FormularioComorbilidad::where('n_idusuario', '=',$idUsuario)->where('t_activo', '=', 'SI')->first();        
+        return $formulario;
+    }
     
 
 }

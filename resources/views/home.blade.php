@@ -56,7 +56,9 @@ else {
 @include('partials.validation-errors')
 
 <h4>¡Bienvenido! Este es el registro para el control de ingreso a la UPB.</h4><br>
-<h5 align="justify">Para la continuidad de nuestro retorno responsable e inteligente a la UPB es fundamental que cada uno realice de forma consciente y responsable la siguiente encuesta, reportando su estado de salud y síntomas diariamente, ya sea porque vayas a ir a la Universidad o estés desde tu casa. ¡De esto depende nuestra salud y bienestar!<h5><br><br>
+<h5 align="justify">Para la continuidad de nuestro retorno responsable e inteligente a la UPB es fundamental que cada uno realice de forma consciente y responsable la siguiente encuesta, reportando su estado de salud y síntomas diariamente, ya sea porque vayas a ir a la Universidad o estés desde tu casa. Esto se debe hacer de acuerdo a lo establecido por la Resolución 666 del 24 de abril de 2020 denominada “Por el cual se adopta el protocolo general de bioseguridad para mitigar, controlar y realizar el adecuado manejo de la pandemia del Coronavirus COVID-19”, numeral 4.1 inciso 4, Resolución 1721 del 24 de septiembre de 2020 denominada “ Por medio de la cual se adopta el protocolo de bioseguridad para el manejo y control del riesgo del coronavirus COVID-19 en instituciones educativas, instituciones de educación superior y las instituciones de educación para el trabajo y el desarrollo humano”
+  ¡De esto depende nuestra salud y bienestar! 
+ <h5><br><br>
 
 
 <div class="row">

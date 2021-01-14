@@ -52,5 +52,6 @@ return [
                 <br>21.	Acataré y respetaré las indicaciones dadas por el personal responsable de la Universidad frente al cumplimiento de los protocolos de Bioseguridad en las diferentes áreas del campus.
                 <br>22.	Trataré de cumplir con las recomendaciones de vestuario dadas por la Organización Mundial de la Salud (OMS): uso de pantalón largo, camisa manga larga, zapato cerrado, entre otros.    
                 <br>Con la aceptación de este documento, puedo asistir la Universidad a desarrollar las diferentes actividades académicas y laborales de manera presencial.', 
+                
 ];
 

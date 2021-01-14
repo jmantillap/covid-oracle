@@ -1,8 +1,8 @@
 @extends('layout')
-@section('title','Inactivar Encuesta Comorbilidad')
+@section('title','Inactivar Encuesta de Estado de Salud')
 @section('titulopag','Administración')
 @section('elcontrolador','Menu Princial')
-@section('laaccion','INACTIVAR ENCUESTA COMORBILIDAD.')
+@section('laaccion','INACTIVAR ENCUESTA DE ESTADO DE SALUD.')
 @section('content')
 @csrf    
 <div class="row">

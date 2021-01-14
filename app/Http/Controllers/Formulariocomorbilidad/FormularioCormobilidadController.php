@@ -32,8 +32,21 @@ class FormularioCormobilidadController extends Controller
     }
     private function mostrarView($messages='')
     {
-        $user=User::find(Session::get('idUsuario'));        
-        $objetos=['usuario'=>$user,'formulario'=>$this->formulario];         
+        $user=User::find(Session::get('idUsuario'));
+        if($user->n_idvinculou==1){
+           $vinculo="ESTUDIANTES"; 
+           $modalidad="estudio";
+        }elseif ($user->n_idvinculou==2 || $user->n_idvinculou==3 || $user->n_idvinculou==4){
+           $vinculo="PROFESORES Y PERSONAL ADMINISTRATIVO"; 
+           $modalidad="trabajo";
+        }elseif($user->n_idvinculou==5){
+            $vinculo="PROVEEDORES";
+            $modalidad="trabajo";
+        }else{
+            $vinculo=strtoupper($usuario->vinculou->t_vinculo).'S';
+            $modalidad="trabajo";
+        }
+        $objetos=['usuario'=>$user,'formulario'=>$this->formulario,'vinculo'=>$vinculo,'modalidad'=>$modalidad]; 
         if($messages==''){
             return view('formulariocomorbilidad.encuestacomorbilidad',$objetos);
         }else{

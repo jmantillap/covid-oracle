@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Encuesta de Comorbilidad')
+@section('title','Encuesta de Estado de Salud')
 @section('titulopag','ESTADO DE SALUD PARA PREVENCIÓN DE COVID-19' )
 @section('elcontrolador','Formulario Usuario UPB')
 @section('laaccion',' Pregunta requerida, debe responder para completar la encuesta.')
@@ -22,7 +22,7 @@
         <h3 class="card-title">Consentimiento: <strong>{{$usuario->c_codtipo}}. {{$usuario->t_documento}} - {{$usuario->t_nombres}} {{$usuario->t_apellidos}}</strong></h3>
     </div>
     <div class="card-body">          
-        {!! strip_tags(str_replace('$viculoconu','pruebaxxx',Config::get('comorbilidad.autorizacion')),'<strong><br><ul><li>') !!} 
+        {!! strip_tags(str_replace('$viculoconu','pruebaxxx',Config::get('comorbilidad.autorizacion')),'<strong><br><ul><li><u>') !!} 
         <br><br>
         <label>
             {{ Config::get('comorbilidad.consentimiento')}}
@@ -33,16 +33,18 @@
     </div>
 </div>
 
-<div id="preguntas">
+<div id="preguntas">    
     <div>
-    Estimados <strong>{{$usuario->vinculou->t_vinculo}}</strong> de la Universidad Pontificia Bolivariana:
+    Estimados <strong>{{$vinculo}}</strong> de la Universidad Pontificia Bolivariana:<br><br>
     Para la Universidad tu salud y seguridad es lo primero. Desde la Rectoría General y su Equipo Directivo se ha venido siguiendo la evolución de la epidemia en tiempo real. 
-    Basados en modelaciones matemáticas, las predicciones nos informan sobre cuándo se presentaría el mayor número de casos, en qué tiempos, y el impacto de las diferentes estrategias
-    emitidas por los gobiernos nacional y locales. Uno de los puntos más importantes es que requerimos conocer qué <strong>{{$usuario->vinculou->t_vinculo}}</strong> deberán continuar con telepresencia porque tienen 
-    condiciones o enfermedades crónicas que, de acuerdo con la literatura médica, tendrían mayor riesgo de infección y complicaciones.Por ello, los invitamos a responder esta encuesta 
-    para poder conocer cuántos de ustedes tendrían estas condiciones, y organizar la modalidad de teletrabajo o estudio telepresencial frente a un posible levantamiento de la 
-    cuarentena obligatoria después del 30 de mayo (decretado por el gobierno nacional para colegios y universidades). Garantizamos total confidencialidad y todas las respuestas 
-    serán usadas exclusivamente para las modelaciones de los escenarios. Agradecemos que por favor nos responda con total sinceridad:
+    Basados en modelaciones matemáticas, las predicciones nos informan sobre cuándo se presentaría el mayor número de casos, en qué tiempos, y el impacto de las diferentes 
+    estrategias emitidas por los gobiernos nacional y locales.<br><br>
+    Uno de los puntos más importantes es que requerimos conocer qué <strong>{{$vinculo}}</strong> deberán continuar con telepresencia porque tienen condiciones o enfermedades 
+    crónicas que, de acuerdo con la literatura médica, tendrían mayor riesgo de infección y complicaciones.<br><br>
+    Por ello, los invitamos a responder esta encuesta para poder conocer cuántos de ustedes tendrían estas condiciones, y definir la modalidad de {{ $modalidad }} para cuidar 
+    de su salud.<br>
+    <u>Garantizamos total confidencialidad</u> y todas las respuestas serán usadas exclusivamente para las modelaciones de los escenarios. Agradecemos que por favor nos responda 
+    con total sinceridad:
     </div>
     <div id="g_peso" class="form-group">
         <label for="n_peso" class="col-form-label">{{ Config::get('comorbilidad.peso') }} *</label>

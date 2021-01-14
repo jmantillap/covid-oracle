@@ -121,9 +121,9 @@
           @endif
           @if (App\Services\FormularioServices::getEncuestaComorbilidad()==null)
             <li class="nav-item">
-              <a id="menuEncuestaComorbilidad" href="{{ route('encuesta.comorbilidad.upb') }}" class="nav-link"> <i class="nav-icon fas fa-file-signature"></i><p>Llenar Comorbilidad</p></a></li>    
+              <a id="menuEncuestaComorbilidad" href="{{ route('encuesta.comorbilidad.upb') }}" class="nav-link"> <i class="nav-icon fas fa-file-signature"></i><p>Llenar Estado de Salud</p></a></li>    
             <li class="nav-header">
-              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Comorbilidad</h5></div>
+              <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Estado de Salud</h5></div>
             </li> 
           @endif
           <li class="nav-header"></li> 
@@ -227,7 +227,7 @@
         </li>
         <li class="nav-item">
           <a  id="menuInactivarComorbilidad" href="{{ route('encuesta.comorbilidad.inactivar') }}" class="nav-link"> 
-          <i class="nav-icon fas fa-folder-minus"></i><p>Inactivar Comorbilidad</p></a>
+          <i class="nav-icon fas fa-folder-minus"></i><p>Inactivar Estado de Salud</p></a>
       </li>   
         
         @if (auth()->user()->n_id==1)
@@ -301,6 +301,7 @@
       </div>
       <!-- /.card -->  
       @yield('acta')
+      @yield('comorbilidad')
     </section>
     <!-- /.content -->
 </div>

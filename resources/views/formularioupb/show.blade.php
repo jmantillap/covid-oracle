@@ -207,3 +207,34 @@ if($formulario->n_semaforo=="3")
     @endif
 
 @endsection
+@section('comorbilidad')
+    @if ($comorbilidad!=null && $comorbilidad->n_idformulario_comorbilidad>=0)
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Resultado Estado de Salud</h3>
+        <div class="card-tools">          
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="position-relative p-3 {{ $comorbilidad->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} bordes" >
+          <div class="ribbon-wrapper"><div class="ribbon {{ $comorbilidad->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} ">{{ $comorbilidad->n_idformulario_comorbilidad }}</div></div>
+          <h5>Encuesta estado de salud. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>
+        </div>
+      </div>      
+    </div>  
+    @else
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Resultado Estado de Salud</h3>
+        <div class="card-tools">          
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="position-relative p-3 bg-danger bordes" >
+          <div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div>
+          <h5>Falta LLenar Encuesta Estado de salud</h5>
+        </div>                
+      </div>      
+    </div>  
+    @endif
+@endsection

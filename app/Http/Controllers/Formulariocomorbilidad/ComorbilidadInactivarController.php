@@ -63,7 +63,7 @@ class ComorbilidadInactivarController extends Controller
             $response = array('status' => '0','msg' =>'***ERROR GRAVE AL GUARDAR**** Contacte Con el Administrador del sistema');
             return response()->json($response);
        }
-       $response = array('status' => '1','msg' =>'Se inactivo la encuesta de Comorbildidad');
+       $response = array('status' => '1','msg' =>'Se inactivo la encuesta de Estado de Salud');
        return response()->json($response);
     }
 }

@@ -189,8 +189,13 @@ class FormularioController extends Controller
      */
     public function show(Formulario $formulario)
     {
-        $acta=FormularioServices::getActaCovidUsuario($formulario->n_idusuario);        
-        return view('formulario.show', ['formulario' => $formulario,'acta' => $acta]);
+        $acta=FormularioServices::getActaCovidUsuario($formulario->n_idusuario);
+        $user=User::find($formulario->n_idusuario);
+        $comorbilidad=null;
+        if($user->n_idvinculou==1 || $user->n_idvinculou==2 || $user->n_idvinculou==3 || $user->n_idvinculou==4){
+            $comorbilidad=FormularioServices::getEncuestaComorbilidadUsuario($formulario->n_idusuario);
+        }
+        return view('formulario.show', ['formulario' => $formulario,'acta' => $acta,'comorbilidad' => $comorbilidad]);
     }
 
     public function edit($id){ }

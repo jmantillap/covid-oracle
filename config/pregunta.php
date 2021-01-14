@@ -17,11 +17,11 @@ return [
     'personal_salud'=>'15. ¿Usted es personal activo en servicios de salud? ',    
     'contacto'=>'16. ¿Ha estado en contacto con personas que han tenido los síntomas anteriormente mencionados o ha estado relacionado con casos de personas infectadas de Coronavirus en los últimos 7- 14 días? ',
     'fecha_contacto'=>'17. ¿En qué fecha se presentó el último contacto con la persona infectada?',     
-    'viaje'=>'18. ¿Realizó un viaje nacional o internacional en los últimos 15 días? ',  /* Se quitan de la vista reunion 07 dic 2020 */
-    'fecha_viaje'=>'19. ¿en qué fecha realizó su ultimo viaje? ',          /* Se quitan de la vista reunion 07 dic 2020 */
+    'viaje'=>'18. ¿Realizó un viaje nacional o internacional en los últimos 15 días? ',  
+    'fecha_viaje'=>'19. ¿en qué fecha realizó su ultimo viaje? ',         
     'aislamiento_covid'=>'20. En caso de haber presentado infección COVID-19 ¿sigue usted en aislamiento? ',
     'n_idestudiante'=>'1',
-    'encabezado'=>'Que conforme a la Ley 1581 de 2012, de manera voluntaria, autorizo a la Universidad Pontificia Bolivariana a tratar mis datos personales. 
+    /*'encabezado'=>'Que conforme a la Ley 1581 de 2012, de manera voluntaria, autorizo a la Universidad Pontificia Bolivariana a tratar mis datos personales. 
                    Declaro que conozco mis derechos y deberes y las políticas de tratamiento de protección de datos de la Universidad, en mi calidad de  
                    <strong>$viculoconu</strong>,conforme  a la finalidad de promoción, prevención y gestión de riesgos de salud, establecida por la Resolución 666 del 24 de abril de 2020 denominada “Por el cual se adopta el protocolo general de bioseguridad para mitigar, controlar y realizar el adecuado manejo de la pandemia del coronavirus  COVID-19, 
                    numeral 4.1 inciso 4 y Resolución 1721 de 24 de septiembre de 2020 “ Por medio de la cual se adopta el protocolo de bioseguridad para el manejo y 
@@ -29,5 +29,14 @@ return [
                    para el trabajo y el desarrollo humano, en numeral 3.6.5 inciso 3.6.1.5.. Y conforme a los parámetros  establecidos por la Organización Mundial de la Salud – OMS, 
                    sobre el autocuidado que cada persona debe tener para generar los medios de protección que le permita salvaguardar su salud; 
                    por lo anterior, asumo el compromiso del reporte diario de mi estado de salud, bajo el principio de la buena fe, que lo reportado en la 
-                   presente encuesta corresponde a datos verídicos, asumiendo la responsabilidad por cualquier dato inexacto que pueda poner en riesgo  mi salud y la de los demás. '                   
+                   presente encuesta corresponde a datos verídicos, asumiendo la responsabilidad por cualquier dato inexacto que pueda poner en riesgo  mi salud y la de los demás. ',*/
+    'encabezado'=>'Que conforme a la Ley 1581 de 2012, en mi calidad de <strong>$viculoconu</strong> de manera voluntaria, autorizo a la Universidad Pontificia Bolivariana a 
+                   tratar mis datos personales. Declaro que conozco mis derechos y deberes y la política de Tratamiento de protección de datos personales de la Universidad, la cual se 
+                   encuentra en <a href="https://www.upb.edu.co/es/politica-de-privacidad-upb" target="_blank">https://www.upb.edu.co/es/politica-de-privacidad-upb.</a>
+                   Cuya finalidad es la de promoción, prevención y gestión de riesgo de salud, según los 
+                   parámetros establecidos por la Organización Mundial de la Salud - OMS sobre el autocuidado que cada persona debe tener para generar los medios de protección 
+                   que le permita salvaguardad su salud; por lo anterior, asumo el compromiso del Reporte diario de estado de salud, bajo el principio de la buena fe, 
+                   que lo reportado en la presente encuesta corresponde a datos verídicos asumiendo la responsabilidad por cualquier dato inexacto que pueda poner en riesgo 
+                   mi salud y la de los demás.'
 ];
+

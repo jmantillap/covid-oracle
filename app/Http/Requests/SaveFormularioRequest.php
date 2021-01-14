@@ -41,7 +41,7 @@ class SaveFormularioRequest extends FormRequest
             't_contactopersonasinfectadas' => 'required_if:t_personalsalud,==,NO',
             'd_ultimocontacto' => 'sometimes',
             't_realizoviaje'=>'required',
-            'd_ultimoviaje' => 'sometimes|date',
+            'd_ultimoviaje' => 'sometimes',
             't_activo' => 'required',
             't_perdolfa' => 'required',       
             't_molestia_diges'=> 'required',

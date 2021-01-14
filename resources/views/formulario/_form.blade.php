@@ -9,19 +9,8 @@
         <div class="card-header">
             <h3 class="card-title">Consentimiento: <strong>{{$usuarioesta->c_codtipo}}. {{$usuarioesta->t_documento}} - {{$usuarioesta->t_nombres}} {{$usuarioesta->t_apellidos}}</strong></h3>
         </div>
-        <div class="card-body">
-            {{-- Que conforme a la Ley 1581 de 2012, de manera voluntaria, autorizo a la Universidad Pontificia Bolivariana a 
-            tratar mis datos personales. Declaro que conozco mis derechos y deberes y las políticas de Tratamiento de 
-            protección de datos de la Universidad, en mi calidad de <strong>{{$viculoconu}}</strong> conforme a la finalidad 
-            de promoción, prevención y gestión de riesgo de salud, establecida por la Resolución 666 del 24 de abril de 2020 
-            denominada “Por el cual se adopta el protocolo general de bioseguridad para mitigar, controlar y realizar el adecuado 
-            manejo de la pandemia del Coronavirus COVID-19”, numeral 4.1 inciso 4, y conforme a los parámetros establecidos por 
-            la Organización Mundial de la Salud - OMS sobre el autocuidado que cada persona debe tener para generar los medios de 
-            protección que le permita salvaguardad su salud; por lo anterior, asumo el compromiso del Reporte diario de estado de 
-            salud, bajo el principio de la buena fe, que lo reportado en la presente encuesta corresponde a datos verídicos asumiendo 
-            la responsabilidad por cualquier dato inexacto que pueda poner en riesgo mi salud y la de los demás.
-            <br><br> --}}
-            {!! strip_tags(str_replace('$viculoconu',$viculoconu,Config::get('pregunta.encabezado')),'<strong>') !!}
+        <div class="card-body">           
+            {!! strip_tags(str_replace('$viculoconu',$viculoconu,Config::get('pregunta.encabezado')),'<strong><a>') !!}
             <br><br>
             <label>
                 Acepto

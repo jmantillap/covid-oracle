@@ -1,7 +1,11 @@
 <?php
 return [    
     'autorizacion' => 'AUTORIZACIÓN<br>
-    La Universidad Pontificia Bolivariana como responsable del tratamiento de los datos y en cumplimiento de lo establecido por las normas vigentes: Ley 1581 de 2012, y demás normas que la reglamentan o complementan, solicita su consentimiento libre e informado, para que se recolecte, use, almacene, circule, suprima y en general, realice el tratamiento de los datos personales (sensibles) que sean suministrados por usted en esta encuesta, cuya única finalidad será la de adoptar e implementar las medidas necesarias para prevenir, tratar o controlar la propagación del COVID-19 (coronavirus) y mitigar sus efectos; se garantiza el cumplimiento y adaptación de las medidas de seguridad, circulación restringida y confidencialidad de dicha información.
+     La Universidad Pontificia Bolivariana como responsable del tratamiento de los datos y en cumplimiento de lo establecido por las normas vigentes: Ley 1581 de 2012,
+     y demás normas que la reglamentan o complementan, solicita su consentimiento libre e informado, para que se recolecte, use, almacene, circule, suprima y en general, 
+     realice el tratamiento de los datos personales (sensibles) que sean suministrados por usted en esta encuesta,<u>cuya única finalidad es conocer el estado de salud actual 
+     de docentes y personal administrativo y adoptar e implementar las medidas necesarias para prevenir, tratar o controlar la propagación del COVID-19 (coronavirus) y 
+     mitigar sus efectos; se garantiza el cumplimiento y adaptación de las medidas de seguridad, circulación restringida y confidencialidad de dicha información.</u>
     <br><br>DERECHOS DEL TITULAR DE LOS DATOS<br><br>
     Declaro que la Universidad Pontificia Bolivariana me ha informado que en calidad de titular de los datos personales que serán objeto de tratamiento, podré ejercer en cualquier momento los siguientes derechos:<br>
     <ul>
@@ -35,12 +39,12 @@ return [
     'pulmonar_enfermedad'=>'1.7.1. ¿Qué enfermedad?:',
     'defensas_bajas'=>'1.8. ¿Toma medicamentos para enfermedades autoinmunes, trasplantes o medicamentos que su médico le haya dicho que le baja las defensas?:',
     'defensas_bajas_medicamentos'=>'1.8.1. ¿Qué medicamentos?:',
-    'inmunodeficiencia'=>'1.9. ¿Su médico le ha dicho que tiene alguna inmunodeficiencia adquirida?:',
+    'inmunodeficiencia'=>'1.9. ¿Su médico le ha dicho que tiene alguna inmunodeficiencia primarias o secundarias (Adquirida por medicamentos, cáncer, VIH(SIDA), etc) ?:',
     'cancer'=>'1.10. ¿Le han diagnosticado algún tipo de cáncer?:',
     'quimioterapia'=>'1.10.1. ¿Está en tratamiento con quimioterapia o radioterapia?:',    
     'convive'=>'1.11. ¿Convive en la misma casa con una persona que tenga: (puede seleccionar más de una opción si así corresponde)',    
     'convive_mayor_60'=>'Edad mayor de 60 años',    
-    'convive_bajas_defensas'=>'Síndrome de inmunodeficiencia adquirida, o alguna enfermedad autoinmune, trasplante o medicamentos que le bajen las defensas',    
+    'convive_bajas_defensas'=>' Síndrome de inmunodeficiencia adquirida, o alguna enfermedad autoinmune, trasplante o medicamentos que le bajen las defensas',    
     'convive_enfermedad_pulmonar'=>'Enfermedad pulmonar obstructiva crónica o alguna enfermedad pulmonar que requiera oxígeno en casa',    
     'convive_cancer'=>'Cáncer en tratamiento con quimioterapia o radioterapia',
     'convive_otra'=>'Otra, ¿cuál?:',
