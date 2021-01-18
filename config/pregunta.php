@@ -17,7 +17,7 @@ return [
     'personal_salud'=>'15. ¿Usted es personal activo en servicios de salud? ',    
     'contacto'=>'16. ¿Ha estado en contacto con personas que han tenido los síntomas anteriormente mencionados o ha estado relacionado con casos de personas infectadas de Coronavirus en los últimos 7- 14 días? ',
     'fecha_contacto'=>'17. ¿En qué fecha se presentó el último contacto con la persona infectada?',     
-    'viaje'=>'18. ¿Realizó un viaje nacional o internacional en los últimos 15 días? ',  
+    'viaje'=>'18. ¿Realizó un viaje internacional en los últimos 15 días? ',  
     'fecha_viaje'=>'19. ¿en qué fecha realizó su ultimo viaje? ',         
     'aislamiento_covid'=>'20. En caso de haber presentado infección COVID-19 ¿sigue usted en aislamiento? ',
     'n_idestudiante'=>'1',
