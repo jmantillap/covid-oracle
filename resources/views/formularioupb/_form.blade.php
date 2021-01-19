@@ -16,7 +16,7 @@
             </label>
             <br>
             <input   type="radio" name="t_consentimiento" value="SI"  {{(old('t_consentimiento') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
-            <input   type="radio" name="t_consentimiento" value="NO" {{(old('t_consentimiento') == 'NO') ? 'checked' : ''}}> NO<br>
+            <input   type="radio" name="t_consentimiento" value="NO" {{(old('t_consentimiento') == 'NO') ? 'checked' : ''}}> NO<br>            
         </div>
     </div>
 </div>
@@ -219,7 +219,8 @@
     </label>
     <div class="col-md-5">
         <input   type="radio" name="t_sigue_aislado" value="SI" {{(old('t_sigue_aislado') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
-        <input   type="radio" name="t_sigue_aislado" value="NO" {{(old('t_sigue_aislado') == 'NO') ? 'checked' : ''}}> NO<br>
+        <input   type="radio" name="t_sigue_aislado" value="NO" {{(old('t_sigue_aislado') == 'NO') ? 'checked' : ''}}> NO
+        <input   type="radio" name="t_sigue_aislado" value="NA" {{(old('t_sigue_aislado') == 'NA') ? 'checked' : ''}}> NO APLICA<br>
     </div>
 </div>
 
