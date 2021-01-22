@@ -73,8 +73,9 @@ class UsersupbController extends Controller
         $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>  $usuario->tipo_documento]))->first();
         
       }else{
-		  $usuario_tipo_documento = "CEDULA DE CIUDADANIA";
-	  }
+        //$usuario_tipo_documento = "CEDULA DE CIUDADANIA";
+          $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>'CC']))->first();
+	    }
       //$usuario->documento='PA702700464';
       //dd($usuario);
       $vinculou= Vinculou::all();
