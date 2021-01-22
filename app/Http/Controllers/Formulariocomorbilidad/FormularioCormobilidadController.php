@@ -43,7 +43,7 @@ class FormularioCormobilidadController extends Controller
             $vinculo="PROVEEDORES";
             $modalidad="trabajo";
         }else{
-            $vinculo=strtoupper($usuario->vinculou->t_vinculo).'S';
+            $vinculo=strtoupper($user->vinculou->t_vinculo).'S';
             $modalidad="trabajo";
         }
         $objetos=['usuario'=>$user,'formulario'=>$this->formulario,'vinculo'=>$vinculo,'modalidad'=>$modalidad]; 

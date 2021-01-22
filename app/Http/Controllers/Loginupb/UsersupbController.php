@@ -72,7 +72,9 @@ class UsersupbController extends Controller
         $elquery .=" WHERE gtvadid_code = :idTipo";
         $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>  $usuario->tipo_documento]))->first();
         
-      }
+      }else{
+		  $usuario_tipo_documento = "CEDULA DE CIUDADANIA";
+	  }
       //$usuario->documento='PA702700464';
       //dd($usuario);
       $vinculou= Vinculou::all();
