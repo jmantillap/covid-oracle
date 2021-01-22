@@ -62,22 +62,17 @@ class UsersupbController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-      
+    {      
+      $elquery=" SELECT DISTINCT ";
+      $elquery .=" gtvadid_Desc  descripcion_tipo_documento";
+      $elquery .=" FROM gtvadid";
+      $elquery .=" WHERE gtvadid_code = :idTipo";
       if(Session::has('vs_ussel')){
-        $usuario= Session::get('vs_ussel');
-        $elquery=" SELECT DISTINCT ";
-        $elquery .=" gtvadid_Desc  descripcion_tipo_documento";
-        $elquery .=" FROM gtvadid";
-        $elquery .=" WHERE gtvadid_code = :idTipo";
-        $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>  $usuario->tipo_documento]))->first();
-        
-      }else{
-        //$usuario_tipo_documento = "CEDULA DE CIUDADANIA";
+        $usuario= Session::get('vs_ussel');        
+        $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>  $usuario->tipo_documento]))->first();        
+      }else{        
           $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>'CC']))->first();
-	    }
-      //$usuario->documento='PA702700464';
-      //dd($usuario);
+	    }            
       $vinculou= Vinculou::all();
       $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();
       return view('usersupb.create',[
