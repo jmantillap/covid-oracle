@@ -61,6 +61,10 @@ Route::get('reporteador1', 'ReportesController@getReporte1Formularios')->name('r
 Route::get('reporteador2', 'ReportesController@getReporte2Formularios')->name('reporteador2');
 Route::get('reporteador3', 'ReportesController@getReporte3Formularios')->name('reporteador3');
 Route::get('reporteador4', 'ReportesController@getReporte4Formularios')->name('reporteador4');
+Route::get('estado/salud', 'Reportes\ReporteEstadoSaludController@index')->name('reportes.estado.salud')->middleware('auth');;
+Route::post('/estado/salud/generar/excel','Reportes\ReporteEstadoSaludController@generarExcelEstadoSalud')->name('reporte.estadosalud.generar.excel')->middleware('auth');
+
+
 
 Route::get('/salir/usuario/upb','Loginupb\LoginupbController@cerrarSessionUserUPB')->name('salir.usuario.upb');
 
@@ -81,5 +85,7 @@ Route::post('/encuesta/comorbilidad/','Formulariocomorbilidad\FormularioCormobil
 Route::get('encuesta/comorbilidad/inactivar', 'Formulariocomorbilidad\ComorbilidadInactivarController@index')->name('encuesta.comorbilidad.inactivar')->middleware('auth');
 Route::get('encuesta/comorbilidad/consultar', 'Formulariocomorbilidad\ComorbilidadInactivarController@consultar')->name('encuesta.comorbilidad.consultar.ajax')->middleware('auth');
 Route::post('encuesta/comorbilidad/inactivar/ajax','Formulariocomorbilidad\ComorbilidadInactivarController@envioInactivar')->name('encuesta.comorbilidad.inactivar.ajax')->middleware('auth');
+
+
 
 Auth::routes();

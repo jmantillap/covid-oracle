@@ -197,6 +197,7 @@
             <p>Reportes<i class="right fas fa-angle-left"></i></p>
           </a>
           <ul class="nav nav-treeview">
+            <li class="nav-item"><hr  style="height:2px;border-width:0;color:gray;background-color:white"  /></li>    
             <li class="nav-item">
               <a id="menuReporte1" href="{{ route('reportes.reporte1') }}" class="nav-link">
                 <i class="nav-icon fas fa-exclamation-triangle"></i><p>Críticos x Periodo</p>
@@ -217,6 +218,12 @@
                 <i class="nav-icon fas fa-bed"></i><p>Usuarios No Reportaron</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a  id="menuReporte5" href="{{ route('reportes.estado.salud') }}" class="nav-link">
+                <i class="nav-icon fas fa-heartbeat"></i><p>Estado de Salud</p>
+              </a>
+            </li>
+            <li class="nav-item"><hr  style="height:2px;border-width:0;color:gray;background-color:white"  /></li>    
           </ul>
         </li>
         <li class="nav-item"><a  id="menuInactivar" href="{{ route('formulario.inactivar') }}" class="nav-link"> 
