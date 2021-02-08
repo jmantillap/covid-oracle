@@ -73,8 +73,8 @@ Route::get('/acta/usuario/','Formularioacta\FormularioActaController@index')->na
 Route::post('/acta/usuario/','Formularioacta\FormularioActaController@envioGuardar')->name('acta.usuario.guardar');
 
 /*Funcionalidad de inactivar formularios de encuesta covid */
-Route::get('acta/covid19/inactivar', 'FormularioActa\ActaCovidInactivarController@index')->name('acta.covid19.inactivar')->middleware('auth');
-Route::get('acta/covid19/consultar', 'FormularioActa\ActaCovidInactivarController@consultar')->name('acta.covid19.consultar.ajax')->middleware('auth');
+Route::get('acta/covid19/inactivar', 'Formularioacta\ActaCovidInactivarController@index')->name('acta.covid19.inactivar')->middleware('auth');
+Route::get('acta/covid19/consultar', 'Formularioacta\ActaCovidInactivarController@consultar')->name('acta.covid19.consultar.ajax')->middleware('auth');
 Route::post('acta/covid19/inactivar/ajax','Formularioacta\ActaCovidInactivarController@envioInactivar')->name('acta.covid19.inactivar.ajax')->middleware('auth');
 
 /** Funcionalidad de encuesta cormobilidad */

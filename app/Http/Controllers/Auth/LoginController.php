@@ -13,6 +13,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Log;
 use Exception;
+use Session;
 
 /**
  * Javier Mantilla. javier.mantillap@upb.edu.co
@@ -52,7 +53,13 @@ class LoginController extends Controller
                 return $this->validarUsuario(); 
             }
         }else{
-            $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
+            //$data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
+            if(Config::get('ws.developer')==null || Config::get('ws.developer')==false ){
+                $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
+            }else{
+                $data=json_decode('{"ESTADO":"AUTORIZADO"}');
+                Session::flash('flash-error', '********WARNING: PILAS ESTA EN MODO DESARROLLO PARA EL WS, POR FAVOR COMUNICARSE CON CTIC**********' );
+            }
             if($data->ESTADO=="AUTORIZADO"){
                 Auth::login($administrador);    
                 return $this->validarUsuario(); 
