@@ -31,15 +31,15 @@ class WebServicesUpb {
     {
         $client = new Client(['base_uri' => Config::get('ws.endpoint')]);
         $parametros=[
-            'headers' => ['Username' => Config::get('ws.username'),'Password' => Config::get('ws.password'), 'Accept'     => 'application/json',],
-            'query' => ['id' => $idBanner,'password' => $password],
+            'headers' => ['Username' => Config::get('ws.username'),'Password' => Config::get('ws.password'), 'Accept'     => 'application/json','passwordldap' =>$password,],
+            'query' => ['id' => $idBanner],
             'verify' => false,
             'connect_timeout' => 10,
             'timeout' => 10,
         ];  //'connect_timeout' => Config::get('ws.connect_timeout'), //'timeout' => Config::get('ws.timeout'),
         try {
             //Log::channel('ws')->info('Inicio Prueba');            
-            $response = $client->request('GET', "/General/Autenticacion/?",$parametros);        
+            $response = $client->request('GET', "/General/Autenticacion2/?",$parametros);        
             $data = json_decode($response->getBody());
             unset($response, $client);    
         } catch(ClientException $e) {
