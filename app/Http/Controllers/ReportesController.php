@@ -25,7 +25,7 @@ class ReportesController extends Controller
 
     public function getReporte1Formularios()
     {
-      if(request('fecha_desde')==null || request('fecha_hasta')==null ){    return response()->json(array()); }   
+        if(request('fecha_desde')==null || request('fecha_hasta')==null ){    return Datatables::of(array())->make(true); }   
       $id_ciudad=auth()->user()->n_idciudad;
       $estudsi=auth()->user()->b_estudiantes;
       $todas=auth()->user()->b_todas;
@@ -93,7 +93,8 @@ public function reporte2(){
 
 public function getReporte2Formularios()
 {
-  if(request('fecha_desde')==null || request('fecha_hasta')==null ){    return response()->json(array()); }   
+  if(request('fecha_desde')==null || request('fecha_hasta')==null ){    return Datatables::of(array())->make(true); }   
+
   $id_ciudad=auth()->user()->n_idciudad;
   $estudsi=auth()->user()->b_estudiantes;
   $todas=auth()->user()->b_todas;
@@ -163,7 +164,7 @@ public function reporte3(){
 
 public function getReporte3Formularios()
 {
-  if(request('fecha_desde')==null || request('fecha_hasta')==null ){    return response()->json(array()); }   
+    if(request('fecha_desde')==null || request('fecha_hasta')==null ){    return Datatables::of(array())->make(true); }   
   $id_ciudad=auth()->user()->n_idciudad;
   $estudsi=auth()->user()->b_estudiantes;
   $todas=auth()->user()->b_todas;
