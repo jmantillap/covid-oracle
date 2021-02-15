@@ -36,7 +36,7 @@
                     <tr role="row">                        
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Activo</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;">Fecha y Hora de Presentación</th>
-                  
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Id_Sigaa: activate to sort column ascending" style="width: 176px;">Id Sigaa</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Usuario: activate to sort column ascending" style="width: 176px;">Usuario</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Resultado: activate to sort column ascending" style="width: 176px;">Resultado</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Aprobado Ingreso</th>
@@ -89,6 +89,7 @@
           "columns": [
             {data: 'activo' },
             {data: 'fechacreated' },
+            {data: 't_idsigaa' },
             {data: 'nombrec' },
             {data: 'semaforo' },            
             {data: 'ingreso' },
@@ -120,27 +121,27 @@
             {
                  extend: 'copy',
                  exportOptions: {
-                 columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23 ] //Your Colume value those you want
+                 columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23,24 ] //Your Colume value those you want
                      }
                    },
                   {
                  extend: 'print',
                  orientation: 'landscape',
                  exportOptions: {
-                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23 ] //Your Colume value those you want
+                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23,24 ] //Your Colume value those you want
                      }
                    },
                    {
                     extend: 'excel',
                     exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18,19,20,21,22,23 ] //Your Colume value those you want
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18,19,20,21,22,23,24 ] //Your Colume value those you want
                    }
                  },
                  {
                     extend: 'pdf',
                     orientation: 'landscape',
                     exportOptions: {
-                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18,19,20,21,22,23 ] //Your Colume value those you want
+                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18,19,20,21,22,23,24 ] //Your Colume value those you want
                    }
                  },
                ],

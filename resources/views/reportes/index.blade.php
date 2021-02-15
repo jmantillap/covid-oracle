@@ -30,12 +30,13 @@
       </form>
     </div>
     <!-- /.card-header -->
-    <div class="card-body">
+    <div class="card-body table-responsive">
             <table id="example1" class="table display responsive nowrap datatable" role="grid" aria-describedby="example1_info">
                     <thead>
                     <tr role="row">                        
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Activo</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;">Fecha y Hora de Presentación</th>                  
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Activo</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;">Fecha y Hora de Presentación</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="IdSigaa: activate to sort column ascending" style="width: 176px;">Id Sigaa</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Usuario: activate to sort column ascending" style="width: 176px;">Usuario</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Resultado: activate to sort column ascending" style="width: 176px;">Resultado</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Aprobado Ingreso</th>
@@ -54,11 +55,10 @@
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Tos Seca</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Contacto Personas Infectadas</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Fecha Último Contacto</th>
-                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Realizó Viaje</th>
-                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Perdida Gusto/Olfato</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Realizó Viaje</th>                       
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Perdida Gusto/Olfato</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Molestia Digestiva</th>
-                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Continua Aislamiento</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 150px;">Continua Aislamiento</th>
                     </tr>
                     </thead>
                     <tbody></tbody>
@@ -89,6 +89,7 @@
           "columns": [
             {data: 'activo' },
             {data: 'fechacreated' },
+            {data: 't_idsigaa' },
             {data: 'nombrec' },
             {data: 'semaforo' },
             {data: 'ingreso' },
@@ -111,7 +112,6 @@
             {data: 't_perdolfa' },
             {data: 't_molestia_diges' },
             {data: 't_sigue_aislado' },
-
             ],
           "language": { "url": "/plugins/datatables/locale/Spanish.json",},
           dom: 'lfBrtip',
@@ -120,27 +120,27 @@
             {
                  extend: 'copy',
                  exportOptions: {
-                 columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23 ] //Your Colume value those you want
+                 columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23,24 ] //Your Colume value those you want
                      }
                    },
                   {
                  extend: 'print',
                  orientation: 'landscape',
                  exportOptions: {
-                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23 ] //Your Colume value those you want
+                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23,24] //Your Colume value those you want
                      }
                    },
                    {
                     extend: 'excel',
                     exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23 ] //Your Colume value those you want
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23,24 ] //Your Colume value those you want
                    }
                  },
                  {
                     extend: 'pdf',
                     orientation: 'landscape',
                     exportOptions: {
-                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23 ] //Your Colume value those you want
+                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19,20,21,22,23,24] //Your Colume value those you want
                    }
                  },
                ],
@@ -148,13 +148,12 @@
           [10, 50, 100, 200, -1],
           [10, 50, 100, 200, "All"]
       ],
-      iDisplayLength: 10,
-          
+      iDisplayLength: 10,          
       } );
 
       $('#search-form').on('submit', function(e) {
             e.preventDefault();
-            console.log('Entro');
+            //console.log('Entro');
             otable.draw();   
                 
        });

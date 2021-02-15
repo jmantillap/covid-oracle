@@ -29,9 +29,9 @@
             <table id="example1" class="table display responsive nowrap datatable" role="grid" aria-describedby="example1_info">
                     <thead>
                     <tr role="row">                        
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Cod</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;"># Documento</th>
-                  
+                        {{-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;">Id Sigaa</th> --}}
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Cod</th>                        
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;"># Documento</th>                  
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Usuario: activate to sort column ascending" style="width: 176px;">Nombres</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Resultado: activate to sort column ascending" style="width: 176px;">Apellidos</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Teléfono</th>
@@ -69,8 +69,8 @@
                       d.fecha_desde = $('input[name=fecha_desde]').val();
                       }
               },
-          "columns": [
-            {data: 'c_codtipo' },
+          "columns": [            
+            {data: 'c_codtipo' },            
             {data: 't_documento' },
             {data: 't_nombres' },
             {data: 't_apellidos' },
@@ -82,8 +82,6 @@
             {data: 't_idsigaa' },
             {data: 't_jefeinmediatocontacto' },
             {data: 't_facultadareaempresa' },
-            
-
             ],
           "language": { "url": "/plugins/datatables/locale/Spanish.json",},
           dom: 'lfBrtip',
@@ -99,7 +97,7 @@
                  extend: 'print',
                  orientation: 'landscape',
                  exportOptions: {
-                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ] //Your Colume value those you want
+                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] //Your Colume value those you want
                      }
                    },
                    {
@@ -112,7 +110,7 @@
                     extend: 'pdf',
                     orientation: 'landscape',
                     exportOptions: {
-                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ] //Your Colume value those you want
+                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12 ] //Your Colume value those you want
                    }
                  },
                ],
