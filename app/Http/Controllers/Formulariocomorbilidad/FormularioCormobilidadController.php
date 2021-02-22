@@ -102,8 +102,8 @@ class FormularioCormobilidadController extends Controller
         if(request('t_consentimiento')=='NO'){
             $validator = Validator::make(request()->all(),$reglas,array());
         }elseif(request('t_consentimiento')=='SI'){
-            $reglas=['n_peso' => 'required|integer|min:30|max:150',
-                    'n_talla' => 'required|integer|min:50|max:230',
+            $reglas=['n_peso' => 'required|integer|min:5|max:150',
+                    'n_talla' => 'required|integer|min:10|max:230',
                     't_fuma' => 'required|string|in:SI,NO',
                     't_hipertension' => 'required|string|in:SI,NO',
                     't_diabetes' => 'required|string|in:SI,NO',
