@@ -72,6 +72,7 @@ class UsersupbController extends Controller
         $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>  $usuario->tipo_documento]))->first();        
       }else{        
           $usuario_tipo_documento = collect(DB::select($elquery ,['idTipo' =>'CC']))->first();
+          $usuario=new User();
 	    }            
       $vinculou= Vinculou::all();
       $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();

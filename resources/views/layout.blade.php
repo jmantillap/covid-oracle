@@ -237,7 +237,7 @@
           <i class="nav-icon fas fa-folder-minus"></i><p>Inactivar Estado de Salud</p></a>
       </li>   
         
-        @if (auth()->user()->n_id==1)
+        @if (auth()->user()->n_id==1 || auth()->user()->n_id==101 )
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
             <li class="nav-item"><a  id="menuPerfil" href="{{ route('administrador.perfil') }}" class="nav-link"> <i class="nav-icon fas fa-user-tie"></i><p>Cambio Contraseña</p></a></li>
             <li class="nav-item"><a  id="menuUsuario" href="{{ route('users.index') }}" class="nav-link"> <i class="nav-icon fas fa-user"></i><p>Usuarios</p></a></li>            

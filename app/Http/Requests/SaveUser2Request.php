@@ -36,7 +36,8 @@ class SaveUser2Request extends FormRequest
             't_jefeinmediatocontacto' => 'sometimes',
             't_facultadareaempresa' => 'sometimes',
             'n_idvinculou' => 'required',
-            't_activo' => 'required'
+            't_activo' => 'required',
+            't_sigaa' => 'sometimes'
         ];
     }
 

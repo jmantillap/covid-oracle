@@ -68,7 +68,10 @@
       <strong>Vínculo con la UPB</strong> - 
       {{$users->vinculou->t_vinculo}}
     </p>
-
+    <p>
+      <strong>Usuario SIGAA WS</strong> - 
+      {{$users->t_sigaa}}
+    </p>    
     <p>
       <strong>Activo</strong> - 
       {{$users->t_activo}}

@@ -246,7 +246,24 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            @auth
+                            <div class="form-group row" id="t_sigaa">
+                                <label for="t_sigaa"  class="col-md-5 col-form-label text-md-right">{{ __('Usuario SIGAA WS. *') }}</label>    
+                                <div class="col-md-6">
+                                    {{-- <input id="t_sigaa" type="text" class="form-control @error('t_sigaa') is-invalid @enderror" 
+                                        name="t_sigaa" value="{{ old('t_facultadareaempresa',$users->t_sigaa) }}"  > --}}
+                                    <select name="t_sigaa" class="form-control" id="t_sigaa">
+                                        <option value="SI" @if ('SI' == old('n_idvinculou',$users->t_sigaa)) selected="selected" @endif  >SI</option>
+                                        <option value="NO" @if ('NO' == old('n_idvinculou',$users->t_sigaa)) selected="selected" @endif  >NO</option>
+                                    </select>
+                                    @error('t_sigaa')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            @endauth
                             <br>
 
                             <div class="form-group row mb-0">

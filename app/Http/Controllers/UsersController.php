@@ -38,6 +38,7 @@ class UsersController extends Controller
     {
       
       
+      
       return view('users.index', 
         [
             'users'=> User::orderBy('t_apellidos','ASC')->paginate(10)
@@ -136,8 +137,7 @@ class UsersController extends Controller
      */
     public function update(User $users, SaveUser2Request $request)
       {
-
-       
+        //dd(request('t_sigaa'));
         $users->update($request->validated()); //solo envia los que esten validados por SaveSedeRequest
         unset($request);
         return redirect()->route('users.show',$users)->with('status','El Usuario fue actualizado con éxito');

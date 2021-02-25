@@ -30,9 +30,8 @@
                 {data: 't_documento' },
                 {data: 't_email' }, 
                 {data: 't_telefono' },                     
-                {data: 't_idsigaa' },
-                
-
+                {data: 't_idsigaa' },                
+                {data: 't_sigaa' },  
                  ],
             language: {
             "decimal": "",
@@ -61,25 +60,25 @@
               {
                    extend: 'copy',
                    exportOptions: {
-                   columns: [  1, 2, 3, 4, 5, 6 ] //Your Colume value those you want
+                   columns: [  1, 2, 3, 4, 5, 6,7 ] //Your Colume value those you want
                        }
                      },
                     {
                    extend: 'print',
                    exportOptions: {
-                   columns: [  1, 2, 3, 4, 5, 6 ] //Your Colume value those you want
+                   columns: [  1, 2, 3, 4, 5, 6,7 ] //Your Colume value those you want
                        }
                      },
                      {
                       extend: 'excel',
                       exportOptions: {
-                      columns: [  1, 2, 3, 4, 5, 6 ] //Your Colume value those you want
+                      columns: [  1, 2, 3, 4, 5, 6,7 ] //Your Colume value those you want
                      }
                    },
                    {
                       extend: 'pdf',
                       exportOptions: {
-                      columns: [  1, 2, 3, 4, 5, 6 ] //Your Colume value those you want
+                      columns: [  1, 2, 3, 4, 5, 6,7 ] //Your Colume value those you want
                      }
                    },
                  ],
@@ -111,15 +110,10 @@
                               <th class="sorting"    >E-mail</th>
                               <th class="sorting"    >Teléfono</th>
                               <th class="sorting"    >ID SIGAA</th>
-                              
-                              
-                              
+                              <th class="sorting"    >SIGAA WS</th>
                           </tr>
                     </thead>
-                   
-                
-                    
-                  </table>
+            </table>
                  
     </div>
     <!-- /.card-body -->
