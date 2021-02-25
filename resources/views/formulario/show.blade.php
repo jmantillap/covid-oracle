@@ -224,7 +224,7 @@ echo "<h1> El formulario fue desactivado por el Administrador del Aplicativo</h1
         </div>
       </div>      
     </div>  
-    @else
+    @elseif($formulario->usuario->t_sigaa!='NO')    
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title">Resultado Estado de Salud</h3>

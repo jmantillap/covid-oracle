@@ -207,7 +207,7 @@ if($formulario->n_semaforo=="3")
     @endif
 
 @endsection
-@section('comorbilidad')
+@section('comorbilidad')     
     @if ($comorbilidad!=null && $comorbilidad->n_idformulario_comorbilidad>=0)
     <div class="card card-primary">
       <div class="card-header">
@@ -222,7 +222,7 @@ if($formulario->n_semaforo=="3")
         </div>
       </div>      
     </div>  
-    @else
+    @elseif($formulario->usuario->t_sigaa!='NO')    
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title">Resultado Estado de Salud</h3>
