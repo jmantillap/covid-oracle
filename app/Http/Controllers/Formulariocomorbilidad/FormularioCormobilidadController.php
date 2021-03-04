@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Formulariocomorbilidad;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\FormularioServices;
+use App\Services\BannerServices;
 use App\User;
 use App\Entidades\FormularioComorbilidad;
 use DB;
@@ -64,17 +65,18 @@ class FormularioCormobilidadController extends Controller
         if ($validator->fails()) { return redirect('encuesta/comorbilidad')->withErrors($validator)->withInput(); }
         if(request('t_consentimiento')=='NO'){
             $this->formulario= new FormularioComorbilidad(["t_consentimiento" => "NO"]);            
-            $this->formulario->n_semaforo='3';
+            $this->formulario->n_semaforo=3;
         }else{            
             $this->formulario->t_convive_mayor=request('t_convive_mayor')!=null ? request('t_convive_mayor') : 'NO';
             $this->formulario->t_convive_bajas_defensas=request('t_convive_bajas_defensas')!=null ? request('t_convive_bajas_defensas') : 'NO';
             $this->formulario->t_convive_pulmonar=request('t_convive_pulmonar')!=null ? request('t_convive_pulmonar') : 'NO';
             $this->formulario->t_convive_cancer=request('t_convive_cancer')!=null ? request('t_convive_cancer') : 'NO';
             $this->formulario->t_convive_otras=request('t_convive_otras')!=null ? request('t_convive_otras') : 'NO';
-            $this->formulario->n_semaforo='1';
+            $this->formulario->n_semaforo=1;
         }
         $this->formulario->n_idusuario=Session::get('idUsuario');
         $this->formulario->t_activo='SI';
+        $this->getSemaforo();
         try {
             DB::beginTransaction();           
             $this->formulario->saveOrFail();            
@@ -87,6 +89,26 @@ class FormularioCormobilidadController extends Controller
         Session::flash('flash', 'ESTADO DE SALUD PARA PREVENCIÓN DE COVID-19 se almacenó correctamente.' );                
         return redirect()->route('home'); 
     }
+
+    private function getSemaforo()
+    {
+        if($this->formulario->n_semaforo==3) return;
+        $totalPuntos=0;        
+        if(BannerServices::getEdadUsuarioBanner(Session::get('idUsuario'))>=60) $totalPuntos++;
+        if($this->formulario->t_hipertension=='SI') $totalPuntos++;
+        if($this->formulario->t_diabetes=='SI') $totalPuntos++;
+        if($this->formulario->t_corazon=='SI') $totalPuntos++;
+        if($this->formulario->t_pulmonar=='SI') $totalPuntos++;
+        if($this->formulario->t_medicamento_defensas_bajas=='SI') $totalPuntos++;
+        if($this->formulario->t_inmunodeficiencia=='SI') $totalPuntos++;
+        if($this->formulario->t_cancer=='SI') $totalPuntos++;
+
+        if($totalPuntos==0) $this->formulario->n_semaforo=1;
+        if($totalPuntos==1) $this->formulario->n_semaforo=2;
+        if($totalPuntos>1) $this->formulario->n_semaforo=3;
+    }
+
+    
 
     private function cargarRequest()
     {

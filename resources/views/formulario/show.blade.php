@@ -217,9 +217,14 @@ echo "<h1> El formulario fue desactivado por el Administrador del Aplicativo</h1
         <div class="card-tools">          
         </div>
       </div>
-      <div class="card-body">
-        <div class="position-relative p-3 {{ $comorbilidad->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} bordes" >
-          <div class="ribbon-wrapper"><div class="ribbon {{ $comorbilidad->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} ">{{ $comorbilidad->n_idformulario_comorbilidad }}</div></div>
+      <div class="card-body">        
+        @php
+            $clase='bg-success';
+            if($comorbilidad->n_semaforo==2) $clase='bg-warning';
+            if($comorbilidad->n_semaforo==3) $clase='bg-danger';
+        @endphp
+        <div class="position-relative p-3 {{ $clase }} bordes" >
+          <div class="ribbon-wrapper"><div class="ribbon {{ $clase }} ">{{ $comorbilidad->n_idformulario_comorbilidad }}</div></div>
           <h5>Encuesta estado de salud. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>
         </div>
       </div>      

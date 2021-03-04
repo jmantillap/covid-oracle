@@ -50,6 +50,19 @@ class BannerServices {
         return $sql;
     }
 
+    public static function getEdadUsuarioBanner($idAplicativoCovid)
+    {
+        $sql="SELECT BANINST1.F_CALCULATE_AGE(NULL,SPBPERS_BIRTH_DATE,NULL) edad
+        FROM SPBPERS P INNER JOIN 
+            SPRIDEN S ON (P.SPBPERS_PIDM=S.SPRIDEN_PIDM) INNER JOIN
+            USERS U ON (S.SPRIDEN_ID=U.T_IDSIGAA) 
+        WHERE S.SPRIDEN_CHANGE_IND IS NULL AND S.spriden_entity_ind = 'P'  
+        /*AND P.SPBPERS_PIDM=:pidm AND P.SPBPERS_PIDM=:T_IDSIGAA   */ AND U.N_IDUSUARIO=:N_IDUSUARIO ";        
+        $registro = collect(DB::select($sql,['N_IDUSUARIO' => $idAplicativoCovid]))->first();        
+        if($registro==null) return 0;
+        return $registro->edad;
+    }
+
 }
  /*$sql="SELECT DISTINCT SPRIDEN_PIDM pidm, SPRIDEN_ID id,    SZRIDEN_ADID_CODE tipo_documento, SZRIDEN_DOC_ID documento,
             (SPRIDEN_FIRST_NAME || ' ' || SPRIDEN_MI || ' ' || SPRIDEN_LAST_NAME) nombre_completo,  
