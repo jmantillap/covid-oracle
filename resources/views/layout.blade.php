@@ -194,7 +194,7 @@
         <li id="menuReportes" class="nav-item has-treeview">
           <a href="#" class="nav-link" >
             <i class="nav-icon fas fa-file-invoice"></i>
-            <p>Reportes<i class="right fas fa-angle-left"></i></p>
+            <p>Reporte Encuesta Diaria<i class="right fas fa-angle-left"></i></p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item"><hr  style="height:2px;border-width:0;color:gray;background-color:white"  /></li>    
@@ -218,9 +218,29 @@
                 <i class="nav-icon fas fa-bed"></i><p>Usuarios No Reportaron</p>
               </a>
             </li>
+            {{-- <li class="nav-item">
+              <a  id="menuReporte5" href="{{ route('reportes.estado.salud') }}" class="nav-link">
+                <i class="nav-icon fas fa-heartbeat"></i><p>Estado de Salud</p>
+              </a>
+            </li> --}}
+            <li class="nav-item"><hr  style="height:2px;border-width:0;color:gray;background-color:white"  /></li>    
+          </ul>
+        </li>
+        <li id="menuReporteComorbilidad" class="nav-item has-treeview">
+          <a href="#" class="nav-link" >
+            <i class="nav-icon fas fa-file-invoice"></i>
+            <p>Reportes Estado Salud<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item"><hr  style="height:2px;border-width:0;color:gray;background-color:white"  /></li>                
             <li class="nav-item">
               <a  id="menuReporte5" href="{{ route('reportes.estado.salud') }}" class="nav-link">
                 <i class="nav-icon fas fa-heartbeat"></i><p>Estado de Salud</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a  id="menuReporte6" href="{{ route('reportes.estado.salud.datos') }}" class="nav-link">
+                <i class="nav-icon fas fa-heartbeat"></i><p>Estado Salud Datos</p>
               </a>
             </li>
             <li class="nav-item"><hr  style="height:2px;border-width:0;color:gray;background-color:white"  /></li>    

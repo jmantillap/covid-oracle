@@ -1,6 +1,6 @@
 <?php
 
-include ('web-admin.php');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,8 +61,11 @@ Route::get('reporteador1', 'ReportesController@getReporte1Formularios')->name('r
 Route::get('reporteador2', 'ReportesController@getReporte2Formularios')->name('reporteador2');
 Route::get('reporteador3', 'ReportesController@getReporte3Formularios')->name('reporteador3');
 Route::get('reporteador4', 'ReportesController@getReporte4Formularios')->name('reporteador4');
-Route::get('estado/salud', 'Reportes\ReporteEstadoSaludController@index')->name('reportes.estado.salud')->middleware('auth');;
+Route::get('estado/salud', 'Reportes\ReporteEstadoSaludController@index')->name('reportes.estado.salud')->middleware('auth');
 Route::post('/estado/salud/generar/excel','Reportes\ReporteEstadoSaludController@generarExcelEstadoSalud')->name('reporte.estadosalud.generar.excel')->middleware('auth');
+
+Route::get('estado/salud/datos', 'Reportes\ReporteEstadoSaludDatosController@index')->name('reportes.estado.salud.datos')->middleware('auth');
+Route::post('/estado/salud/datos/generar/excel','Reportes\ReporteEstadoSaludDatosController@generarExcelEstadoSaludDatos')->name('reporte.estadosalud.datos.generar.excel')->middleware('auth');
 
 
 
@@ -86,6 +89,6 @@ Route::get('encuesta/comorbilidad/inactivar', 'Formulariocomorbilidad\Comorbilid
 Route::get('encuesta/comorbilidad/consultar', 'Formulariocomorbilidad\ComorbilidadInactivarController@consultar')->name('encuesta.comorbilidad.consultar.ajax')->middleware('auth');
 Route::post('encuesta/comorbilidad/inactivar/ajax','Formulariocomorbilidad\ComorbilidadInactivarController@envioInactivar')->name('encuesta.comorbilidad.inactivar.ajax')->middleware('auth');
 
-
+include ('web-admin.php');
 
 Auth::routes();

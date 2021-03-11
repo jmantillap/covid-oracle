@@ -29,7 +29,6 @@
 <script src="/plugins/jAlert-master/dist/jAlert.min.js"></script>
 <script src="/plugins/jAlert-master/dist/jAlert-functions.min.js"></script>
 
-
 <div class="col-md-4">
   <form method="post" id="search-form" name="search-form" data-toggle="validator" class="formulario" role="form">
     {{ csrf_field() }}
@@ -94,7 +93,7 @@
       today = yyyy+'-'+mm+'-'+dd;
       $("#fecha_desde").val(today);
       $("#fecha_hasta").val(today);   
-      $("#menuReportes" ).addClass("menu-open" );
+      $("#menuReporteComorbilidad" ).addClass("menu-open" );
       $("#menuReporte5" ).addClass("active" );   
       $('#fecha_desde').datepicker({ autoclose: true,format:'yyyy-mm-dd',defaultViewDate:'today',todayHighlight:true,todayBtn:true
                 ,enableOnReadonly:true,language:'es'

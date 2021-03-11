@@ -48,14 +48,14 @@ class LoginController extends Controller
             return back()->withErrors(['usuario'=>trans('auth.failed')])->withInput(request(['usuario']));
         }        
         if($administrador->b_ldap=='0'){
-            $credentials = [$this->username() => request('usuario'),'password' => request('password'),];
+            $credentials = [$this->username() => request('usuario'),'password' => utf8_encode(request('password')),];
             if (Auth::attempt($credentials)) {
                 return $this->validarUsuario(); 
             }
         }else{
             //$data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
             if(Config::get('ws.developer')==null || Config::get('ws.developer')==false ){
-                $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
+                $data=WebServicesUpb::getAutenticacion(request('usuario'),utf8_encode(request('password')));
             }else{
                 $data=json_decode('{"ESTADO":"AUTORIZADO"}');
                 Session::flash('flash-error', '********WARNING: PILAS ESTA EN MODO DESARROLLO PARA EL WS, POR FAVOR COMUNICARSE CON CTIC**********' );

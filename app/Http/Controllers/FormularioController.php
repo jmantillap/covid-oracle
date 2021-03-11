@@ -194,6 +194,8 @@ class FormularioController extends Controller
         $comorbilidad=null;
         if($user->n_idvinculou==1 || $user->n_idvinculou==2 || $user->n_idvinculou==3 || $user->n_idvinculou==4){
             $comorbilidad=FormularioServices::getEncuestaComorbilidadUsuario($formulario->n_idusuario);
+        }elseif($user->t_sigaa=='SI'){
+            $comorbilidad=FormularioServices::getEncuestaComorbilidadUsuario($formulario->n_idusuario);
         }
         return view('formulario.show', ['formulario' => $formulario,'acta' => $acta,'comorbilidad' => $comorbilidad]);
     }

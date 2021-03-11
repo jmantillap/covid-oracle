@@ -61,7 +61,7 @@ class LoginupbController extends Controller
 
         $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);        
         if(Config::get('ws.developer')==null || Config::get('ws.developer')==false ){
-            $data=WebServicesUpb::getAutenticacion(request('usuario'),request('password'));
+            $data=WebServicesUpb::getAutenticacion(request('usuario'),utf8_decode(request('password')));
         }else{
             $data=json_decode('{"ESTADO":"AUTORIZADO"}');
             Session::flash('flash-error', '********WARNING: PILAS ESTA EN MODO DESARROLLO PARA EL WS, POR FAVOR COMUNICARSE CON CTIC**********' );

@@ -27,8 +27,8 @@ class ListarAdministradorController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function index(){
-        if(Auth::id()!=1){
-            redirect()->route('/');
+        if(Auth::id()!=1 || Auth::id()!=101){
+            redirect()->route('home');
         }
         Session::forget('idAdministradorModificar');
         $administradores=Administrador::all();
