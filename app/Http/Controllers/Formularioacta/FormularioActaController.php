@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\formularioacta;
+namespace App\Http\Controllers\Formularioacta;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
