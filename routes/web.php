@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +14,6 @@
 
 Route::get('/','HomeController@index')->name('home');
 
-
 Route::get('formulario/inactivar', 'FormularioController@inactivar')->name('formulario.inactivar')->middleware('auth');
 Route::get('formulario/{id}/updateinac', 'FormularioController@updateinac')->name('formulario.updateinac')->middleware('auth');
 Route::get('home/externos', 'Externos\ExternosController@homeext')->name('homeext');
@@ -29,7 +27,6 @@ Route::resource('usuarios', 'UsuariosController')->names('usuarios')->parameters
 Route::get('usuarios/editar/{usuarios}', 'UsuariosController@editar')->name('usuarios.editar');
 Route::resource('sedes', 'SedesController')->names('sedes')->parameters(['sedes'  =>  'sedes'])->middleware('auth');;//->middleware('role:1|2');
 
-
 Route::post('revisar', 'RevisarController@verificar')->name('revisar');
 Route::get('revisar', 'RevisarController@getRevisar')->name('revisar');
 
@@ -39,7 +36,6 @@ Route::get('reportes/reporte3', 'ReportesController@reporte3')->name('reportes.r
 Route::get('reportes/reporte4', 'ReportesController@reporte4')->name('reportes.reporte4')->middleware('auth');
 
 /* para despues del cambio Oracle */
-
 Route::get('/loginupb','Loginupb\LoginupbController@showLoginForm')->name('loginupb');
 Route::post('/autenticarupb','Loginupb\LoginupbController@validarLogin')->name('loginupb.validar');
 Route::get('/autenticarupb','Loginupb\LoginupbController@showLoginForm')->name('loginupb.mostrar');
@@ -48,7 +44,6 @@ Route::get('formularioupbshow2/{id}', 'Loginupb\FormularioupbController@show2')-
 Route::get('home/consulta', 'Consulta\ConsultaController@homeconsulta')->name('consulta');
 Route::post('consultar', 'Consulta\ConsultaController@consultar')->name('consultar');
 Route::get('consultar', 'Consulta\ConsultaController@consultar')->name('consultar');
-
 
 Route::get('formulario/create/{n_idciudad}', 'FormularioController@listarSedesAjax')->name('sedes.listar');
 Route::get('formularioupb/create/{n_idciudad}', 'Loginupb\FormularioupbController@listarSedesAjax')->name('sedes.listar.userupb');
@@ -66,8 +61,6 @@ Route::post('/estado/salud/generar/excel','Reportes\ReporteEstadoSaludController
 
 Route::get('estado/salud/datos', 'Reportes\ReporteEstadoSaludDatosController@index')->name('reportes.estado.salud.datos')->middleware('auth');
 Route::post('/estado/salud/datos/generar/excel','Reportes\ReporteEstadoSaludDatosController@generarExcelEstadoSaludDatos')->name('reporte.estadosalud.datos.generar.excel')->middleware('auth');
-
-
 
 Route::get('/salir/usuario/upb','Loginupb\LoginupbController@cerrarSessionUserUPB')->name('salir.usuario.upb');
 
@@ -88,6 +81,10 @@ Route::post('/encuesta/comorbilidad/','Formulariocomorbilidad\FormularioCormobil
 Route::get('encuesta/comorbilidad/inactivar', 'Formulariocomorbilidad\ComorbilidadInactivarController@index')->name('encuesta.comorbilidad.inactivar')->middleware('auth');
 Route::get('encuesta/comorbilidad/consultar', 'Formulariocomorbilidad\ComorbilidadInactivarController@consultar')->name('encuesta.comorbilidad.consultar.ajax')->middleware('auth');
 Route::post('encuesta/comorbilidad/inactivar/ajax','Formulariocomorbilidad\ComorbilidadInactivarController@envioInactivar')->name('encuesta.comorbilidad.inactivar.ajax')->middleware('auth');
+
+Route::get('encuesta/comorbilidad/actualizar', 'Formulariocomorbilidad\ComorbilidadActualizarController@index')->name('encuesta.comorbilidad.actualizar')->middleware('auth');
+Route::get('encuesta/comorbilidad/actualizar/consultar', 'Formulariocomorbilidad\ComorbilidadActualizarController@consultar')->name('encuesta.comorbilidad.actualizar.consultar.ajax')->middleware('auth');
+Route::post('encuesta/comorbilidad/actualizar/ajax','Formulariocomorbilidad\ComorbilidadActualizarController@envioActualizar')->name('encuesta.comorbilidad.actualizar.ajax')->middleware('auth');
 
 include ('web-admin.php');
 

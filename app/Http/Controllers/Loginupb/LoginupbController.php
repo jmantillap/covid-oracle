@@ -105,11 +105,13 @@ class LoginupbController extends Controller
 
     public function cerrarSessionUserUPB()
      {
-             Auth::logout();
+             Auth::logout();             
              Session::forget('vs_ussel'); 
              Session::forget('userUPB');
              Session::forget('idUsuario');
-             Session::forget('documentoCreate');                
+             Session::forget('documentoCreate');
+             request()->session()->invalidate();
+             request()->session()->regenerateToken();
              return redirect()->route('home');
     }
 

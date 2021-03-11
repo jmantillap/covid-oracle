@@ -255,7 +255,11 @@
         <li class="nav-item">
           <a  id="menuInactivarComorbilidad" href="{{ route('encuesta.comorbilidad.inactivar') }}" class="nav-link"> 
           <i class="nav-icon fas fa-folder-minus"></i><p>Inactivar Estado de Salud</p></a>
-      </li>   
+        </li>   
+        <li class="nav-item">
+          <a  id="menuActualizarComorbilidad" href="{{ route('encuesta.comorbilidad.actualizar') }}" class="nav-link"> 
+          <i class="nav-icon fas fa-save"></i><p>Actualizar Estado de Salud</p></a>
+        </li>   
         
         @if (auth()->user()->n_id==1 || auth()->user()->n_id==101 )
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
