@@ -30,22 +30,23 @@ class ComorbilidadActualizarController extends Controller
                 ,u.T_DOCUMENTO documento,u.T_IDSIGAA pidm        ,decode(u.T_SIGAA,'SI','UPB','EXTERNO') tipo        ,fc.T_CONSENTIMIENTO consentimiento 
                 ,TO_CHAR(fc.CREATED_AT,'DD/MM/YYYY') fecha 
                 ,DECODE(fc.N_SEMAFORO,1,'VERDE',2,'AMARILLO','ROJO') SEMAFORO
+                ,fc.N_SEMAFORO n_semaforo
                 FROM formulario_comorbilidad fc INNER JOIN users u ON (fc.N_IDUSUARIO= u.N_IDUSUARIO)
-                WHERE fc.T_ACTIVO='SI' AND fc.T_CONSENTIMIENTO='SI' AND fc.N_SEMAFORO > 1
+                WHERE fc.T_ACTIVO='SI' 
+                /*    AND fc.T_CONSENTIMIENTO=SI AND fc.N_SEMAFORO > 1*/
                 AND (u.T_IDSIGAA= ? OR u.T_DOCUMENTO= ?) ";
         
         $query = DB::select($sql,[request('parametro'),request('parametro')]);
         return Datatables::of($query)
                 ->addColumn('accion', function ($registro) {
-                return '<button type="button" class="btn btn-warning btn-actualizar"
-                            data-id="'.$registro->id.'"              
-                            data-nombre="'.$registro->nombre.'"
-                            data-fecha="'.$registro->fecha.'"
-                            data-documento="'.$registro->documento.'"
-                            data-pidm="'.$registro->pidm.'"
-                             >
-                            <span class="fas fa-minus-circle" alt="Actualizar"></span>
-                        </button>';
+                        if($registro->consentimiento!='NO' && $registro->n_semaforo > 1 ){
+                            return '<button type="button" class="btn btn-warning btn-actualizar"
+                                    data-id="'.$registro->id.'"  data-nombre="'.$registro->nombre.'" data-fecha="'.$registro->fecha.'"
+                                    data-documento="'.$registro->documento.'" data-pidm="'.$registro->pidm.'" >
+                                    <span class="fas fa-minus-circle" alt="Actualizar"></span></button>';
+                        }else{
+                            return ' ';
+                        }
            })->rawColumns(['accion'])->setRowId('id')->make(true);
 
     }
