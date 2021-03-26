@@ -30,6 +30,7 @@ class ActaCovidInactivarController extends Controller
         ,u.T_DOCUMENTO documento,u.T_IDSIGAA pidm        ,decode(u.T_SIGAA,'SI','UPB','EXTERNO') tipo        ,fa.T_CONSENTIMIENTO consentimiento
         /*,TRUNC(fa.CREATED_AT) fecha*/
         ,TO_CHAR(fa.CREATED_AT,'DD/MM/YYYY') fecha 
+        ,DECODE(fa.N_SEMAFORO,1,'VERDE',2,'AMARILLO','ROJO') semaforo
         FROM formulario_acta fa INNER JOIN users u ON (fa.N_IDUSUARIO= u.N_IDUSUARIO)
         WHERE fa.T_ACTIVO='SI' /* AND  fa.T_CONSENTIMIENTO=NO */     AND (T_IDSIGAA= ? OR T_DOCUMENTO= ?) ";
         

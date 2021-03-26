@@ -21,4 +21,9 @@ class FormularioActa extends Model
 		return $this->belongsTo('App\Entidades\Administrador','n_iddesactiva','n_id');
     }
 
+    public function usuario() //trae los datos de usuario
+	{
+		 return $this->belongsTo('App\User','n_idusuario');
+    }
+
 }

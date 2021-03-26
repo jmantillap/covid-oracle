@@ -6,7 +6,7 @@
 @section('content')
 @csrf    
 <div class="row">
-    <div class="col-4"><label id="ld_ultimocontacto">Búsqueda documento del Usuario o pidm </label></div>    
+    <div class="col-4"><label id="ld_ultimocontacto">Búsqueda documento del Usuario o pidm (Con Ceros) </label></div>    
 </div>
 <div class="row">
     <div class="col-4">
@@ -19,7 +19,7 @@
 {{-- <div class="col-4"> <label id="ld_ultimocontacto">Búsqueda documento del Usuario o pidm </label><input required size=40 class="form-control col-md-50" id="documento" name="documento"></div>
 <div class="col-sm"><button id="btnConsultar" name="btnConsultar" class="btn btn-info" type="button">Consultar</button></div> --}}
 <br/>
-{{-- <div class="card-body"> --}}
+
 <div class="row">    
     <div class="table-responsive">
         <table id="tblActaCovidInhabilitar" class="table table-bordered table-striped tbl">
@@ -32,7 +32,6 @@
         </table>
     </div>    
 </div>
-{{-- </div> --}}
 @endsection
 @include('partials.validation-errors')
 @include('partials.session-status')

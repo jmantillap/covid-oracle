@@ -34,7 +34,7 @@ class ComorbilidadActualizarController extends Controller
                 FROM formulario_comorbilidad fc INNER JOIN users u ON (fc.N_IDUSUARIO= u.N_IDUSUARIO)
                 WHERE fc.T_ACTIVO='SI' 
                 /*    AND fc.T_CONSENTIMIENTO=SI AND fc.N_SEMAFORO > 1*/
-                AND (u.T_IDSIGAA= ? OR u.T_DOCUMENTO= ?) ";
+                AND (u.T_IDSIGAA= ? OR u.T_DOCUMENTO= ? ) ";
         
         $query = DB::select($sql,[request('parametro'),request('parametro')]);
         return Datatables::of($query)
@@ -71,6 +71,27 @@ class ComorbilidadActualizarController extends Controller
        $response = array('status' => '1','msg' =>'Se Actualizo semaforo VERDE en la encuesta de Estado de Salud');
        return response()->json($response);
     }
+
+
+    public function consultarEncuestaDiaria()
+    {
+        if(request('parametro')==null){ return Datatables::of(array())->make(true);}
+        $fechahoy = date('d/m/Y');
+        $sql = "SELECT f.N_IDFORMULARIO id ,f.N_IDUSUARIO id_usuario,u.T_NOMBRES || ' ' ||u.T_APELLIDOS nombre
+                ,u.T_DOCUMENTO documento,u.T_IDSIGAA pidm,decode(u.T_SIGAA,'SI','UPB','EXTERNO') tipo ,f.T_CONSENTIMIENTO consentimiento 
+                ,TO_CHAR(f.CREATED_AT,'DD/MM/YYYY') fecha 
+                ,DECODE(f.N_SEMAFORO,1,'VERDE',2,'AMARILLO','ROJO') SEMAFORO
+                ,f.N_SEMAFORO n_semaforo 
+                from formulario f  INNER JOIN users u ON (f.N_IDUSUARIO= u.N_IDUSUARIO)
+                WHERE f.T_ACTIVO='SI'                 
+                and trunc(f.created_at) = to_date(?,'dd/mm/yyyy')                 
+                AND (u.T_IDSIGAA= ? OR u.T_DOCUMENTO= ? ) ";
+
+        $query = DB::select($sql,[$fechahoy,request('parametro'),request('parametro')]);
+        return Datatables::of($query)->setRowId('id')->make(true);
+
+    }
+
     
 
 

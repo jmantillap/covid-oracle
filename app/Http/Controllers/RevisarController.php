@@ -20,9 +20,8 @@ class RevisarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function verificar()
-    {
-        //$sedes = Sedes::all();
-        $key = Input::post('t_documento');//$docentesall = Formulario::all();
+    {        
+        $key = Input::post('t_documento');
         $usuarioesta = User::where('t_documento', '=', $key)->first();
         $usuariohoy = "";         $nombrecompleto = "";        $idusuario = "";        $viculoconu = "";        $errorenform = "";        
         $contestohoy = "NO";        $puedeingresar = "SI";        $idsigaa="NO";
@@ -42,12 +41,13 @@ class RevisarController extends Controller
                 return redirect()->route('formulario.show', ['id' => $hoyformulario])->with('status', 'Resultado Previamente Guardado');
             } else {                
                 Session::forget('userUPB');
-                if ($idsigaa=="SI"){                    
+                if ($idsigaa=="SI"){ 
+                  Session::forget('idUsuario');                                         
                   return redirect()->route('loginupb')->with('status', 'Ud. es Usuario UPB, Por favor autentíquese');
                 }else{
                   return redirect()->route('formulario.create');
                 }
-            }            //dd($usuarioesta);
+            }            
         } else {
             $usuarioBanner=BannerServices::getUsuarioBannerNroDocumento($key);           
             if($usuarioBanner!=null){                
@@ -55,6 +55,7 @@ class RevisarController extends Controller
                 if($data->CN==$usuarioBanner->id){
                     if($data->lastlogon<>0){
                         Session::forget('userUPB');
+                        Session::forget('idUsuario');
                         return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
                     }
                 }            
@@ -65,18 +66,18 @@ class RevisarController extends Controller
                     if($data->CN==$usuarioBanner->id){
                         if($data->lastlogon<>0){
                             Session::forget('userUPB');
+                            Session::forget('idUsuario');
                             return redirect()->route('loginupb')->withErrors(array('usuario' =>'Ud. es Usuario UPB, Por favor autentíquese' ));
                         }
                     }
                  }
             }
             $errorenform = "Usuario No Existe";
-        }
-        //var_dump($docentesall);
+        }        
         Session::put('documentoCreate', $key);
         return view('revisar.verificar', ['nombrecompleto' => $nombrecompleto,'idusuario' => $idusuario,            /*'docentesall' => $docentesall,*/
             'errorenform' => $errorenform,'contestohoy' => $contestohoy, 'viculoconu' => $viculoconu,
-            'usuarioesta' => $usuarioesta,            /*'sedes' => $sedes,*/
+            'usuarioesta' => $usuarioesta,           
             't_documento' => $key,])->with('status', 'El Docente Nuevo fue creado con éxito');
     }
 

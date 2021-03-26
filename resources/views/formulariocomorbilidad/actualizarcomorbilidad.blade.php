@@ -6,7 +6,7 @@
 @section('content')
 @csrf    
 <div class="row">
-    <div class="col-4"><label id="ld_ultimocontacto">Búsqueda documento del Usuario o pidm </label></div>    
+    <div class="col-4"><label id="ld_ultimocontacto">Búsqueda documento del Usuario o pidm (Con ceros)</label></div>    
 </div>
 <div class="row">
     <div class="col-4">
@@ -19,7 +19,6 @@
 {{-- <div class="col-4"> <label id="ld_ultimocontacto">Búsqueda documento del Usuario o pidm </label><input required size=40 class="form-control col-md-50" id="documento" name="documento"></div>
 <div class="col-sm"><button id="btnConsultar" name="btnConsultar" class="btn btn-info" type="button">Consultar</button></div> --}}
 <br/>
-{{-- <div class="card-body"> --}}
 <div class="row">    
     <div class="table-responsive">
         <table id="tblComorbilidadActualizar" class="table table-bordered table-striped tbl">
@@ -32,7 +31,45 @@
         </table>
     </div>    
 </div>
-{{-- </div> --}}
+<br/>
+<div class="row"> 
+    <div class="table-responsive" >
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-archive"></i>Información Acta</h3>
+            </div>   
+            <div class="card-body">
+                <table id="tblActa" class="table table-bordered table-striped tbl">
+                    <thead><tr><th>Formulario</th><th>Nombre</th><th>Documento</th><th>Pidm</th>
+                        <th>Consentimiento</th><th>Fecha</th><th>Semaforo</th></thead>
+                    <tbody></tbody>
+                    <tfoot>                
+                    </tfoot>
+                </table>    
+            </div>             
+        </div>
+    </div>
+</div>
+<div class="row"> 
+    <div class="table-responsive" >
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-archive"></i>Encuesta Diaria {{ date('d/m/Y') }}</h3>
+            </div>   
+            <div class="card-body">
+                <table id="tblDiariaHoy" class="table table-bordered table-striped tbl">
+                    <thead><tr><th>Formulario</th><th>Nombre</th><th>Documento</th><th>Pidm</th><th>Tipo</th>
+                        <th>Consentimiento</th><th>Fecha</th><th>Semaforo</th></thead>
+                    <tbody></tbody>
+                    <tfoot>                
+                    </tfoot>
+                </table>    
+            </div>             
+        </div>
+    </div>
+</div>
+
+
 @endsection
 @include('partials.validation-errors')
 @include('partials.session-status')
@@ -62,9 +99,44 @@
                       ],            
         });
 
+        var oActas = $("#tblActa" ).DataTable({
+            'ordering': false, "processing": true, "serverSide": true, "info": false, "searching": false, 'paging' : false,
+            "language": {"url": "/plugins/datatables/locale/Spanish.json",},
+            "ajax": { url: '{{ route('acta.covid19.consultar.ajax') }}'
+                      , data: function (d) {d.parametro = $("#parametro").val(); }                      
+                    },
+            "columns":[{data:'id',className: "text-center","width": "5%"}                       
+                       ,{data:'nombre',"width": "30%"}
+                       ,{data:'documento',"width": "10%"}
+                       ,{data:'pidm',"width": "10%"}                       
+                       ,{data:'consentimiento',"width": "10%"}
+                       ,{data:'fecha'}
+                       ,{data:'semaforo'}                       
+                      ],            
+        });
+
+        var oDiaria = $("#tblDiariaHoy" ).DataTable({
+            'paging' : false,    'ordering': false,     "searching": false,   "processing": true, "serverSide": true, "pageLength": 50,"info": false,
+            "language": {"url": "/plugins/datatables/locale/Spanish.json",},
+            "ajax": { url: '{{ route('encuesta.comorbilidad.consultar.diaria.ajax') }}'
+                      , data: function (d) {d.parametro = $("#parametro").val(); }                      
+                    },
+            "columns":[{data:'id',className: "text-center","width": "5%"}                       
+                       ,{data:'nombre',"width": "30%"}
+                       ,{data:'documento',"width": "10%"}
+                       ,{data:'pidm',"width": "10%"}
+                       ,{data:'tipo',"width": "10%"}
+                       ,{data:'consentimiento',"width": "10%"}
+                       ,{data:'fecha'}
+                       ,{data:'semaforo'}                       
+                      ],            
+        });
+
         $("#btnConsultar").on("click", function () {                                    
             if($('#parametro').val()==""){ warningAlert('Parametro','Debe digitar el documento de usuario o Pidm'); return; }
-            oEncuestas.draw();            
+            oEncuestas.draw(); 
+            oActas.draw(); 
+            oDiaria.draw(); 
         });
 
         oEncuestas.on('click','button.btn-actualizar', function () {

@@ -35,8 +35,7 @@ class FormularioServices {
     public static function getFormularioEncuestaHoy()
     {
         $fechahoy= date('Y-m-d 00:00:00');                    
-        $formhoy=Formulario::where([['n_idusuario', '=', Session::get('idUsuario')],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
-        //dd(Session::get('idUsuario'));
+        $formhoy=Formulario::where([['n_idusuario', '=', Session::get('idUsuario')],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();        
         return $formhoy;
     }
 
@@ -62,6 +61,23 @@ class FormularioServices {
         $formulario=FormularioComorbilidad::where('n_idusuario', '=',$idUsuario)->where('t_activo', '=', 'SI')->first();        
         return $formulario;
     }
+
+    public static function getEncuestasLlenas($idUsuario)
+    {
+        $sql="SELECT /*n_idformulario id ,*/n_semaforo semaforo,'D' as encuesta FROM formulario WHERE n_idusuario=? and t_activo='SI' and trunc(created_at)=trunc(sysdate)
+              UNION 
+              SELECT /*n_idformulario_acta id,*/ n_semaforo semaforo,'A' as encuesta FROM formulario_acta WHERE n_idusuario=? and t_activo='SI' and rownum=1
+              UNION
+              SELECT /*n_idformulario_comorbilidad id,*/ n_semaforo semaforo,'C' as encuesta FROM  formulario_comorbilidad WHERE n_idusuario=? and t_activo='SI' ";
+
+        $registros = collect(DB::select($sql,[$idUsuario,$idUsuario,$idUsuario]));
+        return $registros;
+
+    }
+
+    
+
+
     
 
 }

@@ -139,6 +139,10 @@ class ReporteEstadoSaludDatosController extends Controller
             $sql.=" AND s.n_idciudad=".$idCiudad; 
         }
         if(request('n_idvinculou')!=null){ $sql.=" AND u.n_idvinculou=".request('n_idvinculou');  }
+        //dd(request('documento'));
+        if(request('documento')!=null){
+            $sql.=" AND u.t_documento like '%".request('documento')."%'"; 
+        }
         if(auth()->user()->b_estudiantes==1){ $sql.=" AND u.n_idvinculou=".Config::get('pregunta.n_idestudiante'); }    
         
         $registros = DB::select($sql);    

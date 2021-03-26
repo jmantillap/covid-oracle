@@ -18,4 +18,9 @@ class FormularioComorbilidad extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
+    public function usuario() //trae los datos de usuario
+	{
+		 return $this->belongsTo('App\User','n_idusuario');
+    }
+
 }

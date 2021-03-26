@@ -144,36 +144,55 @@
               <li class="nav-header">
                 <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
               </li> 
-          @endif 
+          @endif
+
           <li class="nav-header"></li> 
-          <li class="nav-item"><a href="{{ route('salir.usuario.upb') }}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt"></i><p>Salir Usuario Visitante</p></a></li>          
-          @if (($form=App\Services\FormularioServices::getActaCovid())!=null)              
-              <li class="nav-header">
-              <div class="position-relative p-3 {{ $form->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} bordes" >
-                <div class="ribbon-wrapper"><div class="ribbon {{ $form->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} ">{{ $form->n_idformulario_acta }}</div></div>
-                <h5>Acta COVID-19</h5>
-              </div>
-              </li>
-          @else
-              <li class="nav-header">ALERTAS</li> 
-              <li class="nav-header">
-                <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
-              </li> 
-          @endif            
+          <li class="nav-item"><a href="{{ route('salir.usuario.visitante') }}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt"></i><p>Salir Usuario Visitante</p></a></li>                    
         </ul>  
-      </nav>            
-    @else    
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                    
-        @if (Session::has('idUsuario') && App\Services\FormularioServices::getActaCovid()==null )
-              <li class="nav-header">ALERTAS 1</li> 
-              <li class="nav-header">
-                <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
-              </li> 
-        @endif  
-        </ul>  
-      </nav>          
+      </nav>                
     @endif
+    @if (((Session::has('idUsuario') && ($usuario=\App\User::find(Session::get('idUsuario')))!=null) ||
+          (Session::has('userUPB') && ($usuario=\App\User::find(Session::get('userUPB')->n_idusuario))!=null)) 
+          || (Route::currentRouteName()=='formulario.show' && $formulario!=null  && $formulario->usuario!=null)
+          ) {{-- && $usuario->t_sigaa=='SI' --}}          
+        @php
+          if(Route::currentRouteName()=='formulario.show' && $formulario!=null  && $formulario->usuario!=null){
+            $usuario=$formulario->usuario;
+          }
+          $encuestas=App\Services\FormularioServices::getEncuestasLlenas($usuario->n_idusuario);
+          $bloqueo=0;
+          foreach ($encuestas as $encu) { if($encu->semaforo>1){ $bloqueo++; } }
+        @endphp  
+        {{-- {{ dd(count($encuestas)) }} --}}
+        @if ((count($encuestas)<3  && $usuario->t_sigaa=='SI') || (count($encuestas)<2  && $usuario->t_sigaa=='NO'))
+          <nav class="mt-2">
+            <div class="alert alert-danger alert-dismissible">            
+              <h5><i class="icon fas fa-ban"></i> Alerta!</h5>
+              * No tiene autorizado ingreso al campus. Falta llenar alguna(s) Encuesta(s).
+            </div>
+          </nav>   
+        @endif        
+        @if ($bloqueo>0)
+          <nav class="mt-2">
+            <div class="alert alert-warning alert-dismissible">            
+              <h5><i class="icon fas fa-info"></i> Alerta!</h5>
+              * No tiene autorizado ingreso al campus. [{{ $bloqueo }}] encuesta(s) tiene(n) Bloqueo.
+            </div>
+          </nav>            
+        @endif
+        @if ($bloqueo==0 && ((count($encuestas)==3  && $usuario->t_sigaa=='SI') || (count($encuestas)==2  && $usuario->t_sigaa=='NO')) )
+          <nav class="mt-2">
+            <div class="alert alert-success alert-dismissible">            
+              <h5><i class="icon fas fa-check"></i> APROBADO</h5>
+              * Puede ingresar al campus y no tiene Bloqueo.
+            </div>
+          </nav>            
+        @endif      
+
+    @endif    
+    {{-- @if(Route::currentRouteName()=='formulario.show' && $formulario!=null  && $formulario->usuario!=null)            
+    @endif   --}}
+
 @endguest           
 @auth
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -354,3 +373,33 @@
 @include('partials.notification')
 </body>
 </html>
+{{-- @else    
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                    
+        @if (Session::has('idUsuario') && App\Services\FormularioServices::getActaCovid()==null )
+              <li class="nav-header">ALERTAS 1</li> 
+              <li class="nav-header">
+                <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
+              </li> 
+        @elseif(Route::currentRouteName()=='formulario.show' && $formulario!=null  && $formulario->usuario!=null  && $formulario->usuario->t_sigaa=='SI' )       
+
+              {{ dd($formulario->usuario->t_sigaa) }}              
+              
+             
+        @endif  
+        </ul>  
+      </nav>           --}}
+
+{{-- @if (($form=App\Services\FormularioServices::getActaCovid())!=null)              
+              <li class="nav-header">
+              <div class="position-relative p-3 {{ $form->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} bordes" >
+                <div class="ribbon-wrapper"><div class="ribbon {{ $form->n_semaforo==1 ? 'bg-success' : 'bg-danger' }} ">{{ $form->n_idformulario_acta }}</div></div>
+                <h5>Acta COVID-19</h5>
+              </div>
+              </li>
+          @else
+              <li class="nav-header">ALERTAS</li> 
+              <li class="nav-header">
+                <div class="position-relative p-3 bg-danger bordes" ><div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div><h5>Acta COVID-19</h5></div>
+              </li> 
+          @endif             --}}

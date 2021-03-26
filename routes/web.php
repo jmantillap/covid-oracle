@@ -63,6 +63,7 @@ Route::get('estado/salud/datos', 'Reportes\ReporteEstadoSaludDatosController@ind
 Route::post('/estado/salud/datos/generar/excel','Reportes\ReporteEstadoSaludDatosController@generarExcelEstadoSaludDatos')->name('reporte.estadosalud.datos.generar.excel')->middleware('auth');
 
 Route::get('/salir/usuario/upb','Loginupb\LoginupbController@cerrarSessionUserUPB')->name('salir.usuario.upb');
+Route::get('/salir/usuario/visitante','Loginupb\LoginupbController@cerrarSessionUserUPB')->name('salir.usuario.visitante');
 
 /*Funcionalidad de acta*/
 Route::get('/acta/usuario/','Formularioacta\FormularioActaController@index')->name('acta.usuario.upb');
@@ -85,6 +86,7 @@ Route::post('encuesta/comorbilidad/inactivar/ajax','Formulariocomorbilidad\Comor
 Route::get('encuesta/comorbilidad/actualizar', 'Formulariocomorbilidad\ComorbilidadActualizarController@index')->name('encuesta.comorbilidad.actualizar')->middleware('auth');
 Route::get('encuesta/comorbilidad/actualizar/consultar', 'Formulariocomorbilidad\ComorbilidadActualizarController@consultar')->name('encuesta.comorbilidad.actualizar.consultar.ajax')->middleware('auth');
 Route::post('encuesta/comorbilidad/actualizar/ajax','Formulariocomorbilidad\ComorbilidadActualizarController@envioActualizar')->name('encuesta.comorbilidad.actualizar.ajax')->middleware('auth');
+Route::get('encuesta/comorbilidad/actualizar/consultar/diaria', 'Formulariocomorbilidad\ComorbilidadActualizarController@consultarEncuestaDiaria')->name('encuesta.comorbilidad.consultar.diaria.ajax')->middleware('auth');
 
 include ('web-admin.php');
 

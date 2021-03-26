@@ -19,21 +19,17 @@ class ExternosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function verificar()
-    {     
+    {   
         $key = Input::post('t_documento');     
         $usuarioesta = User::where('t_documento', '=', $key)->first();
         $usuariohoy = "";
         $nombrecompleto = "";
         $idusuario = "";
         $viculoconu = "";       
-
         $errorenform = "";
-
         $contestohoy = "NO";
         $puedeingresar = "SI";
-
-        $fechahoy = date('Y-m-d 00:00:00');
-                
+        $fechahoy = date('Y-m-d 00:00:00');                
         if (!is_null($usuarioesta)) {
             $nombrecompleto = $usuarioesta->t_nombres . " " . $usuarioesta->t_apellidos;
             $viculoconu = $usuarioesta->vinculou->t_vinculo;
@@ -54,19 +50,15 @@ class ExternosController extends Controller
             $errorenform = "Usuario No Existe";
         }
 
-        return view('revisar.verificar', [
-            'nombrecompleto' => $nombrecompleto,
-            'idusuario' => $idusuario,            
-            'errorenform' => $errorenform,
-            'contestohoy' => $contestohoy,
-            'viculoconu' => $viculoconu,
-            'usuarioesta' => $usuarioesta,            
-            't_documento' => $key,
-        ])->with('status', 'El Docente Nuevo fue creado con éxito');
+        return view('revisar.verificar', [  'nombrecompleto' => $nombrecompleto,
+            'idusuario' => $idusuario, 'errorenform' => $errorenform,  'contestohoy' => $contestohoy,
+            'viculoconu' => $viculoconu,      'usuarioesta' => $usuarioesta,  't_documento' => $key, ])->with('status', 'El Docente Nuevo fue creado con éxito');
+                        
     }
 
     public function homeext()
-    {        
+    {    
+        
         if(Session::has('userUPB') && Session::get('userUPB')->n_idusuario!=null ){
             $formularioHoy=FormularioServices::formularioHoy();
             if($formularioHoy!=null){
@@ -78,11 +70,5 @@ class ExternosController extends Controller
         }
         return view('externos.homeext');
     }
-
-    // public function formularioHoy()
-    // {
-    //     $fechahoy= date('Y-m-d 00:00:00');                    
-    //     $formhoy=Formulario::where([['n_idusuario', '=', Session::get('userUPB')->n_idusuario],['created_at', '>', $fechahoy],['t_activo', '=', "SI"],])->first();
-    //     return $formhoy;
-    // }
+    
 }

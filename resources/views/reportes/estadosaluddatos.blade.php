@@ -74,7 +74,11 @@
           <div class="form-group" >
             <input name="todas" id="todas"  type="checkbox" value="1" class="flat-red pull-right" > Todas las Ciudades
           </div>
-        @endif                     
+        @endif  
+        <div class="form-group">
+          <label id="lblDocumento" for="documento">Documento del Usuario </label>
+          <input size=40 class="form-control col-md-10" id="documento" name="documento" value=""><br>
+        </div>                   
       </div>
       <div class="card-footer">        
           <button id="btnConsultar" type="submit" class="btn btn-info pull-right">Generar Excel</button>
