@@ -22,7 +22,7 @@ if ($formulario->t_activo=="SI"){
     $icono="checkmark";
     $textautoriza="Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de encuesta de estado de salud y acta de compromiso, puede ingresar al campus.<br><br>". $fechafinal ;
     if($formulario->usuario->n_idvinculou==5){
-      $textautoriza="Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de acta de compromiso, puede ingresar al campus.<br><br>". $fechafinal ;
+        $textautoriza="Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de acta de compromiso, puede ingresar al campus.<br><br>". $fechafinal ;
     }    
     $recomendaciones="<ul>
                   <li>Para ingresar a la Universidad debes utilizar mascarilla (desechable o en tela). Si es desechables deben cambiarla diariamente, si es de tela el lavado debe ser diario.</li>
@@ -91,7 +91,6 @@ if ($formulario->t_activo=="SI"){
           <a href="#" class="small-box-footer"><i class="fas fa-calendar"></i>&nbsp;<h4>Fecha Consulta: {{date('Y-m-d h:i:s a')}} </h4></a>
         </div>
       </div>
-
       <div class="visible-print text-center">
         {!! QrCode::size(300)->generate(Request::url()); !!}      
       </div>
@@ -121,11 +120,11 @@ if ($formulario->t_activo=="SI"){
     @php
       $contacte="";
       if($acta->usuario->n_idvinculou==1 ){
-        $contacte="De aviso a su docente o director de programa y contacte al área de Bienestar Universitario";
+          $contacte="De aviso a su docente o director de programa y contacte al área de Bienestar Universitario";
       }elseif($acta->usuario->n_idvinculou==2 || $acta->usuario->n_idvinculou==3 || $acta->usuario->n_idvinculou==4 || $acta->usuario->n_idvinculou==6 ){
-        $contacte="De aviso a su jefe inmediato y contacte al área de seguridad y salud en el trabajo de su seccional";          
+          $contacte="De aviso a su jefe inmediato y contacte al área de seguridad y salud en el trabajo de su seccional";          
       }else{
-        $contacte="Contacte al área de seguridad y salud en el trabajo de la seccional";
+          $contacte="Contacte al área de seguridad y salud en el trabajo de la seccional";
       }
     @endphp
     <div class="card card-primary">
@@ -150,8 +149,7 @@ if ($formulario->t_activo=="SI"){
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title">Resultado Acta COVID-19</h3>
-        <div class="card-tools">          
-        </div>
+        <div class="card-tools"></div>
       </div>
       <div class="card-body">
         <div class="position-relative p-3 bg-danger bordes" >
@@ -190,9 +188,9 @@ if ($formulario->t_activo=="SI"){
           <div class="ribbon-wrapper"><div class="ribbon {{ $clase }} ">{{ $comorbilidad->n_idformulario_comorbilidad }}</div></div>          
           @if ($comorbilidad->n_semaforo==1)
             <h5>Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de encuesta de estado de salud y acta de compromiso, 
-              puede ingresar al campus. Diligenciada el {{ substr ($acta->created_at,0,10) }}</h5>
+              puede ingresar al campus. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>
           @else
-            <h5>* No tiene autorizado ingreso al campus. {{ $contacte }}, para que revise su caso. Diligenciada el {{ substr ($acta->created_at,0,10) }}</h5>    
+            <h5>* No tiene autorizado ingreso al campus. {{ $contacte }}, para que revise su caso. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>    
           @endif          
         </div>
       </div>      

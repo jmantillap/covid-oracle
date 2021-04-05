@@ -154,7 +154,7 @@
     @if (((Session::has('idUsuario') && ($usuario=\App\User::find(Session::get('idUsuario')))!=null) ||
           (Session::has('userUPB') && ($usuario=\App\User::find(Session::get('userUPB')->n_idusuario))!=null)) 
           || (Route::currentRouteName()=='formulario.show' && $formulario!=null  && $formulario->usuario!=null)
-          ) {{-- && $usuario->t_sigaa=='SI' --}}          
+        ) {{-- && $usuario->t_sigaa=='SI' --}}          
         @php
           if(Route::currentRouteName()=='formulario.show' && $formulario!=null  && $formulario->usuario!=null){
             $usuario=$formulario->usuario;
@@ -162,8 +162,7 @@
           $encuestas=App\Services\FormularioServices::getEncuestasLlenas($usuario->n_idusuario);
           $bloqueo=0;
           foreach ($encuestas as $encu) { if($encu->semaforo>1){ $bloqueo++; } }
-        @endphp  
-        {{-- {{ dd(count($encuestas)) }} --}}
+        @endphp          
         @if ((count($encuestas)<3  && $usuario->t_sigaa=='SI') || (count($encuestas)<2  && $usuario->t_sigaa=='NO'))
           <nav class="mt-2">
             <div class="alert alert-danger alert-dismissible">            
@@ -189,10 +188,7 @@
           </nav>            
         @endif      
 
-    @endif    
-    {{-- @if(Route::currentRouteName()=='formulario.show' && $formulario!=null  && $formulario->usuario!=null)            
-    @endif   --}}
-
+    @endif        
 @endguest           
 @auth
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">

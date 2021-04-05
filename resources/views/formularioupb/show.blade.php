@@ -16,7 +16,6 @@
 @section('content')
 @include('partials.session-status')
 <?php
-
 $fechafinal=\App\Utils\UtilFechas::getFechaEspanol($formulario->created_at);
 $color="success";
 $icono="checkmark";
@@ -111,9 +110,39 @@ $recomendaciones="<ul>
   </div>
 </div>  
 @endsection
-
 @section('acta')
-    @if ($acta!=null && $acta->n_idformulario_acta>=0)
+    @php    
+    if($acta!=null && $acta->n_semaforo==1){      $color="bg-success";    }else{      $color="bg-danger";    }
+    if ($acta!=null) { $etiqueta_acta=$acta->n_idformulario_acta;  } else {      $etiqueta_acta="Llenar";    }
+    if($acta!=null && $acta->usuario->n_idvinculou==1 ){
+          $contacte="De aviso a su docente o director de programa y contacte al área de Bienestar Universitario";
+    }elseif($acta!=null && ($acta->usuario->n_idvinculou==2 || $acta->usuario->n_idvinculou==3 || $acta->usuario->n_idvinculou==4 || $acta->usuario->n_idvinculou==6) ){
+         $contacte="De aviso a su jefe inmediato y contacte al área de seguridad y salud en el trabajo de su seccional";          
+    }else{
+        $contacte="Contacte al área de seguridad y salud en el trabajo de la seccional";          
+    }    
+    @endphp  
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Resultado Acta COVID-19</h3>
+        <div class="card-tools">          
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="position-relative p-3 {{ $color }} bordes" >
+          <div class="ribbon-wrapper"><div class="ribbon {{ $color }}">{{$etiqueta_acta}}</div></div>
+          @if ($acta!=null && $acta->n_semaforo==1)
+              <h5>Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de encuesta de estado de salud y acta de compromiso, 
+                puede ingresar al campus. Diligenciada el {{ substr ($acta->created_at,0,10) }}</h5>
+          @elseif($acta!=null)
+              <h5>* No tiene autorizado ingreso al campus. {{ $contacte }}, para que le habilite el acta y vuelva a realizarla. Diligenciada el {{ substr ($acta->created_at,0,10) }}</h5>    
+          @else
+              <h5>Falta LLenar Acta COVID-19</h5>  
+          @endif          
+        </div>                
+      </div>      
+    </div>    
+    {{-- @if ($acta!=null && $acta->n_idformulario_acta>=0)
         @php
         $contacte="";
         if($acta->usuario->n_idvinculou==1 ){
@@ -155,8 +184,7 @@ $recomendaciones="<ul>
             </div>                
           </div>      
         </div>  
-    @endif
-
+    @endif --}}
 @endsection
 @section('comorbilidad')     
     @if ($comorbilidad!=null && $comorbilidad->n_idformulario_comorbilidad>=0)
@@ -186,26 +214,26 @@ $recomendaciones="<ul>
           <div class="ribbon-wrapper"><div class="ribbon {{ $clase }} ">{{ $comorbilidad->n_idformulario_comorbilidad }}</div></div>
           @if ($comorbilidad->n_semaforo==1)
             <h5>Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de encuesta de estado de salud y acta de compromiso, 
-              puede ingresar al campus. Diligenciada el {{ substr ($acta->created_at,0,10) }}</h5>
+              puede ingresar al campus. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>
           @else
-            <h5>* No tiene autorizado ingreso al campus. {{ $contacte }}, para que revise su caso. Diligenciada el {{ substr ($acta->created_at,0,10) }}</h5>    
+            <h5>* No tiene autorizado ingreso al campus. {{ $contacte }}, para que revise su caso. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>    
           @endif
         </div>
       </div>      
     </div>  
     @elseif($formulario->usuario->t_sigaa!='NO')    
-    <div class="card card-primary">
-      <div class="card-header">
-        <h3 class="card-title">Resultado Estado de Salud</h3>
-        <div class="card-tools">          
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Resultado Estado de Salud</h3>
+          <div class="card-tools">          
+          </div>
         </div>
-      </div>
-      <div class="card-body">
-        <div class="position-relative p-3 bg-danger bordes" >
-          <div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div>
-          <h5>Falta LLenar Encuesta Estado de salud</h5>
-        </div>                
-      </div>      
-    </div>  
+        <div class="card-body">
+          <div class="position-relative p-3 bg-danger bordes" >
+            <div class="ribbon-wrapper"><div class="ribbon bg-danger">Llenar</div></div>
+            <h5>Falta LLenar Encuesta Estado de salud</h5>
+          </div>                
+        </div>      
+      </div>  
     @endif
 @endsection

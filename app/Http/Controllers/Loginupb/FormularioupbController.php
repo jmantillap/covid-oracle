@@ -253,6 +253,9 @@ class FormularioupbController extends Controller
         //
     }
 
+    
+}
+
     // private function rules()
     // {
     //     return [
@@ -298,5 +301,3 @@ class FormularioupbController extends Controller
     //         't_realizoviaje.required' => "No has Respondido acerca de su ultimo viaje"
     //      ];
     // }
-    
-}

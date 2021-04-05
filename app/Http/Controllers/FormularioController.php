@@ -105,7 +105,7 @@ class FormularioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        //dd("mostrar vista de externos a crear");
+    {       
         if (!Session::has('idUsuario') || Session::has('userUPB') ) {
             return redirect()->route('home');
         }
