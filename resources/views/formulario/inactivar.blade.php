@@ -1,39 +1,23 @@
-
-
-
 @extends('layout')
-
 @section('title','Formulario')
 @section('titulopag','FORMULARIO')
 @section('elcontrolador','FORMULARIO')
 @section('laaccion','Listado')
-    
-
-
-
 @section('content')
-
 @include('partials.session-status')
-
-
 <script>
   $(document).ready(function() {
-      $('#example1').DataTable( {
+      $('#tbl_inactivar').DataTable( {
           responsive: true,
-          "serverSide": true,
+          "serverSide": true,          
           "ajax": "{{ url('losformularios') }}",
           "columns": [
               {data: 'action' }, 
-              {data: 'activo' },
-              
-              {data: 'updated_at' },            
-              
+              {data: 'activo' },              
+              {data: 'fecha_creacion' },                          
               {data: 'nombrec' },
               {data: 'semaforo' },
               {data: 'ingreso' }
-              
-              
-
                ],
           language: {
           "decimal": "",
@@ -88,8 +72,7 @@
           [10, 50, 100, 200, -1],
           [10, 50, 100, 200, "All"]
       ],
-      iDisplayLength: 10
-          
+      iDisplayLength: 10          
       } );
   } );
 </script>
@@ -107,16 +90,16 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <table id="tbl_inactivar" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                     <thead>
                     <tr role="row">
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Accion: activate to sort column ascending" style="width: 50px;">Acción</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Activo</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;">Fecha y Hora de Presentación</th>
+                        <th class="sorting" tabindex="0" aria-controls="tbl_inactivar" rowspan="1" colspan="1" aria-label="Accion: activate to sort column ascending" style="width: 50px;">Acción</th>
+                        <th class="sorting" tabindex="0" aria-controls="tbl_inactivar" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Activo</th>
+                        <th class="sorting" tabindex="0" aria-controls="tbl_inactivar" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;">Fecha y Hora de Presentación</th>
                   
-                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Usuario: activate to sort column ascending" style="width: 176px;">Usuario</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Resultado: activate to sort column ascending" style="width: 176px;">Resultado</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Ingresó</th>
+                       <th class="sorting" tabindex="0" aria-controls="tbl_inactivar" rowspan="1" colspan="1" aria-label="Usuario: activate to sort column ascending" style="width: 176px;">Usuario</th>
+                        <th class="sorting" tabindex="0" aria-controls="tbl_inactivar" rowspan="1" colspan="1" aria-label="Resultado: activate to sort column ascending" style="width: 176px;">Resultado</th>
+                        <th class="sorting" tabindex="0" aria-controls="tbl_inactivar" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Ingresó</th>
                     </tr>
                     </thead>
                     

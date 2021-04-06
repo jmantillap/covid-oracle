@@ -76,6 +76,7 @@
   .pull-right {      float: right !important;    }
   .bordes{      border-radius: 10px !important;    }
 </style>
+@include('partials.notification')
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -164,6 +165,9 @@
           foreach ($encuestas as $encu) { if($encu->semaforo>1){ $bloqueo++; } }
         @endphp          
         @if ((count($encuestas)<3  && $usuario->t_sigaa=='SI') || (count($encuestas)<2  && $usuario->t_sigaa=='NO'))
+          <script>            
+            toastr.error('* No tiene autorizado ingreso al campus. Falta llenar alguna(s) Encuesta(s).'); //mensaje
+          </script>
           <nav class="mt-2">
             <div class="alert alert-danger alert-dismissible">            
               <h5><i class="icon fas fa-ban"></i> Alerta!</h5>
@@ -172,6 +176,12 @@
           </nav>   
         @endif        
         @if ($bloqueo>0)
+          {{-- @php
+              \Session::flash('status', 'Bloqueo');                
+          @endphp --}}
+          <script>            
+            toastr.warning('* No tiene autorizado ingreso al campus. [{{ $bloqueo }}] encuesta(s) tiene(n) Bloqueo.'); //mensaje
+          </script>
           <nav class="mt-2">
             <div class="alert alert-warning alert-dismissible">            
               <h5><i class="icon fas fa-info"></i> Alerta!</h5>
@@ -180,6 +190,9 @@
           </nav>            
         @endif
         @if ($bloqueo==0 && ((count($encuestas)==3  && $usuario->t_sigaa=='SI') || (count($encuestas)==2  && $usuario->t_sigaa=='NO')) )
+        <script>            
+          toastr.success('* Puede ingresar al campus y no tiene Bloqueo.'); //mensaje
+        </script>
           <nav class="mt-2">
             <div class="alert alert-success alert-dismissible">            
               <h5><i class="icon fas fa-check"></i> APROBADO</h5>
@@ -366,7 +379,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('partials.notification')
+{{-- @include('partials.session-status') --}}
 </body>
 </html>
 {{-- @else    

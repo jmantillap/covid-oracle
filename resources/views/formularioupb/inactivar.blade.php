@@ -1,21 +1,10 @@
-
-
-
 @extends('layout')
-
 @section('title','Formulario')
 @section('titulopag','FORMULARIO')
 @section('elcontrolador','FORMULARIO')
 @section('laaccion','Listado')
-    
-
-
-
 @section('content')
-
 @include('partials.session-status')
-
-
 <script>
   $(document).ready(function() {
       $('#example1').DataTable( {
@@ -24,16 +13,11 @@
           "ajax": "{{ url('losformularios') }}",
           "columns": [
               {data: 'action' }, 
-              {data: 'activo' },
-              
-              {data: 'updated_at' },            
-              
+              {data: 'activo' },              
+              {data: 'fecha_creacion' },                          
               {data: 'nombrec' },
               {data: 'semaforo' },
               {data: 'ingreso' }
-              
-              
-
                ],
           language: {
           "decimal": "",
@@ -88,8 +72,7 @@
           [10, 50, 100, 200, -1],
           [10, 50, 100, 200, "All"]
       ],
-      iDisplayLength: 10
-          
+      iDisplayLength: 10          
       } );
   } );
 </script>
@@ -127,8 +110,6 @@
     </div>
     <!-- /.card-body -->
   </div>
-
-
 
 @endsection
 

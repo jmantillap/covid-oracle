@@ -6,4 +6,5 @@
   toastr.options = {
     "closeButton": true,    
   };
+  // toastr.success('Eliminado correctamente'); //mensaje
 </script>
