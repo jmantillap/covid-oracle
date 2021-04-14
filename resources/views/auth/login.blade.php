@@ -1,8 +1,8 @@
 @extends('layout')
 @section('title','Ingreso del Usuario' )
-@section('titulopag','FORMULARIO DE INGRESO')
+@section('titulopag','INGRESO ADMINISTRADORES')
 @section('elcontrolador','login')
-@section('laaccion','Login de Usuario')
+@section('laaccion','Administradores del sistema')
 @section('content')
 {{-- /**
  * Javier Mantilla. javier.mantillap@upb.edu.co
@@ -25,13 +25,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }} Usuarios Administradores del Sistema SST</div>
+                <div class="card-header">{{ __('Login') }} Administradores del Sistema SST</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login.validar') }}">
                         @csrf
                         <div class="form-group row">
-                            <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }} Sigaa</label>
+                            <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ __('Administrador') }} Sigaa</label>
                             <div class="col-md-6">
                                 <input id="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required 
                                 autocomplete="usuario" autofocus  placeholder="Ej. 000253678" autocomplete="off"  >
@@ -66,7 +66,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    {{ __('Login Administrador') }}
                                 </button>
                                 {{-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">

@@ -246,6 +246,11 @@
                 <i class="nav-icon fas fa-bed"></i><p>Usuarios No Reportaron</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a  id="menuReporteDiariaEmpleados" href="{{ route('reportes.encuestadiaria.empleados') }}" class="nav-link">
+                <i class="nav-icon fas fa-calendar-day"></i><p>Diaria Empleados UPB</p>
+              </a>
+            </li>
             {{-- <li class="nav-item">
               <a  id="menuReporte5" href="{{ route('reportes.estado.salud') }}" class="nav-link">
                 <i class="nav-icon fas fa-heartbeat"></i><p>Estado de Salud</p>

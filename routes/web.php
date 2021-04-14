@@ -88,6 +88,10 @@ Route::get('encuesta/comorbilidad/actualizar/consultar', 'Formulariocomorbilidad
 Route::post('encuesta/comorbilidad/actualizar/ajax','Formulariocomorbilidad\ComorbilidadActualizarController@envioActualizar')->name('encuesta.comorbilidad.actualizar.ajax')->middleware('auth');
 Route::get('encuesta/comorbilidad/actualizar/consultar/diaria', 'Formulariocomorbilidad\ComorbilidadActualizarController@consultarEncuestaDiaria')->name('encuesta.comorbilidad.consultar.diaria.ajax')->middleware('auth');
 
+Route::get('encuesta/diaria/empleado', 'Reportes\ReporteEncuestaEmpleadoController@index')->name('reportes.encuestadiaria.empleados')->middleware('auth');
+Route::post('/encuesta/diaria/empleado/excel','Reportes\ReporteEncuestaEmpleadoController@generarExcelDiariaEmpleado')->name('reporte.generarExcelDiariaEmpleado.generar.excel')->middleware('auth');
+
+
 include ('web-admin.php');
 
 Auth::routes();
