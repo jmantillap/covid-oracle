@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Loginupb;
 use App\User;
 use App\Entidades\Formulario;
+use App\Entidades\Vacunacion;
 use App\Entidades\Sedes;
 use App\Entidades\Ciudad;
 use Validator;
@@ -36,33 +37,20 @@ class FormularioupbController extends Controller
        $key = Session::get('idUsuario');
        $usuarioesta=User::where('t_documento','=',$key)->first();
        //var_dump($key);
-      return view('formularioupb.index', 
-        [
-            'formulario'=> Formulario::orderBy('n_idusuario','ASC')->paginate(10)
-        ]);  
+      return view('formularioupb.index', ['formulario'=> Formulario::orderBy('n_idusuario','ASC')->paginate(10)]);  
     }
 
 
     public function inactivar()
     {
-      /*
-      var_dump(auth()->user()->n_idciudad);
-      var_dump(auth()->user()->ciudad->t_nombre);
-      var_dump(auth()->user()->n_id);
-      var_dump(Auth::id());
-*/ 
-      
-      return view('formularioupb.inactivar', 
-        [
-            'sedes'=> Sedes::orderBy('t_sede','ASC')->paginate(10)
-        ]);  
+      /*      var_dump(auth()->user()->n_idciudad);      var_dump(auth()->user()->ciudad->t_nombre);      var_dump(auth()->user()->n_id);      var_dump(Auth::id());*/       
+      return view('formularioupb.inactivar', ['sedes'=> Sedes::orderBy('t_sede','ASC')->paginate(10)        ]);  
     }
 
     public function getListaFormularios()
     {
       $id_ciudad=auth()->user()->n_idciudad;
       $fechahoy=date('Y-m-d 00:00:00');
-
       //$elselect= "select *,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo from formulario fo,sedes se, users us where se.n_idsede=fo.n_idsede and se.n_idciudad=".$id_ciudad;
 
       $elselect="select fo.*,se.*,us.*
@@ -70,47 +58,34 @@ class FormularioupbController extends Controller
       , fo.t_activo as activo 
       from formulario fo,sedes se, users us where se.n_idsede=fo.n_idsede and se.n_idciudad= ".$id_ciudad  ;
       //$elselect .= " and fo.updated_at>='".$fechahoy."'";
-      $elselect .= " and fo.updated_at>= trunc(to_date('".$fechahoy."','YY/MM/DD HH24:MI:SS')) ";
-      
-      $elselect .= " and us.n_idusuario=fo.n_idusuario";
-      
-        $query = DB::select($elselect);
-
-        //dd($query);
-      
-        return datatables()->of($query)
+      $elselect .= " and fo.updated_at>= trunc(to_date('".$fechahoy."','YY/MM/DD HH24:MI:SS')) ";      
+      $elselect .= " and us.n_idusuario=fo.n_idusuario";      
+      $query = DB::select($elselect);
+       //dd($query);      
+      return datatables()->of($query)
         ->addColumn('action', function ($registro) {
             if ($registro->activo=="SI")return '<a href="'.route('formulario.updateinac', $registro->n_idformulario).'"> Inactivar</a>';
             if ($registro->activo=="NO")return 'DESACTIVADO';
-
-        
-    })
-    ->addColumn('semaforo', function ($registro) {
-        if ($registro->n_semaforo=="1")return '<strong class="text-success">Verde</strong>';
-        if ($registro->n_semaforo=="2")return '<strong class="text-warning">Amarillo</strong>';
-        if ($registro->n_semaforo=="3")return '<strong class="text-danger">Rojo</strong>';
-    })
-    ->addColumn('ingreso', function ($registro) {
-    if ($registro->n_semaforo=="1")return '<strong class="text-success">SI</strong>';
-    if ($registro->n_semaforo=="2")return '<strong class="text-danger">NO</strong>';
-    if ($registro->n_semaforo=="3")return '<strong class="text-danger">NO</strong>';
-    })
-    ->rawColumns(['action','semaforo','ingreso'])
-    ->toJson();
+            })
+            ->addColumn('semaforo', function ($registro) {
+                if ($registro->n_semaforo=="1")return '<strong class="text-success">Verde</strong>';
+                if ($registro->n_semaforo=="2")return '<strong class="text-warning">Amarillo</strong>';
+                if ($registro->n_semaforo=="3")return '<strong class="text-danger">Rojo</strong>';
+            })
+            ->addColumn('ingreso', function ($registro) {
+                if ($registro->n_semaforo=="1")return '<strong class="text-success">SI</strong>';
+                if ($registro->n_semaforo=="2")return '<strong class="text-danger">NO</strong>';
+                if ($registro->n_semaforo=="3")return '<strong class="text-danger">NO</strong>';
+            })
+            ->rawColumns(['action','semaforo','ingreso'])->toJson();
     }
 
     public function updateinac($request)
     {
-       
-        //return $request;
-        
-        $affected = DB::table('formulario')
-              ->where('n_idformulario', $request)
-              ->update(['t_activo' => "NO", 'n_iddesactiva' => Auth::id(),'updated_at'=>date('Y-m-d H:i:s')]);
+        $affected = DB::table('formulario')->where('n_idformulario', $request)->update(['t_activo' => "NO", 'n_iddesactiva' => Auth::id(),'updated_at'=>date('Y-m-d H:i:s')]);
         return redirect()->route('formulario.inactivar')->with('status','El formulario fue actualizado con éxito');
-
-
     }
+
     public function listarSedesAjax($request)
     {   
         $sql = "SELECT n_idsede, t_sede
@@ -132,9 +107,7 @@ class FormularioupbController extends Controller
      */
     public function create()
     {
-        if(!Session::has('userUPB') || !Session::has('idUsuario') ){            
-            return redirect()->route("home");   
-        } 
+        if(!Session::has('userUPB') || !Session::has('idUsuario') ){  return redirect()->route("home");   } 
         $key = Session::get('idUsuario');
         $usuarioesta=User::where('n_idusuario','=',$key)->first();
 	    $fechahoy = date('d/m/Y');
@@ -142,16 +115,16 @@ class FormularioupbController extends Controller
         $formhoy = collect(DB::select($sql, ['n_idusuario'=>$key,'created_at'=>$fechahoy]))->first();
         if($formhoy!=null){                
              return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
-        }               
+        }
+        $vacunacion=Vacunacion::where('T_ACTIVO','=','SI')->where('N_IDUSUARIO','=',$key)->first();
         $viculoconu=$usuarioesta->vinculou->t_vinculo;
         $ciudades = Ciudad::where('b_habilitado', '=', '1')->orderBY('t_nombre')->get();        
         return view('formularioupb.create',['formulario' => new Formulario,'n_idusuario'=>$key,'usuarioesta'=>$usuarioesta,'ciudades' => $ciudades,
-            'viculoconu'=>$viculoconu
-          ]);
+            'viculoconu'=>$viculoconu,'vacunacion'=>$vacunacion ]);
     }
 
     public function store(SaveFormularioRequest $request)
-    {
+    {        
         $semaforonegacion="NO";
         $semafororojo="NO";
         $semaforo=1;        
@@ -164,8 +137,7 @@ class FormularioupbController extends Controller
               return redirect()->route('formularioupb.show2', ['id' => $formhoy->n_idformulario])->with('status', 'Resultado Previamente Guardado');
         }
         if(!Session::has('idUsuario') || Session::get('idUsuario')!=$request->n_idusuario ){
-            Session::forget('idUsuario');
-            Session::forget('userUPB');
+            Session::forget('idUsuario'); Session::forget('userUPB');
             return redirect()->route('home')->with('error', 'No se guardo el formulario Vuelva a Autenticarse..');
         }
         if  ($miscampos[0]['t_consentimiento']=="NO")$semaforonegacion="SI"; 
@@ -176,33 +148,36 @@ class FormularioupbController extends Controller
         //if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI";  //Se realiza cambio segun correo de badder. 23 sep 2020
         if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI";  //Se activa por correo badder 13 ene 2021
         if  ($miscampos[0]['t_dificultadrespirar']=="SI"){
-                $semaforonegacion="SI";
-                $semafororojo="SI"; 
+                $semaforonegacion="SI"; $semafororojo="SI"; 
         }
-        if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI"; 
-        
+        if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI";         
         if ($miscampos[0]['t_perdolfa'] == "SI") $semafororojo = "SI";
         if ($miscampos[0]['t_molestia_diges'] == "SI") $semaforonegacion = "SI";        
         if ($miscampos[0]['t_sigue_aislado'] == "SI") $semafororojo = "SI";
-
         if  ($miscampos[0]['t_personalsalud']=="NO" && $miscampos[0]['t_contactopersonasinfectadas']=="SI" )$semaforonegacion="SI"; 
         if ($semafororojo=="SI"){
             $semaforo="3";
         }else{
-            if ($semaforonegacion=="SI"){
-                $semaforo="2";
-            }else{
-                $semaforo="1";    
-            }
+            if ($semaforonegacion=="SI"){ $semaforo="2"; }else{ $semaforo="1";    }
         }
         if($miscampos[0]['t_personalsalud']=="SI" && request('t_contactopersonasinfectadas')==null ){
             $campos['t_contactopersonasinfectadas']="SI";    
-        }        
+        }                
         $campos['n_semaforo']=$semaforo;        
         //se Comentarea por cambio de correo 13/01/2021
         //$campos['t_realizoviaje']='NO'; /* Se realiza cambio en vista para que no muestre la pregunta de viaje segun reunion 07/12/2020 */        
         $resultado=Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
-        
+        if(request('t_esquema_vacunacion')!=null && request('t_esquema_vacunacion')=='SI'){
+            $valores=['n_idusuario'=>$request->n_idusuario,'t_activo'=>'SI','t_vacuna'=>request('t_esquema_vacunacion')];
+            $vacunacion=new Vacunacion($valores);
+            try {   
+                DB::beginTransaction();        
+                $vacunacion->saveOrFail();       
+                DB::commit();
+            } catch (Exception $e) {
+                DB::rollBack(); Log::error($e);                
+            }   
+        }
         return redirect()->route('formularioupb.show2',[$resultado])->with('status','El formulario se guardó con éxito');
     }
 

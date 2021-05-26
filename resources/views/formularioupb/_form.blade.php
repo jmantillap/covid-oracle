@@ -195,7 +195,7 @@
     </div>
 </div>
 {{-- Se comentarea por indicaciones reunion del dia 07/12/2020 nacional donde indican que no es necesario --}}
-{{-- Se descomentarea por indicaciones correo del dia 13/01/2021 nacional donde indican que no es necesario --}}
+{{-- Se descomentarea por indicaciones correo del dia 13/01/2021 nacional donde indican que  es necesario --}}
 <div id="lt_realizoviaje" class="form-group row">
     <label class="col-md-10 col-form-label">
         {{ Config::get('pregunta.viaje') }} *
@@ -223,6 +223,18 @@
         <input   type="radio" name="t_sigue_aislado" value="NA" {{(old('t_sigue_aislado') == 'NA') ? 'checked' : ''}}> NO APLICA<br>
     </div>
 </div>
+@if ($vacunacion==null)
+    <div id="lt_esquema_vacunacion" class="form-group row">        
+        <label class="col-md-10 col-form-label">        
+            {{ Config::get('pregunta.esquema_vacunacion') }} *            
+            <i class="fas fa-syringe fa-2x"></i>
+        </label>
+        <div class="col-md-5">
+            <input   type="radio" name="t_esquema_vacunacion" value="SI" {{(old('t_esquema_vacunacion') == 'SI') ? 'checked' : ''}} required> SI &nbsp;&nbsp;&nbsp;
+            <input   type="radio" name="t_esquema_vacunacion" value="NO" {{(old('t_esquema_vacunacion') == 'NO') ? 'checked' : ''}}> NO&nbsp;&nbsp;&nbsp;        
+        </div>
+    </div>    
+@endif
 
 <div class="form-group row">
     <div class="col-md-5">

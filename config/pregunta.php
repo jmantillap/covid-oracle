@@ -37,6 +37,8 @@ return [
                    parámetros establecidos por la Organización Mundial de la Salud - OMS sobre el autocuidado que cada persona debe tener para generar los medios de protección 
                    que le permita salvaguardad su salud; por lo anterior, asumo el compromiso del Reporte diario de estado de salud, bajo el principio de la buena fe, 
                    que lo reportado en la presente encuesta corresponde a datos verídicos asumiendo la responsabilidad por cualquier dato inexacto que pueda poner en riesgo 
-                   mi salud y la de los demás.'
+                   mi salud y la de los demás.',
+
+    'esquema_vacunacion'=>'21. ¿Usted ya tiene esquema completo de vacunación para Covid -19? ',     
 ];
 

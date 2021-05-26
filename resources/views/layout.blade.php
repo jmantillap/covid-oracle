@@ -286,6 +286,10 @@
             <i class="nav-icon fas fa-backspace"></i><p>Inactivar Acta Covid</p></a>
         </li>
         <li class="nav-item">
+          <a  id="menuInactivarVacunacion" href="{{ route('encuesta.vacunacion.inactivar') }}" class="nav-link"> 
+          <i class="nav-icon fas fa-syringe"></i><p>Inactivar Vacunación</p></a>          
+       </li>
+        <li class="nav-item">
           <a  id="menuInactivarComorbilidad" href="{{ route('encuesta.comorbilidad.inactivar') }}" class="nav-link"> 
           <i class="nav-icon fas fa-folder-minus"></i><p>Inactivar Estado de Salud</p></a>
         </li>   

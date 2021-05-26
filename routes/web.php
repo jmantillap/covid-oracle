@@ -91,6 +91,10 @@ Route::get('encuesta/comorbilidad/actualizar/consultar/diaria', 'Formulariocomor
 Route::get('encuesta/diaria/empleado', 'Reportes\ReporteEncuestaEmpleadoController@index')->name('reportes.encuestadiaria.empleados')->middleware('auth');
 Route::post('/encuesta/diaria/empleado/excel','Reportes\ReporteEncuestaEmpleadoController@generarExcelDiariaEmpleado')->name('reporte.generarExcelDiariaEmpleado.generar.excel')->middleware('auth');
 
+/*Funcionalidad de inactivar Vacunacion*/
+Route::get('encuesta/vacunacion/inactivar', 'Vacunacion\InactivarVacunacionController@index')->name('encuesta.vacunacion.inactivar')->middleware('auth');
+Route::get('encuesta/vacunacion/consultar', 'Vacunacion\InactivarVacunacionController@consultar')->name('encuesta.vacunacion.consultar.ajax')->middleware('auth');
+Route::post('encuesta/vacunacion/inactivar/ajax','Vacunacion\InactivarVacunacionController@envioInactivar')->name('encuesta.vacunacion.inactivar.ajax')->middleware('auth');
 
 include ('web-admin.php');
 

@@ -46,6 +46,7 @@ class SaveFormularioRequest extends FormRequest
             't_perdolfa' => 'required',       
             't_molestia_diges'=> 'required',
             't_sigue_aislado'=> 'required',
+            't_esquema_vacunacion' => 'nullable|sometimes',            
             /* 'n_iddesactiva' => 'required', */
         ];
     }
