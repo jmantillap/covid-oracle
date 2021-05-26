@@ -96,6 +96,10 @@ Route::get('encuesta/vacunacion/inactivar', 'Vacunacion\InactivarVacunacionContr
 Route::get('encuesta/vacunacion/consultar', 'Vacunacion\InactivarVacunacionController@consultar')->name('encuesta.vacunacion.consultar.ajax')->middleware('auth');
 Route::post('encuesta/vacunacion/inactivar/ajax','Vacunacion\InactivarVacunacionController@envioInactivar')->name('encuesta.vacunacion.inactivar.ajax')->middleware('auth');
 
+Route::get('reporte/vacunacion/empleado', 'Reportes\ReporteVacunacionController@index')->name('reportes.vacunacion.empleados')->middleware('auth');
+Route::post('/reporte/vacunacion/empleado/generar/excel','Reportes\ReporteVacunacionController@generarExcelVacunacion')->name('reporte.vacunacion.generar.excel')->middleware('auth');
+
+
 include ('web-admin.php');
 
 Auth::routes();

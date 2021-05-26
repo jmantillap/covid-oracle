@@ -251,6 +251,11 @@
                 <i class="nav-icon fas fa-calendar-day"></i><p>Diaria Empleados UPB</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a  id="menuReporteVacunacioEmpleados" href="{{ route('reportes.vacunacion.empleados') }}" class="nav-link">
+                <i class="nav-icon fas fa-syringe"></i><p>Vacunación Empleados</p>                
+              </a>
+            </li>
             {{-- <li class="nav-item">
               <a  id="menuReporte5" href="{{ route('reportes.estado.salud') }}" class="nav-link">
                 <i class="nav-icon fas fa-heartbeat"></i><p>Estado de Salud</p>
