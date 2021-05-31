@@ -20,9 +20,9 @@ if ($formulario->t_activo=="SI"){
     $fechafinal=\App\Utils\UtilFechas::getFechaEspanol($formulario->created_at);
     $color="success";
     $icono="checkmark";
-    $textautoriza="Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de encuesta de estado de salud y acta de compromiso, puede ingresar al campus.<br><br>". $fechafinal ;
+    $textautoriza="Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de encuesta de estado de salud y acta de compromiso, puede ingresar al campus.<br>";//<br>". $fechafinal ;
     if($formulario->usuario->n_idvinculou==5){
-        $textautoriza="Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de acta de compromiso, puede ingresar al campus.<br><br>". $fechafinal ;
+        $textautoriza="Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de acta de compromiso, puede ingresar al campus.<br>";//<br>". $fechafinal ;
     }    
     $recomendaciones="<ul>
                   <li>Para ingresar a la Universidad debes utilizar mascarilla (desechable o en tela). Si es desechables deben cambiarla diariamente, si es de tela el lavado debe ser diario.</li>
@@ -44,15 +44,15 @@ if ($formulario->t_activo=="SI"){
         $color="warning";
         $icono="android-hand";
         if($formulario->usuario->n_idvinculou==1 ){
-            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su docente o director de programa y a bienestar universitario de su seccional.<br><br>". $fechafinal;
+            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su docente o director de programa y a bienestar universitario de su seccional.<br>";//<br>". $fechafinal;
             $recomendaciones="En caso de sintomatología Covid-19 debe consultar a su EPS para que le genere incapacidad o certificado de aislamiento, recuerde enviar constancia de atención su docente o director de programa.
                   Si se equivocó en sus respuestas y no presenta síntomas relacionados con Covid-19, contacte al área de bienestar universitario de su seccional para que habilite la encuesta y la vuelva a realizar.";
         }elseif($formulario->usuario->n_idvinculou==2 || $formulario->usuario->n_idvinculou==3 || $formulario->usuario->n_idvinculou==4 || $formulario->usuario->n_idvinculou==6 ){
-            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato y a seguridad y salud en el trabajo de la seccional.<br><br>". $fechafinal;
+            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato y a seguridad y salud en el trabajo de la seccional.<br>";//<br>". $fechafinal;
             $recomendaciones="En caso de sintomatología Covid-19 debe consultar a su EPS para que le genere incapacidad o certificado de aislamiento, recuerde enviar constancia de atención al área encargada en gestión humana. 
             Si se equivocó en sus respuestas y no presenta síntomas relacionados con Covid-19, contacte a al área de seguridad y salud en el trabajo de su seccional, para que habilite la encuesta y la vuelva a realizar.";
         }else{
-            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a salud en el trabajo de la seccional.<br><br>". $fechafinal;
+            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a salud en el trabajo de la seccional.<br>";//<br>". $fechafinal;
             $recomendaciones="En caso de sintomatología Covid-19 debe consultar a su EPS para que le genere incapacidad o certificado de aislamiento, recuerde enviar constancia de atención al área encargada en gestión humana. 
             Si se equivocó en sus respuestas y no presenta síntomas relacionados con Covid-19, contacte a al área de seguridad y salud en el trabajo de su seccional, para que habilite la encuesta y la vuelva a realizar.";
         }        
@@ -62,15 +62,15 @@ if ($formulario->t_activo=="SI"){
         $color="danger";
         $icono="heart-broken";
         if($formulario->usuario->n_idvinculou==1 ){
-            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su docente o director de programa y a bienestar universitario de su seccional.<br><br>". $fechafinal;
+            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su docente o director de programa y a bienestar universitario de su seccional.<br>";//<br>". $fechafinal;
             $recomendaciones="En caso de sintomatología Covid-19 debe consultar a su EPS para que le genere incapacidad o certificado de aislamiento, recuerde enviar constancia de atención su docente o director de programa.
                   Si se equivocó en sus respuestas y no presenta síntomas relacionados con Covid-19, contacte al área de bienestar universitario de su seccional para que habilite la encuesta y la vuelva a realizar.";
         }elseif($formulario->usuario->n_idvinculou==2 || $formulario->usuario->n_idvinculou==3 || $formulario->usuario->n_idvinculou==4 || $formulario->usuario->n_idvinculou==6 ){
-            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato y a seguridad y salud en el trabajo de la seccional.<br><br>". $fechafinal;
+            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a su jefe inmediato y a seguridad y salud en el trabajo de la seccional.<br>";//<br>". $fechafinal;
             $recomendaciones="En caso de sintomatología Covid-19 debe consultar a su EPS para que le genere incapacidad o certificado de aislamiento, recuerde enviar constancia de atención al área encargada en gestión humana. 
               Si se equivocó en sus respuestas y no presenta síntomas relacionados con Covid-19, contacte a al área de seguridad y salud en el trabajo de su seccional, para que habilite la encuesta y la vuelva a realizar.";
         }else{
-            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a salud en el trabajo de la seccional.<br><br>". $fechafinal;
+            $textautoriza="Usted no tiene permitido el ingreso a la Universidad, de forma temporal, por favor avise a salud en el trabajo de la seccional.<br>";//<br>". $fechafinal;
             $recomendaciones="En caso de sintomatología Covid-19 debe consultar a su EPS para que le genere incapacidad o certificado de aislamiento, recuerde enviar constancia de atención al área encargada en gestión humana. 
             Si se equivocó en sus respuestas y no presenta síntomas relacionados con Covid-19, contacte a al área de seguridad y salud en el trabajo de su seccional, para que habilite la encuesta y la vuelva a realizar.";
         }
@@ -80,9 +80,10 @@ if ($formulario->t_activo=="SI"){
         <!-- small box -->
         <div class="small-box bg-{{$color}}">
           <div class="inner">
-            <h3>{{$formulario->usuario->t_nombres}} <br>{{$formulario->usuario->t_apellidos}}</h3>
+            <h4>{{$fechafinal}} </h4>
+            <h2><strong>{{$formulario->usuario->t_nombres}} {{$formulario->usuario->t_apellidos}}</strong></h2>
             <h4>{{$formulario->usuario->c_codtipo}}: {{$formulario->usuario->t_documento}} </h4>            
-            <p><h2><strong><?php echo $textautoriza; ?></strong></h2></p>      
+            <p><h2><?php echo $textautoriza; ?></h2></p>      
             <h6>{{$formulario->created_at}} </h6>            
           </div>
           <div class="icon">
@@ -91,6 +92,13 @@ if ($formulario->t_activo=="SI"){
           <a href="#" class="small-box-footer"><i class="fas fa-calendar"></i>&nbsp;<h4>Fecha Consulta: {{date('Y-m-d h:i:s a')}} </h4></a>
         </div>
       </div>
+      @if(!Session::has('userUPB') && Session::has('idUsuario') && Session::get('idUsuario')!=null) 
+      <div class="text-right">  
+        <button class="btn btn-dark" id="btnReversar" data-id="{{ $formulario->n_idformulario }}" 
+            data-nombre="{{$formulario->usuario->t_nombres}} {{$formulario->usuario->t_apellidos}}">Reversar Encuesta Visitante</button>
+        {{ csrf_field() }}
+      </div>
+      @endif
       <div class="visible-print text-center">
         {!! QrCode::size(300)->generate(Request::url()); !!}      
       </div>
@@ -242,5 +250,47 @@ if ($formulario->t_activo=="SI"){
         </div>  
     @endif
 @endsection
-
+@section('script-custom')
+<link rel="stylesheet" href="/plugins/jAlert-master/dist/jAlert.css">
+<script src="/plugins/jAlert-master/dist/jAlert.min.js"></script>
+<script src="/plugins/jAlert-master/dist/jAlert-functions.min.js"></script>
+<script>         
+  $(function () {    
+    $("#btnReversar").on("click", function () {                                    
+      var id=$(this).attr('data-id');      
+      if (typeof $(this).attr("data-id") != 'undefined') {
+               var id=$(this).attr('data-id');
+               $.fn.jAlert.defaults.confirmBtnText = 'Si, Inactivar';
+               $.fn.jAlert.defaults.confirmQuestion = 'Esta seguro de Inactivar la encuesta diaria diligenciada por Ud. ? <br/> * '
+               + $(this).attr('data-nombre')
+               + '<br><span class="badge badge-danger">No se podrá revertir la acción. Esta seguro? </span><br/> ';
+               $.fn.jAlert.defaults.title = 'Inactivar el Encuesta Diaria';
+               $.fn.jAlert.defaults.confirmAutofocus = '.denyBtn';
+               confirm(function(e,btn){ //event + button clicked
+                    e.preventDefault();
+                    $.ajax({
+                        type: "POST", url: "{{ route('formulario.covid19.inactivar.ajax') }}",
+                        data: { '_token': $('input[name=_token]').val(), 'id_formulario':id, },
+                        success: function(response){
+                            if(response.status=="1"){
+                                successAlert('Inactivación',response.msg);
+                                window.location.href = "{{ route('formulario.create')}}";
+                            }else{
+                                if(typeof response.msg != "undefined"){ errorAlert('Error',response.msg); }
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) { 
+                            console.log(JSON.stringify(jqXHR)); console.log("AJAX error: " + textStatus + ' : ' + errorThrown); 
+                            errorAlert('Error',errorThrown);
+                        }
+                    });                
+                }, function(e,btn){
+                    e.preventDefault(); //errorAlert('Denied!');
+                });
+      }
+    });
+    
+  });
+</script>
+@endsection
 

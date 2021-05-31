@@ -213,20 +213,35 @@ class FormularioupbController extends Controller
         return view('formularioupb.show', ['formulario' => $formulario,'acta' => $acta,'comorbilidad' => $comorbilidad]);
     }
 
-    public function edit($id)
-    {
-        //
+    public function envioInactivar()
+    {   //dd(request()->all());
+        $response=array();
+        if(request('id_formulario')==null){ return response()->json(array('status' => '0','msg' =>'No se puede Inactivar la Encuesta Diaria')); }
+        $formulario=Formulario::find(request('id_formulario'));
+        //$formulario->n_iddesactiva=;
+        //Session::get('idUsuario')
+        $formulario->t_activo='NO';
+        try {
+            DB::beginTransaction();            
+            $formulario->saveOrFail();
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            $response = array('status' => '0','msg' =>'***ERROR GRAVE AL GUARDAR**** Contacte Con el Administrador del sistema');
+            return response()->json($response);
+       }
+       $response = array('status' => '1','msg' =>'Se inactivo la encuesta Diaria');
+       return response()->json($response);
     }
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function edit($id){}
 
-    public function destroy($id)
-    {
-        //
-    }
+    public function update(Request $request, $id){ }
+
+    public function destroy($id){}
+
+    
 
     
 }

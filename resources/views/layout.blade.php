@@ -162,7 +162,9 @@
           }
           $encuestas=App\Services\FormularioServices::getEncuestasLlenas($usuario->n_idusuario);
           $bloqueo=0;
-          foreach ($encuestas as $encu) { if($encu->semaforo>1){ $bloqueo++; } }
+          foreach ($encuestas as $encu) { 
+            if($encu->encuesta!='C' &&  $encu->semaforo>1){  $bloqueo++; } 
+          }
         @endphp          
         @if ((count($encuestas)<3  && $usuario->t_sigaa=='SI') || (count($encuestas)<2  && $usuario->t_sigaa=='NO'))
           <script>            
@@ -176,9 +178,7 @@
           </nav>   
         @endif        
         @if ($bloqueo>0)
-          {{-- @php
-              \Session::flash('status', 'Bloqueo');                
-          @endphp --}}
+          {{-- @php \Session::flash('status', 'Bloqueo');                @endphp --}}
           <script>            
             toastr.warning('* No tiene autorizado ingreso al campus. [{{ $bloqueo }}] encuesta(s) tiene(n) Bloqueo.'); //mensaje
           </script>

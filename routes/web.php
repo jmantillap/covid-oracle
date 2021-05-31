@@ -12,6 +12,10 @@
 //Route::get('/', function () {    return view('welcome'); });
 //Route::view('/','home')->name('home');
 
+Route::middleware('auth:api')->group(function () {
+    // our routes to be protected will go in here
+});
+
 Route::get('/','HomeController@index')->name('home');
 
 Route::get('formulario/inactivar', 'FormularioController@inactivar')->name('formulario.inactivar')->middleware('auth');
@@ -44,6 +48,11 @@ Route::get('formularioupbshow2/{id}', 'Loginupb\FormularioupbController@show2')-
 Route::get('home/consulta', 'Consulta\ConsultaController@homeconsulta')->name('consulta');
 Route::post('consultar', 'Consulta\ConsultaController@consultar')->name('consultar');
 Route::get('consultar', 'Consulta\ConsultaController@consultar')->name('consultar');
+/* Comunidad upb*/
+Route::post('formularioupb/covid19/inactivar/ajax','Loginupb\FormularioupbController@envioInactivar')->name('formularioupb.covid19.inactivar.ajax');
+/* visitante*/
+Route::post('formulario/covid19/inactivar/ajax','FormularioController@envioInactivar')->name('formulario.covid19.inactivar.ajax');
+
 
 Route::get('formulario/create/{n_idciudad}', 'FormularioController@listarSedesAjax')->name('sedes.listar');
 Route::get('formularioupb/create/{n_idciudad}', 'Loginupb\FormularioupbController@listarSedesAjax')->name('sedes.listar.userupb');
