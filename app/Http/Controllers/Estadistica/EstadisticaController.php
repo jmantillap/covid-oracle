@@ -294,6 +294,7 @@ class EstadisticaController extends Controller
         ,f.t_malestargeneral,f.t_secresioncongestionnasal,f.t_dificultadrespirar,f.t_tosseca,f.t_personalsalud,f.t_contactopersonasinfectadas
         ,f.d_ultimocontacto,f.t_realizoviaje,f.d_ultimoviaje,f.created_at,f.updated_at
         ,f.t_perdolfa,f.t_molestia_diges,f.t_sigue_aislado
+        ,DECODE(F.N_SEMAFORO,1,'VERDE',2,'AMARILLO','ROJO') SEMAFORO
         from formulario f inner join users u on (f.n_idusuario=u.n_idusuario) INNER JOIN sedes s on (f.n_idsede=s.n_idsede) INNER JOIN ciudades c on (s.n_idciudad=c.n_id)
         left join vinculou v on (v.n_idvinculou=u.n_idvinculou)
         where f.t_activo='SI'  AND TRUNC(f.created_at)>= trunc(to_date(:fecha_desde, 'YY/MM/DD'))  
