@@ -229,7 +229,9 @@ if ($formulario->t_activo=="SI"){
             <h5>Si usted ya cuenta con la autorización para la presencialidad y cumple (verde) con los requisitos de encuesta de estado de salud y acta de compromiso, 
               puede ingresar al campus. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>
           @else
-            <h5>* No tiene autorizado ingreso al campus. {{ $contacte }}, para que revise su caso. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>    
+            {{-- <h5>* No tiene autorizado ingreso al campus. {{ $contacte }}, para que revise su caso. Diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>     --}}
+            <h5>* Usted reportó patologías previas en su encuesta de estado de salud, si actualmente no se encuentran controladas, le recomendamos acudir a su EPS. 
+              Encuesta diligenciada el {{ substr ($comorbilidad->created_at,0,10) }}</h5>    
           @endif          
         </div>
       </div>      
