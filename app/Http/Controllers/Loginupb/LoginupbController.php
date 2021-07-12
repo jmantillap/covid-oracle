@@ -79,7 +79,8 @@ class LoginupbController extends Controller
        $idbanner=request('usuario');
        $contestohoy="NO";
        $usuario_sel=BannerServices::getUsuarioBanner($idbanner);       
-       if($usuario_sel!=null){
+       //dd(count($usuario_sel));
+       if($usuario_sel!=null && count($usuario_sel)==1 ){
             Session::put('vs_ussel',$usuario_sel);            
             $documentous=$usuario_sel->documento;                        
             $usuarioesta=User::where('t_documento','=',$documentous)->where('t_activo','=','SI')->first();

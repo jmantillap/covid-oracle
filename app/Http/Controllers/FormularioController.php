@@ -144,7 +144,7 @@ class FormularioController extends Controller
         if ($miscampos[0]['t_malestargeneral'] == "SI") $semaforonegacion = "SI";
         if ($miscampos[0]['t_secresioncongestionnasal'] == "SI") $semaforonegacion = "SI";
         //if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI"; //Se realiza cambio segun correo de badder. 23 sep 2020
-        if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI";  //Se activa por correo badder 13 ene 2021
+        //if  ($miscampos[0]['t_realizoviaje']=="SI")$semaforonegacion="SI";  //Se activa por correo badder 13 ene 2021 // SE INACTIVA POR SOLICITUD BADER CORREO TIKET #8860847 12.07.2021
         if ($miscampos[0]['t_dificultadrespirar'] == "SI") {
             $semaforonegacion = "SI";
             $semafororojo = "SI";
@@ -253,4 +253,6 @@ class FormularioController extends Controller
     //         't_realizoviaje.required' => "No has Respondido acerca de su ultimo viaje"
     //     ];
     // }
+
+    
 }

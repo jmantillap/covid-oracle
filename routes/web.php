@@ -108,6 +108,7 @@ Route::post('encuesta/vacunacion/inactivar/ajax','Vacunacion\InactivarVacunacion
 Route::get('reporte/vacunacion/empleado', 'Reportes\ReporteVacunacionController@index')->name('reportes.vacunacion.empleados')->middleware('auth');
 Route::post('/reporte/vacunacion/empleado/generar/excel','Reportes\ReporteVacunacionController@generarExcelVacunacion')->name('reporte.vacunacion.generar.excel')->middleware('auth');
 
+Route::get('/get/formulario/diario/{documento}','WsApi\ConsultasWsController@getFormularioDiario')->name('formulario.diario.documento');
 
 include ('web-admin.php');
 
